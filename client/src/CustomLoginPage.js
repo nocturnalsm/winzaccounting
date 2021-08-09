@@ -1,8 +1,8 @@
 // LoginPage.js
 import React from "react";
 import { Login, LoginForm } from "react-admin";
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import ForgotPasswordButton from './CustomForgotPassword'
 
 // Configure FirebaseUI.
@@ -22,10 +22,6 @@ const SignInScreen = () => <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth=
 
 const CustomLoginForm = props => (
   <div>
-    <div style={{fontFamily: "monospace", marginLeft: '15px'}}>
-      <p>Username: test@example.com</p>
-      <p>Password: password</p>
-    </div>
     <LoginForm {...props} />
     <ForgotPasswordButton {...props} />
     <SignInScreen />

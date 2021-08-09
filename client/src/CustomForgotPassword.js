@@ -1,4 +1,5 @@
 import React from "react";
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
   Dialog,
@@ -12,7 +13,18 @@ import {
 
 import firebase from "firebase";
 
+const useStyles = makeStyles({
+  button_wrapper: {
+      padding: '8px',
+      display: 'block'
+  },
+  button: {
+      width: '100%'
+  }
+});
+
 export default function AlertDialog() {
+  const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
 
@@ -50,8 +62,8 @@ export default function AlertDialog() {
   };
 
   return (
-    <div>
-      <Button variant="contained" onClick={handleClickOpen}>
+    <div className={classes.button_wrapper}>
+      <Button className={classes.button} variant="contained" onClick={handleClickOpen}>
         Forgot Password?
       </Button>
       <Dialog

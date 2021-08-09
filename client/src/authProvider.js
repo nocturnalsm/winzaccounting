@@ -11,4 +11,8 @@ const config = {
     measurementId: "G-N17W4FELQE"
 };
 
-export const authProvider = FirebaseAuthProvider(config);
+firebase.initializeApp(config);
+
+const authProvider = FirebaseAuthProvider(config);
+
+export default authProvider;
