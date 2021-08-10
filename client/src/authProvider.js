@@ -2,13 +2,13 @@ import firebase from 'firebase';
 import { FirebaseAuthProvider } from 'react-admin-firebase';
 
 const config = {
-    apiKey: "AIzaSyA5AKpRAeLHNf5OJj29D-fO8V_JwZhAJLY",
-    authDomain: "winz-accounting.firebaseapp.com",
-    projectId: "winz-accounting",
-    storageBucket: "winz-accounting.appspot.com",
-    messagingSenderId: "907042986836",
-    appId: "1:907042986836:web:37608328ce064856fa86c1",
-    measurementId: "G-N17W4FELQE"
+    apiKey: process.env.REACT_APP_APIKEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
 firebase.initializeApp(config);

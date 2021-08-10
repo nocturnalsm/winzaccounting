@@ -1,7 +1,8 @@
 // in src/users.js
 import * as React from "react";
 import { useMediaQuery } from '@material-ui/core';
-import { List, Datagrid, SimpleList, TextField, EmailField, TextInput } from 'react-admin';
+import { List, Datagrid, SimpleList, TextField, EmailField, TextInput,
+         EditButton, Edit, SimpleForm } from 'react-admin';
 import MyUrlField from './MyUrlField';
 
 const postFilters = [
@@ -26,11 +27,19 @@ export const UserList = props => {
                 <TextField source="id" />
                 <TextField source="name" />
                 <EmailField source="email" />
-                <TextField source="phone" />
-                <MyUrlField source="website" />
-                <TextField source="company.name" />
+                <EditButton />
             </Datagrid>
           )}
       </List>
     )
 };
+
+export const UserEdit = props => (
+  <Edit {...props}>
+      <SimpleForm>
+          <TextInput disabled source="id" />
+          <TextInput source="name" />
+          <TextInput source="email" />
+      </SimpleForm>
+  </Edit>
+);
