@@ -9,7 +9,10 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $users = UserComponent::getList($request);
+        $start = $request->start;
+        $limit = $request->limit;
+        $sort = json_decode($request->sort);
+        $users = UserComponent::getList($start, $limit, $sort->field, $sort->order);
         return response()->json($users);
     }
     public function show(Request $request, $id)

@@ -8,15 +8,12 @@ use Illuminate\Http\Request;
 
 class UserComponent
 {
-    public static function getList($request)
+    public static function getList($start = 0, $limit = 10, $sortBy = "id", $order = "asc")
     {
-        $start = $request->start ? $request->start : 0;
-        $limit = $request->limit ? $request->limit : 10;
-        $sort = json_decode($request->sort);
         return DB::table("users")
                 ->offset($start)
                 ->take($limit)
-                ->orderBy($sort->field, $sort->order)
+                ->orderBy($sortBy, $order)
                 ->get();
     }
     public static function get($id)
