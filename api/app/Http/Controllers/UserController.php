@@ -11,8 +11,16 @@ class UserController extends Controller
     {
         $start = $request->start;
         $limit = $request->limit;
-        $sort = json_decode($request->sort);
-        $users = UserComponent::getList($start, $limit, $sort->field, $sort->order);
+        $sort = $request->sort;
+        $order = $request->order;
+        $filter = json_decode($request->filter);
+        if (isset($filter->q)){
+            $filter = $filter->q;
+        }
+        else {
+            $filter = [];
+        }
+        $users = UserComponent::getList($filter, $start, $limit, $sort, $order);
         return response()->json($users);
     }
     public function show(Request $request, $id)

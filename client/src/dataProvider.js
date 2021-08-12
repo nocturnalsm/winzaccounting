@@ -9,7 +9,8 @@ export default {
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
         const query = {
-            sort: JSON.stringify({field: field, order: order}),
+            sort: field,
+            order: order,
             start: (page - 1) * perPage,
             limit: perPage,
             filter: JSON.stringify(params.filter),
