@@ -3,29 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Components\UserComponent;
+use App\Http\Services\UserService;
 
 class UserController extends Controller
 {
     public function index(Request $request)
-    {
-        $start = $request->start;
-        $limit = $request->limit;
-        $sort = $request->sort;
-        $order = $request->order;
-        $filter = json_decode($request->filter);
-        if (isset($filter->q)){
-            $filter = $filter->q;
-        }
-        else {
-            $filter = [];
-        }
-        $users = UserComponent::getList($filter, $start, $limit, $sort, $order);
+    {               
+        $users = UserService::getList($request->all());
         return response()->json($users);
     }
     public function show(Request $request, $id)
     {
-        $user = UserComponent::get($id);
+        $user = UserService::get($id);
         return response()->json($user);
     }
 }

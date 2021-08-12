@@ -6,15 +6,27 @@ const httpClient = fetchUtils.fetchJson;
 
 export default {
     getList: (resource, params) => {
+
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
+
+        // Create query with pagination params.
         const query = {
-            sort: field,
-            order: order,
             start: (page - 1) * perPage,
-            limit: perPage,
-            filter: JSON.stringify(params.filter),
+            limit: perPage
         };
+
+        // Add all filter params to query.
+        Object.keys(params.filter || {}).forEach((key) => {
+            query[`filter[${key}]`] = params.filter[key];
+        });
+
+        // Add sort parameter
+        if (params.sort && params.sort.field) {            
+            query.sort = params.sort.field;
+            query.order = params.sort.order;
+        }
+
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
         return httpClient(url).then(({ headers, json }) => ({
