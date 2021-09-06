@@ -17,7 +17,7 @@ import CompanySelect from '../components/CompanySelect'
 // routes config
 import routes from '../routes'
 
-import { 
+import {
   TheHeaderDropdown,
   TheHeaderDropdownMssg,
   TheHeaderDropdownNotif,
@@ -59,7 +59,7 @@ const TheHeader = () => {
       <CHeaderNav className="d-md-down-none mr-auto">
         <CHeaderNavItem  >
           <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
-        </CHeaderNavItem>       
+        </CHeaderNavItem>
         <SetupMenu className="px-3" />
         <AdminMenu className="px-3" />
         <CHeaderNavItem className="px-3">
@@ -75,13 +75,13 @@ const TheHeader = () => {
       </CHeaderNav>
 
       <CSubheader className="px-3 justify-content-between">
-        <CBreadcrumbRouter 
-          className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
-          routes={routes} 
+        <CBreadcrumbRouter
+          className="border-0 c-subheader-nav m-0 px-0 px-md-3"
+          routes={routes}
         />
-          <div className="d-xs-down-none mfe-2 c-subheader-nav">            
-            <CompanySelect />
-          </div>
+        <div className="d-xs-down-none py-0 px-0">            
+          <CompanySelect />
+        </div>
       </CSubheader>
     </CHeader>
   )

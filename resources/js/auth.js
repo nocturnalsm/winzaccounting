@@ -1,11 +1,11 @@
-import { store, setAuth, setAppLoading } from './store';
+import { store, setAuth, setAppLoading, setAppError } from './store';
 import axios from 'axios';
 
-const Auth = {    
+const Auth = {
 
     login: async (data) => {
-          
-        store.dispatch(setAppLoading(true));    
+
+        store.dispatch(setAppLoading(true));
         try {
             const csrf = await axios.get('/sanctum/csrf-cookie');
             const response = await axios.post('/login', data);
@@ -25,25 +25,24 @@ const Auth = {
         }
         finally {
             store.dispatch(setAppLoading(false));
-        } 
+        }
     },
 
     logout: async () => {
         store.dispatch(setAppLoading(true));
         try {
             const cookie =  await axios.get('/sanctum/csrf-cookie');
-            const response = await axios.post('/logout')            
+            const response = await axios.post('/logout')
             store.dispatch(setAuth({isLoggedIn: false}))
         }
         catch (error){
-            console.log(error)
+            store.dispatch(setAppError(error));
         }
         finally {
             store.dispatch(setAppLoading(false));
         }
-        
+
     }
 }
 
 export default Auth;
-

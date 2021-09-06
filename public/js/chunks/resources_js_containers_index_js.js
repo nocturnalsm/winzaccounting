@@ -14259,7 +14259,7 @@ var Auth = {
             case 11:
               _context2.prev = 11;
               _context2.t0 = _context2["catch"](1);
-              console.log(_context2.t0);
+              _store__WEBPACK_IMPORTED_MODULE_1__.store.dispatch((0,_store__WEBPACK_IMPORTED_MODULE_1__.setAppError)(_context2.t0));
 
             case 14:
               _context2.prev = 14;
@@ -14346,13 +14346,9 @@ var CompanySelect = function CompanySelect(props) {
       });
     }
   }, []);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log(company);
-  });
 
   var onChangeCompany = function onChangeCompany(event) {
     var selected = event.target.getAttribute('_id');
-    console.log(selected);
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_3__.setActiveCompany)(companies[selected]));
   };
 
@@ -14593,7 +14589,7 @@ var TheHeader = function TheHeader() {
         className: "border-0 c-subheader-nav m-0 px-0 px-md-3",
         routes: _routes__WEBPACK_IMPORTED_MODULE_5__.default
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-        className: "d-xs-down-none mfe-2 c-subheader-nav",
+        className: "d-xs-down-none py-0 px-0",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_CompanySelect__WEBPACK_IMPORTED_MODULE_4__.default, {})
       })]
     })]
@@ -15839,6 +15835,9 @@ var UserList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.lazy(function () 
 var RoleList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.lazy(function () {
   return __webpack_require__.e(/*! import() */ "resources_js_views_pages_roles_RoleList_js").then(__webpack_require__.bind(__webpack_require__, /*! ./views/pages/roles/RoleList */ "./resources/js/views/pages/roles/RoleList.js"));
 });
+var PermissionList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.lazy(function () {
+  return __webpack_require__.e(/*! import() */ "resources_js_views_pages_permissions_PermissionList_js").then(__webpack_require__.bind(__webpack_require__, /*! ./views/pages/permissions/PermissionList */ "./resources/js/views/pages/permissions/PermissionList.js"));
+});
 var CurrencyList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.lazy(function () {
   return __webpack_require__.e(/*! import() */ "resources_js_views_pages_currencies_CurrencyList_js").then(__webpack_require__.bind(__webpack_require__, /*! ./views/pages/currencies/CurrencyList */ "./resources/js/views/pages/currencies/CurrencyList.js"));
 });
@@ -15865,6 +15864,10 @@ var routes = [{
   path: '/roles',
   name: 'Roles',
   component: RoleList
+}, {
+  path: '/permissions',
+  name: 'Permissions',
+  component: PermissionList
 }, {
   path: '/currencies',
   name: 'Currencies',

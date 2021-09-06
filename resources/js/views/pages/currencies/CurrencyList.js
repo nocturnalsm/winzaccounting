@@ -25,6 +25,8 @@ const CurrencyList = () => {
         <CCard>
             <CCardBody>
                 <DTable
+                    _id="currencieslist"
+                    defaultSort="name"
                     fields={fields}
                     apiUrl="/api/setup/currencies"
                 />

@@ -21,9 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::prefix('admin')->group(function(){
-    Route::resource('/users', App\Http\Controllers\Admin\UserController::class);    
-    Route::resource('/companies', App\Http\Controllers\Admin\CompanyController::class); 
-    Route::resource('/roles', App\Http\Controllers\Admin\RoleController::class); 
+    Route::resource('/users', App\Http\Controllers\Admin\UserController::class);
+    Route::resource('/companies', App\Http\Controllers\Admin\CompanyController::class);
+    Route::resource('/roles', App\Http\Controllers\Admin\RoleController::class);
+    Route::resource('/permissions', App\Http\Controllers\Admin\PermissionController::class);
 });
 
 Route::prefix('setup')->group(function(){

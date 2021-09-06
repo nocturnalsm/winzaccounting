@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_users_UserList_js"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_permissions_PermissionList_js"],{
 
 /***/ "./resources/js/components/datatable/DTToolbar.js":
 /*!********************************************************!*\
@@ -428,10 +428,10 @@ var DTable = function DTable(props) {
 
 /***/ }),
 
-/***/ "./resources/js/views/pages/users/UserList.js":
-/*!****************************************************!*\
-  !*** ./resources/js/views/pages/users/UserList.js ***!
-  \****************************************************/
+/***/ "./resources/js/views/pages/permissions/PermissionList.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/views/pages/permissions/PermissionList.js ***!
+  \****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -445,29 +445,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var UserList = function UserList() {
+var PermissionList = function PermissionList() {
   var fields = [{
     label: 'Name',
     key: 'name'
   }, {
-    label: 'Username',
-    key: 'username'
-  }, {
-    label: 'Email',
-    key: 'email',
-    type: 'email'
-  }, {
-    label: 'Roles',
+    label: 'User Count',
     type: 'custom',
-    key: 'roleName',
-    onRender: function onRender(item) {
+    key: 'users_count',
+    onRender: function onRender(item, index) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-        children: item.roles.map(function (badge, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CBadge, {
-            color: "success",
-            children: badge.name
-          }, index);
-        })
+        children: item.roles.reduce(function (total, role) {
+          return total + role.users_count;
+        }, 0)
       });
     }
   }, {
@@ -477,17 +467,16 @@ var UserList = function UserList() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCard, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCardBody, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__.default, {
-        _id: "userslist",
+        _id: "permissionslist",
         defaultSort: "name",
         fields: fields,
-        apiUrl: "/api/admin/users",
-        showToolbar: true
+        apiUrl: "/api/admin/permissions"
       })
     })
   });
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserList);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PermissionList);
 
 /***/ })
 

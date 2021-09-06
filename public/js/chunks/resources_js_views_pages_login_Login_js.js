@@ -14259,7 +14259,7 @@ var Auth = {
             case 11:
               _context2.prev = 11;
               _context2.t0 = _context2["catch"](1);
-              console.log(_context2.t0);
+              _store__WEBPACK_IMPORTED_MODULE_1__.store.dispatch((0,_store__WEBPACK_IMPORTED_MODULE_1__.setAppError)(_context2.t0));
 
             case 14:
               _context2.prev = 14;

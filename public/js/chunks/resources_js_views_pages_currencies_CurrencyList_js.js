@@ -156,8 +156,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var DTable = function DTable(props) {
-  var _props$limit, _props$defaultSort, _props$defaultOrder;
-
   var appLoading = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.appLoading;
   });
@@ -185,19 +183,40 @@ var DTable = function DTable(props) {
       fields = _useState8[0],
       setFields = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    page: 1,
-    limit: (_props$limit = props.limit) !== null && _props$limit !== void 0 ? _props$limit : 10,
-    sort: (_props$defaultSort = props.defaultSort) !== null && _props$defaultSort !== void 0 ? _props$defaultSort : 'id',
-    order: (_props$defaultOrder = props.defaultOrder) !== null && _props$defaultOrder !== void 0 ? _props$defaultOrder : 'asc',
-    filter: {}
-  }),
+  var initialParams = function initialParams() {
+    var datatable = localStorage.getItem('datatable.' + props._id) || '';
+
+    if (datatable != '') {
+      return JSON.parse(datatable);
+    } else {
+      var _props$limit, _props$defaultSort, _props$defaultOrder;
+
+      return {
+        page: 1,
+        limit: (_props$limit = props.limit) !== null && _props$limit !== void 0 ? _props$limit : 10,
+        sort: (_props$defaultSort = props.defaultSort) !== null && _props$defaultSort !== void 0 ? _props$defaultSort : '',
+        order: (_props$defaultOrder = props.defaultOrder) !== null && _props$defaultOrder !== void 0 ? _props$defaultOrder : 'asc',
+        filter: {}
+      };
+    }
+  };
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initialParams()),
       _useState10 = _slicedToArray(_useState9, 2),
       params = _useState10[0],
       setParams = _useState10[1];
 
+  var firstFetch = true;
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    fetchUsers();
+    console.log(firstFetch);
+
+    if (firstFetch == true && params.sort != '') {
+      console.log(params.sort);
+      firstFetch = false;
+    } else {
+      fetchUsers();
+      localStorage.setItem('datatable.' + props._id, JSON.stringify(params));
+    }
   }, [params]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var slots = {};
@@ -325,18 +344,16 @@ var DTable = function DTable(props) {
   };
 
   var handleSort = function handleSort(newSort) {
-    if (typeof newSort.asc != 'undefined') {
-      var sort = params.sort,
-          order = params.order,
-          rest = _objectWithoutProperties(params, _excluded4);
+    var sort = params.sort,
+        order = params.order,
+        rest = _objectWithoutProperties(params, _excluded4);
 
-      sort = newSort.column;
-      order = newSort.asc == true ? 'asc' : 'desc';
-      setParams(_objectSpread({
-        sort: sort,
-        order: order
-      }, rest));
-    }
+    sort = newSort.column;
+    order = newSort.asc == true ? 'asc' : 'desc';
+    setParams(_objectSpread({
+      sort: sort,
+      order: order
+    }, rest));
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
@@ -364,8 +381,9 @@ var DTable = function DTable(props) {
           custom: true,
           name: "pagechange",
           id: "pagechange",
+          value: params.limit,
           onChange: function onChange(event) {
-            return handlePerRowsChange(event.target.value);
+            return handlePerRowsChange(parseInt(event.target.value));
           },
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("option", {
             value: "10",
@@ -377,7 +395,7 @@ var DTable = function DTable(props) {
             value: "50",
             children: "50 items per page"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("option", {
-            value: "50",
+            value: "100",
             children: "100 items per page"
           })]
         })
@@ -392,6 +410,10 @@ var DTable = function DTable(props) {
       loading: appLoading,
       hover: true,
       sorter: true,
+      sorterValue: params.sort ? {
+        column: params.sort,
+        asc: params.order == 'asc'
+      } : {},
       onSorterValueChange: handleSort,
       scopedSlots: customFields
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_5__.CPagination, {
@@ -440,6 +462,8 @@ var CurrencyList = function CurrencyList() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCard, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCardBody, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__.default, {
+        _id: "currencieslist",
+        defaultSort: "name",
         fields: fields,
         apiUrl: "/api/setup/currencies"
       })

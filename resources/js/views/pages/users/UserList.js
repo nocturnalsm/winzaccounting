@@ -17,16 +17,16 @@ const UserList = () => {
             type: 'email'
         },
         {
-            label: 'Roles',            
-            type: 'custom',     
-            key: 'roleName',      
-            onRender: (item) => (  
-                <td>{                    
-                    item.roles.map((badge, index) => {                            
+            label: 'Roles',
+            type: 'custom',
+            key: 'roleName',
+            onRender: (item) => (
+                <td>{
+                    item.roles.map((badge, index) => {
                         return (
                             <CBadge key={index} color="success">{badge.name}</CBadge>
                         )
-                    })                        
+                    })
                 }
                 </td>
             )
@@ -41,6 +41,8 @@ const UserList = () => {
         <CCard>
             <CCardBody>
                 <DTable
+                    _id="userslist"
+                    defaultSort="name"
                     fields={fields}
                     apiUrl="/api/admin/users"
                     showToolbar={true}

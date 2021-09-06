@@ -5,7 +5,7 @@ import { setActiveCompany } from '../store';
 import axios from 'axios';
 
 const CompanySelect = (props) => {
-    
+
     const [companies, setCompanies] = useState([])
     const dispatch = useDispatch();
     const company = useSelector((state) => state.activeCompany);
@@ -21,19 +21,15 @@ const CompanySelect = (props) => {
             .then(response => {
                 setCompanies(response.data.data);
                 dispatch(setActiveCompany(response.data.data[0]));
-            });                     
+            });
         }
     },[])
 
-    useEffect(() => {
-        console.log(company);
-    })
-    const onChangeCompany = (event) => {        
-        const selected = event.target.getAttribute('_id');        
-        console.log(selected);
+    const onChangeCompany = (event) => {
+        const selected = event.target.getAttribute('_id');
         dispatch(setActiveCompany(companies[selected]));
     }
-    return (             
+    return (
         <div>
             {
                 companies ? (
@@ -42,7 +38,7 @@ const CompanySelect = (props) => {
                         {company ? company.name : ''}
                         </CDropdownToggle>
                         <CDropdownMenu>
-                            {                                                  
+                            {
                                 companies.map((item,index) => (
                                     <CDropdownItem key={item.id} _id={index} onClick={onChangeCompany}>
                                         {item.name}

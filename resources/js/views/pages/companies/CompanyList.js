@@ -30,6 +30,8 @@ const CompanyList = () => {
         <CCard>
             <CCardBody>
                 <DTable
+                    _id="companieslist"
+                    defaultSort="name"
                     fields={fields}
                     apiUrl="/api/admin/companies"
                 />

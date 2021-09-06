@@ -25,6 +25,8 @@ const TaxCodeList = () => {
         <CCard>
             <CCardBody>
                 <DTable
+                    _id="taxcodeslist"
+                    defaultSort="name"
                     fields={fields}
                     apiUrl="/api/setup/taxcodes"
                 />

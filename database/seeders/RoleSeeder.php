@@ -21,7 +21,7 @@ class RoleSeeder extends Seeder
                 'guard_name' => 'web',
             ]
         );
-        Role::create(
+        Role::insert([
             [
                 'name' => 'Admin',
                 'guard_name' => 'web',
@@ -34,6 +34,7 @@ class RoleSeeder extends Seeder
                 'name' => 'Employee',
                 'guard_name' => 'web',
             ]
+          ]
         );
 
         User::where('username', 'basugi99')
