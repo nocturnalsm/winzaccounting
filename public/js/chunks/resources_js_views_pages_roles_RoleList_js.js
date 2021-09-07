@@ -26,7 +26,7 @@ var DTToolbarShow = function DTToolbarShow(props) {
     shape: "square",
     size: "sm",
     disabled: props.disabled,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cil-magnifying-glass"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -42,7 +42,7 @@ var DTToolbarEdit = function DTToolbarEdit(props) {
     shape: "square",
     size: "sm",
     disabled: props.disabled,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cilPencil"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -58,7 +58,7 @@ var DTToolbarDelete = function DTToolbarDelete(props) {
     shape: "square",
     size: "sm",
     disabled: props.disabled,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cilTrash"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -156,11 +156,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var DTable = function DTable(props) {
+  var _ref3, _params$page, _params$limit;
+
   var appLoading = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.appLoading;
-  });
-  var appError = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
-    return state.appError;
   });
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
@@ -183,40 +182,21 @@ var DTable = function DTable(props) {
       fields = _useState8[0],
       setFields = _useState8[1];
 
-  var initialParams = function initialParams() {
-    var datatable = localStorage.getItem('datatable.' + props._id) || '';
-
-    if (datatable != '') {
-      return JSON.parse(datatable);
-    } else {
-      var _props$limit, _props$defaultSort, _props$defaultOrder;
-
-      return {
-        page: 1,
-        limit: (_props$limit = props.limit) !== null && _props$limit !== void 0 ? _props$limit : 10,
-        sort: (_props$defaultSort = props.defaultSort) !== null && _props$defaultSort !== void 0 ? _props$defaultSort : '',
-        order: (_props$defaultOrder = props.defaultOrder) !== null && _props$defaultOrder !== void 0 ? _props$defaultOrder : 'asc',
-        filter: {}
-      };
-    }
+  var initial = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {
+    page: 1,
+    limit: 10,
+    sort: null,
+    order: 'asc'
   };
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initialParams()),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initial),
       _useState10 = _slicedToArray(_useState9, 2),
       params = _useState10[0],
       setParams = _useState10[1];
 
-  var firstFetch = true;
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    console.log(firstFetch);
-
-    if (firstFetch == true && params.sort != '') {
-      console.log(params.sort);
-      firstFetch = false;
-    } else {
-      fetchUsers();
-      localStorage.setItem('datatable.' + props._id, JSON.stringify(params));
-    }
+    fetchData(params);
+    localStorage.setItem('datatable.' + props._id, JSON.stringify(params));
   }, [params]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var slots = {};
@@ -228,7 +208,7 @@ var DTable = function DTable(props) {
         field['filter'] = false;
 
         slots[field.key] = function (item, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_6__.default, {});
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_6__["default"], {});
         };
 
         return field;
@@ -268,7 +248,7 @@ var DTable = function DTable(props) {
     setCustomFields(slots);
   }, []);
 
-  var fetchUsers = /*#__PURE__*/function () {
+  var fetchData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -306,7 +286,7 @@ var DTable = function DTable(props) {
       }, _callee, null, [[1, 8, 11, 14]]);
     }));
 
-    return function fetchUsers() {
+    return function fetchData() {
       return _ref.apply(this, arguments);
     };
   }();
@@ -344,16 +324,20 @@ var DTable = function DTable(props) {
   };
 
   var handleSort = function handleSort(newSort) {
-    var sort = params.sort,
-        order = params.order,
-        rest = _objectWithoutProperties(params, _excluded4);
+    var _ref2;
 
-    sort = newSort.column;
-    order = newSort.asc == true ? 'asc' : 'desc';
-    setParams(_objectSpread({
-      sort: sort,
-      order: order
-    }, rest));
+    if (newSort.column != params.sort || newSort.asc != ((_ref2 = params.order == 'asc') !== null && _ref2 !== void 0 ? _ref2 : true)) {
+      var sort = params.sort,
+          order = params.order,
+          rest = _objectWithoutProperties(params, _excluded4);
+
+      sort = newSort.column;
+      order = newSort.asc == true ? 'asc' : 'desc';
+      setParams(_objectSpread({
+        sort: sort,
+        order: order
+      }, rest));
+    }
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
@@ -365,7 +349,7 @@ var DTable = function DTable(props) {
         lg: "10",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_5__.CButton, {
           color: "primary",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_7__.default, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
             name: "cil-plus"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
             className: "ml-2",
@@ -408,17 +392,19 @@ var DTable = function DTable(props) {
       itemsPerPage: params.limit,
       onColumnFilterChange: handleFilterChange,
       loading: appLoading,
+      sorterValue: {
+        column: params.sort,
+        asc: (_ref3 = params.order == 'asc') !== null && _ref3 !== void 0 ? _ref3 : true
+      },
       hover: true,
       sorter: true,
-      sorterValue: params.sort ? {
-        column: params.sort,
-        asc: params.order == 'asc'
-      } : {},
+      columnFilterValue: props.customFilterValue ? _objectSpread(_objectSpread({}, props.customFilterValue), params.filter) : {},
       onSorterValueChange: handleSort,
-      scopedSlots: customFields
+      scopedSlots: customFields,
+      columnFilterSlot: props.customFilterInput
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_5__.CPagination, {
-      activePage: params.page,
-      pages: Math.ceil(data.count / params.limit),
+      activePage: (_params$page = params.page) !== null && _params$page !== void 0 ? _params$page : 1,
+      pages: Math.ceil(data.count / ((_params$limit = params.limit) !== null && _params$limit !== void 0 ? _params$limit : 10)),
       onActivePageChange: handlePageChange
     })]
   });
@@ -481,7 +467,7 @@ var RoleList = function RoleList() {
   }];
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCard, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCardBody, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__.default, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__["default"], {
         _id: "roleslist",
         defaultSort: "name",
         fields: fields,

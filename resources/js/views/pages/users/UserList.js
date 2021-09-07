@@ -1,7 +1,14 @@
 import DTable from '../../../components/datatable/DTable'
-import {CCard, CCardBody, CBadge} from '@coreui/react'
+import {CCard, CCardBody, CBadge, CSelect} from '@coreui/react'
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setAppError } from '../../../store'
+import axios from 'axios';
 
 const UserList = () => {
+    const [roles, setRoles] = useState([]);
+    const [customFilterRole, setCustomFilterRole] = useState({})
+
     const fields = [
         {
             label: 'Name',
@@ -36,7 +43,28 @@ const UserList = () => {
             type: 'toolbar',
         }
     ];
+    const dispatch = useDispatch;
+    const onChangeRoleFilter = (event) => {
+        let value = event.target.value;
+        console.log(event);
+        setCustomFilterRole({roleName: value});
+    }
+    useEffect(() => {        
+        axios.get("/api/admin/roles", {
+            params: {
+                limit: 5000,
+                sort: 'name'
+            }
+        }).then(response => {
+            if (response.data){
+                setRoles(response.data.data)
+            }
+        })
+        .catch(error => {
+            dispatch(setAppError(error.response.message))
+        })
 
+    }, [])
     return (
         <CCard>
             <CCardBody>
@@ -46,6 +74,19 @@ const UserList = () => {
                     fields={fields}
                     apiUrl="/api/admin/users"
                     showToolbar={true}
+                    customFilterValue={customFilterRole}
+                    customFilterInput={{
+                        'roleName': (
+                            <CSelect aria-label="column name: 'roleName' filter input" onChange={onChangeRoleFilter} size="sm">
+                                <option value=""></option>
+                                {                                    
+                                    roles.map((item, index) =>(
+                                        <option key={index} value={item.name}>{item.name}</option>
+                                    ))
+                                }
+                            </CSelect>
+                        )
+                    }}
                 />
             </CCardBody>
         </CCard>

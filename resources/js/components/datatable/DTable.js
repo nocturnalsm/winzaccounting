@@ -9,39 +9,24 @@ import CIcon from '@coreui/icons-react';
 const DTable = (props) => {
 
     const appLoading = useSelector(state => state.appLoading);
-    const appError = useSelector(state => state.appError);
 
     const [data, setData] = useState([]);
     const [showToolbar, setShowToolbar] = useState(true);
     const [customFields, setCustomFields] = useState({});
-    const [fields, setFields] = useState(props.fields);
-    const initialParams = () => {
-        let datatable = localStorage.getItem('datatable.' + props._id) || '';
-        if (datatable != ''){
-            return JSON.parse(datatable);
-        }
-        else {
-            return {
-                page: 1,
-                limit: props.limit ?? 10,
-                sort: props.defaultSort ?? '',
-                order: props.defaultOrder ?? 'asc',
-                filter: {}
-            }
-        }
-    }
-    const [params, setParams] = useState(initialParams())
-    let firstFetch = true;
+    const [fields, setFields] = useState(props.fields);        
+    
+    const initial = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {
+        page: 1,
+        limit: 10,
+        sort: null,
+        order: 'asc'
+    };        
+    
+    const [params, setParams] = useState(initial)
+        
     useEffect(() => {
-        console.log(firstFetch);
-        if (firstFetch == true && params.sort != ''){
-            console.log(params.sort);
-            firstFetch = false;
-        }
-        else {
-          fetchUsers();
-          localStorage.setItem('datatable.' +props._id, JSON.stringify(params))
-        }
+        fetchData(params)
+        localStorage.setItem('datatable.' +props._id, JSON.stringify(params))
     }, [params])
 
     useEffect(() => {
@@ -88,10 +73,15 @@ const DTable = (props) => {
 
     }, [])
 
-    const fetchUsers = async () => {
+    const fetchData = async () => {
         store.dispatch(setAppLoading(true));
         try {
-            const response = await axios.get(props.apiUrl, {params: params});
+            //const {page, limit, sort, order, filter} = params;              
+            const response = await axios.get(props.apiUrl, 
+                {
+                    params: params
+                }
+            );            
             setData(response.data);
         }
         catch (error){
@@ -103,26 +93,28 @@ const DTable = (props) => {
     }
     const handlePageChange = newPage => {
         let { page, ...rest } = params;
-        page = newPage;
+        page = newPage;        
         setParams({page, ...rest});
   	};
-    const handleFilterChange = (newFilter) => {
+    const handleFilterChange = (newFilter) => {      
         if (Object.keys(newFilter).length != 0){
             let { filter, ...rest} = params;
             filter = newFilter;
             setParams({filter, ...rest});
         }
     }
-  	const handlePerRowsChange = newLimit => {
+  	const handlePerRowsChange = newLimit => {        
         let { limit, ...rest } = params;
-        limit = newLimit;
+        limit = newLimit;        
         setParams({limit, ...rest});
   	};
-    const handleSort = (newSort) => {
-        let { sort, order, ...rest } = params;
-        sort = newSort.column;
-        order = newSort.asc == true ? 'asc' : 'desc'
-        setParams({sort, order, ...rest});
+    const handleSort = (newSort) => {          
+        if (newSort.column != params.sort || newSort.asc != (params.order == 'asc' ?? true)){
+            let { sort, order, ...rest } = params;
+            sort = newSort.column;
+            order = newSort.asc == true ? 'asc' : 'desc'     
+            setParams({sort, order, ...rest});
+        }
   	};
 
     return (
@@ -156,15 +148,17 @@ const DTable = (props) => {
               itemsPerPage={params.limit}
               onColumnFilterChange={handleFilterChange}
               loading={appLoading}
+              sorterValue={{column: params.sort, asc: params.order == 'asc' ?? true}}
               hover
-              sorter
-              sorterValue={params.sort ? {column: params.sort, asc: params.order == 'asc'} : {}}
+              sorter              
+              columnFilterValue={props.customFilterValue ? {...props.customFilterValue, ...params.filter} : {}}
               onSorterValueChange={handleSort}
               scopedSlots = {customFields}
+              columnFilterSlot = {props.customFilterInput}
           />
           <CPagination
-              activePage={params.page}
-              pages={Math.ceil(data.count / params.limit)}
+              activePage={params.page ?? 1}
+              pages={Math.ceil(data.count / (params.limit ?? 10))}
               onActivePageChange={handlePageChange}
           ></CPagination>
         </>
