@@ -1,6 +1,6 @@
 import DTable from '../../../components/datatable/DTable'
 import {CCard, CCardBody, CBadge, CSelect} from '@coreui/react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { setAppError } from '../../../store'
 import axios from 'axios';
@@ -9,6 +9,7 @@ const UserList = () => {
     const [roles, setRoles] = useState([]);
     const [customFilterRole, setCustomFilterRole] = useState({})
 
+    const dtRef = useRef(null)
     const fields = [
         {
             label: 'Name',
@@ -43,12 +44,13 @@ const UserList = () => {
             type: 'toolbar',
         }
     ];
-    const dispatch = useDispatch;
+    const dispatch = useDispatch();
     const onChangeRoleFilter = (event) => {
-        let value = event.target.value;
-        console.log(event);
-        setCustomFilterRole({roleName: value});
+        const value = event.target.value;    
+        dtRef.current.setCustomFilter({roleName: value})
+        setCustomFilterRole({roleName: value});                  
     }
+    
     useEffect(() => {        
         axios.get("/api/admin/roles", {
             params: {
@@ -71,9 +73,10 @@ const UserList = () => {
                 <DTable
                     _id="userslist"
                     defaultSort="name"
-                    fields={fields}
+                    fields={fields}                    
+                    ref={dtRef}
                     apiUrl="/api/admin/users"
-                    showToolbar={true}
+                    showToolbar={true}                    
                     customFilterValue={customFilterRole}
                     customFilterInput={{
                         'roleName': (

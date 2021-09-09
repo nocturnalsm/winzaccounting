@@ -14594,6 +14594,8 @@ var Login = function Login(props) {
         password: password
       }).then(function (response) {
         if (response.error) {
+          inputRef.current.focus();
+
           if (response.error.errors) {
             setLoginError(response.error);
             setValidated(false);
@@ -14647,6 +14649,7 @@ var Login = function Login(props) {
                       autoComplete: "username",
                       type: "text",
                       name: "username",
+                      autoFocus: true,
                       disabled: loading,
                       "aria-describedby": "inputGroupPrepend03",
                       onChange: function onChange(e) {

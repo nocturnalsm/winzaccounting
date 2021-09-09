@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { setAppError } from '../../../store'
 import {
@@ -28,7 +28,7 @@ const Login = (props) => {
   const [loading, setLoading] = useState(false);
   
   const dispatch = useDispatch();
-
+  
   const handleSubmit = (event) => {
     const form = event.currentTarget    
     event.preventDefault()    
@@ -44,6 +44,7 @@ const Login = (props) => {
       })            
       .then((response) => {                 
           if (response.error){
+              inputRef.current.focus()
               if (response.error.errors){
                   setLoginError(response.error);
                   setValidated(false);
@@ -87,6 +88,7 @@ const Login = (props) => {
                         autoComplete="username" 
                         type="text"
                         name="username" 
+                        autoFocus                        
                         disabled={loading}
                         aria-describedby="inputGroupPrepend03"
                         onChange={e => setUsername(e.target.value)}

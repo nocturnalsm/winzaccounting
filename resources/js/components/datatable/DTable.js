@@ -1,33 +1,41 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useImperativeHandle } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { store, setAppLoading, setAppError } from '../../store';
 import {CDataTable,CPagination, CRow, CCol, CButton, CSelect, CBadge} from '@coreui/react';
 import DTToolbar from './DTToolbar'
 import CIcon from '@coreui/icons-react';
+import debounce from 'lodash.debounce';
 
-const DTable = (props) => {
-
+const DTable = React.forwardRef((props, ref) => {
+    
     const appLoading = useSelector(state => state.appLoading);
-
     const [data, setData] = useState([]);
     const [showToolbar, setShowToolbar] = useState(true);
     const [customFields, setCustomFields] = useState({});
-    const [fields, setFields] = useState(props.fields);        
-    
-    const initial = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {
-        page: 1,
-        limit: 10,
-        sort: null,
-        order: 'asc'
-    };        
-    
-    const [params, setParams] = useState(initial)
+    const [fields, setFields] = useState(props.fields);  
+    const [customFilterValue, setCustomFilterValue] = useState(props.customFilterValue)    
+    const [params, setParams] = useState({})
         
     useEffect(() => {
-        fetchData(params)
-        localStorage.setItem('datatable.' +props._id, JSON.stringify(params))
-    }, [params])
+        let data = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {
+            page: 1,
+            limit: 10,
+            sort: null,
+            order: 'asc'
+        };      
+        let {filter, ...rest} = data
+        fetchData(rest)  
+    }, [])
+
+    useImperativeHandle(ref, () => ({
+        
+        setCustomFilter(values) {                                    
+            fetchData({filter: {...params.filter, ...values}})
+            setCustomFilterValue(values)
+        }
+    
+    }));
 
     useEffect(() => {
         let slots = {};
@@ -73,47 +81,56 @@ const DTable = (props) => {
 
     }, [])
 
-    const fetchData = async () => {
-        store.dispatch(setAppLoading(true));
-        try {
-            //const {page, limit, sort, order, filter} = params;              
-            const response = await axios.get(props.apiUrl, 
-                {
-                    params: params
-                }
-            );            
-            setData(response.data);
-        }
-        catch (error){
-            store.dispatch(setAppError(error.response.data.message));
-        }
-        finally {
-            store.dispatch(setAppLoading(false));
+    const fetchData = async (request) => {        
+        if (!appLoading){
+            store.dispatch(setAppLoading(true));
+            try {                                            
+                console.log(params.sort)
+                let { page, limit, sort, order, filter } = { params, ...request}                                
+                let newParams = {
+                    page: page ?? 1,
+                    limit: limit ?? 10,
+                    sort: sort,
+                    order: order ?? 'asc',
+                    filter: filter
+                }                         
+                
+                const response = await axios.get(props.apiUrl, 
+                    {
+                        params: newParams
+                    }
+                );            
+                setData(response.data);
+                setParams(newParams)                  
+                localStorage.setItem('datatable.' +props._id, JSON.stringify(newParams))    
+            }
+            catch (error){
+                store.dispatch(setAppError(error.response.data.message));
+            }
+            finally {
+                store.dispatch(setAppLoading(false));
+            }        
         }
     }
-    const handlePageChange = newPage => {
-        let { page, ...rest } = params;
-        page = newPage;        
-        setParams({page, ...rest});
-  	};
-    const handleFilterChange = (newFilter) => {      
-        if (Object.keys(newFilter).length != 0){
-            let { filter, ...rest} = params;
-            filter = newFilter;
-            setParams({filter, ...rest});
+    const handlePageChange = newPage => {      
+        if (newPage > 0 && newPage != params.page){            
+            fetchData({page: newPage});
         }
-    }
-  	const handlePerRowsChange = newLimit => {        
-        let { limit, ...rest } = params;
-        limit = newLimit;        
-        setParams({limit, ...rest});
   	};
-    const handleSort = (newSort) => {          
+    const handleFilterChange = (newFilter) => {          
+        if (Object.keys(newFilter).length != 0 && params.filter != newFilter){   
+            let filter = {...newFilter, ...customFilterValue}
+            fetchData({filter: filter})          
+        }        
+    }
+  	const handlePerRowsChange = newLimit => {                
+        fetchData({limit: newLimit});
+  	};
+    const handleSort = (newSort) => {                  
         if (newSort.column != params.sort || newSort.asc != (params.order == 'asc' ?? true)){
-            let { sort, order, ...rest } = params;
-            sort = newSort.column;
-            order = newSort.asc == true ? 'asc' : 'desc'     
-            setParams({sort, order, ...rest});
+            let sort = newSort.column;
+            let order = newSort.asc == true ? 'asc' : 'desc'     
+            fetchData({sort: sort, order: order});
         }
   	};
 
@@ -144,26 +161,27 @@ const DTable = (props) => {
               items={data.data}
               fields={fields}
               columnFilter
-              footer
+              footer             
+              key={props._id}
+              innerRef={ref}
               itemsPerPage={params.limit}
-              onColumnFilterChange={handleFilterChange}
+              onColumnFilterChange={debounce(handleFilterChange, 300)}
               loading={appLoading}
               sorterValue={{column: params.sort, asc: params.order == 'asc' ?? true}}
               hover
-              sorter              
-              columnFilterValue={props.customFilterValue ? {...props.customFilterValue, ...params.filter} : {}}
+              sorter                            
               onSorterValueChange={handleSort}
               scopedSlots = {customFields}
               columnFilterSlot = {props.customFilterInput}
           />
           <CPagination
               activePage={params.page ?? 1}
-              pages={Math.ceil(data.count / (params.limit ?? 10))}
+              pages={data.count ? Math.ceil(data.count / (params.limit ?? 10)) : 0}
               onActivePageChange={handlePageChange}
           ></CPagination>
         </>
     );
 
-}
+})
 
 export default DTable
