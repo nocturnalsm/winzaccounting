@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Setup;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class CurrencyController extends Controller
 {
@@ -45,7 +46,13 @@ class CurrencyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $data = $this->currency->create($request);
+            return response()->json($data);
+        }
+        catch (\Exception $e){
+            return response()->json(['errors' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -68,7 +75,13 @@ class CurrencyController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $currency = $this->currency->getById($id);
+            return response()->json($currency);
+        }
+        catch (\Exception $e){
+            return response()->json(["errors" => $e->getMessage()]);
+        }
     }
 
     /**
@@ -80,7 +93,14 @@ class CurrencyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $data = $this->currency->update($id, $request);
+            Log::info($data);
+            return response()->json($data, isset($data["errors"]) ? 400 : 200);
+        }
+        catch (\Exception $e){
+            return response()->json(['errors' => $e->getMessage()]);
+        }
     }
 
     /**

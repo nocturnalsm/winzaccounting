@@ -26,7 +26,8 @@ var DTToolbarShow = function DTToolbarShow(props) {
     shape: "square",
     size: "sm",
     disabled: props.disabled,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    to: props.showLink ? props.showLink.replace(/\/$/, '') + "/" + props._id : '',
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cil-magnifying-glass"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -42,7 +43,8 @@ var DTToolbarEdit = function DTToolbarEdit(props) {
     shape: "square",
     size: "sm",
     disabled: props.disabled,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    to: props.editLink ? props.editLink.replace(/\/$/, '') + "/" + props._id : '',
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cilPencil"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -58,7 +60,8 @@ var DTToolbarDelete = function DTToolbarDelete(props) {
     shape: "square",
     size: "sm",
     disabled: props.disabled,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    to: props.deleteLink ? props.deleteLink.replace(/\/$/, '') + "/" + props._id : '',
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cilTrash"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -76,10 +79,16 @@ var DTToolbar = function DTToolbar(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_0__.CButtonToolbar, {
       children: [showButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(DTToolbarShow, {
+        _id: props._id,
+        showLink: props.showLink,
         disabled: props.showButtonDisabled
       }) : '', editButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(DTToolbarEdit, {
+        _id: props._id,
+        editLink: props.editLink,
         disabled: props.editButtonDisabled
       }) : '', deleteButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(DTToolbarDelete, {
+        _id: props._id,
+        deleteLink: props.deleteLink,
         disabled: props.deleteButtonDisabled
       }) : '']
     })
@@ -155,7 +164,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function (props, ref) {
-  var _ref3, _params$page, _params$limit;
+  var _ref3, _params$limit;
 
   var appLoading = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.appLoading;
@@ -224,7 +233,13 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         field['filter'] = false;
 
         slots[field.key] = function (item, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_6__.default, {});
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            _id: item.id,
+            createLink: props.createLink,
+            editLink: props.editLink,
+            deleteLink: props.deleteLink,
+            showLink: props.showLink
+          });
         };
 
         return field;
@@ -273,13 +288,12 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
           switch (_context.prev = _context.next) {
             case 0:
               if (appLoading) {
-                _context.next = 20;
+                _context.next = 19;
                 break;
               }
 
               _store__WEBPACK_IMPORTED_MODULE_4__.store.dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(true));
               _context.prev = 2;
-              console.log(params.sort);
               _params$request = _objectSpread(_objectSpread({}, params), request), page = _params$request.page, limit = _params$request.limit, sort = _params$request.sort, order = _params$request.order, filter = _params$request.filter;
               newParams = {
                 page: page !== null && page !== void 0 ? page : 1,
@@ -288,35 +302,35 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
                 order: order !== null && order !== void 0 ? order : 'asc',
                 filter: filter
               };
-              _context.next = 8;
+              _context.next = 7;
               return axios__WEBPACK_IMPORTED_MODULE_3___default().get(props.apiUrl, {
                 params: newParams
               });
 
-            case 8:
+            case 7:
               response = _context.sent;
               setData(response.data);
               setParams(newParams);
               localStorage.setItem('datatable.' + props._id, JSON.stringify(newParams));
-              _context.next = 17;
+              _context.next = 16;
               break;
 
-            case 14:
-              _context.prev = 14;
+            case 13:
+              _context.prev = 13;
               _context.t0 = _context["catch"](2);
               _store__WEBPACK_IMPORTED_MODULE_4__.store.dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppError)(_context.t0.response.data.message));
 
-            case 17:
-              _context.prev = 17;
+            case 16:
+              _context.prev = 16;
               _store__WEBPACK_IMPORTED_MODULE_4__.store.dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
-              return _context.finish(17);
+              return _context.finish(16);
 
-            case 20:
+            case 19:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[2, 14, 17, 20]]);
+      }, _callee, null, [[2, 13, 16, 19]]);
     }));
 
     return function fetchData(_x) {
@@ -370,7 +384,8 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         lg: "10",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_5__.CButton, {
           color: "primary",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_7__.default, {
+          to: "/currencies/create",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
             name: "cil-plus"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
             className: "ml-2",
@@ -410,7 +425,6 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       fields: fields,
       columnFilter: true,
       footer: true,
-      innerRef: ref,
       itemsPerPage: params.limit,
       onColumnFilterChange: lodash_debounce__WEBPACK_IMPORTED_MODULE_8___default()(handleFilterChange, 300),
       loading: appLoading,
@@ -424,7 +438,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       scopedSlots: customFields,
       columnFilterSlot: props.customFilterInput
     }, props._id), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_5__.CPagination, {
-      activePage: (_params$page = params.page) !== null && _params$page !== void 0 ? _params$page : 1,
+      activePage: params.page ? data.count <= params.limit ? 1 : params.page : 1,
       pages: data.count ? Math.ceil(data.count / ((_params$limit = params.limit) !== null && _params$limit !== void 0 ? _params$limit : 10)) : 0,
       onActivePageChange: handlePageChange
     })]
@@ -542,7 +556,7 @@ var UserList = function UserList() {
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCard, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCardBody, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__.default, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__["default"], {
         _id: "userslist",
         defaultSort: "name",
         fields: fields,

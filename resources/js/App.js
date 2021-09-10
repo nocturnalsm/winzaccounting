@@ -28,6 +28,7 @@ const App = () =>  {
   
  
   const appLoading = useSelector((state) => state.appLoading)
+  const appSuccess = useSelector((state) => state.appSuccess)
   const appError = useSelector((state) => state.appError)
   const [progress, setProgress] = useState(0)
   
@@ -57,6 +58,17 @@ const App = () =>  {
           store.dispatch(setAppError(''));
       }
   }, [appError])
+
+  useEffect(() => {      
+    if (appSuccess != ''){          
+        Swal2.fire({
+            icon: 'success',
+            title: 'Success',
+            text: appSuccess
+        })
+        store.dispatch(setAppSuccess(''));
+    }
+}, [appSuccess])
 
   return (    
     <BrowserRouter forceRefresh={false}>

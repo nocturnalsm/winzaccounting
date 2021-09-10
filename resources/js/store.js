@@ -5,7 +5,8 @@ const initialState = {
   auth: JSON.parse(localStorage.getItem("appState")) || {},
   appLoading: false,
   appError: '',
-  activeCompany: {}
+  activeCompany: {},
+  appSuccess: ''
 }
 
 const setActiveCompany = (company) => {
@@ -28,6 +29,14 @@ const setAppError = (error) => {
   let payload = {appError: error}
   return {
       type: 'APP_ERROR',
+      payload
+  }
+}
+
+const setAppSuccess = (message) => {
+  let payload = {appSuccess: message}
+  return {
+      type: 'APP_SUCCESS',
       payload
   }
 }

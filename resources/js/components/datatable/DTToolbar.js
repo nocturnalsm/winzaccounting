@@ -7,8 +7,9 @@ const DTToolbarShow = (props) => {
         <CButton className="mr-2"
             color="success"                                        
             shape="square"
-            size="sm"           
-            disabled={props.disabled}                       
+            size="sm"                       
+            disabled={props.disabled}             
+            to={props.showLink ? props.showLink.replace(/\/$/, '') + "/" + props._id : ''}          
             >
             <CIcon name='cil-magnifying-glass' />
             <span className="d-none d-md-inline ml-2">Show</span>
@@ -22,7 +23,8 @@ const DTToolbarEdit = (props) => {
             color="primary"                                        
             shape="square"
             size="sm"            
-            disabled={props.disabled}                      
+            disabled={props.disabled}     
+            to={props.editLink ? props.editLink.replace(/\/$/, '') + "/" + props._id : ''}
             >
             <CIcon name='cilPencil' />
             <span className="d-none d-md-inline ml-2">Edit</span>
@@ -36,7 +38,8 @@ const DTToolbarDelete = (props) => {
             color="danger"                                        
             shape="square"
             size="sm"              
-            disabled={props.disabled}                    
+            disabled={props.disabled}   
+            to={props.deleteLink ? props.deleteLink.replace(/\/$/, '') + "/" + props._id : ''}                 
         >
             <CIcon name='cilTrash' />
             <span className="d-none d-md-inline ml-2">Delete</span>
@@ -49,19 +52,32 @@ const DTToolbar = (props) => {
     let showButtonVisible = props.showButtonVisible ?? true;
     let editButtonVisible = props.editButtonVisible ?? true;
     let deleteButtonVisible = props.deleteButtonVisible ?? true;
+    
     return (
         <td>            
             <CButtonToolbar>
             { showButtonVisible ? (
-                <DTToolbarShow disabled={props.showButtonDisabled}/>
+                <DTToolbarShow 
+                    _id={props._id} 
+                    showLink={props.showLink} 
+                    disabled={props.showButtonDisabled}
+                />
               ) : ''
             }
             { editButtonVisible ? (
-                <DTToolbarEdit disabled={props.editButtonDisabled}/>
+                <DTToolbarEdit 
+                    _id={props._id} 
+                    editLink={props.editLink} 
+                    disabled={props.editButtonDisabled}
+                />
               ) : ''
             }
             { deleteButtonVisible ? (
-                <DTToolbarDelete disabled={props.deleteButtonDisabled}/>
+                <DTToolbarDelete 
+                    _id={props._id} 
+                    deleteLink={props.deleteLink} 
+                    disabled={props.deleteButtonDisabled}
+                />
               ) : ''
             }
             </CButtonToolbar>            

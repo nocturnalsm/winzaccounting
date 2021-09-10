@@ -4,10 +4,6 @@ const SetupMenu = () => {
 
     const items = [
         {
-            href: "/companies",
-            caption: "Companies",
-        },
-        {
             href: "/currencies",
             caption: "Currencies"
         },

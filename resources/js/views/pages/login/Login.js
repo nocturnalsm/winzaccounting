@@ -1,6 +1,6 @@
-import React, {useState, useRef} from 'react'
-import { useDispatch } from 'react-redux'
-import { setAppError } from '../../../store'
+import React, {useState} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAppLoading, setAppError } from '../../../store'
 import {
   CButton,
   CCard,
@@ -21,31 +21,29 @@ import Auth from '../../../auth'
 
 const Login = (props) => {
   const [validated, setValidated] = useState(false);
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [username, setUsername] = React.useState('');  
   const [loginAttempt, setLoginAttempt] = useState(0);
   const [loginError, setLoginError] = useState({});
-  const [loading, setLoading] = useState(false);
+  
+  const loading = useSelector(state => state.appLoading)
+  const dispatch = useDispatch()
+  const passwordRef = React.useRef()
 
-  const dispatch = useDispatch();
-  const ref = useRef();
   const handleSubmit = (event) => {
     const form = event.currentTarget
     event.preventDefault()
     event.stopPropagation()
     setValidated(true)
     if (form.checkValidity() === true) {
-      setLoading(true);
+      dispatch(setAppLoading(true));
       setLoginError({});
       setLoginAttempt(loginAttempt+1);
       Auth.login({
           username: username,
-          password: password
+          password: passwordRef.current.value
       })
       .then((response) => {
-          if (response.error){
-              console.log(ref)
-              ref.current.focus()
+          if (response.error){                            
               if (response.error.errors){
                   setLoginError(response.error);
                   setValidated(false);
@@ -53,9 +51,9 @@ const Login = (props) => {
               else {
                   let message = response.error.message ?? 'Something went wrong';
                   dispatch(setAppError(message));
-              }
-              setLoading(false);
+              }              
           }
+          dispatch(setAppLoading(false));
       });
 
     }
@@ -80,17 +78,17 @@ const Login = (props) => {
                         </CAlert>
                         ) : ''
                     }
-                    <CInputGroup className="mb-3 has-validation" innerRef={ref}>
-                      <CInputGroupText id="inputGroupPrepend03">
+                    <CInputGroup className="mb-3 has-validation">
+                      <CInputGroupText>
                         <CIcon name="cil-user" />
                       </CInputGroupText>
                       <CInput
                         placeholder="Username"
-                        autoComplete="username"
-                        type="text"
-                        name="username"
-                        disabled={loading}
-                        aria-describedby="inputGroupPrepend03"
+                        autoFocus={true}
+                        autoComplete="off"
+                        innerRef={input => input && input.focus()}
+                        type="text"                        
+                        disabled={loading}                        
                         onChange={e => setUsername(e.target.value)}
                         value={username}
                         invalid={
@@ -100,9 +98,6 @@ const Login = (props) => {
                         }
                         required
                       />
-                      {
-
-                      }
                       <CInvalidFeedback>{
                         loginAttempt > 0
                         && loginError.errors
@@ -117,10 +112,9 @@ const Login = (props) => {
                       <CInput
                         type="password"
                         placeholder="Password"
-                        autoComplete="current-password"
-                        value={password}
-                        disabled={loading}
-                        onChange={e => setPassword(e.target.value)}
+                        autoComplete="off"       
+                        innerRef={passwordRef}                                         
+                        disabled={loading}                        
                         required
                       />
                       <CInvalidFeedback>Please enter your password.</CInvalidFeedback>

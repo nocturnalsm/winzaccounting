@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import {
   CBadge,
   CDropdown,
@@ -9,9 +10,34 @@ import {
   CLink
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import { setAppLoading, setAppError } from '../store';
 import Auth from '../auth';
 
 const TheHeaderDropdown = () => {
+
+  const [userAvatar, setUserAvatar] = useState(null);
+  const auth = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
+
+  const logout = () => {
+      dispatch(setAppLoading(true));
+      try {        
+          Auth.logout()          
+      }
+      catch(error){
+          dispatch(setAppError(error));
+      }
+      finally {
+          dispatch(setAppLoading(false))
+      }
+  }
+
+  useEffect(() => {
+      let name = auth.user.name
+      let avatarUrl = "https://ui-avatars.com/api/?background=random&name=" + name
+      setUserAvatar(avatarUrl)
+  }, [])
+
   return (
     <CDropdown
       inNav
@@ -21,7 +47,7 @@ const TheHeaderDropdown = () => {
       <CDropdownToggle className="c-header-nav-link" caret={false}>
         <div className="c-avatar">
           <CImg
-            src={'avatars/6.jpg'}
+            src={userAvatar}
             className="c-avatar-img"
             alt="admin@bootstrapmaster.com"
           />
@@ -82,7 +108,7 @@ const TheHeaderDropdown = () => {
           <CBadge color="primary" className="mfs-auto">42</CBadge>
         </CDropdownItem>
         <CDropdownItem divider />
-        <CDropdownItem href="#" onClick={Auth.logout}>
+        <CDropdownItem href="#" onClick={logout}>
           <CIcon name="cil-lock-locked" className="mfe-2" />
           Logout
         </CDropdownItem>

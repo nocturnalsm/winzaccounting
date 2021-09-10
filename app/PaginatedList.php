@@ -32,6 +32,9 @@ class PaginatedList
             $data = ($this->filterFunction)($data, $filter);
         }
         $count = $data->count();
+        if ($count <= $limit){
+            $page = 1;
+        }
         if ($sortBy != ''){
             $data = $data->orderBy($sortBy, $order);
         }

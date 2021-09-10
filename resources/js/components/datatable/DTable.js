@@ -38,15 +38,21 @@ const DTable = React.forwardRef((props, ref) => {
     }));
 
     useEffect(() => {
-        let slots = {};
+        let slots = {};        
         let currFields = props.fields;
         currFields.map((field, index) => {
             if (field.type == 'toolbar' && showToolbar == true){
                 field['key'] = '_toolbar';
                 field['sorter'] = false;
                 field['filter'] = false;
-                slots[field.key] = (item, index)=> (
-                    <DTToolbar />
+                slots[field.key] = (item, index)=> (                    
+                    <DTToolbar 
+                        _id={item.id} 
+                        createLink={props.createLink}
+                        editLink={props.editLink}
+                        deleteLink={props.deleteLink}
+                        showLink={props.showLink} 
+                    />
                 )
                 return field;
             }
@@ -84,8 +90,7 @@ const DTable = React.forwardRef((props, ref) => {
     const fetchData = async (request) => {
         if (!appLoading){
             store.dispatch(setAppLoading(true));
-            try {
-                console.log(params.sort)
+            try {                
                 let { page, limit, sort, order, filter } = { ...params, ...request}                                
                 let newParams = {
                     page: page ?? 1,
@@ -138,7 +143,7 @@ const DTable = React.forwardRef((props, ref) => {
         <>
           <CRow className="pb-2">
               <CCol xs="6" md="9" lg="10">
-                  <CButton color="primary">
+                  <CButton color="primary" to="/currencies/create">
                       <CIcon name="cil-plus" />
                       <span className="ml-2">Add</span>
                   </CButton>
@@ -162,8 +167,7 @@ const DTable = React.forwardRef((props, ref) => {
               fields={fields}
               columnFilter
               footer
-              key={props._id}
-              innerRef={ref}
+              key={props._id}              
               itemsPerPage={params.limit}
               onColumnFilterChange={debounce(handleFilterChange, 300)}
               loading={appLoading}
@@ -175,7 +179,7 @@ const DTable = React.forwardRef((props, ref) => {
               columnFilterSlot = {props.customFilterInput}
           />
           <CPagination
-              activePage={params.page ?? 1}
+              activePage={params.page ? (data.count <= params.limit ? 1: params.page) : 1}
               pages={data.count ? Math.ceil(data.count / (params.limit ?? 10)) : 0}
               onActivePageChange={handlePageChange}
           ></CPagination>

@@ -29,6 +29,10 @@ const CurrencyList = () => {
                     defaultSort="name"
                     fields={fields}
                     apiUrl="/api/setup/currencies"
+                    editLink="/currencies/edit"
+                    createLink="/currencies/create"
+                    deleteLink="/currencies/delete"
+                    showLink="/currencies/show"
                 />
             </CCardBody>
         </CCard>

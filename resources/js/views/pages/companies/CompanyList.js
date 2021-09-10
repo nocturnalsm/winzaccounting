@@ -34,6 +34,10 @@ const CompanyList = () => {
                     defaultSort="name"
                     fields={fields}
                     apiUrl="/api/admin/companies"
+                    editLink="/currencies/edit"
+                    createLink="/currencies/create"
+                    deleteLink="/currencies/delete"
+                    showLink="/currencies/show"
                 />
             </CCardBody>
         </CCard>
