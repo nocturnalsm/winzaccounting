@@ -1,5 +1,8 @@
 import DTable from '../../../components/datatable/DTable'
 import {CCard, CCardBody} from '@coreui/react'
+import { setActiveCompany } from '../../../store';
+import { useSelector } from 'react-redux'
+import { useEffect, useRef } from 'react';
 
 const CurrencyList = () => {
     const fields = [
@@ -21,6 +24,15 @@ const CurrencyList = () => {
         }
     ];
 
+    const activeCompany = useSelector(state => state.activeCompany)
+    const dtRef = useRef(null)
+
+    useEffect(() => {
+                
+        dtRef.current.setCustomFilter({company_id: activeCompany.id})         
+
+    }, [activeCompany])
+
     return (
         <CCard>
             <CCardBody>
@@ -28,6 +40,8 @@ const CurrencyList = () => {
                     _id="currencieslist"
                     defaultSort="name"
                     fields={fields}
+                    ref={dtRef}
+                    customFilterValue={{company_id: activeCompany.id}}
                     apiUrl="/api/setup/currencies"
                     editLink="/currencies/edit"
                     createLink="/currencies/create"

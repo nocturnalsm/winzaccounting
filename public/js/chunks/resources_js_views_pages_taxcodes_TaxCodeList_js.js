@@ -117,13 +117,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../store */ "./resources/js/store.js");
-/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
-/* harmony import */ var _DTToolbar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DTToolbar */ "./resources/js/components/datatable/DTToolbar.js");
-/* harmony import */ var _coreui_icons_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @coreui/icons-react */ "./node_modules/@coreui/icons-react/es/index.js");
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lodash.debounce */ "./node_modules/lodash.debounce/index.js");
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var _excluded = ["filter"];
+/* harmony import */ var _alert__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../alert */ "./resources/js/alert.js");
+/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
+/* harmony import */ var _DTToolbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DTToolbar */ "./resources/js/components/datatable/DTToolbar.js");
+/* harmony import */ var _coreui_icons_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @coreui/icons-react */ "./node_modules/@coreui/icons-react/es/index.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lodash.debounce */ "./node_modules/lodash.debounce/index.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -136,10 +136,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -151,6 +147,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -185,34 +182,52 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       customFields = _useState6[0],
       setCustomFields = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(props.fields),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
       _useState8 = _slicedToArray(_useState7, 2),
-      fields = _useState8[0],
-      setFields = _useState8[1];
+      customFilterInputs = _useState8[0],
+      setCustomFilterInputs = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(props.customFilterValue),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(props.fields),
       _useState10 = _slicedToArray(_useState9, 2),
-      customFilterValue = _useState10[0],
-      setCustomFilterValue = _useState10[1];
+      fields = _useState10[0],
+      setFields = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(props.customFilterValue),
       _useState12 = _slicedToArray(_useState11, 2),
-      params = _useState12[0],
-      setParams = _useState12[1];
+      customFilterValue = _useState12[0],
+      setCustomFilterValue = _useState12[1];
 
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    var data = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+      _useState14 = _slicedToArray(_useState13, 2),
+      params = _useState14[0],
+      setParams = _useState14[1];
+
+  var initialParams = function initialParams() {
+    var _props$customFilterVa;
+
+    return JSON.parse(localStorage.getItem('datatable.' + props._id)) || {
       page: 1,
       limit: 10,
       sort: null,
-      order: 'asc'
+      order: 'asc',
+      filter: (_props$customFilterVa = props.customFilterValue) !== null && _props$customFilterVa !== void 0 ? _props$customFilterVa : {}
     };
+  };
 
-    var filter = data.filter,
-        rest = _objectWithoutProperties(data, _excluded);
-
-    fetchData(rest);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    var data = initialParams();
+    fetchData(data);
   }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    var _props$customFilterIn;
+
+    var inputs = (_props$customFilterIn = props.customFilterInput) !== null && _props$customFilterIn !== void 0 ? _props$customFilterIn : {};
+    var values = initialParams();
+    var filterSlots = {};
+    Object.keys(inputs).map(function (item, index) {
+      filterSlots[item] = inputs[item](values.filter[item]);
+    });
+  }, [customFilterInputs]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useImperativeHandle)(ref, function () {
     return {
       setCustomFilter: function setCustomFilter(values) {
@@ -220,6 +235,9 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
           filter: _objectSpread(_objectSpread({}, params.filter), values)
         });
         setCustomFilterValue(values);
+      },
+      getInitialParams: function getInitialParams() {
+        return initialParams();
       }
     };
   });
@@ -233,7 +251,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         field['filter'] = false;
 
         slots[field.key] = function (item, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_7__["default"], {
             _id: item.id,
             createLink: props.createLink,
             editLink: props.editLink,
@@ -245,8 +263,8 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         return field;
       } else if (field.type == 'email') {
         slots[field.key] = function (item, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("td", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("a", {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("td", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("a", {
               href: "mailto:" + item[field.key],
               children: item[field.key]
             })
@@ -254,8 +272,8 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         };
       } else if (field.type == 'url') {
         slots[field.key] = function (item, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("td", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("a", {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("td", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("a", {
               target: "_blank",
               href: "http://" + item[field.key],
               children: item[field.key]
@@ -264,8 +282,8 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         };
       } else if (field.type == 'badge') {
         slots[field.key] = function (item) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("td", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_5__.CBadge, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("td", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CBadge, {
               color: "success",
               children: item[field.key]
             }, index)
@@ -318,7 +336,9 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
             case 13:
               _context.prev = 13;
               _context.t0 = _context["catch"](2);
-              _store__WEBPACK_IMPORTED_MODULE_4__.store.dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppError)(_context.t0.response.data.message));
+              _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
+                text: _context.t0.response.data.message
+              });
 
             case 16:
               _context.prev = 16;
@@ -347,7 +367,11 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
   };
 
   var handleFilterChange = function handleFilterChange(newFilter) {
-    if (Object.keys(newFilter).length != 0 && params.filter != newFilter) {
+    var _params$filter;
+
+    var oldParams = (_params$filter = params.filter) !== null && _params$filter !== void 0 ? _params$filter : {};
+
+    if (Object.keys(newFilter).length != 0 && newFilter !== oldParams) {
       var filter = _objectSpread(_objectSpread({}, newFilter), customFilterValue);
 
       fetchData({
@@ -375,28 +399,28 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
     }
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_5__.CRow, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CRow, {
       className: "pb-2",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_5__.CCol, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CCol, {
         xs: "6",
         md: "9",
         lg: "10",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_5__.CButton, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CButton, {
           color: "primary",
           to: "/currencies/create",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
             name: "cil-plus"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
             className: "ml-2",
             children: "Add"
           })]
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_5__.CCol, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CCol, {
         xs: "6",
         md: "3",
         lg: "2",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_5__.CSelect, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CSelect, {
           placeholder: "Items per page",
           custom: true,
           name: "pagechange",
@@ -405,28 +429,29 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
           onChange: function onChange(event) {
             return handlePerRowsChange(parseInt(event.target.value));
           },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("option", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("option", {
             value: "10",
             children: "10 items per page"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("option", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("option", {
             value: "20",
             children: "20 items per page"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("option", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("option", {
             value: "50",
             children: "50 items per page"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("option", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("option", {
             value: "100",
             children: "100 items per page"
           })]
         })
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_5__.CDataTable, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CDataTable, {
       items: data.data,
       fields: fields,
       columnFilter: true,
       footer: true,
+      columnFilterValue: params.filter,
       itemsPerPage: params.limit,
-      onColumnFilterChange: lodash_debounce__WEBPACK_IMPORTED_MODULE_8___default()(handleFilterChange, 300),
+      onColumnFilterChange: lodash_debounce__WEBPACK_IMPORTED_MODULE_9___default()(handleFilterChange, 300),
       loading: appLoading,
       sorterValue: {
         column: params.sort,
@@ -436,8 +461,8 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       sorter: true,
       onSorterValueChange: handleSort,
       scopedSlots: customFields,
-      columnFilterSlot: props.customFilterInput
-    }, props._id), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_5__.CPagination, {
+      columnFilterSlot: customFilterInputs
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CPagination, {
       activePage: params.page ? data.count <= params.limit ? 1 : params.page : 1,
       pages: data.count ? Math.ceil(data.count / ((_params$limit = params.limit) !== null && _params$limit !== void 0 ? _params$limit : 10)) : 0,
       onActivePageChange: handlePageChange

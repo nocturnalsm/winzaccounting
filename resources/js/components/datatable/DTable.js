@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useImperativeHandle } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { store, setAppLoading, setAppError } from '../../store';
+import { store, setAppLoading } from '../../store';
+import MyAlert from '../../alert';
 import {CDataTable,CPagination, CRow, CCol, CButton, CSelect, CBadge} from '@coreui/react';
 import DTToolbar from './DTToolbar'
 import CIcon from '@coreui/icons-react';
@@ -13,26 +14,43 @@ const DTable = React.forwardRef((props, ref) => {
     const [data, setData] = useState([]);
     const [showToolbar, setShowToolbar] = useState(true);
     const [customFields, setCustomFields] = useState({});
+    const [customFilterInputs, setCustomFilterInputs] = useState({});
     const [fields, setFields] = useState(props.fields);
-    const [customFilterValue, setCustomFilterValue] = useState(props.customFilterValue)
+    const [customFilterValue, setCustomFilterValue] = useState(props.customFilterValue)    
     const [params, setParams] = useState({})
 
-    useEffect(() => {
-        let data = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {
+    const initialParams = () => {
+        return JSON.parse(localStorage.getItem('datatable.' + props._id)) || {
             page: 1,
             limit: 10,
             sort: null,
-            order: 'asc'
+            order: 'asc',
+            filter: props.customFilterValue ?? {}
         };
-        let {filter, ...rest} = data
-        fetchData(rest)
+    }
+
+    useEffect(() => {
+        let data = initialParams()
+        fetchData(data)
     }, [])
+
+    useEffect(() => {
+        let inputs = props.customFilterInput ?? {}
+        let values = initialParams();
+        let filterSlots = {}       
+        Object.keys(inputs).map((item, index) => {     
+            filterSlots[item] = inputs[item](values.filter[item])
+        })        
+    }, [customFilterInputs])
 
     useImperativeHandle(ref, () => ({
 
         setCustomFilter(values) {
             fetchData({filter: {...params.filter, ...values}})
             setCustomFilterValue(values)
+        },
+        getInitialParams(){
+            return initialParams()
         }
 
     }));
@@ -83,10 +101,10 @@ const DTable = React.forwardRef((props, ref) => {
 
         })
         setFields(currFields);
-        setCustomFields(slots);
+        setCustomFields(slots);        
 
     }, [])
-
+   
     const fetchData = async (request) => {
         if (!appLoading){
             store.dispatch(setAppLoading(true));
@@ -110,7 +128,7 @@ const DTable = React.forwardRef((props, ref) => {
                 localStorage.setItem('datatable.' +props._id, JSON.stringify(newParams))
             }
             catch (error){
-                store.dispatch(setAppError(error.response.data.message));
+                MyAlert.error({text: error.response.data.message});
             }
             finally {
                 store.dispatch(setAppLoading(false));
@@ -123,7 +141,8 @@ const DTable = React.forwardRef((props, ref) => {
         }
   	};
     const handleFilterChange = (newFilter) => {
-        if (Object.keys(newFilter).length != 0 && params.filter != newFilter){
+        let oldParams = params.filter ?? {}        
+        if (Object.keys(newFilter).length != 0 && newFilter !== oldParams){
             let filter = {...newFilter, ...customFilterValue}
             fetchData({filter: filter})
         }
@@ -167,7 +186,7 @@ const DTable = React.forwardRef((props, ref) => {
               fields={fields}
               columnFilter
               footer
-              key={props._id}              
+              columnFilterValue={params.filter}              
               itemsPerPage={params.limit}
               onColumnFilterChange={debounce(handleFilterChange, 300)}
               loading={appLoading}
@@ -176,7 +195,7 @@ const DTable = React.forwardRef((props, ref) => {
               sorter
               onSorterValueChange={handleSort}
               scopedSlots = {customFields}
-              columnFilterSlot = {props.customFilterInput}
+              columnFilterSlot = {customFilterInputs}
           />
           <CPagination
               activePage={params.page ? (data.count <= params.limit ? 1: params.page) : 1}

@@ -43,31 +43,31 @@ class BaseRepository implements RepositoryInterface
     public function create(Request $request)
     {
         $params = $request->all();
-
         $validator = Validator::make($params, $this->validateUsing($params));
+        $validator->validateWithBag("errors");
 
-        if ($validator->fails()) {
-            return ["errors" => $validator->errors()];
-        }        
-        $data = $this->data->create($params);
-        return $data;
+        $data = new $this->data;
+        $data->fill($params)->save();
+        return $validator->validated();
     }
     public function update(String $id, Request $request)
     {
-        $params = $request->all();        
+        $params = $request->all();
         $validator = Validator::make($params, $this->validateUsing($params, $id));
+        $validator->validateWithBag('errors');
 
-        if ($validator->fails()) {
-            Log::info("fail");
-            return ["errors" => $validator->errors()];
-        }          
-        $data = $this->data->where("id", $id);
-        $data->update($params);
-        return $data;
+        $data = $this->data->findOrFail($id);
+        $data->fill($params)->save();
+        return $validator->validated();
     }
     public function delete(String $id)
     {
-
+        if (method_exists($this, 'validateDelete')){
+            $this->validateDelete();
+        }
+        $data = $this->data->findOrFail($id);
+        $data->delete();
+        return true;
     }
 
 }

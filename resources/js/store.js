@@ -4,7 +4,6 @@ const initialState = {
   sidebarShow: true,
   auth: JSON.parse(localStorage.getItem("appState")) || {},
   appLoading: false,
-  appError: '',
   activeCompany: {},
   appSuccess: ''
 }
@@ -21,22 +20,6 @@ const setAppLoading = (loading) => {
   let payload = {appLoading: loading}
   return {
       type: 'APP_LOADING',
-      payload
-  }
-}
-
-const setAppError = (error) => {
-  let payload = {appError: error}
-  return {
-      type: 'APP_ERROR',
-      payload
-  }
-}
-
-const setAppSuccess = (message) => {
-  let payload = {appSuccess: message}
-  return {
-      type: 'APP_SUCCESS',
       payload
   }
 }
@@ -65,4 +48,4 @@ const changeState = (state = initialState, { type, ...rest }) => {
 }
 
 const store = createStore(changeState)
-export {store, setAppLoading, setAuth, setAppError, setActiveCompany}
+export {store, setAppLoading, setAuth, setActiveCompany}

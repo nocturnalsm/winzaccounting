@@ -10,7 +10,8 @@ import {
   CLink
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { setAppLoading, setAppError } from '../store';
+import { setAppLoading } from '../store';
+import MyAlert from '../alert';
 import Auth from '../auth';
 
 const TheHeaderDropdown = () => {
@@ -25,7 +26,7 @@ const TheHeaderDropdown = () => {
           Auth.logout()          
       }
       catch(error){
-          dispatch(setAppError(error));
+          MyAlert.error({text: error});
       }
       finally {
           dispatch(setAppLoading(false))

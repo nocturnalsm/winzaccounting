@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAppLoading, setAppError } from '../../../store'
+import { setAppLoading } from '../../../store'
+import MyAlert from '../../../alert'
 import {
   CButton,
   CCard,
@@ -50,7 +51,7 @@ const Login = (props) => {
               }
               else {
                   let message = response.error.message ?? 'Something went wrong';
-                  dispatch(setAppError(message));
+                  MyAlert.error({text: message});
               }              
           }
           dispatch(setAppLoading(false));

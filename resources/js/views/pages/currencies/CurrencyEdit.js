@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { CCard, CCardBody, CCardFooter, CCardHeader,
          CForm, CInput, CCol, CFormGroup, CLabel, 
          CInvalidFeedback, CButton } from '@coreui/react'
-import { setAppLoading, setAppSuccess, setAppError } from "../../../store";
+import { setAppLoading } from "../../../store";
+import MyAlert from "../../../alert";
 import CIcon from '@coreui/icons-react'
 import axios from 'axios'
 
@@ -12,8 +13,7 @@ const CurrencyEdit = (props) => {
 
     const {id} = useParams()
     const [data, setData] = useState({})
-    const [validated, setValidated] = useState(false)
-    const [submitAttempt, setSubmitAttempt] = useState(0);
+    const [validated, setValidated] = useState(false)    
     const [submitError, setSubmitError] = useState({});
   
     const dispatch = useDispatch()
@@ -30,11 +30,10 @@ const CurrencyEdit = (props) => {
         const form = event.currentTarget
         event.preventDefault()
         event.stopPropagation()
-        setValidated(true)
-        setSubmitAttempt(submitAttempt+1);
+        setValidated(true)        
+        setSubmitError({})
         if (form.checkValidity() === true) {                        
-            const submit = async () => {                
-                dispatch(setAppLoading(true))
+            const submit = async () => {                                
                 try {                    
                     let request = {
                         company_id: activeCompany.id,
@@ -42,29 +41,40 @@ const CurrencyEdit = (props) => {
                         code: data.code,
                         sign: data.sign
                     }                    
-                    if (id){                        
-                        const response = await axios.put('/api/setup/currencies/' + id, request)
-                    }
-                    else {
-                        const response = await axios.post('/api/setup/currencies', request)
-                    }
-                    dispatch(setAppSuccess("Data saved"))
+                    const response = await axios({
+                        method: id ? 'put' : 'post',
+                        url: '/api/setup/currencies/' + (id ?? ''),
+                        data: request
+                    })
+                    return response
                 }
-                catch(error)
-                {                
-                    if (error.response.data){
-                        setSubmitError(error.response.data.errors)
+                catch(err){                              
+                    return {
+                        error : {
+                            message: err.response.data.message,
+                            errors: err.response.data.errors
+                        }
                     }
-                    else {
-                        dispatch(setAppError(error.response))
-                    }                                      
-                }
-                finally {                    
-                    dispatch(setAppLoading(false))
-                    setValidated(false); 
-                }
+                }                         
             }
+            dispatch(setAppLoading(true));
             submit()
+            .then((response) => {
+                if (response.error){                            
+                    if (response.error.errors){
+                        setSubmitError(response.error.errors);
+                        setValidated(false);
+                    }
+                    else {
+                        let message = response.error.message ?? 'Something went wrong';
+                        MyAlert.error({text: message});
+                    }              
+                }
+                else {
+                    MyAlert.success({text: 'Data saved successfully'})
+                }
+                dispatch(setAppLoading(false));
+            });      
         }
     }
     
@@ -83,7 +93,7 @@ const CurrencyEdit = (props) => {
                 dispatch(setAppLoading(false))
             })
             .catch(error => {                
-                dispatch(setAppError(error.message))
+                MyAlert.error({type: 'error', text: error.message})
             })        
        }
     }, [])
@@ -109,14 +119,12 @@ const CurrencyEdit = (props) => {
                             onChange={e => handleChange({name: e.target.value})}
                             value={data.name ?? ''}
                             invalid={
-                                submitAttempt > 0
-                                && submitError.hasOwnProperty('name')
+                                submitError.hasOwnProperty('name')
                             }
                             required
                             />
                             <CInvalidFeedback>{
-                            submitAttempt > 0
-                            && submitError.hasOwnProperty('name') ?
+                            submitError.hasOwnProperty('name') ?
                             submitError.name[0] : 'Please enter a name'
                             }</CInvalidFeedback>
                         </CCol>
@@ -134,13 +142,11 @@ const CurrencyEdit = (props) => {
                             value={data.code ?? ''}
                             onChange={e => handleChange({code: e.target.value})}
                             invalid={
-                                submitAttempt > 0
-                                && submitError.hasOwnProperty('code')
+                                submitError.hasOwnProperty('code')
                             }                            
                             />
                             <CInvalidFeedback>{
-                            submitAttempt > 0
-                            && submitError.hasOwnProperty('code') ?
+                            submitError.hasOwnProperty('code') ?
                             submitError.code[0] : 'Unknown Error'
                             }</CInvalidFeedback>                
                         </CCol>
@@ -158,14 +164,12 @@ const CurrencyEdit = (props) => {
                             value={data.sign ?? ''}
                             onChange={e => handleChange({sign: e.target.value})}
                             invalid={
-                                submitAttempt > 0
-                                && submitError.errors
+                                submitError.errors
                                 && submitError.errors.hasOwnProperty('sign')
                             }                            
                             />
                             <CInvalidFeedback>{
-                            submitAttempt > 0
-                            && submitError.errors
+                            submitError.errors
                             && submitError.errors.hasOwnProperty('sign') ?
                             submitError.errors.sign[0] : 'Unknown Error'
                             }</CInvalidFeedback>                        
