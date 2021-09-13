@@ -5,11 +5,11 @@ import MyAlert from '../../../alert'
 import axios from 'axios';
 
 const UserList = () => {
-    const [roles, setRoles] = useState([]);
+    const [roles, setRoles] = useState({default: '', data: []});
     const [customFilterRole, setCustomFilterRole] = useState({})
-    const [customFilterInput, setCustomFilterInput] = useState({})
 
     const dtRef = useRef(null)    
+    const roleFilterRef = useRef(null)
     
     const fields = [
         {
@@ -60,8 +60,8 @@ const UserList = () => {
                 sort: 'name'
             }
         }).then(response => {
-            if (response.data){
-                setRoles(response.data.data)
+            if (response.data){                
+                setRoles({data: response.data.data, default: tableData.filter.roleName ?? '' })                
             }
         })
         .catch(error => {
@@ -69,23 +69,23 @@ const UserList = () => {
         })
     }, [])
 
-    useEffect(() => {        
-        setCustomFilterInput({
-            'roleName': (defaultValue) => {
-                return (
-                    <CSelect defaultValue={defaultValue} aria-label="column name: 'roleName' filter input" onChange={onChangeRoleFilter} size="sm">
-                        <option value=""></option>
-                        {                      
-                            console.log(roles),                                            
-                            roles.map((item, index) => (                                 
-                                <option key={index} value={item.name}>{item.name}</option>                                        
-                            ))
-                        }
-                    </CSelect>
-                )
-            }
-        })
-    }, [roles])
+   const customFilterInput = {
+        'roleName': () => (
+            let tableData = JSON.parse(localStorage.getItem('datatable.userslist')) || {}
+            return  
+                (
+                <CSelect defaultValue={tableData.filter.roleName} aria-label="column name: 'roleName' filter input" onChange={onChangeRoleFilter} size="sm">
+                    <option value=""></option>
+                    {                      
+                        roles.data.map((item, index) => (                                 
+                            <option key={index} value={item.name}>{item.name}</option>                                        
+                        ))
+                    }
+                </CSelect>
+             )
+        )
+    }
+
     return (
         <CCard>
             <CCardBody>

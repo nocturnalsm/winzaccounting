@@ -3,7 +3,7 @@ import {CCard, CCardBody} from '@coreui/react'
 import MyAlert from '../../../alert';
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 
 const CurrencyList = () => {
@@ -27,12 +27,13 @@ const CurrencyList = () => {
     ];
 
     const activeCompany = useSelector(state => state.activeCompany)
+    const [customFilter, setCustomFilter] = useState({company_id: activeCompany.id})
     const dtRef = useRef(null)
-    let history = useHistory()
+    let history = useHistory()    
 
-    useEffect(() => {
-        if (activeCompany.id){
-          dtRef.current.setCustomFilter({company_id: activeCompany.id})
+    useEffect(() => {        
+        if (Object.keys(activeCompany).length > 0){
+            dtRef.current.setCustomFilter({company_id: activeCompany.id})
         }
     }, [activeCompany])
 
@@ -62,10 +63,11 @@ const CurrencyList = () => {
             <CCardBody>
                 <DTable
                     _id="currencieslist"
+                    key="currencieslist"
                     defaultSort="name"
                     fields={fields}
                     ref={dtRef}
-                    defaultFilters={{company_id: activeCompany.id}}
+                    customFilterValue={customFilter}
                     apiUrl="/api/setup/currencies"
                     editAction={handleEdit}
                     createAction={handleCreate}

@@ -6,7 +6,7 @@ import MyAlert from '../../alert';
 import {CDataTable,CPagination, CRow, CCol, CButton, CSelect, CBadge} from '@coreui/react';
 import DTToolbar from './DTToolbar'
 import CIcon from '@coreui/icons-react';
-import {debounce, isEqual} from 'lodash';
+import {debounce, initial, isEqual} from 'lodash';
 
 const DTable = React.forwardRef((props, ref) => {
 
@@ -14,9 +14,7 @@ const DTable = React.forwardRef((props, ref) => {
     const [data, setData] = useState([]);
     const [showToolbar, setShowToolbar] = useState(true);
     const [customFields, setCustomFields] = useState({});
-    const [customFilterInputs, setCustomFilterInputs] = useState({});
-    const [fields, setFields] = useState(props.fields);
-    const [customFilterValue, setCustomFilterValue] = useState(props.customFilterValue)
+    const [fields, setFields] = useState(props.fields);    
     const [params, setParams] = useState({})
 
     const initialParams = () => {
@@ -25,31 +23,23 @@ const DTable = React.forwardRef((props, ref) => {
             limit: 10,
             sort: null,
             order: 'asc',
-            filter: props.defaultFilters ?? {}
+            filter: props.customFilterValue ?? {}
         };
     }
 
     useEffect(() => {
         let data = initialParams()
-        console.log('intitial');
         fetchData(data)
     }, [])
 
-    useEffect(() => {
-        let inputs = props.customFilterInput ?? {}
-        let values = initialParams();
-        let filterSlots = {}
-        Object.keys(inputs).map((item, index) => {
-            filterSlots[item] = inputs[item](values.filter[item])
-        })
-    }, [customFilterInputs])
-
     useImperativeHandle(ref, () => ({
 
-        setCustomFilter(values) {
-            console.log('custom filter')
-            fetchData({filter: {...params.filter, ...values}})
-            setCustomFilterValue(values)
+        setCustomFilter(values) {            
+            let currParams = initialParams().filter;
+            let newFilter = {...currParams.filter, ...values}
+            if (Object.keys(newFilter).length > 0 && !isEqual(newFilter, currParams)){
+                fetchData({filter: newFilter})                
+            }
         },
         refresh() {
             fetchData()
@@ -113,40 +103,34 @@ const DTable = React.forwardRef((props, ref) => {
 
     }, [])
 
-    const fetchData = async (request) => {
-        console.log(params)
-        let { page, limit, sort, order, filter } = { ...params, ...request}
-        if ((page != params.page)
-         || (limit != params.limit)
-         || (sort != params.sort)
-         || (order != params.order)
-         || (!isEqual(filter, params.filter))){
-            if (!appLoading){
-                store.dispatch(setAppLoading(true));
-                try {
-                    let newParams = {
-                        page: page ?? 1,
-                        limit: limit ?? 10,
-                        sort: sort,
-                        order: order ?? 'asc',
-                        filter: filter
-                    }
+    const fetchData = async (request) => {        
+        let { page, limit, sort, order, filter } = { ...params, ...request}        
+        
+        if (!appLoading){
+            store.dispatch(setAppLoading(true));
+            try {
+                let newParams = {
+                    page: page ?? 1,
+                    limit: limit ?? 10,
+                    sort: sort,
+                    order: order ?? 'asc',
+                    filter: filter
+                }
 
-                    const response = await axios.get(props.apiUrl,
-                        {
-                            params: newParams
-                        }
-                    );
-                    setData(response.data);
-                    setParams(newParams)
-                    localStorage.setItem('datatable.' +props._id, JSON.stringify(newParams))
-                }
-                catch (error){
-                    MyAlert.error({text: error.response.data.message});
-                }
-                finally {
-                    store.dispatch(setAppLoading(false));
-                }
+                const response = await axios.get(props.apiUrl,
+                    {
+                        params: newParams
+                    }
+                );
+                setData(response.data);
+                setParams(newParams)
+                localStorage.setItem('datatable.' +props._id, JSON.stringify(newParams))
+            }
+            catch (error){
+                MyAlert.error({text: error.response.data.message});
+            }
+            finally {
+                store.dispatch(setAppLoading(false));
             }
         }
     }
@@ -158,9 +142,7 @@ const DTable = React.forwardRef((props, ref) => {
     const handleFilterChange = (newFilter) => {
         let oldParams = params.filter ?? {}
         if (Object.keys(newFilter).length != 0 && !isEqual(newFilter, oldParams)){
-            let filter = {...newFilter, ...customFilterValue}
-            console.log('filter')
-            fetchData({filter: filter})
+            fetchData({filter: newFilter})
         }
     }
   	const handlePerRowsChange = newLimit => {
@@ -211,7 +193,7 @@ const DTable = React.forwardRef((props, ref) => {
               sorter
               onSorterValueChange={handleSort}
               scopedSlots = {customFields}
-              columnFilterSlot = {customFilterInputs}
+              columnFilterSlot = {props.customFilterInput}
           />
           <CPagination
               activePage={params.page ? (data.count <= params.limit ? 1: params.page) : 1}

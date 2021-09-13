@@ -4,8 +4,7 @@ const initialState = {
   sidebarShow: true,
   auth: JSON.parse(localStorage.getItem("appState")) || {},
   appLoading: false,
-  activeCompany: {},
-  appSuccess: ''
+  activeCompany: {}
 }
 
 const setActiveCompany = (company) => {
