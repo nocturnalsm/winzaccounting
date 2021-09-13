@@ -71,7 +71,7 @@ class CurrencyController extends Controller
     public function edit($id)
     {
         $data = $this->currency->getById($id);
-        return response()->json($data);        
+        return response()->json($data);
     }
 
     /**
@@ -84,7 +84,7 @@ class CurrencyController extends Controller
     public function update(Request $request, $id)
     {
         $data = $this->currency->update($id, $request);
-        return $data;        
+        return $data;
     }
 
     /**
@@ -95,6 +95,7 @@ class CurrencyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $result = $this->currency->delete($id);
+        return $result;
     }
 }

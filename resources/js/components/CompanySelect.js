@@ -20,7 +20,8 @@ const CompanySelect = (props) => {
             })
             .then(response => {
                 setCompanies(response.data.data);
-                dispatch(setActiveCompany(response.data.data[0]));
+                let initialCompany = JSON.parse(localStorage.getItem('activeCompany')) ?? response.data.data[0]
+                dispatch(setActiveCompany(initialCompany));
             });
         }
     },[])
@@ -29,6 +30,7 @@ const CompanySelect = (props) => {
         const selected = event.target.getAttribute('_id');
         dispatch(setActiveCompany(companies[selected]));
     }
+
     return (
         <div>
             {

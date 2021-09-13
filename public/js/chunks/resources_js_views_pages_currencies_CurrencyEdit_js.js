@@ -66,18 +66,23 @@ var CurrencyEdit = function CurrencyEdit(props) {
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
-      data = _useState2[0],
-      setData = _useState2[1];
+      initialData = _useState2[0],
+      setInitialData = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
       _useState4 = _slicedToArray(_useState3, 2),
-      validated = _useState4[0],
-      setValidated = _useState4[1];
+      data = _useState4[0],
+      setData = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      submitError = _useState6[0],
-      setSubmitError = _useState6[1];
+      validated = _useState6[0],
+      setValidated = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+      _useState8 = _slicedToArray(_useState7, 2),
+      submitError = _useState8[0],
+      setSubmitError = _useState8[1];
 
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var loading = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
@@ -91,14 +96,14 @@ var CurrencyEdit = function CurrencyEdit(props) {
     setData(_objectSpread(_objectSpread({}, data), values));
   };
 
-  var initialData = data;
+  var ref = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useHistory)();
 
   var handleSubmit = function handleSubmit(event) {
     var form = event.currentTarget;
     event.preventDefault();
     event.stopPropagation();
     setValidated(true);
-    setSubmitError({});
 
     if (form.checkValidity() === true) {
       var submit = /*#__PURE__*/function () {
@@ -151,25 +156,32 @@ var CurrencyEdit = function CurrencyEdit(props) {
 
       dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(true));
       submit().then(function (response) {
+        dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
+
         if (response.error) {
           if (response.error.errors) {
             setSubmitError(response.error.errors);
-            setValidated(false);
           } else {
             var _response$error$messa;
 
             var message = (_response$error$messa = response.error.message) !== null && _response$error$messa !== void 0 ? _response$error$messa : 'Something went wrong';
-            _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
+            _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
               text: message
             });
           }
         } else {
-          _alert__WEBPACK_IMPORTED_MODULE_5__["default"].success({
+          _alert__WEBPACK_IMPORTED_MODULE_5__.default.success({
             text: 'Data saved successfully'
           });
+          setSubmitError({});
+
+          if (!id) {
+            setData({});
+          }
         }
 
-        dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
+        ref.current.focus();
+        setValidated(false);
       });
     }
   };
@@ -182,14 +194,16 @@ var CurrencyEdit = function CurrencyEdit(props) {
     if (id) {
       dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(true));
       axios__WEBPACK_IMPORTED_MODULE_7___default().get('/api/setup/currencies/' + id).then(function (response) {
-        setData(response.data);
-      }).then(function () {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
+        setData(response.data);
+        ref.current.focus();
       })["catch"](function (error) {
-        _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
+        dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
+        _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
           type: 'error',
           text: error.message
         });
+        history.back();
       });
     }
   }, []);
@@ -220,6 +234,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
               autoFocus: true,
               autoComplete: "off",
               type: "text",
+              innerRef: ref,
               disabled: loading,
               onChange: function onChange(e) {
                 return handleChange({
@@ -282,9 +297,9 @@ var CurrencyEdit = function CurrencyEdit(props) {
                   sign: e.target.value
                 });
               },
-              invalid: submitError.errors && submitError.errors.hasOwnProperty('sign')
+              invalid: submitError.hasOwnProperty('sign')
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
-              children: submitError.errors && submitError.errors.hasOwnProperty('sign') ? submitError.errors.sign[0] : 'Unknown Error'
+              children: submitError && submitError.hasOwnProperty('sign') ? submitError.sign[0] : 'Unknown Error'
             })]
           })]
         })]
@@ -298,7 +313,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
         },
         size: "md",
         color: "primary",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
           name: "cil-scrubber"
         }), " Submit"]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CButton, {
@@ -307,7 +322,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
         onClick: resetForm,
         size: "md",
         color: "danger",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
           name: "cil-ban"
         }), " Reset"]
       })]

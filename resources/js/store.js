@@ -10,9 +10,12 @@ const initialState = {
 
 const setActiveCompany = (company) => {
   let payload = {activeCompany: company}
-  return {
-      type: 'ACTIVE_COMPANY',
-      payload
+  if (Object.keys(company).length > 0){
+    localStorage.setItem("activeCompany", JSON.stringify(company))
+    return {
+        type: 'ACTIVE_COMPANY',
+        payload
+    }
   }
 }
 
@@ -27,7 +30,7 @@ const setAppLoading = (loading) => {
 const setAuth = (authState) => {
     let payload = {auth: authState}
     if (authState.isLoggedIn == true){
-        localStorage.setItem("appState", JSON.stringify(authState));        
+        localStorage.setItem("appState", JSON.stringify(authState));
     }
     else {
         localStorage.removeItem("appState");
@@ -40,7 +43,7 @@ const setAuth = (authState) => {
 
 const changeState = (state = initialState, { type, ...rest }) => {
   switch (type) {
-    case 'set':      
+    case 'set':
       return { ...state, ...rest }
     default:
       return { ...state, ...rest.payload }

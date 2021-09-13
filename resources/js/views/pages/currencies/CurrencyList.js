@@ -1,8 +1,10 @@
 import DTable from '../../../components/datatable/DTable'
 import {CCard, CCardBody} from '@coreui/react'
-import { setActiveCompany } from '../../../store';
+import MyAlert from '../../../alert';
 import { useSelector } from 'react-redux'
-import { useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
+import axios from 'axios'
 
 const CurrencyList = () => {
     const fields = [
@@ -26,13 +28,35 @@ const CurrencyList = () => {
 
     const activeCompany = useSelector(state => state.activeCompany)
     const dtRef = useRef(null)
+    let history = useHistory()
 
     useEffect(() => {
-                
-        dtRef.current.setCustomFilter({company_id: activeCompany.id})         
-
+        if (activeCompany.id){
+          dtRef.current.setCustomFilter({company_id: activeCompany.id})
+        }
     }, [activeCompany])
 
+    const handleDelete = (data, clickEvent) => {
+        MyAlert.confirm({
+            title: 'Are you sure to delete this data ?',
+            confirmAction: () => {
+                axios.delete('/api/setup/currencies/' + data.id)
+                .then(() => {
+                    MyAlert.success({text: "Data successfully deleted"})
+                    dtRef.current.refresh()
+                })
+                .catch((error) => {
+                    MyAlert.error(error.response)
+                })
+            }
+        })
+    }
+    const handleCreate = () => {
+        history.push('/currencies/create')
+    }
+    const handleEdit = (data, event) => {
+        history.push('/currencies/edit/' + data.id)
+    }
     return (
         <CCard>
             <CCardBody>
@@ -41,12 +65,12 @@ const CurrencyList = () => {
                     defaultSort="name"
                     fields={fields}
                     ref={dtRef}
-                    customFilterValue={{company_id: activeCompany.id}}
+                    defaultFilters={{company_id: activeCompany.id}}
                     apiUrl="/api/setup/currencies"
-                    editLink="/currencies/edit"
-                    createLink="/currencies/create"
-                    deleteLink="/currencies/delete"
-                    showLink="/currencies/show"
+                    editAction={handleEdit}
+                    createAction={handleCreate}
+                    deleteAction={handleDelete}
+                    showButtonVisible={false}
                 />
             </CCardBody>
         </CCard>
