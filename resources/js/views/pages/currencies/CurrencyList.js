@@ -29,9 +29,9 @@ const CurrencyList = () => {
     const activeCompany = useSelector(state => state.activeCompany)
     const [customFilter, setCustomFilter] = useState({company_id: activeCompany.id})
     const dtRef = useRef(null)
-    let history = useHistory()    
+    let history = useHistory()
 
-    useEffect(() => {        
+    useEffect(() => {
         if (Object.keys(activeCompany).length > 0){
             dtRef.current.setCustomFilter({company_id: activeCompany.id})
         }
@@ -56,7 +56,7 @@ const CurrencyList = () => {
         history.push('/currencies/create')
     }
     const handleEdit = (data, event) => {
-        history.push('/currencies/edit/' + data.id)
+        history.push('/currencies/' + data.id)
     }
     return (
         <CCard>

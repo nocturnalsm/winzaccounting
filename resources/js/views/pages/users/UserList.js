@@ -8,9 +8,8 @@ const UserList = () => {
     const [roles, setRoles] = useState({default: '', data: []});
     const [customFilterRole, setCustomFilterRole] = useState({})
 
-    const dtRef = useRef(null)    
-    const roleFilterRef = useRef(null)
-    
+    const dtRef = useRef(null)
+
     const fields = [
         {
             label: 'Name',
@@ -45,23 +44,23 @@ const UserList = () => {
             type: 'toolbar',
         }
     ];
-    
-    
-    const onChangeRoleFilter = (event) => {        
-        const value = event.target.value;    
+
+
+    const onChangeRoleFilter = (event) => {
+        const value = event.target.value;
         dtRef.current.setCustomFilter({roleName: value})
-        setCustomFilterRole({roleName: value});                  
+        setCustomFilterRole({roleName: value});
     }
 
-    useEffect(() => {        
+    useEffect(() => {
         axios.get("/api/admin/roles", {
             params: {
                 limit: 5000,
                 sort: 'name'
             }
         }).then(response => {
-            if (response.data){                
-                setRoles({data: response.data.data, default: tableData.filter.roleName ?? '' })                
+            if (response.data){
+                setRoles({data: response.data.data, default: tableData.filter.roleName ?? '' })
             }
         })
         .catch(error => {
@@ -69,21 +68,19 @@ const UserList = () => {
         })
     }, [])
 
-   const customFilterInput = {
-        'roleName': () => (
-            let tableData = JSON.parse(localStorage.getItem('datatable.userslist')) || {}
-            return  
-                (
-                <CSelect defaultValue={tableData.filter.roleName} aria-label="column name: 'roleName' filter input" onChange={onChangeRoleFilter} size="sm">
-                    <option value=""></option>
-                    {                      
-                        roles.data.map((item, index) => (                                 
-                            <option key={index} value={item.name}>{item.name}</option>                                        
-                        ))
-                    }
-                </CSelect>
-             )
-        )
+    let tableData = JSON.parse(localStorage.getItem('datatable.userslist')) || {}
+    console.log(tableData)
+    const customFilterInput = {
+        roleName: (
+                  <CSelect value={tableData.filter.roleName} aria-label="column name: 'roleName' filter input" onChange={onChangeRoleFilter} size="sm">
+                      <option value=""></option>
+                      {
+                          roles.data.map((item, index) => (
+                              <option key={index} value={item.name}>{item.name}</option>
+                          ))
+                      }
+                  </CSelect>
+                )
     }
 
     return (
@@ -92,10 +89,10 @@ const UserList = () => {
                 <DTable
                     _id="userslist"
                     defaultSort="name"
-                    fields={fields}                    
+                    fields={fields}
                     ref={dtRef}
                     apiUrl="/api/admin/users"
-                    showToolbar={true}                    
+                    showToolbar={true}
                     customFilterValue={customFilterRole}
                     customFilterInput={customFilterInput}
                 />

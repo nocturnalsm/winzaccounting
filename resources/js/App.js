@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
-import { BrowserRouter, Switch } from 'react-router-dom'
+import { HashRouter, Switch } from 'react-router-dom'
 import PrivateRoute from './components/PrivateRoute'
 import PublicRoute from './components/PublicRoute'
 import { useSelector } from 'react-redux'
@@ -22,29 +22,29 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 // Containers
 const TheLayout = React.lazy(() => import('./containers/TheLayout'));
 
-const App = () =>  {  
-  
- 
-  const appLoading = useSelector((state) => state.appLoading)  
+const App = () =>  {
+
+
+  const appLoading = useSelector((state) => state.appLoading)
   const [progress, setProgress] = useState(0)
-  
+
   const ref = useRef(null)
 
-  useEffect(() => {    
+  useEffect(() => {
 
     if (appLoading){
         ref.current.continuousStart();
     }
-    else {                
+    else {
         if (progress >= 0){
             ref.current.complete();
         }
     }
 
   }, [appLoading]);
-  
-  return (    
-    <BrowserRouter forceRefresh={false}>
+
+  return (
+    <HashRouter>
       <LoadingBar color='#f11946' ref={ref} />
       <React.Suspense fallback={loading}>
         <Switch>
@@ -52,7 +52,7 @@ const App = () =>  {
           <PrivateRoute path="/" component={TheLayout} />
         </Switch>
       </React.Suspense>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

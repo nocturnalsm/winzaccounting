@@ -10,6 +10,7 @@ const RoleList = React.lazy(() => import('./views/pages/roles/RoleList'))
 const PermissionList = React.lazy(() => import('./views/pages/permissions/PermissionList'))
 const CurrencyList = React.lazy(() => import('./views/pages/currencies/CurrencyList'))
 const CurrencyEdit = React.lazy(() => import('./views/pages/currencies/CurrencyEdit'))
+
 const TaxCodeList = React.lazy(() => import('./views/pages/taxcodes/TaxCodeList'))
 
 const routes = [
@@ -22,10 +23,10 @@ const routes = [
   { path: '/companies', name: 'Companies', component: CompanyList},
   { path: '/users', name: 'Users', component: UserList},
   { path: '/roles', name: 'Roles', component: RoleList},
-  { path: '/permissions', name: 'Permissions', component: PermissionList},    
-  { path: '/currencies/create', exact: false, name: 'Create Currency', component: CurrencyEdit},
-  { path: '/currencies/edit/:id', exact: false, name: 'Edit Currency', component: CurrencyEdit},
-  { path: '/currencies', exact: true, name: 'Currencies', component: CurrencyList},    
+  { path: '/permissions', name: 'Permissions', component: PermissionList},
+  { path: '/currencies/create', name: 'Create Currency', component: CurrencyEdit},
+  { path: '/currencies/:id', name: 'Edit Currency', component: CurrencyEdit},
+  { path: '/currencies', name: 'Currencies', component: CurrencyList},
   { path: '/tax-codes', name: 'Tax Codes', component: TaxCodeList},
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
