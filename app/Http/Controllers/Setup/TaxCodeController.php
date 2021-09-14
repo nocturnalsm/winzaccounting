@@ -41,7 +41,8 @@ class TaxCodeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->taxCode->create($request);
+        return response()->json($data);
     }
 
     /**
@@ -64,7 +65,8 @@ class TaxCodeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = $this->taxCode->getById($id);
+        return response()->json($data);
     }
 
     /**
@@ -76,7 +78,8 @@ class TaxCodeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $this->taxCode->update($id, $request);
+        return response()->json($data);
     }
 
     /**
@@ -87,6 +90,7 @@ class TaxCodeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $result = $this->taxCode->delete($id);
+        return $result;
     }
 }

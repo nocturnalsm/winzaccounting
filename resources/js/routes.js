@@ -1,8 +1,6 @@
 import React from 'react'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
-const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
-const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 const CompanyList = React.lazy(() => import('./views/pages/companies/CompanyList'))
 //const CompanyEdit = React.lazy(() => import('./views/pages/companies/CompanyEdit'))
 const UserList = React.lazy(() => import('./views/pages/users/UserList'))
@@ -10,8 +8,9 @@ const RoleList = React.lazy(() => import('./views/pages/roles/RoleList'))
 const PermissionList = React.lazy(() => import('./views/pages/permissions/PermissionList'))
 const CurrencyList = React.lazy(() => import('./views/pages/currencies/CurrencyList'))
 const CurrencyEdit = React.lazy(() => import('./views/pages/currencies/CurrencyEdit'))
-
 const TaxCodeList = React.lazy(() => import('./views/pages/taxcodes/TaxCodeList'))
+const TaxCodeEdit = React.lazy(() => import('./views/pages/taxcodes/TaxCodeEdit'))
+const AccountList = React.lazy(() => import('./views/pages/accounts/AccountList'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -27,10 +26,12 @@ const routes = [
   { path: '/currencies/create', name: 'Create Currency', component: CurrencyEdit},
   { path: '/currencies/:id', name: 'Edit Currency', component: CurrencyEdit},
   { path: '/currencies', name: 'Currencies', component: CurrencyList},
-  { path: '/tax-codes', name: 'Tax Codes', component: TaxCodeList},
-  { path: '/theme', name: 'Theme', component: Colors, exact: true },
-  { path: '/theme/colors', name: 'Colors', component: Colors },
-  { path: '/theme/typography', name: 'Typography', component: Typography },
+  //{ path: '/currencies/create', name: 'Create Currency', component: CurrencyEdit},
+  //{ path: '/currencies/:id', name: 'Edit Currency', component: CurrencyEdit},
+  { path: '/accounts', name: 'Chart of Accounts', component: AccountList},
+  { path: '/tax-codes/create', name: 'Create Tax Code', component: TaxCodeEdit},
+  { path: '/tax-codes/:id', name: 'Edit Tax Code', component: TaxCodeEdit},  
+  { path: '/tax-codes', name: 'Tax Codes', component: TaxCodeList}
 ]
 
 export default routes

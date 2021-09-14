@@ -1,10 +1,10 @@
 "use strict";
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_currencies_CurrencyEdit_js"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_taxcodes_TaxCodeEdit_js"],{
 
-/***/ "./resources/js/views/pages/currencies/CurrencyEdit.js":
-/*!*************************************************************!*\
-  !*** ./resources/js/views/pages/currencies/CurrencyEdit.js ***!
-  \*************************************************************/
+/***/ "./resources/js/views/pages/taxcodes/TaxCodeEdit.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/views/pages/taxcodes/TaxCodeEdit.js ***!
+  \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -58,8 +58,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var CurrencyEdit = function CurrencyEdit(props) {
-  var _data$name, _data$code, _data$sign;
+var TaxCodeEdit = function TaxCodeEdit(props) {
+  var _data$name, _data$code, _data$percentage;
 
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useParams)(),
       id = _useParams.id;
@@ -118,12 +118,12 @@ var CurrencyEdit = function CurrencyEdit(props) {
                     company_id: activeCompany.id,
                     name: data.name,
                     code: data.code,
-                    sign: data.sign
+                    percentage: data.percentage
                   };
                   _context.next = 4;
                   return axios__WEBPACK_IMPORTED_MODULE_7___default()({
                     method: id ? 'put' : 'post',
-                    url: '/api/setup/currencies/' + (id !== null && id !== void 0 ? id : ''),
+                    url: '/api/setup/taxcodes/' + (id !== null && id !== void 0 ? id : ''),
                     data: request
                   });
 
@@ -193,7 +193,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     if (id) {
       dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(true));
-      axios__WEBPACK_IMPORTED_MODULE_7___default().get('/api/setup/currencies/' + id).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_7___default().get('/api/setup/taxcodes/' + id).then(function (response) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
         setData(response.data);
         ref.current.focus();
@@ -210,7 +210,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCard, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardHeader, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
-        children: id && id != "" ? 'Edit Currency' : 'Create Currency'
+        children: id && id != "" ? 'Edit Tax Code' : 'Create Tax Code'
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardBody, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CForm, {
@@ -224,13 +224,13 @@ var CurrencyEdit = function CurrencyEdit(props) {
             sm: "4",
             lg: "2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Currency Name"
+              children: "Tax Name"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
             lg: "3",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
-              placeholder: "Enter currency name",
+              placeholder: "Enter tax name",
               autoFocus: true,
               autoComplete: "off",
               type: "text",
@@ -254,14 +254,14 @@ var CurrencyEdit = function CurrencyEdit(props) {
             sm: "4",
             lg: "2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Currency Code"
+              children: "Tax Code"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
             lg: "3",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
               type: "text",
-              placeholder: "Enter currency code",
+              placeholder: "Enter tax code",
               autoComplete: "off",
               disabled: loading,
               value: (_data$code = data.code) !== null && _data$code !== void 0 ? _data$code : '',
@@ -272,7 +272,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
               },
               invalid: submitError.hasOwnProperty('code')
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
-              children: submitError.hasOwnProperty('code') ? submitError.code[0] : 'Unknown Error'
+              children: submitError.hasOwnProperty('code') ? submitError.code[0] : 'Pleas enter a code'
             })]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
@@ -281,25 +281,25 @@ var CurrencyEdit = function CurrencyEdit(props) {
             sm: "4",
             lg: "2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Currency Sign"
+              children: "Percentage (in %)"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
             lg: "3",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
-              type: "text",
-              placeholder: "Enter currency sign",
+              type: "number",
+              placeholder: "Enter tax percentage",
               autoComplete: "off",
               disabled: loading,
-              value: (_data$sign = data.sign) !== null && _data$sign !== void 0 ? _data$sign : '',
+              value: (_data$percentage = data.percentage) !== null && _data$percentage !== void 0 ? _data$percentage : '',
               onChange: function onChange(e) {
                 return handleChange({
-                  sign: e.target.value
+                  percentage: e.target.value
                 });
               },
-              invalid: submitError.hasOwnProperty('sign')
+              invalid: submitError.hasOwnProperty('percentage')
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
-              children: submitError && submitError.hasOwnProperty('sign') ? submitError.sign[0] : 'Unknown Error'
+              children: submitError && submitError.hasOwnProperty('percentage') ? submitError.percentage[0] : 'Unknown Error'
             })]
           })]
         })]
@@ -330,7 +330,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
   });
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CurrencyEdit);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TaxCodeEdit);
 
 /***/ })
 

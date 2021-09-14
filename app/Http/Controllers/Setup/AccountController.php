@@ -5,16 +5,14 @@ namespace App\Http\Controllers\Setup;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CurrencyController extends Controller
+class AccountController extends Controller
 {
+    private $account;
 
-    private $currency;
-
-    public function __construct(\App\Repositories\Setup\CurrencyRepository $currency)
+    public function __construct(\App\Repositories\Setup\AccountRepository $account)
     {
-        $this->currency = $currency;
+        $this->account = $account;
     }
-
 
     /**
      * Display a listing of the resource.
@@ -23,7 +21,7 @@ class CurrencyController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->currency->getList($request);
+        $data = $this->account->getList($request);
         return response()->json($data);
     }
 
@@ -45,7 +43,7 @@ class CurrencyController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->currency->create($request);
+        $data = $this->account->create($request);
         return response()->json($data);
     }
 
@@ -57,8 +55,8 @@ class CurrencyController extends Controller
      */
     public function show($id)
     {
-        $currency = $this->currency->getById($id);
-        return response()->json($currency);
+        $data = $this->account->getById($id);
+        return response()->json($data);
     }
 
     /**
@@ -69,7 +67,7 @@ class CurrencyController extends Controller
      */
     public function edit($id)
     {
-        $data = $this->currency->getById($id);
+        $data = $this->account->getById($id);
         return response()->json($data);
     }
 
@@ -82,8 +80,8 @@ class CurrencyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $this->currency->update($id, $request);
-        return $data;
+        $data = $this->account->update($id, $request);
+        return response()->json($data);
     }
 
     /**
@@ -94,7 +92,7 @@ class CurrencyController extends Controller
      */
     public function destroy($id)
     {
-        $result = $this->currency->delete($id);
+        $result = $this->account->delete($id);
         return $result;
     }
 }

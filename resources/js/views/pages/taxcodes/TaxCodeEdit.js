@@ -9,7 +9,7 @@ import MyAlert from "../../../alert";
 import CIcon from '@coreui/icons-react'
 import axios from 'axios'
 
-const CurrencyEdit = (props) => {
+const TaxCodeEdit = (props) => {
 
     const {id} = useParams()
     const [initialData, setInitialData] = useState({})
@@ -39,11 +39,11 @@ const CurrencyEdit = (props) => {
                         company_id: activeCompany.id,
                         name: data.name,
                         code: data.code,
-                        sign: data.sign
+                        percentage: data.percentage
                     }
                     const response = await axios({
                         method: id ? 'put' : 'post',
-                        url: '/api/setup/currencies/' + (id ?? ''),
+                        url: '/api/setup/taxcodes/' + (id ?? ''),
                         data: request
                     })
                     return response
@@ -90,7 +90,7 @@ const CurrencyEdit = (props) => {
     useEffect(() => {
         if (id){
             dispatch(setAppLoading(true))
-            axios.get('/api/setup/currencies/' + id)
+            axios.get('/api/setup/taxcodes/' + id)
             .then(response => {
                 dispatch(setAppLoading(false))
                 setData(response.data)
@@ -107,17 +107,17 @@ const CurrencyEdit = (props) => {
     return (
         <CCard>
             <CCardHeader>
-                <h3>{id && id != "" ? 'Edit Currency' : 'Create Currency'}</h3>
+                <h3>{id && id != "" ? 'Edit Tax Code' : 'Create Tax Code'}</h3>
             </CCardHeader>
             <CCardBody>
                 <CForm className="form-horizontal needs-validation" noValidate wasValidated={validated} onSubmit={handleSubmit}>
                     <CFormGroup row>
                         <CCol sm="4" lg="2">
-                            <CLabel>Currency Name</CLabel>
+                            <CLabel>Tax Name</CLabel>
                         </CCol>
                         <CCol sm="8" lg="3">
                             <CInput
-                            placeholder="Enter currency name"
+                            placeholder="Enter tax name"
                             autoFocus={true}
                             autoComplete="off"
                             type="text"
@@ -138,12 +138,12 @@ const CurrencyEdit = (props) => {
                     </CFormGroup>
                     <CFormGroup row>
                         <CCol sm="4" lg="2">
-                            <CLabel>Currency Code</CLabel>
+                            <CLabel>Tax Code</CLabel>
                         </CCol>
                         <CCol sm="8" lg="3">
                             <CInput
                             type="text"
-                            placeholder="Enter currency code"
+                            placeholder="Enter tax code"
                             autoComplete="off"
                             disabled={loading}
                             value={data.code ?? ''}
@@ -154,30 +154,30 @@ const CurrencyEdit = (props) => {
                             />
                             <CInvalidFeedback>{
                             submitError.hasOwnProperty('code') ?
-                            submitError.code[0] : 'Unknown Error'
+                            submitError.code[0] : 'Pleas enter a code'
                             }</CInvalidFeedback>
                         </CCol>
                     </CFormGroup>
                     <CFormGroup row>
                         <CCol sm="4" lg="2">
-                            <CLabel>Currency Sign</CLabel>
+                            <CLabel>Percentage (in %)</CLabel>
                         </CCol>
                         <CCol sm="8" lg="3">
                             <CInput
-                            type="text"
-                            placeholder="Enter currency sign"
+                            type="number"
+                            placeholder="Enter tax percentage"
                             autoComplete="off"
                             disabled={loading}
-                            value={data.sign ?? ''}
-                            onChange={e => handleChange({sign: e.target.value})}
+                            value={data.percentage ?? ''}
+                            onChange={e => handleChange({percentage: e.target.value})}
                             invalid={
-                                submitError.hasOwnProperty('sign')
+                                submitError.hasOwnProperty('percentage')
                             }
                             />
                             <CInvalidFeedback>{
                             submitError
-                            && submitError.hasOwnProperty('sign') ?
-                            submitError.sign[0] : 'Unknown Error'
+                            && submitError.hasOwnProperty('percentage') ?
+                            submitError.percentage[0] : 'Unknown Error'
                             }</CInvalidFeedback>
                         </CCol>
                     </CFormGroup>
@@ -195,4 +195,4 @@ const CurrencyEdit = (props) => {
     )
 }
 
-export default CurrencyEdit
+export default TaxCodeEdit

@@ -33,7 +33,7 @@ var DTToolbarShow = function DTToolbarShow(props) {
     onClick: function onClick(event) {
       return props.showAction(props.item, event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cil-magnifying-glass"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -55,7 +55,7 @@ var DTToolbarEdit = function DTToolbarEdit(props) {
       return props.editAction(props.item, event);
     } //{props.editLink ? props.editLink.replace(/\/$/, '') + "/" + props._id : ''}
     ,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cilPencil"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -76,7 +76,7 @@ var DTToolbarDelete = function DTToolbarDelete(props) {
     onClick: function onClick(event) {
       return props.deleteAction(props.item, event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cilTrash"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -251,7 +251,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         field['filter'] = false;
 
         slots[field.key] = function (item, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_7__.default, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_7__["default"], {
             item: item,
             createAction: props.createAction,
             editAction: props.editAction,
@@ -343,7 +343,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
             case 13:
               _context.prev = 13;
               _context.t0 = _context["catch"](3);
-              _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+              _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
                 text: _context.t0.response.data.message
               });
 
@@ -416,7 +416,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
           onClick: function onClick(event) {
             return props.createAction(event);
           },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_8__.default, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
             name: "cil-plus"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
             className: "ml-2",
@@ -519,18 +519,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var UserList = function UserList() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({
-    "default": '',
-    data: []
-  }),
+  var _ref;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       roles = _useState2[0],
       setRoles = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
-      _useState4 = _slicedToArray(_useState3, 2),
-      customFilterRole = _useState4[0],
-      setCustomFilterRole = _useState4[1];
 
   var dtRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
   var fields = [{
@@ -567,9 +561,6 @@ var UserList = function UserList() {
     dtRef.current.setCustomFilter({
       roleName: value
     });
-    setCustomFilterRole({
-      roleName: value
-    });
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
@@ -580,30 +571,25 @@ var UserList = function UserList() {
       }
     }).then(function (response) {
       if (response.data) {
-        var _tableData$filter$rol;
-
-        setRoles({
-          data: response.data.data,
-          "default": (_tableData$filter$rol = tableData.filter.roleName) !== null && _tableData$filter$rol !== void 0 ? _tableData$filter$rol : ''
-        });
+        setRoles(response.data.data);
       }
     })["catch"](function (error) {
-      _alert__WEBPACK_IMPORTED_MODULE_3__.default.error({
+      _alert__WEBPACK_IMPORTED_MODULE_3__["default"].error({
         text: error.response.message
       });
     });
   }, []);
   var tableData = JSON.parse(localStorage.getItem('datatable.userslist')) || {};
-  console.log(tableData);
   var customFilterInput = {
     roleName: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CSelect, {
-      value: tableData.filter.roleName,
+      value: (_ref = tableData.filter && tableData.filter.roleName) !== null && _ref !== void 0 ? _ref : '',
       "aria-label": "column name: 'roleName' filter input",
       onChange: onChangeRoleFilter,
       size: "sm",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
-        value: ""
-      }), roles.data.map(function (item, index) {
+        value: "",
+        children: "All"
+      }), roles.map(function (item, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
           value: item.name,
           children: item.name
@@ -613,14 +599,13 @@ var UserList = function UserList() {
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCard, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCardBody, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__.default, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__["default"], {
         _id: "userslist",
         defaultSort: "name",
         fields: fields,
         ref: dtRef,
         apiUrl: "/api/admin/users",
         showToolbar: true,
-        customFilterValue: customFilterRole,
         customFilterInput: customFilterInput
       })
     })

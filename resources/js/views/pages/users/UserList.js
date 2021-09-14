@@ -5,9 +5,7 @@ import MyAlert from '../../../alert'
 import axios from 'axios';
 
 const UserList = () => {
-    const [roles, setRoles] = useState({default: '', data: []});
-    const [customFilterRole, setCustomFilterRole] = useState({})
-
+    const [roles, setRoles] = useState([]);
     const dtRef = useRef(null)
 
     const fields = [
@@ -49,7 +47,6 @@ const UserList = () => {
     const onChangeRoleFilter = (event) => {
         const value = event.target.value;
         dtRef.current.setCustomFilter({roleName: value})
-        setCustomFilterRole({roleName: value});
     }
 
     useEffect(() => {
@@ -60,7 +57,7 @@ const UserList = () => {
             }
         }).then(response => {
             if (response.data){
-                setRoles({data: response.data.data, default: tableData.filter.roleName ?? '' })
+                setRoles(response.data.data)
             }
         })
         .catch(error => {
@@ -69,13 +66,12 @@ const UserList = () => {
     }, [])
 
     let tableData = JSON.parse(localStorage.getItem('datatable.userslist')) || {}
-    console.log(tableData)
     const customFilterInput = {
         roleName: (
-                  <CSelect value={tableData.filter.roleName} aria-label="column name: 'roleName' filter input" onChange={onChangeRoleFilter} size="sm">
-                      <option value=""></option>
+                  <CSelect value={(tableData.filter && tableData.filter.roleName) ?? ''} aria-label="column name: 'roleName' filter input" onChange={onChangeRoleFilter} size="sm">
+                      <option value="">All</option>
                       {
-                          roles.data.map((item, index) => (
+                          roles.map((item, index) => (
                               <option key={index} value={item.name}>{item.name}</option>
                           ))
                       }
@@ -92,8 +88,7 @@ const UserList = () => {
                     fields={fields}
                     ref={dtRef}
                     apiUrl="/api/admin/users"
-                    showToolbar={true}
-                    customFilterValue={customFilterRole}
+                    showToolbar={true}                    
                     customFilterInput={customFilterInput}
                 />
             </CCardBody>
