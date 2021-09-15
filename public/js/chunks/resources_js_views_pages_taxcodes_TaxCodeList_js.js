@@ -33,7 +33,7 @@ var DTToolbarShow = function DTToolbarShow(props) {
     onClick: function onClick(event) {
       return props.showAction(props.item, event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cil-magnifying-glass"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -55,7 +55,7 @@ var DTToolbarEdit = function DTToolbarEdit(props) {
       return props.editAction(props.item, event);
     } //{props.editLink ? props.editLink.replace(/\/$/, '') + "/" + props._id : ''}
     ,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cilPencil"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -76,7 +76,7 @@ var DTToolbarDelete = function DTToolbarDelete(props) {
     onClick: function onClick(event) {
       return props.deleteAction(props.item, event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cilTrash"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -226,9 +226,11 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useImperativeHandle)(ref, function () {
     return {
       setCustomFilter: function setCustomFilter(values) {
-        var currParams = initialParams().filter;
+        var _params$filter;
 
-        var newFilter = _objectSpread(_objectSpread({}, currParams.filter), values);
+        var currParams = (_params$filter = params.filter) !== null && _params$filter !== void 0 ? _params$filter : initialParams().filter;
+
+        var newFilter = _objectSpread(_objectSpread({}, currParams), values);
 
         if (Object.keys(newFilter).length > 0 && !(0,lodash__WEBPACK_IMPORTED_MODULE_9__.isEqual)(newFilter, currParams)) {
           fetchData({
@@ -251,7 +253,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         field['filter'] = false;
 
         slots[field.key] = function (item, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_7__.default, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_7__["default"], {
             item: item,
             createAction: props.createAction,
             editAction: props.editAction,
@@ -343,7 +345,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
             case 13:
               _context.prev = 13;
               _context.t0 = _context["catch"](3);
-              _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+              _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
                 text: _context.t0.response.data.message
               });
 
@@ -374,9 +376,9 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
   };
 
   var handleFilterChange = function handleFilterChange(newFilter) {
-    var _params$filter;
+    var _params$filter2;
 
-    var oldParams = (_params$filter = params.filter) !== null && _params$filter !== void 0 ? _params$filter : {};
+    var oldParams = (_params$filter2 = params.filter) !== null && _params$filter2 !== void 0 ? _params$filter2 : {};
 
     if (Object.keys(newFilter).length != 0 && !(0,lodash__WEBPACK_IMPORTED_MODULE_9__.isEqual)(newFilter, oldParams)) {
       fetchData({
@@ -416,7 +418,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
           onClick: function onClick(event) {
             return props.createAction(event);
           },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_8__.default, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
             name: "cil-plus"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
             className: "ml-2",
@@ -455,6 +457,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       items: data.data,
       fields: fields,
       columnFilter: true,
+      clickableRows: true,
       footer: true,
       columnFilterValue: params.filter,
       itemsPerPage: params.limit,
@@ -538,16 +541,16 @@ var TaxCodeList = function TaxCodeList() {
   }, [activeCompany]);
 
   var handleDelete = function handleDelete(data, clickEvent) {
-    _alert__WEBPACK_IMPORTED_MODULE_2__.default.confirm({
+    _alert__WEBPACK_IMPORTED_MODULE_2__["default"].confirm({
       title: 'Are you sure to delete this data ?',
       confirmAction: function confirmAction() {
-        axios__WEBPACK_IMPORTED_MODULE_5___default().delete('/api/setup/taxcodes/' + data.id).then(function () {
-          _alert__WEBPACK_IMPORTED_MODULE_2__.default.success({
+        axios__WEBPACK_IMPORTED_MODULE_5___default()["delete"]('/api/setup/taxcodes/' + data.id).then(function () {
+          _alert__WEBPACK_IMPORTED_MODULE_2__["default"].success({
             text: "Data successfully deleted"
           });
           dtRef.current.refresh();
         })["catch"](function (error) {
-          _alert__WEBPACK_IMPORTED_MODULE_2__.default.error(error.response);
+          _alert__WEBPACK_IMPORTED_MODULE_2__["default"].error(error.response);
         });
       }
     });
@@ -563,7 +566,7 @@ var TaxCodeList = function TaxCodeList() {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCard, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCardBody, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__.default, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__["default"], {
         _id: "taxcodeslist",
         ref: dtRef,
         fields: fields,

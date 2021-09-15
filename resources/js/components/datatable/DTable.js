@@ -28,15 +28,15 @@ const DTable = React.forwardRef((props, ref) => {
     }
 
     useEffect(() => {
-        let data = initialParams()
+        let data = initialParams()        
         fetchData(data)
     }, [])
 
     useImperativeHandle(ref, () => ({
 
         setCustomFilter(values) {            
-            let currParams = initialParams().filter;
-            let newFilter = {...currParams.filter, ...values}
+            let currParams = params.filter ?? initialParams().filter;
+            let newFilter = {...currParams, ...values}
             if (Object.keys(newFilter).length > 0 && !isEqual(newFilter, currParams)){
                 fetchData({filter: newFilter})                
             }
@@ -121,7 +121,7 @@ const DTable = React.forwardRef((props, ref) => {
                     {
                         params: newParams
                     }
-                );
+                );                                
                 setData(response.data);
                 setParams(newParams)
                 localStorage.setItem('datatable.' +props._id, JSON.stringify(newParams))
@@ -183,6 +183,7 @@ const DTable = React.forwardRef((props, ref) => {
               items={data.data}
               fields={fields}
               columnFilter
+              clickableRows={true}
               footer
               columnFilterValue={params.filter}
               itemsPerPage={params.limit}
@@ -190,7 +191,7 @@ const DTable = React.forwardRef((props, ref) => {
               loading={appLoading}
               sorterValue={{column: params.sort, asc: params.order == 'asc' ?? true}}
               hover
-              sorter
+              sorter              
               onSorterValueChange={handleSort}
               scopedSlots = {customFields}
               columnFilterSlot = {props.customFilterInput}

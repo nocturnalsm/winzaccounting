@@ -59,7 +59,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var AccountEdit = function AccountEdit(props) {
-  var _data$account_type, _data$number, _data$name, _data$parent;
+  var _data$account_type, _data$parent, _data$number, _data$name;
 
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useParams)(),
       id = _useParams.id;
@@ -104,9 +104,14 @@ var AccountEdit = function AccountEdit(props) {
 
   var getParents = function getParents(type) {
     axios__WEBPACK_IMPORTED_MODULE_7___default().get("api/setup/account-parents?type=" + type).then(function (response) {
-      setParents(response.data);
+      var parentsData = response.data;
+      parentsData.unshift({
+        id: 0,
+        name: "--Top Level--"
+      });
+      setParents(parentsData);
     })["catch"](function (error) {
-      _alert__WEBPACK_IMPORTED_MODULE_5__.default.error(error.response.data);
+      _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error(error.response.data);
     });
   };
 
@@ -189,19 +194,26 @@ var AccountEdit = function AccountEdit(props) {
             var _response$error$messa;
 
             var message = (_response$error$messa = response.error.message) !== null && _response$error$messa !== void 0 ? _response$error$messa : 'Something went wrong';
-            _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+            _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
               text: message
             });
           }
         } else {
-          _alert__WEBPACK_IMPORTED_MODULE_5__.default.success({
+          _alert__WEBPACK_IMPORTED_MODULE_5__["default"].success({
             text: 'Data saved successfully'
           });
           setSubmitError({});
+          var account_type = data.account_type,
+              parent = data.parent;
 
           if (!id) {
-            setData({});
+            setData({
+              account_type: account_type,
+              parent: parent
+            });
           }
+
+          getParents(account_type);
         }
 
         ref.current.focus();
@@ -220,7 +232,7 @@ var AccountEdit = function AccountEdit(props) {
         setAccountTypes(response.data);
       }
     })["catch"](function (error) {
-      _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+      _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
         text: error.response.message
       });
     });
@@ -234,7 +246,7 @@ var AccountEdit = function AccountEdit(props) {
         ref.current.focus();
       })["catch"](function (error) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
-        _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+        _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
           text: error.message
         });
         history.back();
@@ -293,14 +305,48 @@ var AccountEdit = function AccountEdit(props) {
             sm: "4",
             lg: "2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Account Number"
+              children: "Parent Account"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
+            lg: "5",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CSelect, {
+              type: "text",
+              placeholder: "Choose parent account",
+              autoComplete: "off",
+              disabled: loading,
+              value: (_data$parent = data.parent) !== null && _data$parent !== void 0 ? _data$parent : '',
+              onChange: function onChange(e) {
+                return handleChange({
+                  parent: e.target.value
+                });
+              },
+              invalid: submitError.hasOwnProperty('parent'),
+              children: parents.map(function (item, index) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("option", {
+                  value: item.id,
+                  children: [item.number, " - ", item.name]
+                }, item.id);
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
+              children: submitError && submitError.hasOwnProperty('parent') ? submitError.parent[0] : 'Unknown Error'
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
+          row: true,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "4",
+            lg: "2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
+              children: "Account Number"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "8",
             lg: "3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInputGroup, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInputGroup, {
+              className: "has-validation",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInputGroupText, {
-                children: data.account_type ? accountTypes[parseInt(data.account_type) - 1].prefix : ''
+                children: data.account_type && accountTypes[parseInt(data.account_type) - 1] ? accountTypes[parseInt(data.account_type) - 1].prefix : ''
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
                 placeholder: "Enter account number",
                 autoComplete: "off",
@@ -314,10 +360,10 @@ var AccountEdit = function AccountEdit(props) {
                 value: (_data$number = data.number) !== null && _data$number !== void 0 ? _data$number : '',
                 invalid: submitError.hasOwnProperty('number'),
                 required: true
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
+                children: submitError.hasOwnProperty('number') ? submitError.number[0] : 'Please enter account number'
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
-              children: submitError.hasOwnProperty('number') ? submitError.number[0] : 'Please enter account number'
-            })]
+            })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
           row: true,
@@ -329,7 +375,7 @@ var AccountEdit = function AccountEdit(props) {
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
-            lg: "3",
+            lg: "5",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
               placeholder: "Enter account name",
               autoComplete: "off",
@@ -347,41 +393,6 @@ var AccountEdit = function AccountEdit(props) {
               children: submitError.hasOwnProperty('name') ? submitError.name[0] : 'Please enter a name'
             })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
-          row: true,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "4",
-            lg: "2",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Parent Account"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "8",
-            lg: "3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CSelect, {
-              type: "text",
-              placeholder: "Choose parent account",
-              autoComplete: "off",
-              disabled: loading,
-              value: (_data$parent = data.parent) !== null && _data$parent !== void 0 ? _data$parent : '',
-              onChange: function onChange(e) {
-                return handleChange({
-                  parent: e.target.value
-                });
-              },
-              invalid: submitError.hasOwnProperty('parent'),
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("option", {
-                value: ""
-              }), parents.map(function (item, index) {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("option", {
-                  value: item.id,
-                  children: item.name
-                }, item.id);
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
-              children: submitError && submitError.hasOwnProperty('parent') ? submitError.parent[0] : 'Unknown Error'
-            })]
-          })]
         })]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardFooter, {
@@ -393,7 +404,7 @@ var AccountEdit = function AccountEdit(props) {
         },
         size: "md",
         color: "primary",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
           name: "cil-scrubber"
         }), " Submit"]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CButton, {
@@ -402,7 +413,7 @@ var AccountEdit = function AccountEdit(props) {
         onClick: resetForm,
         size: "md",
         color: "danger",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
           name: "cil-ban"
         }), " Reset"]
       })]

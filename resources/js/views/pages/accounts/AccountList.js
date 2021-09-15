@@ -12,14 +12,26 @@ const AccountList = () => {
     let tableData = JSON.parse(localStorage.getItem('datatable.accountslist')) || {}
     const [accountTypes, setAccountTypes] = useState([])
     const [filterType, setFilterType] = useState(
-        (tableData.filter && tableData.filter.accountType) ?? ''
+        (tableData.filter && tableData.filter.type) ?? ''
     )
     const activeCompany = useSelector(state => state.activeCompany)
 
     let history = useHistory()
     const dtRef = useRef(null)
+    let badges = ['primary', 'warning', 'light', 'success', 'danger']
 
     const fields = [
+        {
+            label: 'Type',
+            key: 'type',
+            type: 'custom',
+            onRender: (item, index) => 
+            (
+                <td>
+                    <CBadge key={index} color={badges[parseInt(item.account_type) - 1]}>{item.accountType.toUpperCase()}</CBadge>
+                </td>
+            )
+        },
         {
             label: 'Number',
             key: 'number'
@@ -27,21 +39,16 @@ const AccountList = () => {
         {
             label: 'Name',
             key: 'name'
-        },
-        {
-            label: 'Type',
-            key: 'accountType',
-            type: 'custom',
-            onRender: (item, index) => (
-                <td>
-                    <CBadge key={index} color="success">{item.accountType}</CBadge>
-                </td>
-            )
-        },
+        },        
         {
             label: 'Current Balance',
             key: 'balance',
-            filter: false
+            filter: false,    
+            type: 'custom',
+            onRender: (item, index) => 
+            (
+                <td className="text-right">{item.balance}</td>
+            )        
         },
         {
             label: 'Action',
@@ -51,7 +58,7 @@ const AccountList = () => {
 
     useEffect(() => {
         if (Object.keys(activeCompany).length > 0){
-            let customFilter = {company_id: activeCompany.id, accountType: filterType}
+            let customFilter = {company_id: activeCompany.id, type: filterType}
             dtRef.current.setCustomFilter(customFilter)
         }
     }, [filterType, activeCompany])
@@ -91,7 +98,7 @@ const AccountList = () => {
     }, [])
 
     const customFilterInput = {
-        accountType: (
+        type: (
                   <CSelect value={filterType} aria-label="column name: 'accountType' filter input" onChange={event => setFilterType(event.target.value)} size="sm">
                       <option value="">All</option>
                       {

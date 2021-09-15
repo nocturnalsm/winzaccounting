@@ -26,7 +26,9 @@ const AccountEdit = (props) => {
     const getParents = (type) => {
         axios.get("api/setup/account-parents?type=" + type)
         .then(response => {
-            setParents(response.data);
+            let parentsData = response.data;
+            parentsData.unshift({id: 0, name: "--Top Level--"})
+            setParents(parentsData);
         })
         .catch(error => {
             MyAlert.error(error.response.data)
@@ -91,9 +93,14 @@ const AccountEdit = (props) => {
                 else {
                     MyAlert.success({text: 'Data saved successfully'})
                     setSubmitError({})
-                    if (!id){
-                        setData({})
+                    let {account_type, parent} = data;
+                    if (!id){                                                
+                        setData({
+                            account_type: account_type,
+                            parent: parent
+                        })
                     }
+                    getParents(account_type)
                 }
                 ref.current.focus()
                 setValidated(false);
@@ -172,13 +179,42 @@ const AccountEdit = (props) => {
                     </CFormGroup>
                     <CFormGroup row>
                         <CCol sm="4" lg="2">
+                            <CLabel>Parent Account</CLabel>
+                        </CCol>
+                        <CCol sm="8" lg="5">
+                            <CSelect
+                              type="text"
+                              placeholder="Choose parent account"
+                              autoComplete="off"
+                              disabled={loading}
+                              value={data.parent ?? ''}
+                              onChange={e => handleChange({parent: e.target.value})}
+                              invalid={
+                                  submitError.hasOwnProperty('parent')
+                              }
+                            >                                
+                            {
+                                parents.map((item, index) => (
+                                    <option key={item.id} value={item.id}>{item.number} - {item.name}</option>
+                                ))
+                            }
+                            </CSelect>
+                            <CInvalidFeedback>{
+                            submitError
+                            && submitError.hasOwnProperty('parent') ?
+                            submitError.parent[0] : 'Unknown Error'
+                            }</CInvalidFeedback>
+                        </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                        <CCol sm="4" lg="2">
                             <CLabel>Account Number</CLabel>
                         </CCol>
                         <CCol sm="8" lg="3">
-                          <CInputGroup>
+                          <CInputGroup className="has-validation">
                             <CInputGroupText>
                             {
-                              data.account_type ?
+                              (data.account_type  && accountTypes[parseInt(data.account_type) - 1]) ?
                                 accountTypes[parseInt(data.account_type) - 1].prefix : ''
                             }
                             </CInputGroupText>
@@ -194,19 +230,19 @@ const AccountEdit = (props) => {
                               }
                               required
                             />
-                          </CInputGroup>
-                          <CInvalidFeedback>{
+                            <CInvalidFeedback>{
                             submitError.hasOwnProperty('number') ?
                             submitError.number[0] : 'Please enter account number'
                             }
                           </CInvalidFeedback>
+                          </CInputGroup>                          
                         </CCol>
                     </CFormGroup>
                     <CFormGroup row>
                         <CCol sm="4" lg="2">
                             <CLabel>Account Name</CLabel>
                         </CCol>
-                        <CCol sm="8" lg="3">
+                        <CCol sm="8" lg="5">
                             <CInput
                             placeholder="Enter account name"
                             autoComplete="off"
@@ -224,37 +260,7 @@ const AccountEdit = (props) => {
                             submitError.name[0] : 'Please enter a name'
                             }</CInvalidFeedback>
                         </CCol>
-                    </CFormGroup>
-                    <CFormGroup row>
-                        <CCol sm="4" lg="2">
-                            <CLabel>Parent Account</CLabel>
-                        </CCol>
-                        <CCol sm="8" lg="3">
-                            <CSelect
-                              type="text"
-                              placeholder="Choose parent account"
-                              autoComplete="off"
-                              disabled={loading}
-                              value={data.parent ?? ''}
-                              onChange={e => handleChange({parent: e.target.value})}
-                              invalid={
-                                  submitError.hasOwnProperty('parent')
-                              }
-                            >
-                                <option value=""></option>
-                            {
-                                parents.map((item, index) => (
-                                    <option key={item.id} value={item.id}>{item.name}</option>
-                                ))
-                            }
-                            </CSelect>
-                            <CInvalidFeedback>{
-                            submitError
-                            && submitError.hasOwnProperty('parent') ?
-                            submitError.parent[0] : 'Unknown Error'
-                            }</CInvalidFeedback>
-                        </CCol>
-                    </CFormGroup>
+                    </CFormGroup>                    
                 </CForm>
             </CCardBody>
             <CCardFooter>
