@@ -95,4 +95,20 @@ class AccountController extends Controller
         $result = $this->account->delete($id);
         return $result;
     }
+
+    public function account_types()
+    {
+        $data = $this->account->getTypes();
+        return response()->json($data);
+    }
+
+    public function account_parents(Request $request)
+    {
+        $type = $request->type ?? '';
+        $data = $this->account->getParents($type);
+        if ($data){
+            return response()->json($data);
+        }
+        return response(400);
+    }
 }

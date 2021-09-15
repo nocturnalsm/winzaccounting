@@ -8,6 +8,7 @@ class PaginatedList
 {
     private $filterFunction;
     private $queryFunction;
+    private $sortFunction;
     private $data;
 
     public function __construct($data)
@@ -35,9 +36,15 @@ class PaginatedList
         if ($count <= $limit){
             $page = 1;
         }
-        if ($sortBy != ''){
-            $data = $data->orderBy($sortBy, $order);
+        if (is_callable($this->sortFunction)){
+            $data = ($this->sortFunction)($data, $sortBy, $order);
         }
+        else {
+            if ($sortBy != ''){
+                $data = $data->orderBy($sortBy, $order);
+            }
+        }
+
         $data = $data->take($limit)
                      ->offset(($page - 1)*$limit);
 
@@ -56,6 +63,12 @@ class PaginatedList
     {
         if (is_callable($function)){
             $this->filterFunction = $function;
+        }
+    }
+    public function useSort($function)
+    {
+        if (is_callable($function)){
+            $this->sortFunction = $function;
         }
     }
     private function defaultFilter()

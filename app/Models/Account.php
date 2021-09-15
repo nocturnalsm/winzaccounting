@@ -10,6 +10,7 @@ class Account extends Model
     use HasFactory;
 
     protected $fillable = [
+        'number',
         'name',
         'account_type',
         'company_id',
@@ -38,7 +39,7 @@ class Account extends Model
 
     public function balances()
     {
-        return $this->hasMany(AccountBalance::clas);
+        return $this->hasMany(AccountBalance::class);
     }
-    
+
 }

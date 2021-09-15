@@ -1,10 +1,10 @@
 "use strict";
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_currencies_CurrencyEdit_js"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_accounts_AccountEdit_js"],{
 
-/***/ "./resources/js/views/pages/currencies/CurrencyEdit.js":
-/*!*************************************************************!*\
-  !*** ./resources/js/views/pages/currencies/CurrencyEdit.js ***!
-  \*************************************************************/
+/***/ "./resources/js/views/pages/accounts/AccountEdit.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/views/pages/accounts/AccountEdit.js ***!
+  \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -58,8 +58,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var CurrencyEdit = function CurrencyEdit(props) {
-  var _data$name, _data$code, _data$sign;
+var AccountEdit = function AccountEdit(props) {
+  var _data$account_type, _data$number, _data$name, _data$parent;
 
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useParams)(),
       id = _useParams.id;
@@ -84,6 +84,16 @@ var CurrencyEdit = function CurrencyEdit(props) {
       submitError = _useState8[0],
       setSubmitError = _useState8[1];
 
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      parents = _useState10[0],
+      setParents = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState12 = _slicedToArray(_useState11, 2),
+      accountTypes = _useState12[0],
+      setAccountTypes = _useState12[1];
+
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var loading = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.appLoading;
@@ -92,7 +102,20 @@ var CurrencyEdit = function CurrencyEdit(props) {
     return state.activeCompany;
   });
 
+  var getParents = function getParents(type) {
+    axios__WEBPACK_IMPORTED_MODULE_7___default().get("api/setup/account-parents?type=" + type).then(function (response) {
+      setParents(response.data);
+    })["catch"](function (error) {
+      _alert__WEBPACK_IMPORTED_MODULE_5__.default.error(error.response.data);
+    });
+  };
+
   var handleChange = function handleChange(values) {
+    if (values.account_type && data.account_type != values.account_type) {
+      values.parent = '';
+      getParents(values.account_type);
+    }
+
     setData(_objectSpread(_objectSpread({}, data), values));
   };
 
@@ -116,14 +139,15 @@ var CurrencyEdit = function CurrencyEdit(props) {
                   _context.prev = 0;
                   request = {
                     company_id: activeCompany.id,
+                    number: data.number,
                     name: data.name,
-                    code: data.code,
-                    sign: data.sign
+                    account_type: data.account_type,
+                    parent: data.parent
                   };
                   _context.next = 4;
                   return axios__WEBPACK_IMPORTED_MODULE_7___default()({
                     method: id ? 'put' : 'post',
-                    url: '/api/setup/currencies/' + (id !== null && id !== void 0 ? id : ''),
+                    url: '/api/setup/accounts/' + (id !== null && id !== void 0 ? id : ''),
                     data: request
                   });
 
@@ -191,11 +215,22 @@ var CurrencyEdit = function CurrencyEdit(props) {
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    axios__WEBPACK_IMPORTED_MODULE_7___default().get("/api/setup/account-types").then(function (response) {
+      if (response) {
+        setAccountTypes(response.data);
+      }
+    })["catch"](function (error) {
+      _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+        text: error.response.message
+      });
+    });
+
     if (id) {
       dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(true));
-      axios__WEBPACK_IMPORTED_MODULE_7___default().get('/api/setup/currencies/' + id).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_7___default().get('/api/setup/accounts/' + id).then(function (response) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
         setData(response.data);
+        getParents(response.data.account_type);
         ref.current.focus();
       })["catch"](function (error) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
@@ -209,7 +244,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCard, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardHeader, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
-        children: id && id != "" ? 'Edit Currency' : 'Create Currency'
+        children: id && id != "" ? 'Edit Account' : 'Create Account'
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardBody, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CForm, {
@@ -223,17 +258,82 @@ var CurrencyEdit = function CurrencyEdit(props) {
             sm: "4",
             lg: "2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Currency Name"
+              children: "Account Type"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "8",
+            lg: "3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CSelect, {
+              placeholder: "Choose Account Type",
+              autoFocus: true,
+              innerRef: ref,
+              disabled: loading,
+              value: (_data$account_type = data.account_type) !== null && _data$account_type !== void 0 ? _data$account_type : '',
+              onChange: function onChange(e) {
+                return handleChange({
+                  account_type: e.target.value
+                });
+              },
+              invalid: submitError.hasOwnProperty('account_type'),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("option", {
+                value: ""
+              }), accountTypes.map(function (item, index) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("option", {
+                  value: item.id,
+                  children: item.name
+                }, item.id);
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
+              children: submitError.hasOwnProperty('account_type') ? submitError.account_type[0] : 'Unknown Error'
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
+          row: true,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "4",
+            lg: "2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
+              children: "Account Number"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "8",
+            lg: "3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInputGroup, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInputGroupText, {
+                children: data.account_type ? accountTypes[parseInt(data.account_type) - 1].prefix : ''
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
+                placeholder: "Enter account number",
+                autoComplete: "off",
+                type: "text",
+                disabled: loading,
+                onChange: function onChange(e) {
+                  return handleChange({
+                    number: e.target.value
+                  });
+                },
+                value: (_data$number = data.number) !== null && _data$number !== void 0 ? _data$number : '',
+                invalid: submitError.hasOwnProperty('number'),
+                required: true
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
+              children: submitError.hasOwnProperty('number') ? submitError.number[0] : 'Please enter account number'
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
+          row: true,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "4",
+            lg: "2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
+              children: "Account Name"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
             lg: "3",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
-              placeholder: "Enter currency name",
-              autoFocus: true,
+              placeholder: "Enter account name",
               autoComplete: "off",
               type: "text",
-              innerRef: ref,
               disabled: loading,
               onChange: function onChange(e) {
                 return handleChange({
@@ -253,52 +353,33 @@ var CurrencyEdit = function CurrencyEdit(props) {
             sm: "4",
             lg: "2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Currency Code"
+              children: "Parent Account"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
             lg: "3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CSelect, {
               type: "text",
-              placeholder: "Enter currency code",
+              placeholder: "Choose parent account",
               autoComplete: "off",
               disabled: loading,
-              value: (_data$code = data.code) !== null && _data$code !== void 0 ? _data$code : '',
+              value: (_data$parent = data.parent) !== null && _data$parent !== void 0 ? _data$parent : '',
               onChange: function onChange(e) {
                 return handleChange({
-                  code: e.target.value
+                  parent: e.target.value
                 });
               },
-              invalid: submitError.hasOwnProperty('code')
+              invalid: submitError.hasOwnProperty('parent'),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("option", {
+                value: ""
+              }), parents.map(function (item, index) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("option", {
+                  value: item.id,
+                  children: item.name
+                }, item.id);
+              })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
-              children: submitError.hasOwnProperty('code') ? submitError.code[0] : 'Unknown Error'
-            })]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
-          row: true,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "4",
-            lg: "2",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Currency Sign"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "8",
-            lg: "3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
-              type: "text",
-              placeholder: "Enter currency sign",
-              autoComplete: "off",
-              disabled: loading,
-              value: (_data$sign = data.sign) !== null && _data$sign !== void 0 ? _data$sign : '',
-              onChange: function onChange(e) {
-                return handleChange({
-                  sign: e.target.value
-                });
-              },
-              invalid: submitError.hasOwnProperty('sign')
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
-              children: submitError && submitError.hasOwnProperty('sign') ? submitError.sign[0] : 'Unknown Error'
+              children: submitError && submitError.hasOwnProperty('parent') ? submitError.parent[0] : 'Unknown Error'
             })]
           })]
         })]
@@ -329,7 +410,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
   });
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CurrencyEdit);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AccountEdit);
 
 /***/ })
 

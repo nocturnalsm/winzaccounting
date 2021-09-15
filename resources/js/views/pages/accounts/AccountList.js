@@ -10,28 +10,32 @@ import { useHistory } from 'react-router-dom'
 const AccountList = () => {
 
     let tableData = JSON.parse(localStorage.getItem('datatable.accountslist')) || {}
-    const [accountTypes, setAccountTypes] = useState([])            
+    const [accountTypes, setAccountTypes] = useState([])
     const [filterType, setFilterType] = useState(
         (tableData.filter && tableData.filter.accountType) ?? ''
     )
-    const activeCompany = useSelector(state => state.activeCompany)     
+    const activeCompany = useSelector(state => state.activeCompany)
 
     let history = useHistory()
     const dtRef = useRef(null)
 
     const fields = [
         {
+            label: 'Number',
+            key: 'number'
+        },
+        {
             label: 'Name',
             key: 'name'
-        },        
+        },
         {
             label: 'Type',
             key: 'accountType',
             type: 'custom',
-            onRender: (item) => (
+            onRender: (item, index) => (
                 <td>
-                    <CBadge key={index} color="success">{item.accountType}</CBadge>                
-                </td>                
+                    <CBadge key={index} color="success">{item.accountType}</CBadge>
+                </td>
             )
         },
         {
@@ -43,7 +47,7 @@ const AccountList = () => {
             label: 'Action',
             type: 'toolbar',
         }
-    ];    
+    ];
 
     useEffect(() => {
         if (Object.keys(activeCompany).length > 0){
@@ -62,7 +66,7 @@ const AccountList = () => {
                     dtRef.current.refresh()
                 })
                 .catch((error) => {
-                    MyAlert.error(error.response)
+                    MyAlert.error({text: error.response})
                 })
             }
         })
@@ -77,7 +81,7 @@ const AccountList = () => {
     useEffect(() => {
         axios.get("/api/setup/account-types")
         .then(response => {
-            if (response){                                
+            if (response){
                 setAccountTypes(response.data)
             }
         })
@@ -85,11 +89,11 @@ const AccountList = () => {
             MyAlert.error({text: error.response.message})
         })
     }, [])
-    
+
     const customFilterInput = {
         accountType: (
                   <CSelect value={filterType} aria-label="column name: 'accountType' filter input" onChange={event => setFilterType(event.target.value)} size="sm">
-                      <option value="All"></option>
+                      <option value="">All</option>
                       {
                           accountTypes.map((item, index) => (
                               <option key={index} value={item.id}>{item.name}</option>
@@ -104,11 +108,10 @@ const AccountList = () => {
             <CCardBody>
                 <DTable
                     _id="accountslist"
-                    defaultSort="name"
                     fields={fields}
                     ref={dtRef}
                     apiUrl="/api/setup/accounts"
-                    showToolbar={true}                    
+                    showToolbar={true}
                     customFilterInput={customFilterInput}
                     editAction={handleEdit}
                     createAction={handleCreate}

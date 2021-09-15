@@ -30,6 +30,12 @@ class BaseRepository implements RepositoryInterface
             });
         }
 
+        if (method_exists($this, 'listSort')){
+            $list->useSort(function($data, $sortBy, $order){
+                return $this->listSort($data, $sortBy, $order);
+            });
+        }
+
         return $list->make($request);
     }
     public function getById(String $id)
@@ -38,7 +44,7 @@ class BaseRepository implements RepositoryInterface
         if (!$data){
             throw new \Exception("Data not found");
         }
-        return $data->first();        
+        return $data->first();
     }
     public function create(Request $request)
     {

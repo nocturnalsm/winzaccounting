@@ -98,7 +98,7 @@ const CurrencyEdit = (props) => {
             })
             .catch(error => {
                 dispatch(setAppLoading(false))
-                MyAlert.error({type: 'error', text: error.message})
+                MyAlert.error({text: error.message})
                 history.back()
             })
        }

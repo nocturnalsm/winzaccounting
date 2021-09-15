@@ -26,7 +26,7 @@ const CurrencyList = () => {
         }
     ];
 
-    const activeCompany = useSelector(state => state.activeCompany)    
+    const activeCompany = useSelector(state => state.activeCompany)
     const dtRef = useRef(null)
     let history = useHistory()
 
@@ -46,7 +46,7 @@ const CurrencyList = () => {
                     dtRef.current.refresh()
                 })
                 .catch((error) => {
-                    MyAlert.error(error.response)
+                    MyAlert.error({text: error.response})
                 })
             }
         })
@@ -61,9 +61,9 @@ const CurrencyList = () => {
         <CCard>
             <CCardBody>
                 <DTable
-                    _id="currencieslist"       
+                    _id="currencieslist"
                     fields={fields}
-                    ref={dtRef}                    
+                    ref={dtRef}
                     apiUrl="/api/setup/currencies"
                     editAction={handleEdit}
                     createAction={handleCreate}

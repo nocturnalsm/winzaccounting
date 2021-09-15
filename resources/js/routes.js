@@ -10,6 +10,7 @@ const CurrencyList = React.lazy(() => import('./views/pages/currencies/CurrencyL
 const CurrencyEdit = React.lazy(() => import('./views/pages/currencies/CurrencyEdit'))
 const TaxCodeList = React.lazy(() => import('./views/pages/taxcodes/TaxCodeList'))
 const TaxCodeEdit = React.lazy(() => import('./views/pages/taxcodes/TaxCodeEdit'))
+const AccountEdit = React.lazy(() => import('./views/pages/accounts/AccountEdit'))
 const AccountList = React.lazy(() => import('./views/pages/accounts/AccountList'))
 
 const routes = [
@@ -26,11 +27,11 @@ const routes = [
   { path: '/currencies/create', name: 'Create Currency', component: CurrencyEdit},
   { path: '/currencies/:id', name: 'Edit Currency', component: CurrencyEdit},
   { path: '/currencies', name: 'Currencies', component: CurrencyList},
-  //{ path: '/currencies/create', name: 'Create Currency', component: CurrencyEdit},
-  //{ path: '/currencies/:id', name: 'Edit Currency', component: CurrencyEdit},
+  { path: '/accounts/create', name: 'Create Account', component: AccountEdit},
+  { path: '/accounts/:id', name: 'Edit Account', component: AccountEdit},
   { path: '/accounts', name: 'Chart of Accounts', component: AccountList},
   { path: '/tax-codes/create', name: 'Create Tax Code', component: TaxCodeEdit},
-  { path: '/tax-codes/:id', name: 'Edit Tax Code', component: TaxCodeEdit},  
+  { path: '/tax-codes/:id', name: 'Edit Tax Code', component: TaxCodeEdit},
   { path: '/tax-codes', name: 'Tax Codes', component: TaxCodeList}
 ]
 

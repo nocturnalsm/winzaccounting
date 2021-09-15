@@ -31,8 +31,6 @@ Route::prefix('setup')->group(function(){
     Route::resource('currencies', App\Http\Controllers\Setup\CurrencyController::class);
     Route::resource('taxcodes', App\Http\Controllers\Setup\TaxCodeController::class);
     Route::resource('accounts', App\Http\Controllers\Setup\AccountController::class);
-    Route::get('account-types', function(Request $request){
-        $data = \App\Models\AccountType::select('id','name')->get();
-        return response()->json($data);
-    });
+    Route::get('account-types', [App\Http\Controllers\Setup\AccountController::class, 'account_types']);
+    Route::get('account-parents', [App\Http\Controllers\Setup\AccountController::class, 'account_parents']);
 });
