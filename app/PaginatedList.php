@@ -9,6 +9,7 @@ class PaginatedList
     private $filterFunction;
     private $queryFunction;
     private $sortFunction;
+    private $filters = [];
     private $data;
 
     public function __construct($data)
@@ -73,15 +74,55 @@ class PaginatedList
     }
     private function defaultFilter()
     {
-        return function($data, $filter){
-          $data = $data->where(function($query) use ($filter){
+        return function($data, $filter){            
+            
+            $data = $data->where(function($query) use ($filter){               
                 foreach ($filter as $key=>$value){
-                    if (trim($value) != ""){
-                        $query->where($key, "LIKE", "%{$value}%");
+                    if (trim($value) != ""){                                                
+                        if (isset($this->filters[$key])){                            
+                            $itemFilter = $this->filters[$key];                                                        
+                            if ($itemFilter != false){
+                                if (is_callable($itemFilter)){
+                                    $query = $itemFilter($query, $key, $value);                                
+                                }                            
+                                else if (is_array($itemFilter)){
+                                    if (isset($itemFilter["key"])){                                    
+                                        if (isset($itemFilter["operator"])){                                    
+                                            $query = $this->setWhereOperator($query, $itemFilter["key"], $itemFilter["operator"], $value);
+                                        }
+                                        else {
+                                            $query = $this->setWhereEqual($query, $itemFilter["key"], $value);
+                                        }
+                                    }                            
+                                }                            
+                            }
+                        }
+                        else {
+                            $query = $this->setWhereLike($query, $key, $value);
+                        }
                     }
                 }
           });
           return $data;
         };
     }
+    public function setFilters($filter)
+    {
+        if (is_array($filter)){
+            $this->filters = array_merge($this->filters, $filter);              
+        }
+    }
+    private function setWhereLike($query, $key, $value)
+    {
+        return $this->setWhereOperator($query, $key, "LIKE", "%{$value}%");
+    }
+    private function setWhereOperator($query, $key, $operator, $value)
+    {
+        return $query->where($key, $operator, $value);
+    }
+    private function setWhereEqual($query, $key, $value)
+    {
+        return $query->where($key, $value);
+    }
+    
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { CCard, CCardBody, CCardFooter, CCardHeader,
+import { CCard, CCardBody, CCardFooter, CCardHeader, CSelect,
          CForm, CInput, CCol, CFormGroup, CLabel,
          CInvalidFeedback, CButton } from '@coreui/react'
 import { setAppLoading } from "../../../store";
@@ -16,6 +16,7 @@ const TaxCodeEdit = (props) => {
     const [data, setData] = useState({})
     const [validated, setValidated] = useState(false)
     const [submitError, setSubmitError] = useState({});
+    const [accounts, setAccounts] = useState([])
 
     const dispatch = useDispatch()
     const loading = useSelector(state => state.appLoading)
@@ -39,7 +40,8 @@ const TaxCodeEdit = (props) => {
                         company_id: activeCompany.id,
                         name: data.name,
                         code: data.code,
-                        percentage: data.percentage
+                        percentage: data.percentage,
+                        account_id: data.account_id
                     }
                     const response = await axios({
                         method: id ? 'put' : 'post',
@@ -88,6 +90,21 @@ const TaxCodeEdit = (props) => {
     }
 
     useEffect(() => {
+        axios.get("/api/setup/accounts", {
+            params: {
+                limit: 10000,
+                filter: {company_id: activeCompany.id, account_type: 1}
+            }
+        })
+        .then(response => {
+            if (response){
+                setAccounts(response.data.data)
+            }
+        })
+        .catch(error => {
+            MyAlert.error({text: error.response.message})
+        })
+
         if (id){
             dispatch(setAppLoading(true))
             axios.get('/api/setup/taxcodes/' + id)
@@ -179,6 +196,29 @@ const TaxCodeEdit = (props) => {
                             && submitError.hasOwnProperty('percentage') ?
                             submitError.percentage[0] : 'Unknown Error'
                             }</CInvalidFeedback>
+                        </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                        <CCol sm="4" lg="2">
+                            <CLabel>Linked to Account</CLabel>
+                        </CCol>
+                        <CCol sm="8" lg="5">
+                            <CSelect
+                              type="text"
+                              placeholder="Choose account"
+                              autoComplete="off"
+                              disabled={loading}
+                              value={data.account_id ?? ''}
+                              onChange={e => handleChange({account_id: e.target.value})}
+                            >
+                                <option value=""></option>
+                            {
+                                accounts ?
+                                accounts.map((item, index) => (
+                                    <option key={item.id} value={item.id}>{item.number} - {item.name}</option>
+                                )) : ''
+                            }
+                            </CSelect>
                         </CCol>
                     </CFormGroup>
                 </CForm>

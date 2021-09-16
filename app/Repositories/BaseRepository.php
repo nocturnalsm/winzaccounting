@@ -13,6 +13,7 @@ class BaseRepository implements RepositoryInterface
     protected $data;
     protected $filterFunction;
     protected $queryFunction;
+    protected $listFilters;
 
     public function getList(Request $request) : Array
     {
@@ -23,8 +24,12 @@ class BaseRepository implements RepositoryInterface
         }
 
         $list = new PaginatedList($data);
+        
+        if ($this->listFilters && count($this->listFilters) > 0){            
+            $list->setFilters($this->listFilters);
+        }
 
-        if (method_exists($this, 'listFilter')){
+        if (method_exists($this, 'listFilter')){                        
             $list->useFilter(function($data, $filter) {
                 return $this->listFilter($data, $filter);
             });

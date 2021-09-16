@@ -59,7 +59,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var TaxCodeEdit = function TaxCodeEdit(props) {
-  var _data$name, _data$code, _data$percentage;
+  var _data$name, _data$code, _data$percentage, _data$account_id;
 
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useParams)(),
       id = _useParams.id;
@@ -83,6 +83,11 @@ var TaxCodeEdit = function TaxCodeEdit(props) {
       _useState8 = _slicedToArray(_useState7, 2),
       submitError = _useState8[0],
       setSubmitError = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      accounts = _useState10[0],
+      setAccounts = _useState10[1];
 
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var loading = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
@@ -118,7 +123,8 @@ var TaxCodeEdit = function TaxCodeEdit(props) {
                     company_id: activeCompany.id,
                     name: data.name,
                     code: data.code,
-                    percentage: data.percentage
+                    percentage: data.percentage,
+                    account_id: data.account_id
                   };
                   _context.next = 4;
                   return axios__WEBPACK_IMPORTED_MODULE_7___default()({
@@ -165,12 +171,12 @@ var TaxCodeEdit = function TaxCodeEdit(props) {
             var _response$error$messa;
 
             var message = (_response$error$messa = response.error.message) !== null && _response$error$messa !== void 0 ? _response$error$messa : 'Something went wrong';
-            _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+            _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
               text: message
             });
           }
         } else {
-          _alert__WEBPACK_IMPORTED_MODULE_5__.default.success({
+          _alert__WEBPACK_IMPORTED_MODULE_5__["default"].success({
             text: 'Data saved successfully'
           });
           setSubmitError({});
@@ -191,6 +197,24 @@ var TaxCodeEdit = function TaxCodeEdit(props) {
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    axios__WEBPACK_IMPORTED_MODULE_7___default().get("/api/setup/accounts", {
+      params: {
+        limit: 10000,
+        filter: {
+          company_id: activeCompany.id,
+          account_type: 1
+        }
+      }
+    }).then(function (response) {
+      if (response) {
+        setAccounts(response.data.data);
+      }
+    })["catch"](function (error) {
+      _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
+        text: error.response.message
+      });
+    });
+
     if (id) {
       dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(true));
       axios__WEBPACK_IMPORTED_MODULE_7___default().get('/api/setup/taxcodes/' + id).then(function (response) {
@@ -199,7 +223,7 @@ var TaxCodeEdit = function TaxCodeEdit(props) {
         ref.current.focus();
       })["catch"](function (error) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
-        _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+        _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
           type: 'error',
           text: error.message
         });
@@ -302,6 +326,38 @@ var TaxCodeEdit = function TaxCodeEdit(props) {
               children: submitError && submitError.hasOwnProperty('percentage') ? submitError.percentage[0] : 'Unknown Error'
             })]
           })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
+          row: true,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "4",
+            lg: "2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
+              children: "Linked to Account"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "8",
+            lg: "5",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CSelect, {
+              type: "text",
+              placeholder: "Choose account",
+              autoComplete: "off",
+              disabled: loading,
+              value: (_data$account_id = data.account_id) !== null && _data$account_id !== void 0 ? _data$account_id : '',
+              onChange: function onChange(e) {
+                return handleChange({
+                  account_id: e.target.value
+                });
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("option", {
+                value: ""
+              }), accounts ? accounts.map(function (item, index) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("option", {
+                  value: item.id,
+                  children: [item.number, " - ", item.name]
+                }, item.id);
+              }) : '']
+            })
+          })]
         })]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardFooter, {
@@ -313,7 +369,7 @@ var TaxCodeEdit = function TaxCodeEdit(props) {
         },
         size: "md",
         color: "primary",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
           name: "cil-scrubber"
         }), " Submit"]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CButton, {
@@ -322,7 +378,7 @@ var TaxCodeEdit = function TaxCodeEdit(props) {
         onClick: resetForm,
         size: "md",
         color: "danger",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
           name: "cil-ban"
         }), " Reset"]
       })]

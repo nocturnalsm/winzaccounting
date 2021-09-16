@@ -16,6 +16,15 @@ class AccountRepository extends BaseRepository
     public function __construct(Account $account)
     {
         $this->data = $account;
+        $this->listFilters = [
+            "type" => [
+                "key" => "account_type"
+            ],       
+            "number" => function($query, $key, $value){
+                return 
+                    $query->where(DB::raw("CONCAT(at.prefix, accounts.number)"), "LIKE", "%{$value}%");
+            }
+        ];
     }
 
     public function validateUsing($params, $id = "")
@@ -52,16 +61,18 @@ class AccountRepository extends BaseRepository
 
     public function listQuery($data)
     {
-        return $data->select("accounts.id", "accounts.name",
+        return $data->select("accounts.id", "accounts.name", "accountType",
                              DB::raw("CONCAT(at.prefix, accounts.number) AS number"),
                              "accounts.parent", "accounts.account_type",
-                             DB::raw("at.name AS accountType"),
-                             DB::raw("parents.number as parentNumber"),
-                             DB::raw("parents.name as parentName"),
                              DB::raw("IFNULL(balance.amount,0) AS balance")
                      )
-                     ->join(DB::raw('account_types at'), "at.id", "=", "accounts.account_type")
-                     ->leftJoin(DB::raw('accounts as parents'), "parents.id", "=", "accounts.parent")
+                     ->leftJoinSub(
+                         AccountType::select("id", "prefix", DB::raw("name AS accountType")),
+                         "at",
+                         function($join){
+                             $join->on("at.id", "=", "accounts.account_type");
+                         }
+                     )                     
                      ->leftJoinSub(
                           AccountBalance::select('account_id', 'amount')
                             ->where("date", "<=", Date("Y-m-d"))
@@ -69,24 +80,7 @@ class AccountRepository extends BaseRepository
                           "balance", function($join){
                               $join->on("accounts.id", "=", "balance.account_id");
                       });
-    }
-
-    public function listFilter($data, $filter)
-    {
-        $data->where(function($query) use ($filter){
-            foreach ($filter as $key=>$value){
-                if (trim($value) != ""){
-                    if ($key == 'type'){
-                        $query->where("accounts.account_type", $value);
-                    }
-                    else {
-                        $query->where("accounts." .$key, "LIKE", "%{$value}%");
-                    }
-                }
-            }
-        });
-        return $data;
-    }
+    }    
     public function listSort($data, $sortBy, $order)
     {
         $data->orderBy(DB::raw('accounts.account_type'), 'asc')

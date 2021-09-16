@@ -23,13 +23,5 @@ class PermissionRepository extends BaseRepository
                           $query->withCount("users");
                    }]);
     }
-    public function listFilter($data, $filter){
-        return $data->where(function($query) use ($filter){
-              foreach ($filter as $key=>$value){
-                  if ($key != 'users_count'){
-                    $query->where($key, "LIKE", "%{$value}%");
-                  }
-              }
-        });
-    }
+    
 }

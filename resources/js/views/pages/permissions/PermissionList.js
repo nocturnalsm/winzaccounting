@@ -11,6 +11,7 @@ const PermissionList = () => {
             label: 'User Count',
             type: 'custom',
             key: 'users_count',
+            filter: false,
             onRender: (item, index) => (
                 <td>
                 {item.roles.reduce((total, role) => {

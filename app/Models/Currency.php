@@ -27,4 +27,9 @@ class Currency extends Model
         return $this->belongsTo(Company::class);
     }
 
+    public function rates()
+    {
+        return $this->hasMany(CurrencyRate::class);
+    }
+
 }

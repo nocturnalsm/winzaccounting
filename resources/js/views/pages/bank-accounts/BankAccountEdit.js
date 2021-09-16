@@ -118,7 +118,7 @@ const BankAccountEdit = (props) => {
         .catch(error => {
             MyAlert.error(error.response.data)
         })
-        console.log(id);
+  
         if (id){
             dispatch(setAppLoading(true))
             axios.get('/api/setup/bank-accounts/' + id)

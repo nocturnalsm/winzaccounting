@@ -18,7 +18,8 @@ class TaxCode extends Model
         'company_id',
         'name',
         'code',
-        'sign',
+        'percentage',
+        'account_id',
         'status'
     ];
 

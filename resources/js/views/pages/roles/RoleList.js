@@ -11,7 +11,7 @@ const RoleList = () => {
         {
             label: 'Permissions',
             key: 'permissionName',
-            type: 'custom',
+            type: 'custom',            
             onRender: (item, index) => (
               <td>
                 {
@@ -37,7 +37,8 @@ const RoleList = () => {
         },
         {
             label: 'User Count',
-            key: 'users_count'
+            key: 'users_count',
+            filter: false
         },
         {
             label: 'Action',

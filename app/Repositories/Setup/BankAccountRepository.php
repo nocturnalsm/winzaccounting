@@ -6,6 +6,8 @@ use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\BankAccount;
+use App\Models\Bank;
+use App\Models\Account;
 use DB;
 
 class BankAccountRepository extends BaseRepository
@@ -14,6 +16,11 @@ class BankAccountRepository extends BaseRepository
     public function __construct(BankAccount $bank)
     {
         $this->data = $bank;
+        $this->listFilters = [
+            'account_name' => function($query, $key, $value){
+                $query->where(DB::raw("CONCAT(accounts.number, accounts.name)"), "LIKE", "%{$value}%");                
+            }
+        ];
     }
     public function validateUsing($params, $id = "")
     {
@@ -37,40 +44,33 @@ class BankAccountRepository extends BaseRepository
 
     public function listQuery($data)
     {
-        $data = $data->join("banks", "bank_accounts.bank_id", "=", "banks.id")
-                     ->leftJoin("accounts", "bank_accounts.account_id", "=", "accounts.id")
-                     ->leftJoin(DB::raw("account_types types"), "accounts.account_type","=","types.id")
-                     ->select(
-                          DB::raw("bank_accounts.*"),
-                          DB::raw("banks.name AS bank_name"),
-                          DB::raw("CONCAT(types.prefix, accounts.number) AS account_number"),
-                          DB::raw("accounts.name AS account_name")
-                       );
+        $data = $data->leftJoinSub(
+                            Bank::select(
+                                    DB::raw("id AS bank_id"), 
+                                    DB::raw("banks.name AS bank_name"), 
+                                    "company_id"
+                             ),                                
+                             "banks",
+                             function($join){
+                                $join->on("bank_accounts.bank_id", "=", "banks.bank_id");
+                             }
+                    )
+                    ->leftJoinSub(
+                        Account::select(
+                            DB::raw("accounts.id AS linked_account_id"),
+                            DB::raw("CONCAT(types.prefix, accounts.number) AS account_number"),
+                            DB::raw("accounts.name AS account_name")
+                        )
+                        ->leftJoin(DB::raw("account_types types"), "accounts.account_type","=","types.id"),
+                        "accounts", 
+                        function($join){
+                            $join->on("bank_accounts.account_id", "=", "linked_account_id");
+                        }
+                    )
+                    ->select(
+                        DB::raw("bank_accounts.*"), "bank_name", "account_number", "account_name"
+                    );                             
         return $data;
     }
-
-    public function listFilter($data, $filter)
-    {
-        $data->where(function($query) use ($filter){
-            foreach ($filter as $key=>$value){
-                if (trim($value) != ""){
-                    if ($key == 'company_id'){
-                        $query->where("banks.company_id", $value);
-                    }
-                    else if ($key == 'bank_name'){
-                        $query->where("banks.name", "LIKE", "%{$value}%");
-                    }
-                    else if ($key == 'account_name'){
-                        $query->where(
-                          DB::raw("CONCAT(types.prefix, accounts.number, accounts.name)"), "LIKE", "%{$value}%"
-                        );
-                    }
-                    else {
-                        $query->where("bank_accounts." .$key, "LIKE", "%{$value}%");
-                    }
-                }
-            }
-        });
-        return $data;
-    }
+    
 }

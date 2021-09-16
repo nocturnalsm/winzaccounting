@@ -22,6 +22,14 @@ const TaxCodeList = () => {
             filter: false
         },
         {
+            label: 'Linked Account',
+            key: 'account',
+            type: 'custom',
+            onRender: (item) => (
+                <td>{item.account_number ? item.account_number +' - '+ item.account_name : ''}</td>
+            )
+        },
+        {
             label: 'Action',
             type: 'toolbar'
         }

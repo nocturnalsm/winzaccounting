@@ -17,4 +17,9 @@ class BankAccount extends Model
     {
         return $this->belongsTo(Bank::class);
     }
+
+    public function linkedAccount()
+    {
+        return $this->hasOne(Account::class);
+    }
 }
