@@ -33,4 +33,6 @@ Route::prefix('setup')->group(function(){
     Route::resource('accounts', App\Http\Controllers\Setup\AccountController::class);
     Route::get('account-types', [App\Http\Controllers\Setup\AccountController::class, 'account_types']);
     Route::get('account-parents', [App\Http\Controllers\Setup\AccountController::class, 'account_parents']);
+    Route::resource('banks', App\Http\Controllers\Setup\BankController::class);
+    Route::resource('bank-accounts', App\Http\Controllers\Setup\BankAccountController::class);
 });

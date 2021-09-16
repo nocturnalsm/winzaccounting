@@ -1,4 +1,4 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_users_UserList_js"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_banks_BankList_js"],{
 
 /***/ "./resources/js/components/datatable/DTToolbar.js":
 /*!********************************************************!*\
@@ -483,9 +483,9 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
 
 /***/ }),
 
-/***/ "./resources/js/views/pages/users/UserList.js":
+/***/ "./resources/js/views/pages/banks/BankList.js":
 /*!****************************************************!*\
-  !*** ./resources/js/views/pages/users/UserList.js ***!
+  !*** ./resources/js/views/pages/banks/BankList.js ***!
   \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -496,22 +496,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/datatable/DTable */ "./resources/js/components/datatable/DTable.js");
 /* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _alert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../alert */ "./resources/js/alert.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+/* harmony import */ var _alert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../alert */ "./resources/js/alert.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -521,101 +512,73 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var UserList = function UserList() {
-  var _ref;
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      roles = _useState2[0],
-      setRoles = _useState2[1];
-
-  var dtRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
+var BankList = function BankList() {
   var fields = [{
     label: 'Name',
     key: 'name'
   }, {
-    label: 'Username',
-    key: 'username'
-  }, {
-    label: 'Email',
-    key: 'email',
-    type: 'email'
-  }, {
-    label: 'Roles',
-    type: 'custom',
-    key: 'roleName',
-    onRender: function onRender(item) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
-        children: item.roles.map(function (badge, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CBadge, {
-            color: "success",
-            children: badge.name
-          }, index);
-        })
-      });
-    }
+    label: 'Branch',
+    key: 'branch'
   }, {
     label: 'Action',
     type: 'toolbar'
   }];
-
-  var onChangeRoleFilter = function onChangeRoleFilter(event) {
-    var value = event.target.value;
-    dtRef.current.setCustomFilter({
-      roleName: value
-    });
-  };
-
-  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_4___default().get("/api/admin/roles", {
-      params: {
-        limit: 5000,
-        sort: 'name'
-      }
-    }).then(function (response) {
-      if (response.data) {
-        setRoles(response.data.data);
-      }
-    })["catch"](function (error) {
-      _alert__WEBPACK_IMPORTED_MODULE_3__.default.error({
-        text: error.response.message
+  var activeCompany = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(function (state) {
+    return state.activeCompany;
+  });
+  var dtRef = (0,react__WEBPACK_IMPORTED_MODULE_4__.useRef)(null);
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
+  (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    if (Object.keys(activeCompany).length > 0) {
+      dtRef.current.setCustomFilter({
+        company_id: activeCompany.id
       });
+    }
+  }, [activeCompany]);
+
+  var handleDelete = function handleDelete(data, clickEvent) {
+    _alert__WEBPACK_IMPORTED_MODULE_2__.default.confirm({
+      title: 'Are you sure to delete this data ?',
+      confirmAction: function confirmAction() {
+        axios__WEBPACK_IMPORTED_MODULE_5___default().delete('/api/setup/banks/' + data.id).then(function () {
+          _alert__WEBPACK_IMPORTED_MODULE_2__.default.success({
+            text: "Data successfully deleted"
+          });
+          dtRef.current.refresh();
+        })["catch"](function (error) {
+          _alert__WEBPACK_IMPORTED_MODULE_2__.default.error({
+            text: error.response
+          });
+        });
+      }
     });
-  }, []);
-  var tableData = JSON.parse(localStorage.getItem('datatable.userslist')) || {};
-  var customFilterInput = {
-    roleName: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CSelect, {
-      value: (_ref = tableData.filter && tableData.filter.roleName) !== null && _ref !== void 0 ? _ref : '',
-      "aria-label": "column name: 'roleName' filter input",
-      onChange: onChangeRoleFilter,
-      size: "sm",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
-        value: "",
-        children: "All"
-      }), roles.map(function (item, index) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
-          value: item.name,
-          children: item.name
-        }, index);
-      })]
-    })
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCard, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCardBody, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__.default, {
-        _id: "userslist",
-        defaultSort: "name",
+
+  var handleCreate = function handleCreate() {
+    history.push('/banks/create');
+  };
+
+  var handleEdit = function handleEdit(data, event) {
+    history.push('/banks/' + data.id);
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCard, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCardBody, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__.default, {
+        _id: "bankslist",
         fields: fields,
         ref: dtRef,
-        apiUrl: "/api/admin/users",
-        showToolbar: true,
-        customFilterInput: customFilterInput
+        apiUrl: "/api/setup/banks",
+        editAction: handleEdit,
+        createAction: handleCreate,
+        deleteAction: handleDelete,
+        showButtonVisible: false
       })
     })
   });
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserList);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BankList);
 
 /***/ }),
 

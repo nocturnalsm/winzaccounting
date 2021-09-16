@@ -77,10 +77,10 @@ class AccountRepository extends BaseRepository
             foreach ($filter as $key=>$value){
                 if (trim($value) != ""){
                     if ($key == 'type'){
-                    $query->where("accounts.account_type", $value);
+                        $query->where("accounts.account_type", $value);
                     }
                     else {
-                    $query->where("accounts." .$key, "LIKE", "%{$value}%");
+                        $query->where("accounts." .$key, "LIKE", "%{$value}%");
                     }
                 }
             }
@@ -89,7 +89,7 @@ class AccountRepository extends BaseRepository
     }
     public function listSort($data, $sortBy, $order)
     {
-        $data->orderBy(DB::raw('accounts.account_type'), 'asc')             
+        $data->orderBy(DB::raw('accounts.account_type'), 'asc')
              ->orderBy(DB::raw('accounts.number'), 'asc');
         return $data;
     }
@@ -102,7 +102,7 @@ class AccountRepository extends BaseRepository
       if (trim($type) != ""){
           $type = AccountType::find($type);
           $prefix = $type->prefix;
-          $data = $type->accounts()                  
+          $data = $type->accounts()
                   ->select('id','name', DB::raw("CONCAT('{$prefix}', number) AS number"))
                   ->get();
           return $data;

@@ -1,10 +1,10 @@
 "use strict";
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_currencies_CurrencyEdit_js"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_banks_BankEdit_js"],{
 
-/***/ "./resources/js/views/pages/currencies/CurrencyEdit.js":
-/*!*************************************************************!*\
-  !*** ./resources/js/views/pages/currencies/CurrencyEdit.js ***!
-  \*************************************************************/
+/***/ "./resources/js/views/pages/banks/BankEdit.js":
+/*!****************************************************!*\
+  !*** ./resources/js/views/pages/banks/BankEdit.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -58,8 +58,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var CurrencyEdit = function CurrencyEdit(props) {
-  var _data$name, _data$code, _data$sign;
+var BankEdit = function BankEdit(props) {
+  var _data$name, _data$branch;
 
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useParams)(),
       id = _useParams.id;
@@ -117,13 +117,12 @@ var CurrencyEdit = function CurrencyEdit(props) {
                   request = {
                     company_id: activeCompany.id,
                     name: data.name,
-                    code: data.code,
-                    sign: data.sign
+                    branch: data.branch
                   };
                   _context.next = 4;
                   return axios__WEBPACK_IMPORTED_MODULE_7___default()({
                     method: id ? 'put' : 'post',
-                    url: '/api/setup/currencies/' + (id !== null && id !== void 0 ? id : ''),
+                    url: '/api/setup/banks/' + (id !== null && id !== void 0 ? id : ''),
                     data: request
                   });
 
@@ -193,7 +192,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     if (id) {
       dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(true));
-      axios__WEBPACK_IMPORTED_MODULE_7___default().get('/api/setup/currencies/' + id).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_7___default().get('/api/setup/banks/' + id).then(function (response) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
         setData(response.data);
         ref.current.focus();
@@ -209,7 +208,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCard, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardHeader, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
-        children: id && id != "" ? 'Edit Currency' : 'Create Currency'
+        children: id && id != "" ? 'Edit Bank' : 'Create Bank'
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardBody, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CForm, {
@@ -223,13 +222,13 @@ var CurrencyEdit = function CurrencyEdit(props) {
             sm: "4",
             lg: "2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Currency Name"
+              children: "Bank Name"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
             lg: "3",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
-              placeholder: "Enter currency name",
+              placeholder: "Enter bank name",
               autoFocus: true,
               autoComplete: "off",
               type: "text",
@@ -253,53 +252,23 @@ var CurrencyEdit = function CurrencyEdit(props) {
             sm: "4",
             lg: "2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Currency Code"
+              children: "Branch Name"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
             lg: "3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
               type: "text",
-              placeholder: "Enter currency code",
+              placeholder: "Enter branch name",
               autoComplete: "off",
               disabled: loading,
-              value: (_data$code = data.code) !== null && _data$code !== void 0 ? _data$code : '',
+              value: (_data$branch = data.branch) !== null && _data$branch !== void 0 ? _data$branch : '',
               onChange: function onChange(e) {
                 return handleChange({
-                  code: e.target.value
+                  branch: e.target.value
                 });
-              },
-              invalid: submitError.hasOwnProperty('code')
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
-              children: submitError.hasOwnProperty('code') ? submitError.code[0] : 'Unknown Error'
-            })]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
-          row: true,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "4",
-            lg: "2",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Currency Sign"
+              }
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "8",
-            lg: "3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
-              type: "text",
-              placeholder: "Enter currency sign",
-              autoComplete: "off",
-              disabled: loading,
-              value: (_data$sign = data.sign) !== null && _data$sign !== void 0 ? _data$sign : '',
-              onChange: function onChange(e) {
-                return handleChange({
-                  sign: e.target.value
-                });
-              },
-              invalid: submitError.hasOwnProperty('sign')
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
-              children: submitError && submitError.hasOwnProperty('sign') ? submitError.sign[0] : 'Unknown Error'
-            })]
           })]
         })]
       })
@@ -329,7 +298,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
   });
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CurrencyEdit);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BankEdit);
 
 /***/ })
 

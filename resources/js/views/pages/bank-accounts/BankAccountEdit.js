@@ -9,37 +9,21 @@ import MyAlert from "../../../alert";
 import CIcon from '@coreui/icons-react'
 import axios from 'axios'
 
-const AccountEdit = (props) => {
+const BankAccountEdit = (props) => {
 
     const {id} = useParams()
     const [initialData, setInitialData] = useState({})
     const [data, setData] = useState({})
     const [validated, setValidated] = useState(false)
     const [submitError, setSubmitError] = useState({})
-    const [parents, setParents] = useState([])
-    const [accountTypes, setAccountTypes] = useState([])
+    const [banks, setBanks] = useState([])
+    const [accounts, setAccounts] = useState([])
 
     const dispatch = useDispatch()
     const loading = useSelector(state => state.appLoading)
     const activeCompany = useSelector(state => state.activeCompany)
 
-    const getParents = (type) => {
-        axios.get("api/setup/account-parents?type=" + type)
-        .then(response => {
-            let parentsData = response.data;
-            parentsData.unshift({id: 0, name: "--Top Level--"})
-            setParents(parentsData);
-        })
-        .catch(error => {
-            MyAlert.error(error.response.data)
-        })
-    }
-
     const handleChange = (values) => {
-        if (values.account_type && data.account_type != values.account_type){
-            values.parent = '';
-            getParents(values.account_type)
-        }
         setData({...data, ...values})
     }
 
@@ -55,15 +39,14 @@ const AccountEdit = (props) => {
             const submit = async () => {
                 try {
                     let request = {
-                        company_id: activeCompany.id,
+                        bank_id: data.bank_id,
                         number: data.number,
-                        name: data.name,
-                        account_type: data.account_type,
-                        parent: data.parent
+                        holder: data.holder,
+                        account_id: data.account_id
                     }
                     const response = await axios({
                         method: id ? 'put' : 'post',
-                        url: '/api/setup/accounts/' + (id ?? ''),
+                        url: '/api/setup/bank-accounts/' + (id ?? ''),
                         data: request
                     })
                     return response
@@ -93,14 +76,9 @@ const AccountEdit = (props) => {
                 else {
                     MyAlert.success({text: 'Data saved successfully'})
                     setSubmitError({})
-                    let {account_type, parent} = data;
                     if (!id){
-                        setData({
-                            account_type: account_type,
-                            parent: parent
-                        })
+                        setData({})
                     }
-                    getParents(account_type)
                 }
                 ref.current.focus()
                 setValidated(false);
@@ -113,23 +91,40 @@ const AccountEdit = (props) => {
     }
 
     useEffect(() => {
-        axios.get("/api/setup/account-types")
+        axios.get("/api/setup/accounts", {
+            params: {
+                limit: 10000,
+                filter: {company_id: activeCompany.id, account_type: 1}
+            }
+        })
         .then(response => {
             if (response){
-                setAccountTypes(response.data)
+                setAccounts(response.data.data)
             }
         })
         .catch(error => {
             MyAlert.error({text: error.response.message})
         })
 
+        axios.get("api/setup/banks", {
+          params: {
+              limit: 10000,
+              filter: {company_id: activeCompany.id}
+          }
+        })
+        .then(response => {
+            setBanks(response.data.data);
+        })
+        .catch(error => {
+            MyAlert.error(error.response.data)
+        })
+        console.log(id);
         if (id){
             dispatch(setAppLoading(true))
-            axios.get('/api/setup/accounts/' + id)
+            axios.get('/api/setup/bank-accounts/' + id)
             .then(response => {
                 dispatch(setAppLoading(false))
                 setData(response.data)
-                getParents(response.data.account_type)
                 ref.current.focus()
             })
             .catch(error => {
@@ -144,67 +139,38 @@ const AccountEdit = (props) => {
     return (
         <CCard>
             <CCardHeader>
-                <h3>{id && id != "" ? 'Edit Account' : 'Create Account'}</h3>
+                <h3>{id && id != "" ? 'Edit Bank Account' : 'Create Bank Account'}</h3>
             </CCardHeader>
             <CCardBody>
                 <CForm className="form-horizontal needs-validation" noValidate wasValidated={validated} onSubmit={handleSubmit}>
                     <CFormGroup row>
                         <CCol sm="4" lg="2">
-                            <CLabel>Account Type</CLabel>
+                            <CLabel>Bank</CLabel>
                         </CCol>
                         <CCol sm="8" lg="3">
                             <CSelect
-                            placeholder="Choose Account Type"
+                            placeholder="Choose Bank"
+                            required
                             autoFocus={true}
                             innerRef={ref}
                             disabled={loading}
-                            required
-                            value={data.account_type ?? ''}
-                            onChange={e => handleChange({account_type: e.target.value})}
+                            value={data.bank_id ?? ''}
+                            onChange={e => handleChange({bank_id: e.target.value})}
                             invalid={
-                                submitError.hasOwnProperty('account_type')
+                                submitError.hasOwnProperty('bank_id')
                             }
                             >
                               <option value=""></option>
                             {
-                              accountTypes.map((item, index) => (
+                              banks ?
+                              banks.map((item, index) => (
                                   <option key={item.id} value={item.id}>{item.name}</option>
-                              ))
+                              )) : ''
                             }
                             </CSelect>
                             <CInvalidFeedback>{
-                            submitError.hasOwnProperty('account_type') ?
-                            submitError.account_type[0] : 'Unknown Error'
-                            }</CInvalidFeedback>
-                        </CCol>
-                    </CFormGroup>
-                    <CFormGroup row>
-                        <CCol sm="4" lg="2">
-                            <CLabel>Parent Account</CLabel>
-                        </CCol>
-                        <CCol sm="8" lg="5">
-                            <CSelect
-                              type="text"
-                              placeholder="Choose parent account"
-                              autoComplete="off"
-                              disabled={loading}
-                              required
-                              value={data.parent ?? ''}
-                              onChange={e => handleChange({parent: e.target.value})}
-                              invalid={
-                                  submitError.hasOwnProperty('parent')
-                              }
-                            >
-                            {
-                                parents.map((item, index) => (
-                                    <option key={item.id} value={item.id}>{item.number} - {item.name}</option>
-                                ))
-                            }
-                            </CSelect>
-                            <CInvalidFeedback>{
-                            submitError
-                            && submitError.hasOwnProperty('parent') ?
-                            submitError.parent[0] : 'Unknown Error'
+                            submitError.hasOwnProperty('bank_id') ?
+                            submitError.bank_id[0] : 'Unknown Error'
                             }</CInvalidFeedback>
                         </CCol>
                     </CFormGroup>
@@ -213,13 +179,6 @@ const AccountEdit = (props) => {
                             <CLabel>Account Number</CLabel>
                         </CCol>
                         <CCol sm="8" lg="3">
-                          <CInputGroup className="has-validation">
-                            <CInputGroupText>
-                            {
-                              (data.account_type  && accountTypes[parseInt(data.account_type) - 1]) ?
-                                accountTypes[parseInt(data.account_type) - 1].prefix : ''
-                            }
-                            </CInputGroupText>
                             <CInput
                               placeholder="Enter account number"
                               autoComplete="off"
@@ -237,30 +196,52 @@ const AccountEdit = (props) => {
                             submitError.number[0] : 'Please enter account number'
                             }
                           </CInvalidFeedback>
-                          </CInputGroup>
                         </CCol>
                     </CFormGroup>
                     <CFormGroup row>
                         <CCol sm="4" lg="2">
-                            <CLabel>Account Name</CLabel>
+                            <CLabel>Account Holder</CLabel>
                         </CCol>
                         <CCol sm="8" lg="5">
                             <CInput
-                            placeholder="Enter account name"
+                            placeholder="Enter account holder name"
                             autoComplete="off"
                             type="text"
                             disabled={loading}
-                            onChange={e => handleChange({name: e.target.value})}
-                            value={data.name ?? ''}
+                            onChange={e => handleChange({holder: e.target.value})}
+                            value={data.holder ?? ''}
                             invalid={
-                                submitError.hasOwnProperty('name')
+                                submitError.hasOwnProperty('holder')
                             }
                             required
                             />
                             <CInvalidFeedback>{
-                            submitError.hasOwnProperty('name') ?
-                            submitError.name[0] : 'Please enter a name'
+                            submitError.hasOwnProperty('holder') ?
+                            submitError.holder[0] : 'Please enter account holder name'
                             }</CInvalidFeedback>
+                        </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                        <CCol sm="4" lg="2">
+                            <CLabel>Linked to Account</CLabel>
+                        </CCol>
+                        <CCol sm="8" lg="5">
+                            <CSelect
+                              type="text"
+                              placeholder="Choose account"
+                              autoComplete="off"
+                              disabled={loading}
+                              value={data.account_id ?? ''}
+                              onChange={e => handleChange({account_id: e.target.value})}
+                            >
+                                <option value=""></option>
+                            {
+                                accounts ?
+                                accounts.map((item, index) => (
+                                    <option key={item.id} value={item.id}>{item.number} - {item.name}</option>
+                                )) : ''
+                            }
+                            </CSelect>
                         </CCol>
                     </CFormGroup>
                 </CForm>
@@ -277,4 +258,4 @@ const AccountEdit = (props) => {
     )
 }
 
-export default AccountEdit
+export default BankAccountEdit

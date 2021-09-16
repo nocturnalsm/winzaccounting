@@ -12,6 +12,11 @@ const TaxCodeList = React.lazy(() => import('./views/pages/taxcodes/TaxCodeList'
 const TaxCodeEdit = React.lazy(() => import('./views/pages/taxcodes/TaxCodeEdit'))
 const AccountEdit = React.lazy(() => import('./views/pages/accounts/AccountEdit'))
 const AccountList = React.lazy(() => import('./views/pages/accounts/AccountList'))
+const BankAccountEdit = React.lazy(() => import('./views/pages/bank-accounts/BankAccountEdit'))
+const BankAccountList = React.lazy(() => import('./views/pages/bank-accounts/BankAccountList'))
+const BankEdit = React.lazy(() => import('./views/pages/banks/BankEdit'))
+const BankList = React.lazy(() => import('./views/pages/banks/BankList'))
+
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -32,7 +37,13 @@ const routes = [
   { path: '/accounts', name: 'Chart of Accounts', component: AccountList},
   { path: '/tax-codes/create', name: 'Create Tax Code', component: TaxCodeEdit},
   { path: '/tax-codes/:id', name: 'Edit Tax Code', component: TaxCodeEdit},
-  { path: '/tax-codes', name: 'Tax Codes', component: TaxCodeList}
+  { path: '/tax-codes', name: 'Tax Codes', component: TaxCodeList},
+  { path: '/banks/create', name: 'Create Bank', component: BankEdit},
+  { path: '/banks/:id', name: 'Edit Bank', component: BankEdit},
+  { path: '/banks', name: 'Banks', component: BankList},
+  { path: '/bank-accounts/create', name: 'Create Bank Account', component: BankAccountEdit},
+  { path: '/bank-accounts/:id', name: 'Edit Bank Account', component: BankAccountEdit},
+  { path: '/bank-accounts', name: 'Bank Accounts', component: BankAccountList}
 ]
 
 export default routes
