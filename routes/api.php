@@ -29,6 +29,7 @@ Route::prefix('admin')->group(function(){
 
 Route::prefix('setup')->group(function(){
     Route::resource('currencies', App\Http\Controllers\Setup\CurrencyController::class);
+    Route::resource('currency-rates', App\Http\Controllers\Setup\CurrencyRateController::class);
     Route::resource('taxcodes', App\Http\Controllers\Setup\TaxCodeController::class);
     Route::resource('accounts', App\Http\Controllers\Setup\AccountController::class);
     Route::get('account-types', [App\Http\Controllers\Setup\AccountController::class, 'account_types']);

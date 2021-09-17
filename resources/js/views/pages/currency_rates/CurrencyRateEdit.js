@@ -2,49 +2,27 @@ import { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CCard, CCardBody, CCardFooter, CCardHeader, CSelect,
-         CForm, CInput, CInputGroup, CInputGroupText, CCol, CFormGroup, CLabel,
+         CForm, CInput, CCol, CFormGroup, CLabel,
          CInvalidFeedback, CButton } from '@coreui/react'
 import { setAppLoading } from "../../../store";
 import MyAlert from "../../../alert";
 import CIcon from '@coreui/icons-react'
 import axios from 'axios'
 
-const AccountEdit = (props) => {
+const CurrencyRateEdit = (props) => {
 
     const {id} = useParams()
     const [initialData, setInitialData] = useState({})
     const [data, setData] = useState({})
     const [validated, setValidated] = useState(false)
     const [submitError, setSubmitError] = useState({})
-    const [parents, setParents] = useState([])
-    const [accountTypes, setAccountTypes] = useState([])
+    const [currencies, setCurrencies] = useState([])
 
     const dispatch = useDispatch()
     const loading = useSelector(state => state.appLoading)
     const activeCompany = useSelector(state => state.activeCompany)
 
-    const getParents = (type) => {
-        axios.get("api/setup/account-parents", {
-            params: {
-                type: type,
-                company_id: activeCompany.id
-            }
-        })
-        .then(response => {
-            let parentsData = response.data;
-            parentsData.unshift({id: 0, name: "--Top Level--"})
-            setParents(parentsData);
-        })
-        .catch(error => {
-            MyAlert.error(error.response.data)
-        })
-    }
-
     const handleChange = (values) => {
-        if (values.account_type && data.account_type != values.account_type){
-            values.parent = '';
-            getParents(values.account_type)
-        }
         setData({...data, ...values})
     }
 
@@ -60,15 +38,15 @@ const AccountEdit = (props) => {
             const submit = async () => {
                 try {
                     let request = {
-                        company_id: activeCompany.id,
-                        number: data.number,
-                        name: data.name,
-                        account_type: data.account_type,
-                        parent: data.parent
+                        currency_id: data.currency_id,
+                        start: data.start,
+                        end: data.end,
+                        buy: data.buy,
+                        sell: data.sell
                     }
                     const response = await axios({
                         method: id ? 'put' : 'post',
-                        url: '/api/setup/accounts/' + (id ?? ''),
+                        url: '/api/setup/currency-rates/' + (id ?? ''),
                         data: request
                     })
                     return response
@@ -98,14 +76,11 @@ const AccountEdit = (props) => {
                 else {
                     MyAlert.success({text: 'Data saved successfully'})
                     setSubmitError({})
-                    let {account_type, parent} = data;
                     if (!id){
                         setData({
-                            account_type: account_type,
-                            parent: parent
+                            currency_id: data.currency_id
                         })
                     }
-                    getParents(account_type)
                 }
                 ref.current.focus()
                 setValidated(false);
@@ -118,23 +93,25 @@ const AccountEdit = (props) => {
     }
 
     useEffect(() => {
-        axios.get("/api/setup/account-types")
+        axios.get("api/setup/currencies", {
+          params: {
+              filter: {company_id: activeCompany.id},
+              limit: 1000
+          }
+        })
         .then(response => {
-            if (response){
-                setAccountTypes(response.data)
-            }
+            setCurrencies(response.data.data);
         })
         .catch(error => {
-            MyAlert.error({text: error.response.message})
+            MyAlert.error(error.response.data)
         })
 
         if (id){
             dispatch(setAppLoading(true))
-            axios.get('/api/setup/accounts/' + id)
+            axios.get('/api/setup/currency-rates/' + id)
             .then(response => {
                 dispatch(setAppLoading(false))
                 setData(response.data)
-                getParents(response.data.account_type)
                 ref.current.focus()
             })
             .catch(error => {
@@ -149,122 +126,127 @@ const AccountEdit = (props) => {
     return (
         <CCard>
             <CCardHeader>
-                <h3>{id && id != "" ? 'Edit Account' : 'Create Account'}</h3>
+                <h3>{id && id != "" ? 'Edit Currency Rate' : 'Create Currency Rate'}</h3>
             </CCardHeader>
             <CCardBody>
                 <CForm className="form-horizontal needs-validation" noValidate wasValidated={validated} onSubmit={handleSubmit}>
                     <CFormGroup row>
                         <CCol sm="4" lg="2">
-                            <CLabel>Account Type</CLabel>
+                            <CLabel>Currency</CLabel>
                         </CCol>
                         <CCol sm="8" lg="3">
                             <CSelect
-                            placeholder="Choose Account Type"
+                            placeholder="Choose Currency"
                             autoFocus={true}
                             innerRef={ref}
                             disabled={loading}
                             required
-                            value={data.account_type ?? ''}
-                            onChange={e => handleChange({account_type: e.target.value})}
+                            value={data.currency_id ?? ''}
+                            onChange={e => handleChange({currency_id: e.target.value})}
                             invalid={
-                                submitError.hasOwnProperty('account_type')
+                                submitError.hasOwnProperty('currency_id')
                             }
                             >
                               <option value=""></option>
                             {
-                              accountTypes.map((item, index) => (
+                              currencies.map((item, index) => (
                                   <option key={item.id} value={item.id}>{item.name}</option>
                               ))
                             }
                             </CSelect>
                             <CInvalidFeedback>{
-                            submitError.hasOwnProperty('account_type') ?
-                            submitError.account_type[0] : 'Unknown Error'
+                            submitError.hasOwnProperty('currency_id') ?
+                            submitError.currency_id[0] : 'Unknown Error'
                             }</CInvalidFeedback>
                         </CCol>
                     </CFormGroup>
                     <CFormGroup row>
                         <CCol sm="4" lg="2">
-                            <CLabel>Parent Account</CLabel>
-                        </CCol>
-                        <CCol sm="8" lg="5">
-                            <CSelect
-                              type="text"
-                              placeholder="Choose parent account"
-                              autoComplete="off"
-                              disabled={loading}
-                              required
-                              value={data.parent ?? ''}
-                              onChange={e => handleChange({parent: e.target.value})}
-                              invalid={
-                                  submitError.hasOwnProperty('parent')
-                              }
-                            >
-                            {
-                                parents.map((item, index) => (
-                                    <option key={item.id} value={item.id}>{item.number} - {item.name}</option>
-                                ))
-                            }
-                            </CSelect>
-                            <CInvalidFeedback>{
-                            submitError
-                            && submitError.hasOwnProperty('parent') ?
-                            submitError.parent[0] : 'Unknown Error'
-                            }</CInvalidFeedback>
-                        </CCol>
-                    </CFormGroup>
-                    <CFormGroup row>
-                        <CCol sm="4" lg="2">
-                            <CLabel>Account Number</CLabel>
+                            <CLabel>Valid From</CLabel>
                         </CCol>
                         <CCol sm="8" lg="3">
-                          <CInputGroup className="has-validation">
-                            <CInputGroupText>
-                            {
-                              (data.account_type  && accountTypes[parseInt(data.account_type) - 1]) ?
-                                accountTypes[parseInt(data.account_type) - 1].prefix : ''
-                            }
-                            </CInputGroupText>
                             <CInput
-                              placeholder="Enter account number"
+                              placeholder="Choose start date"
                               autoComplete="off"
-                              type="text"
+                              type="date"
                               disabled={loading}
-                              onChange={e => handleChange({number: e.target.value})}
-                              value={data.number ?? ''}
+                              onChange={e => handleChange({start: e.target.value})}
+                              value={data.start ?? ''}
                               invalid={
-                                  submitError.hasOwnProperty('number')
+                                  submitError.hasOwnProperty('start')
                               }
-                              required
                             />
                             <CInvalidFeedback>{
-                            submitError.hasOwnProperty('number') ?
-                            submitError.number[0] : 'Please enter account number'
+                            submitError.hasOwnProperty('start') ?
+                            submitError.start[0] : 'Please choose start date'
                             }
-                          </CInvalidFeedback>
-                          </CInputGroup>
+                            </CInvalidFeedback>
                         </CCol>
                     </CFormGroup>
                     <CFormGroup row>
                         <CCol sm="4" lg="2">
-                            <CLabel>Account Name</CLabel>
+                            <CLabel>To</CLabel>
+                        </CCol>
+                        <CCol sm="8" lg="3">
+                            <CInput
+                              placeholder="Choose end date"
+                              autoComplete="off"
+                              type="date"
+                              disabled={loading}
+                              onChange={e => handleChange({end: e.target.value})}
+                              value={data.end ?? ''}
+                              invalid={
+                                  submitError.hasOwnProperty('end')
+                              }
+                            />
+                            <CInvalidFeedback>{
+                            submitError.hasOwnProperty('end') ?
+                            submitError.end[0] : 'Please choose end date'
+                            }
+                            </CInvalidFeedback>
+                        </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                        <CCol sm="4" lg="2">
+                            <CLabel>Buy</CLabel>
                         </CCol>
                         <CCol sm="8" lg="5">
                             <CInput
-                            placeholder="Enter account name"
+                            placeholder="Enter buy rate"
                             autoComplete="off"
-                            type="text"
+                            type="number"
                             disabled={loading}
-                            onChange={e => handleChange({name: e.target.value})}
-                            value={data.name ?? ''}
+                            onChange={e => handleChange({buy: e.target.value})}
+                            value={data.buy ?? ''}
                             invalid={
-                                submitError.hasOwnProperty('name')
+                                submitError.hasOwnProperty('buy')
                             }
-                            required
                             />
                             <CInvalidFeedback>{
-                            submitError.hasOwnProperty('name') ?
-                            submitError.name[0] : 'Please enter a name'
+                            submitError.hasOwnProperty('buy') ?
+                            submitError.buy[0] : 'Please enter buy rate'
+                            }</CInvalidFeedback>
+                        </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                        <CCol sm="4" lg="2">
+                            <CLabel>Sell</CLabel>
+                        </CCol>
+                        <CCol sm="8" lg="5">
+                            <CInput
+                            placeholder="Enter sell rate"
+                            autoComplete="off"
+                            type="number"
+                            disabled={loading}
+                            onChange={e => handleChange({sell: e.target.value})}
+                            value={data.sell ?? ''}
+                            invalid={
+                                submitError.hasOwnProperty('sell')
+                            }
+                            />
+                            <CInvalidFeedback>{
+                            submitError.hasOwnProperty('sell') ?
+                            submitError.sell[0] : 'Please enter sell rate'
                             }</CInvalidFeedback>
                         </CCol>
                     </CFormGroup>
@@ -282,4 +264,4 @@ const AccountEdit = (props) => {
     )
 }
 
-export default AccountEdit
+export default CurrencyRateEdit

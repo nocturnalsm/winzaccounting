@@ -77,7 +77,7 @@ const BankAccountEdit = (props) => {
                     MyAlert.success({text: 'Data saved successfully'})
                     setSubmitError({})
                     if (!id){
-                        setData({})
+                        setData({bank_id: data.bank_id})
                     }
                 }
                 ref.current.focus()
@@ -118,7 +118,7 @@ const BankAccountEdit = (props) => {
         .catch(error => {
             MyAlert.error(error.response.data)
         })
-  
+
         if (id){
             dispatch(setAppLoading(true))
             axios.get('/api/setup/bank-accounts/' + id)

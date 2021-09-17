@@ -15,38 +15,45 @@ class CurrencyRateRepository extends BaseRepository
         $this->data = $currencyRate;
     }
     public function validateUsing($params, $id = "")
-    {        
+    {
         return [
             'currency_id' => 'required|exists:App\Models\Currency,id',
             'start' => [
-                'required_unless:end',
-                'before_or_equal:end',                
+                'required_if:end,',
+                'before_or_equal:end',
                 Rule::unique(CurrencyRate::class)->where(function ($query) use($params, $id) {
                     $query = $query->where('currency_id', $params["currency_id"])
-                                   ->where('start', "<", $params["end"])                   
+                                   ->where('start', "<", $params["end"])
                                    ->where('end', ">", $params["start"]);
                     if ($id != ""){
-                        $query = $query->where("id", "<>", $id);                        
+                        $query = $query->where("id", "<>", $id);
                     }
                     return $query;
                 }),
-                
+
             ],
             'end' => [
-                'required_unless:start',
-                'after_or_equal:start',                
+                'required_if:start,',
+                'after_or_equal:start',
                 Rule::unique(CurrencyRate::class)->where(function ($query) use($params, $id) {
-                    $query = $query->where('name', $params["name"])
-                                   ->where('company_id', $params["company_id"]);                    
+                    $query = $query->where('currency_id', $params["currency_id"])
+                                   ->where('start', "<", $params["end"])
+                                   ->where('end', ">", $params["start"]);
                     if ($id != ""){
-                        $query = $query->where("id", "<>", $id);                        
+                        $query = $query->where("id", "<>", $id);
                     }
                     return $query;
                 }),
-                
+
             ],
-            'buy' => 'required_unless:sell',
-            'sell' => 'required_unless_buy'            
+            'buy' => 'required_if:sell,',
+            'sell' => 'required_if:buy,'
         ];
+    }
+    public function listQuery($data)
+    {
+        $data = $data->join("currencies", "currency_rates.currency_id", "=", "currencies.id")
+                     ->select("currency_rates.*", "currencies.name", "currencies.company_id");
+        return $data;
     }
 }

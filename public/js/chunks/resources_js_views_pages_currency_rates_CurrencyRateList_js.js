@@ -1,4 +1,4 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_accounts_AccountList_js"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_currency_rates_CurrencyRateList_js"],{
 
 /***/ "./resources/js/components/datatable/DTToolbar.js":
 /*!********************************************************!*\
@@ -483,10 +483,10 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
 
 /***/ }),
 
-/***/ "./resources/js/views/pages/accounts/AccountList.js":
-/*!**********************************************************!*\
-  !*** ./resources/js/views/pages/accounts/AccountList.js ***!
-  \**********************************************************/
+/***/ "./resources/js/views/pages/currency_rates/CurrencyRateList.js":
+/*!*********************************************************************!*\
+  !*** ./resources/js/views/pages/currency_rates/CurrencyRateList.js ***!
+  \*********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -503,17 +503,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -523,77 +512,45 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-
-var AccountList = function AccountList() {
-  var _ref;
-
-  var tableData = JSON.parse(localStorage.getItem('datatable.accountslist')) || {};
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      accountTypes = _useState2[0],
-      setAccountTypes = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)((_ref = tableData.filter && tableData.filter.type) !== null && _ref !== void 0 ? _ref : ''),
-      _useState4 = _slicedToArray(_useState3, 2),
-      filterType = _useState4[0],
-      setFilterType = _useState4[1];
-
+var CurrencyRateList = function CurrencyRateList() {
+  var tableData = JSON.parse(localStorage.getItem('datatable.currencyrateslist')) || {};
   var activeCompany = (0,react_redux__WEBPACK_IMPORTED_MODULE_5__.useSelector)(function (state) {
     return state.activeCompany;
   });
   var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
   var dtRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
-  var badges = ['primary', 'warning', 'light', 'success', 'danger'];
   var fields = [{
-    label: 'Type',
-    key: 'type',
-    type: 'custom',
-    onRender: function onRender(item, index) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CBadge, {
-          color: badges[parseInt(item.account_type) - 1],
-          children: item.accountType.toUpperCase()
-        }, index)
-      });
-    }
-  }, {
-    label: 'Number',
-    key: 'number'
-  }, {
-    label: 'Name',
+    label: 'Currency',
     key: 'name'
   }, {
-    label: 'Current Balance',
-    key: 'balance',
-    filter: false,
-    type: 'custom',
-    onRender: function onRender(item, index) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
-        className: "text-right",
-        children: item.balance
-      });
-    }
+    label: 'Valid From',
+    key: 'start'
+  }, {
+    label: 'To',
+    key: 'end'
+  }, {
+    label: 'Buy',
+    key: 'buy'
+  }, {
+    label: 'Sell',
+    key: 'sell'
   }, {
     label: 'Action',
     type: 'toolbar'
   }];
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     if (Object.keys(activeCompany).length > 0) {
-      var customFilter = {
-        company_id: activeCompany.id,
-        type: filterType
-      };
-      dtRef.current.setCustomFilter(customFilter);
+      dtRef.current.setCustomFilter({
+        company_id: activeCompany.id
+      });
     }
-  }, [filterType, activeCompany]);
+  }, [activeCompany]);
 
   var handleDelete = function handleDelete(data, clickEvent) {
     _alert__WEBPACK_IMPORTED_MODULE_3__.default.confirm({
       title: 'Are you sure to delete this data ?',
       confirmAction: function confirmAction() {
-        axios__WEBPACK_IMPORTED_MODULE_4___default().delete('/api/setup/accounts/' + data.id).then(function () {
+        axios__WEBPACK_IMPORTED_MODULE_4___default().delete('/api/setup/currency-rates/' + data.id).then(function () {
           _alert__WEBPACK_IMPORTED_MODULE_3__.default.success({
             text: "Data successfully deleted"
           });
@@ -608,52 +565,21 @@ var AccountList = function AccountList() {
   };
 
   var handleCreate = function handleCreate() {
-    history.push('/accounts/create');
+    history.push('/currency-rates/create');
   };
 
   var handleEdit = function handleEdit(data, event) {
-    history.push('/accounts/' + data.id);
+    history.push('/currency-rates/' + data.id);
   };
 
-  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_4___default().get("/api/setup/account-types").then(function (response) {
-      if (response) {
-        setAccountTypes(response.data);
-      }
-    })["catch"](function (error) {
-      _alert__WEBPACK_IMPORTED_MODULE_3__.default.error({
-        text: error.response.message
-      });
-    });
-  }, []);
-  var customFilterInput = {
-    type: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CSelect, {
-      value: filterType,
-      "aria-label": "column name: 'accountType' filter input",
-      onChange: function onChange(event) {
-        return setFilterType(event.target.value);
-      },
-      size: "sm",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
-        value: "",
-        children: "All"
-      }), accountTypes.map(function (item, index) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
-          value: item.id,
-          children: item.name
-        }, index);
-      })]
-    })
-  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCard, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCardBody, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__.default, {
-        _id: "accountslist",
+        _id: "currencyrateslist",
         fields: fields,
         ref: dtRef,
-        apiUrl: "/api/setup/accounts",
+        apiUrl: "/api/setup/currency-rates",
         showToolbar: true,
-        customFilterInput: customFilterInput,
         editAction: handleEdit,
         createAction: handleCreate,
         deleteAction: handleDelete,
@@ -663,7 +589,7 @@ var AccountList = function AccountList() {
   });
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AccountList);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CurrencyRateList);
 
 /***/ }),
 

@@ -19,9 +19,9 @@ class AccountRepository extends BaseRepository
         $this->listFilters = [
             "type" => [
                 "key" => "account_type"
-            ],       
+            ],
             "number" => function($query, $key, $value){
-                return 
+                return
                     $query->where(DB::raw("CONCAT(at.prefix, accounts.number)"), "LIKE", "%{$value}%");
             }
         ];
@@ -72,7 +72,7 @@ class AccountRepository extends BaseRepository
                          function($join){
                              $join->on("at.id", "=", "accounts.account_type");
                          }
-                     )                     
+                     )
                      ->leftJoinSub(
                           AccountBalance::select('account_id', 'amount')
                             ->where("date", "<=", Date("Y-m-d"))
@@ -80,7 +80,7 @@ class AccountRepository extends BaseRepository
                           "balance", function($join){
                               $join->on("accounts.id", "=", "balance.account_id");
                       });
-    }    
+    }
     public function listSort($data, $sortBy, $order)
     {
         $data->orderBy(DB::raw('accounts.account_type'), 'asc')
@@ -91,13 +91,14 @@ class AccountRepository extends BaseRepository
     {
         return AccountType::select('id','name','prefix')->get();
     }
-    public function getParents($type)
+    public function getParents($company_id, $type)
     {
-      if (trim($type) != ""){
+      if (trim($type) != "" && trim($company_id) != ""){
           $type = AccountType::find($type);
           $prefix = $type->prefix;
           $data = $type->accounts()
                   ->select('id','name', DB::raw("CONCAT('{$prefix}', number) AS number"))
+                  ->where("company_id", $company_id)
                   ->get();
           return $data;
       }

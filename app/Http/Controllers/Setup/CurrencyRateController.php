@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Setup;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AccountController extends Controller
+class CurrencyRateController extends Controller
 {
-    private $account;
 
-    public function __construct(\App\Repositories\Setup\AccountRepository $account)
+    private $currencyRate;
+
+    public function __construct(\App\Repositories\Setup\CurrencyRateRepository $currencyRate)
     {
-        $this->account = $account;
+        $this->currencyRate = $currencyRate;
     }
+
 
     /**
      * Display a listing of the resource.
@@ -21,7 +23,7 @@ class AccountController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->account->getList($request);
+        $data = $this->currencyRate->getList($request);
         return response()->json($data);
     }
 
@@ -43,7 +45,7 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->account->create($request);
+        $data = $this->currencyRate->create($request);
         return response()->json($data);
     }
 
@@ -55,8 +57,8 @@ class AccountController extends Controller
      */
     public function show($id)
     {
-        $data = $this->account->getById($id);
-        return response()->json($data);
+        $currencyRate = $this->currencyRate->getById($id);
+        return response()->json($currencyRate);
     }
 
     /**
@@ -67,7 +69,7 @@ class AccountController extends Controller
      */
     public function edit($id)
     {
-        $data = $this->account->getById($id);
+        $data = $this->currencyRate->getById($id);
         return response()->json($data);
     }
 
@@ -80,8 +82,8 @@ class AccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $this->account->update($id, $request);
-        return response()->json($data);
+        $data = $this->currencyRate->update($id, $request);
+        return $data;
     }
 
     /**
@@ -92,24 +94,7 @@ class AccountController extends Controller
      */
     public function destroy($id)
     {
-        $result = $this->account->delete($id);
+        $result = $this->currencyRate->delete($id);
         return $result;
-    }
-
-    public function account_types()
-    {
-        $data = $this->account->getTypes();
-        return response()->json($data);
-    }
-
-    public function account_parents(Request $request)
-    {
-        $type = $request->type ?? '';
-        $company_id = $request->company_id ?? '';
-        $data = $this->account->getParents($company_id, $type);
-        if ($data){
-            return response()->json($data);
-        }
-        return response(400);
     }
 }

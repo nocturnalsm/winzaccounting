@@ -16,6 +16,8 @@ const BankAccountEdit = React.lazy(() => import('./views/pages/bank-accounts/Ban
 const BankAccountList = React.lazy(() => import('./views/pages/bank-accounts/BankAccountList'))
 const BankEdit = React.lazy(() => import('./views/pages/banks/BankEdit'))
 const BankList = React.lazy(() => import('./views/pages/banks/BankList'))
+const CurrencyRateEdit = React.lazy(() => import('./views/pages/currency_rates/CurrencyRateEdit'))
+const CurrencyRateList = React.lazy(() => import('./views/pages/currency_rates/CurrencyRateList'))
 
 
 const routes = [
@@ -29,6 +31,7 @@ const routes = [
   { path: '/users', name: 'Users', component: UserList},
   { path: '/roles', name: 'Roles', component: RoleList},
   { path: '/permissions', name: 'Permissions', component: PermissionList},
+  { path: '/currencies/create-rate', name: 'Create Currency Rate', component: CurrencyRateEdit},
   { path: '/currencies/create', name: 'Create Currency', component: CurrencyEdit},
   { path: '/currencies/:id', name: 'Edit Currency', component: CurrencyEdit},
   { path: '/currencies', name: 'Currencies', component: CurrencyList},
@@ -38,12 +41,17 @@ const routes = [
   { path: '/tax-codes/create', name: 'Create Tax Code', component: TaxCodeEdit},
   { path: '/tax-codes/:id', name: 'Edit Tax Code', component: TaxCodeEdit},
   { path: '/tax-codes', name: 'Tax Codes', component: TaxCodeList},
+  { path: '/banks/create-account', name: 'Create Bank Account', component: BankAccountEdit},
   { path: '/banks/create', name: 'Create Bank', component: BankEdit},
   { path: '/banks/:id', name: 'Edit Bank', component: BankEdit},
   { path: '/banks', name: 'Banks', component: BankList},
   { path: '/bank-accounts/create', name: 'Create Bank Account', component: BankAccountEdit},
   { path: '/bank-accounts/:id', name: 'Edit Bank Account', component: BankAccountEdit},
-  { path: '/bank-accounts', name: 'Bank Accounts', component: BankAccountList}
+  { path: '/bank-accounts', name: 'Bank Accounts', component: BankAccountList},
+  { path: '/currency-rates/create', name: 'Create Currency Rate', component: CurrencyRateEdit},
+  { path: '/currency-rates/:id', name: 'Edit Currency Rate', component: CurrencyRateEdit},
+  { path: '/currency-rates', name: 'Currency Rates', component: CurrencyRateList}
+
 ]
 
 export default routes

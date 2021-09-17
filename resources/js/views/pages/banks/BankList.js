@@ -1,10 +1,12 @@
 import DTable from '../../../components/datatable/DTable'
-import {CCard, CCardBody} from '@coreui/react'
+import {CCard, CCardBody, CButton} from '@coreui/react'
 import MyAlert from '../../../alert';
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
 import axios from 'axios'
+import CIcon from '@coreui/icons-react';
+
 
 const BankList = () => {
     const fields = [
@@ -50,9 +52,25 @@ const BankList = () => {
     const handleCreate = () => {
         history.push('/banks/create')
     }
+    const handleCreateAccount = () => {
+        history.push('/banks/create-account')
+    }
     const handleEdit = (data, event) => {
         history.push('/banks/' + data.id)
     }
+    const topButtonSlot = (
+          <>
+            <CButton className="mr-2" color="primary" onClick={event => handleCreate(event)}>
+                <CIcon name="cil-plus" />
+                <span className="ml-2">Add</span>
+            </CButton>
+            <CButton className="mr-2" color="primary" onClick={event => handleCreateAccount(event)}>
+                <CIcon name="cil-plus" />
+                <span className="ml-2">Add Account</span>
+            </CButton>
+          </>
+    )
+
     return (
         <CCard>
             <CCardBody>
@@ -65,6 +83,7 @@ const BankList = () => {
                     createAction={handleCreate}
                     deleteAction={handleDelete}
                     showButtonVisible={false}
+                    topButtonSlot={topButtonSlot}
                 />
             </CCardBody>
         </CCard>

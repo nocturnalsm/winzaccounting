@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use App\Models\BankAccount;
 use App\Models\Bank;
 use App\Models\Account;
+use App\Models\AccountBalance;
 use DB;
 
 class BankAccountRepository extends BaseRepository
@@ -18,7 +19,7 @@ class BankAccountRepository extends BaseRepository
         $this->data = $bank;
         $this->listFilters = [
             'account_name' => function($query, $key, $value){
-                $query->where(DB::raw("CONCAT(accounts.number, accounts.name)"), "LIKE", "%{$value}%");                
+                $query->where(DB::raw("CONCAT(account_number, account_name)"), "LIKE", "%{$value}%");
             }
         ];
     }
@@ -46,10 +47,10 @@ class BankAccountRepository extends BaseRepository
     {
         $data = $data->leftJoinSub(
                             Bank::select(
-                                    DB::raw("id AS bank_id"), 
-                                    DB::raw("banks.name AS bank_name"), 
+                                    DB::raw("id AS bank_id"),
+                                    DB::raw("banks.name AS bank_name"),
                                     "company_id"
-                             ),                                
+                             ),
                              "banks",
                              function($join){
                                 $join->on("bank_accounts.bank_id", "=", "banks.bank_id");
@@ -62,15 +63,19 @@ class BankAccountRepository extends BaseRepository
                             DB::raw("accounts.name AS account_name")
                         )
                         ->leftJoin(DB::raw("account_types types"), "accounts.account_type","=","types.id"),
-                        "accounts", 
+                        "accounts",
                         function($join){
                             $join->on("bank_accounts.account_id", "=", "linked_account_id");
                         }
                     )
-                    ->select(
-                        DB::raw("bank_accounts.*"), "bank_name", "account_number", "account_name"
-                    );                             
+                    ->select(DB::raw("bank_accounts.*"),
+                            "bank_name", "account_number", "account_name")
+                    ->selectSub(AccountBalance::select("amount")
+                                         ->where("date", "<=", Date("Y-m-d"))
+                                         ->whereColumn("account_id", "bank_accounts.account_id")
+                                         ->orderBy('date', 'desc')
+                                         ->limit(1), 'balance');
         return $data;
     }
-    
+
 }

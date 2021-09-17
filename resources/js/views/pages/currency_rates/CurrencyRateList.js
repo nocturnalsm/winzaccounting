@@ -6,44 +6,33 @@ import axios from 'axios';
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-const BankAccountList = () => {
+const CurrencyRateList = () => {
 
-    let tableData = JSON.parse(localStorage.getItem('datatable.bankaccountslist')) || {}
+    let tableData = JSON.parse(localStorage.getItem('datatable.currencyrateslist')) || {}
     const activeCompany = useSelector(state => state.activeCompany)
 
     let history = useHistory()
     const dtRef = useRef(null)
     const fields = [
         {
-            label: 'Bank',
-            key: 'bank_name',
+            label: 'Currency',
+            key: 'name',
         },
         {
-            label: 'Account Number',
-            key: 'number'
+            label: 'Valid From',
+            key: 'start'
         },
         {
-            label: 'Account Holder',
-            key: 'holder'
+            label: 'To',
+            key: 'end'
         },
         {
-            label: 'Linked Account',
-            key: 'account_name',
-            type: 'custom',
-            onRender: (item, index) =>
-              (
-                  <td>{item.account_number ? item.account_number + ' - ' + item.account_name : ''}</td>
-              )
+            label: 'Buy',
+            key: 'buy'
         },
         {
-            label: 'Current Balance',
-            key: 'balance',
-            filter: false,
-            type: 'custom',
-            onRender: (item, index) =>
-              (
-                  <td className="text-right">{item.balance}</td>
-              )
+            label: 'Sell',
+            key: 'sell'
         },
         {
             label: 'Action',
@@ -61,7 +50,7 @@ const BankAccountList = () => {
         MyAlert.confirm({
             title: 'Are you sure to delete this data ?',
             confirmAction: () => {
-                axios.delete('/api/setup/bank-accounts/' + data.id)
+                axios.delete('/api/setup/currency-rates/' + data.id)
                 .then(() => {
                     MyAlert.success({text: "Data successfully deleted"})
                     dtRef.current.refresh()
@@ -73,20 +62,20 @@ const BankAccountList = () => {
         })
     }
     const handleCreate = () => {
-        history.push('/bank-accounts/create')
+        history.push('/currency-rates/create')
     }
     const handleEdit = (data, event) => {
-        history.push('/bank-accounts/' + data.id)
+        history.push('/currency-rates/' + data.id)
     }
 
     return (
         <CCard>
             <CCardBody>
                 <DTable
-                    _id="bankaccountslist"
+                    _id="currencyrateslist"
                     fields={fields}
                     ref={dtRef}
-                    apiUrl="/api/setup/bank-accounts"
+                    apiUrl="/api/setup/currency-rates"
                     showToolbar={true}
                     editAction={handleEdit}
                     createAction={handleCreate}
@@ -100,4 +89,4 @@ const BankAccountList = () => {
 
 }
 
-export default BankAccountList
+export default CurrencyRateList

@@ -14,7 +14,7 @@ const DTable = React.forwardRef((props, ref) => {
     const [data, setData] = useState([]);
     const [showToolbar, setShowToolbar] = useState(true);
     const [customFields, setCustomFields] = useState({});
-    const [fields, setFields] = useState(props.fields);    
+    const [fields, setFields] = useState(props.fields);
     const [params, setParams] = useState({})
 
     const initialParams = () => {
@@ -28,17 +28,17 @@ const DTable = React.forwardRef((props, ref) => {
     }
 
     useEffect(() => {
-        let data = initialParams()        
+        let data = initialParams()
         fetchData(data)
     }, [])
 
     useImperativeHandle(ref, () => ({
 
-        setCustomFilter(values) {            
+        setCustomFilter(values) {
             let currParams = params.filter ?? initialParams().filter;
             let newFilter = {...currParams, ...values}
             if (Object.keys(newFilter).length > 0 && !isEqual(newFilter, currParams)){
-                fetchData({filter: newFilter})                
+                fetchData({filter: newFilter})
             }
         },
         refresh() {
@@ -103,9 +103,9 @@ const DTable = React.forwardRef((props, ref) => {
 
     }, [])
 
-    const fetchData = async (request) => {        
-        let { page, limit, sort, order, filter } = { ...params, ...request}        
-        
+    const fetchData = async (request) => {
+        let { page, limit, sort, order, filter } = { ...params, ...request}
+
         if (!appLoading){
             store.dispatch(setAppLoading(true));
             try {
@@ -121,7 +121,7 @@ const DTable = React.forwardRef((props, ref) => {
                     {
                         params: newParams
                     }
-                );                                
+                );
                 setData(response.data);
                 setParams(newParams)
                 localStorage.setItem('datatable.' +props._id, JSON.stringify(newParams))
@@ -160,10 +160,13 @@ const DTable = React.forwardRef((props, ref) => {
         <>
           <CRow className="pb-2">
               <CCol xs="6" md="9" lg="10">
-                  <CButton color="primary" onClick={event => props.createAction(event)}>
-                      <CIcon name="cil-plus" />
-                      <span className="ml-2">Add</span>
-                  </CButton>
+                  {
+                    props.topButtonSlot ? props.topButtonSlot : (
+                      <CButton color="primary" onClick={event => props.createAction(event)}>
+                          <CIcon name={props.createButtonIcon ?? 'cil-plus'} />
+                          <span className="ml-2">{props.createButtonText ?? 'Add'}</span>
+                      </CButton>
+                  )}
               </CCol>
               <CCol xs="6" md="3" lg="2">
                 <CSelect
@@ -191,7 +194,7 @@ const DTable = React.forwardRef((props, ref) => {
               loading={appLoading}
               sorterValue={{column: params.sort, asc: params.order == 'asc' ?? true}}
               hover
-              sorter              
+              sorter
               onSorterValueChange={handleSort}
               scopedSlots = {customFields}
               columnFilterSlot = {props.customFilterInput}

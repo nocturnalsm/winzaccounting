@@ -1,10 +1,10 @@
 "use strict";
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_banks_BankEdit_js"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_currency_rates_CurrencyRateEdit_js"],{
 
-/***/ "./resources/js/views/pages/banks/BankEdit.js":
-/*!****************************************************!*\
-  !*** ./resources/js/views/pages/banks/BankEdit.js ***!
-  \****************************************************/
+/***/ "./resources/js/views/pages/currency_rates/CurrencyRateEdit.js":
+/*!*********************************************************************!*\
+  !*** ./resources/js/views/pages/currency_rates/CurrencyRateEdit.js ***!
+  \*********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -58,8 +58,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var BankEdit = function BankEdit(props) {
-  var _data$name, _data$branch;
+var CurrencyRateEdit = function CurrencyRateEdit(props) {
+  var _data$currency_id, _data$start, _data$end, _data$buy, _data$sell;
 
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useParams)(),
       id = _useParams.id;
@@ -83,6 +83,11 @@ var BankEdit = function BankEdit(props) {
       _useState8 = _slicedToArray(_useState7, 2),
       submitError = _useState8[0],
       setSubmitError = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      currencies = _useState10[0],
+      setCurrencies = _useState10[1];
 
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var loading = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
@@ -115,14 +120,16 @@ var BankEdit = function BankEdit(props) {
                 case 0:
                   _context.prev = 0;
                   request = {
-                    company_id: activeCompany.id,
-                    name: data.name,
-                    branch: data.branch
+                    currency_id: data.currency_id,
+                    start: data.start,
+                    end: data.end,
+                    buy: data.buy,
+                    sell: data.sell
                   };
                   _context.next = 4;
                   return axios__WEBPACK_IMPORTED_MODULE_7___default()({
                     method: id ? 'put' : 'post',
-                    url: '/api/setup/banks/' + (id !== null && id !== void 0 ? id : ''),
+                    url: '/api/setup/currency-rates/' + (id !== null && id !== void 0 ? id : ''),
                     data: request
                   });
 
@@ -175,7 +182,9 @@ var BankEdit = function BankEdit(props) {
           setSubmitError({});
 
           if (!id) {
-            setData({});
+            setData({
+              currency_id: data.currency_id
+            });
           }
         }
 
@@ -190,9 +199,22 @@ var BankEdit = function BankEdit(props) {
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    axios__WEBPACK_IMPORTED_MODULE_7___default().get("api/setup/currencies", {
+      params: {
+        filter: {
+          company_id: activeCompany.id
+        },
+        limit: 1000
+      }
+    }).then(function (response) {
+      setCurrencies(response.data.data);
+    })["catch"](function (error) {
+      _alert__WEBPACK_IMPORTED_MODULE_5__.default.error(error.response.data);
+    });
+
     if (id) {
       dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(true));
-      axios__WEBPACK_IMPORTED_MODULE_7___default().get('/api/setup/banks/' + id).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_7___default().get('/api/setup/currency-rates/' + id).then(function (response) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
         setData(response.data);
         ref.current.focus();
@@ -208,7 +230,7 @@ var BankEdit = function BankEdit(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCard, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardHeader, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
-        children: id && id != "" ? 'Edit Bank' : 'Create Bank'
+        children: id && id != "" ? 'Edit Currency Rate' : 'Create Currency Rate'
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardBody, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CForm, {
@@ -222,28 +244,34 @@ var BankEdit = function BankEdit(props) {
             sm: "4",
             lg: "2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Bank Name"
+              children: "Currency"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
             lg: "3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
-              placeholder: "Enter bank name",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CSelect, {
+              placeholder: "Choose Currency",
               autoFocus: true,
-              autoComplete: "off",
-              type: "text",
               innerRef: ref,
               disabled: loading,
+              required: true,
+              value: (_data$currency_id = data.currency_id) !== null && _data$currency_id !== void 0 ? _data$currency_id : '',
               onChange: function onChange(e) {
                 return handleChange({
-                  name: e.target.value
+                  currency_id: e.target.value
                 });
               },
-              value: (_data$name = data.name) !== null && _data$name !== void 0 ? _data$name : '',
-              invalid: submitError.hasOwnProperty('name'),
-              required: true
+              invalid: submitError.hasOwnProperty('currency_id'),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("option", {
+                value: ""
+              }), currencies.map(function (item, index) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("option", {
+                  value: item.id,
+                  children: item.name
+                }, item.id);
+              })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
-              children: submitError.hasOwnProperty('name') ? submitError.name[0] : 'Please enter a name'
+              children: submitError.hasOwnProperty('currency_id') ? submitError.currency_id[0] : 'Unknown Error'
             })]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
@@ -252,23 +280,107 @@ var BankEdit = function BankEdit(props) {
             sm: "4",
             lg: "2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Branch Name"
+              children: "Valid From"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
             lg: "3",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
-              type: "text",
-              placeholder: "Enter branch name",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
+              placeholder: "Choose start date",
               autoComplete: "off",
+              type: "date",
               disabled: loading,
-              value: (_data$branch = data.branch) !== null && _data$branch !== void 0 ? _data$branch : '',
               onChange: function onChange(e) {
                 return handleChange({
-                  branch: e.target.value
+                  start: e.target.value
                 });
-              }
+              },
+              value: (_data$start = data.start) !== null && _data$start !== void 0 ? _data$start : '',
+              invalid: submitError.hasOwnProperty('start')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
+              children: submitError.hasOwnProperty('start') ? submitError.start[0] : 'Please choose start date'
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
+          row: true,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "4",
+            lg: "2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
+              children: "To"
             })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "8",
+            lg: "3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
+              placeholder: "Choose end date",
+              autoComplete: "off",
+              type: "date",
+              disabled: loading,
+              onChange: function onChange(e) {
+                return handleChange({
+                  end: e.target.value
+                });
+              },
+              value: (_data$end = data.end) !== null && _data$end !== void 0 ? _data$end : '',
+              invalid: submitError.hasOwnProperty('end')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
+              children: submitError.hasOwnProperty('end') ? submitError.end[0] : 'Please choose end date'
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
+          row: true,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "4",
+            lg: "2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
+              children: "Buy"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "8",
+            lg: "5",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
+              placeholder: "Enter buy rate",
+              autoComplete: "off",
+              type: "number",
+              disabled: loading,
+              onChange: function onChange(e) {
+                return handleChange({
+                  buy: e.target.value
+                });
+              },
+              value: (_data$buy = data.buy) !== null && _data$buy !== void 0 ? _data$buy : '',
+              invalid: submitError.hasOwnProperty('buy')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
+              children: submitError.hasOwnProperty('buy') ? submitError.buy[0] : 'Please enter buy rate'
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
+          row: true,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "4",
+            lg: "2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
+              children: "Sell"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "8",
+            lg: "5",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
+              placeholder: "Enter sell rate",
+              autoComplete: "off",
+              type: "number",
+              disabled: loading,
+              onChange: function onChange(e) {
+                return handleChange({
+                  sell: e.target.value
+                });
+              },
+              value: (_data$sell = data.sell) !== null && _data$sell !== void 0 ? _data$sell : '',
+              invalid: submitError.hasOwnProperty('sell')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInvalidFeedback, {
+              children: submitError.hasOwnProperty('sell') ? submitError.sell[0] : 'Please enter sell rate'
+            })]
           })]
         })]
       })
@@ -298,7 +410,7 @@ var BankEdit = function BankEdit(props) {
   });
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BankEdit);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CurrencyRateEdit);
 
 /***/ })
 

@@ -93,7 +93,7 @@ const TaxCodeEdit = (props) => {
         axios.get("/api/setup/accounts", {
             params: {
                 limit: 10000,
-                filter: {company_id: activeCompany.id, account_type: 1}
+                filter: {company_id: activeCompany.id}
             }
         })
         .then(response => {

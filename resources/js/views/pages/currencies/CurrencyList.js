@@ -36,6 +36,19 @@ const CurrencyList = () => {
         }
     }, [activeCompany])
 
+    const topButtonSlot = (
+          <>
+            <CButton className="mr-2" color="primary" onClick={event => handleCreate(event)}>
+                <CIcon name="cil-plus" />
+                <span className="ml-2">Add</span>
+            </CButton>
+            <CButton className="mr-2" color="primary" onClick={event => handleCreateRate(event)}>
+                <CIcon name="cil-plus" />
+                <span className="ml-2">Add Rate</span>
+            </CButton>
+          </>
+    )
+
     const handleDelete = (data, clickEvent) => {
         MyAlert.confirm({
             title: 'Are you sure to delete this data ?',
@@ -50,6 +63,9 @@ const CurrencyList = () => {
                 })
             }
         })
+    }
+    const handleCreateRate = () => {
+        history.push('/currencies/create-rate')
     }
     const handleCreate = () => {
         history.push('/currencies/create')

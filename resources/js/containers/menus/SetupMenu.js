@@ -8,8 +8,8 @@ const SetupMenu = () => {
             caption: "Currencies"
         },
         {
-            href: "/tax-codes",
-            caption: "Tax Codes"
+            href: "/currency-rates",
+            caption: "Currency Rates"
         },
         {
             isDivider: true
@@ -21,18 +21,22 @@ const SetupMenu = () => {
         {
             href: '/banks',
             caption: 'Banks'
-        },        
+        },
         {
             href: '/bank-accounts',
             caption: 'Bank Accounts'
         },
         {
+            href: "/tax-codes",
+            caption: "Tax Codes"
+        },
+        {
             isDivider: true
-        },        
+        },
         {
             href: '/units',
             caption: 'Units'
-        },        
+        },
         {
             href: '/product-categories',
             caption: 'Product Categories'
@@ -40,14 +44,14 @@ const SetupMenu = () => {
         {
             href: '/products',
             caption: 'Products'
-        },        
+        },
         {
             href: "/warehouses",
             caption: "Warehouses"
         },
-        
+
     ]
-    
+
     return (
         <TopMenu items={items} title="Setup" />
     )
