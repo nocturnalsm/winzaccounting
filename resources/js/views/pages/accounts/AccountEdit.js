@@ -1,26 +1,14 @@
-import { useState, useEffect, useRef } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { CCard, CCardBody, CCardFooter, CCardHeader, CSelect,
-         CForm, CInput, CInputGroup, CInputGroupText, CCol, CFormGroup, CLabel,
-         CInvalidFeedback, CButton } from '@coreui/react'
-import { setAppLoading } from "../../../store";
+import MasterEdit from '../../../containers/MasterEdit'
+import { useState, useEffect, useRef } from 'react';
+import { useSelector } from "react-redux";
+import { CSelect, CInput, CInputGroup, CInputGroupText, CCol, CFormGroup, CLabel} from '@coreui/react'
 import MyAlert from "../../../alert";
-import CIcon from '@coreui/icons-react'
 import axios from 'axios'
 
 const AccountEdit = (props) => {
 
-    const {id} = useParams()
-    const [initialData, setInitialData] = useState({})
-    const [data, setData] = useState({})
-    const [validated, setValidated] = useState(false)
-    const [submitError, setSubmitError] = useState({})
     const [parents, setParents] = useState([])
-    const [accountTypes, setAccountTypes] = useState([])
-
-    const dispatch = useDispatch()
-    const loading = useSelector(state => state.appLoading)
+    const [accountTypes, setAccountTypes] = useState([])    
     const activeCompany = useSelector(state => state.activeCompany)
 
     const getParents = (type) => {
@@ -40,84 +28,9 @@ const AccountEdit = (props) => {
         })
     }
 
-    const handleChange = (values) => {
-        if (values.account_type && data.account_type != values.account_type){
-            values.parent = '';
-            getParents(values.account_type)
-        }
-        setData({...data, ...values})
-    }
-
     const ref = useRef(null)
-    const history = useHistory()
 
-    const handleSubmit = (event) => {
-        const form = event.currentTarget
-        event.preventDefault()
-        event.stopPropagation()
-        setValidated(true)
-        if (form.checkValidity() === true) {
-            const submit = async () => {
-                try {
-                    let request = {
-                        company_id: activeCompany.id,
-                        number: data.number,
-                        name: data.name,
-                        account_type: data.account_type,
-                        parent: data.parent
-                    }
-                    const response = await axios({
-                        method: id ? 'put' : 'post',
-                        url: '/api/setup/accounts/' + (id ?? ''),
-                        data: request
-                    })
-                    return response
-                }
-                catch(err){
-                    return {
-                        error : {
-                            message: err.response.data.message,
-                            errors: err.response.data.errors
-                        }
-                    }
-                }
-            }
-            dispatch(setAppLoading(true));
-            submit()
-            .then((response) => {
-                dispatch(setAppLoading(false));
-                if (response.error){
-                    if (response.error.errors){
-                        setSubmitError(response.error.errors);
-                    }
-                    else {
-                        let message = response.error.message ?? 'Something went wrong';
-                        MyAlert.error({text: message});
-                    }
-                }
-                else {
-                    MyAlert.success({text: 'Data saved successfully'})
-                    setSubmitError({})
-                    let {account_type, parent} = data;
-                    if (!id){
-                        setData({
-                            account_type: account_type,
-                            parent: parent
-                        })
-                    }
-                    getParents(account_type)
-                }
-                ref.current.focus()
-                setValidated(false);
-            });
-        }
-    }
-
-    const resetForm = () => {
-        handleChange(initialData)
-    }
-
-    useEffect(() => {
+    useEffect(() => {        
         axios.get("/api/setup/account-types")
         .then(response => {
             if (response){
@@ -126,159 +39,135 @@ const AccountEdit = (props) => {
         })
         .catch(error => {
             MyAlert.error({text: error.response.message})
-        })
-
-        if (id){
-            dispatch(setAppLoading(true))
-            axios.get('/api/setup/accounts/' + id)
-            .then(response => {
-                dispatch(setAppLoading(false))
-                setData(response.data)
-                getParents(response.data.account_type)
-                ref.current.focus()
-            })
-            .catch(error => {
-                dispatch(setAppLoading(false))
-                MyAlert.error({text: error.message})
-                history.back()
-            })
-       }
+        })        
 
     }, [])
-
+  
     return (
-        <CCard>
-            <CCardHeader>
-                <h3>{id && id != "" ? 'Edit Account' : 'Create Account'}</h3>
-            </CCardHeader>
-            <CCardBody>
-                <CForm className="form-horizontal needs-validation" noValidate wasValidated={validated} onSubmit={handleSubmit}>
-                    <CFormGroup row>
-                        <CCol sm="4" lg="2">
-                            <CLabel>Account Type</CLabel>
-                        </CCol>
-                        <CCol sm="8" lg="3">
-                            <CSelect
-                            placeholder="Choose Account Type"
-                            autoFocus={true}
-                            innerRef={ref}
-                            disabled={loading}
-                            required
-                            value={data.account_type ?? ''}
-                            onChange={e => handleChange({account_type: e.target.value})}
-                            invalid={
-                                submitError.hasOwnProperty('account_type')
-                            }
-                            >
-                              <option value=""></option>
-                            {
-                              accountTypes.map((item, index) => (
-                                  <option key={item.id} value={item.id}>{item.name}</option>
-                              ))
-                            }
-                            </CSelect>
-                            <CInvalidFeedback>{
-                            submitError.hasOwnProperty('account_type') ?
-                            submitError.account_type[0] : 'Unknown Error'
-                            }</CInvalidFeedback>
-                        </CCol>
-                    </CFormGroup>
-                    <CFormGroup row>
-                        <CCol sm="4" lg="2">
-                            <CLabel>Parent Account</CLabel>
-                        </CCol>
-                        <CCol sm="8" lg="5">
-                            <CSelect
-                              type="text"
-                              placeholder="Choose parent account"
-                              autoComplete="off"
-                              disabled={loading}
-                              required
-                              value={data.parent ?? ''}
-                              onChange={e => handleChange({parent: e.target.value})}
-                              invalid={
-                                  submitError.hasOwnProperty('parent')
-                              }
-                            >
-                            {
-                                parents.map((item, index) => (
-                                    <option key={item.id} value={item.id}>{item.number} - {item.name}</option>
-                                ))
-                            }
-                            </CSelect>
-                            <CInvalidFeedback>{
-                            submitError
-                            && submitError.hasOwnProperty('parent') ?
-                            submitError.parent[0] : 'Unknown Error'
-                            }</CInvalidFeedback>
-                        </CCol>
-                    </CFormGroup>
-                    <CFormGroup row>
-                        <CCol sm="4" lg="2">
-                            <CLabel>Account Number</CLabel>
-                        </CCol>
-                        <CCol sm="8" lg="3">
-                          <CInputGroup className="has-validation">
-                            <CInputGroupText>
-                            {
-                              (data.account_type  && accountTypes[parseInt(data.account_type) - 1]) ?
-                                accountTypes[parseInt(data.account_type) - 1].prefix : ''
-                            }
-                            </CInputGroupText>
-                            <CInput
-                              placeholder="Enter account number"
-                              autoComplete="off"
-                              type="text"
-                              disabled={loading}
-                              onChange={e => handleChange({number: e.target.value})}
-                              value={data.number ?? ''}
-                              invalid={
-                                  submitError.hasOwnProperty('number')
-                              }
-                              required
-                            />
-                            <CInvalidFeedback>{
-                            submitError.hasOwnProperty('number') ?
-                            submitError.number[0] : 'Please enter account number'
-                            }
-                          </CInvalidFeedback>
-                          </CInputGroup>
-                        </CCol>
-                    </CFormGroup>
-                    <CFormGroup row>
-                        <CCol sm="4" lg="2">
-                            <CLabel>Account Name</CLabel>
-                        </CCol>
-                        <CCol sm="8" lg="5">
-                            <CInput
-                            placeholder="Enter account name"
-                            autoComplete="off"
-                            type="text"
-                            disabled={loading}
-                            onChange={e => handleChange({name: e.target.value})}
-                            value={data.name ?? ''}
-                            invalid={
-                                submitError.hasOwnProperty('name')
-                            }
-                            required
-                            />
-                            <CInvalidFeedback>{
-                            submitError.hasOwnProperty('name') ?
-                            submitError.name[0] : 'Please enter a name'
-                            }</CInvalidFeedback>
-                        </CCol>
-                    </CFormGroup>
-                </CForm>
-            </CCardBody>
-            <CCardFooter>
-                <CButton className="mr-2" type="submit" onClick={event => handleSubmit(event)} size="md" color="primary">
-                    <CIcon name="cil-scrubber" /> Submit
-                </CButton>
-                <CButton className="mr-2" type="reset" onClick={resetForm} size="md" color="danger">
-                    <CIcon name="cil-ban" /> Reset
-                </CButton>
-            </CCardFooter>
-        </CCard>
+        <MasterEdit
+            apiUrl="/api/setup/accounts"
+            onGetDataSuccess={response => {
+                getParents(response.data.account_type)
+            }}
+            onSubmitSuccess={data => {
+                let {account_type, parent} = data;
+                if (data.id){
+                    setData({
+                        account_type: account_type,
+                        parent: parent
+                    })
+                }
+                getParents(account_type)
+            }}
+            formatData={data => {
+                return {...data, company_id: activeCompany.id}
+            }}
+            onChangeData={(oldData, newData) => {
+                if (newData.account_type && oldData.account_type != newData.account_type){
+                    newData.parent = ''
+                    getParents(newData.account_type)
+                    return newData
+                }                
+            }}
+        >
+        {props => (
+            <>
+            <CFormGroup row>
+                <CCol sm="4" lg="2">
+                    <CLabel>Account Type</CLabel>
+                </CCol>
+                <CCol sm="8" lg="3">
+                    <CSelect
+                    placeholder="Choose Account Type"
+                    autoFocus={true}
+                    innerRef={props.ref}
+                    disabled={props.loading}
+                    required
+                    value={props.data.account_type ?? ''}
+                    onChange={e => props.handleChange({account_type: e.target.value})}
+                    invalid={props.isInvalid('account_type')}                    
+                    >
+                        <option value=""></option>
+                    {
+                        accountTypes.map((item, index) => (
+                            <option key={item.id} value={item.id}>{item.name}</option>
+                        ))
+                    }
+                    </CSelect>
+                    {props.feedback('account_type')}
+                </CCol>
+            </CFormGroup>
+            <CFormGroup row>
+                <CCol sm="4" lg="2">
+                    <CLabel>Parent Account</CLabel>
+                </CCol>
+                <CCol sm="8" lg="5">
+                    <CSelect
+                        type="text"
+                        placeholder="Choose parent account"
+                        autoComplete="off"
+                        disabled={props.loading}
+                        required
+                        value={props.data.parent ?? ''}
+                        onChange={e => props.handleChange({parent: e.target.value})}
+                        invalid={props.isInvalid('parent')}
+                    >
+                    {
+                        parents.map((item, index) => (
+                            <option key={item.id} value={item.id}>{item.number} - {item.name}</option>
+                        ))
+                    }
+                    </CSelect>
+                    {props.feedback('parent')}
+                </CCol>
+            </CFormGroup>
+            <CFormGroup row>
+                <CCol sm="4" lg="2">
+                    <CLabel>Account Number</CLabel>
+                </CCol>
+                <CCol sm="8" lg="3">
+                    <CInputGroup className="has-validation">
+                    <CInputGroupText>
+                    {
+                        (props.data.account_type  && accountTypes[parseInt(props.data.account_type) - 1]) ?
+                        accountTypes[parseInt(props.data.account_type) - 1].prefix : ''
+                    }
+                    </CInputGroupText>
+                    <CInput
+                        placeholder="Enter account number"
+                        autoComplete="off"
+                        type="text"
+                        disabled={props.loading}
+                        onChange={e =>props.handleChange({number: e.target.value})}
+                        value={props.data.number ?? ''}
+                        invalid={props.isInvalid('number')}
+                        required
+                    />
+                    {props.feedback('number')}
+                    </CInputGroup>
+                </CCol>
+            </CFormGroup>
+            <CFormGroup row>
+                <CCol sm="4" lg="2">
+                    <CLabel>Account Name</CLabel>
+                </CCol>
+                <CCol sm="8" lg="5">
+                    <CInput
+                    placeholder="Enter account name"
+                    autoComplete="off"
+                    type="text"
+                    disabled={props.loading}
+                    onChange={e => props.handleChange({name: e.target.value})}
+                    value={props.data.name ?? ''}
+                    invalid={props.isInvalid('name')}
+                    required
+                    />
+                    {props.feedback('name', "Please enter a name")}
+                </CCol>
+            </CFormGroup>
+            </>
+        )}
+        </MasterEdit>
     )
 }
 

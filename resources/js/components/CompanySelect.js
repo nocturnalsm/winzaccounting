@@ -9,6 +9,7 @@ const CompanySelect = (props) => {
     const [companies, setCompanies] = useState([])
     const dispatch = useDispatch();
     const company = useSelector((state) => state.activeCompany);
+    const appEditing = useSelector(state => state.appEditing);
 
     useEffect(() => {
         if (Object.keys(companies).length == 0){
@@ -36,7 +37,7 @@ const CompanySelect = (props) => {
             {
                 companies ? (
                     <CDropdown className="mt-2">
-                        <CDropdownToggle caret color="info">
+                        <CDropdownToggle disabled={appEditing} caret color="info">
                         {company ? company.name : ''}
                         </CDropdownToggle>
                         <CDropdownMenu>

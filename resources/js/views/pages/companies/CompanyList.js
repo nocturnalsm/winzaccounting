@@ -1,5 +1,4 @@
-import DTable from '../../../components/datatable/DTable'
-import {CCard, CCardBody} from '@coreui/react'
+import MasterList from '../../../containers/MasterList'
 
 const CompanyList = () => {
     const fields = [
@@ -27,20 +26,12 @@ const CompanyList = () => {
     ];
 
     return (
-        <CCard>
-            <CCardBody>
-                <DTable
-                    _id="companieslist"
-                    defaultSort="name"
-                    fields={fields}
-                    apiUrl="/api/admin/companies"
-                    editLink="/currencies/edit"
-                    createLink="/currencies/create"
-                    deleteLink="/currencies/delete"
-                    showLink="/currencies/show"
-                />
-            </CCardBody>
-        </CCard>
+        <MasterList 
+            tableId="companieslist"                    
+            fields={fields}
+            apiUrl="/api/admin/companies"
+            showToolbar={false}                                
+        />    
 
     );
 

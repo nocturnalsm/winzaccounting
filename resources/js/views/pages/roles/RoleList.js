@@ -1,5 +1,5 @@
-import DTable from '../../../components/datatable/DTable'
-import {CCard, CCardBody, CBadge} from '@coreui/react'
+import MasterList from '../../../containers/MasterList'
+import {CBadge} from '@coreui/react'
 
 const RoleList = () => {
 
@@ -47,18 +47,12 @@ const RoleList = () => {
     ];
 
     return (
-        <CCard>
-            <CCardBody>
-                <DTable
-                    _id="roleslist"
-                    defaultSort="name"
-                    fields={fields}
-                    apiUrl="/api/admin/roles"
-                />
-            </CCardBody>
-        </CCard>
-
-    );
+        <MasterList
+            tableId="roleslist"            
+            fields={fields}
+            apiUrl="/api/admin/roles"
+        />
+    )
 
 }
 

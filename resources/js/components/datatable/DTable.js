@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useImperativeHandle } from 'react';
-import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { store, setAppLoading } from '../../store';
 import MyAlert from '../../alert';
-import {CDataTable,CPagination, CRow, CCol, CButton, CSelect, CBadge} from '@coreui/react';
 import DTToolbar from './DTToolbar'
-import CIcon from '@coreui/icons-react';
+import CreateButton from './CreateButton'
+import { useSelector } from 'react-redux';
+import { store, setAppLoading } from '../../store';
 import {debounce, initial, isEqual} from 'lodash';
+import {CDataTable,CPagination, CRow, CCol, CButton, CSelect, CBadge} from '@coreui/react';
 
 const DTable = React.forwardRef((props, ref) => {
 
@@ -161,11 +161,16 @@ const DTable = React.forwardRef((props, ref) => {
           <CRow className="pb-2">
               <CCol xs="6" md="9" lg="10">
                   {
-                    props.topButtonSlot ? props.topButtonSlot : (
-                      <CButton color="primary" onClick={event => props.createAction(event)}>
-                          <CIcon name={props.createButtonIcon ?? 'cil-plus'} />
-                          <span className="ml-2">{props.createButtonText ?? 'Add'}</span>
-                      </CButton>
+                    props.topButtonsSlot ? props.topButtonsSlot : (
+                        props.createButtonVisible ? (
+                            <CreateButton 
+                                disabled={props.createButtonDisabled ?? false} 
+                                color={props.createButtonColor ?? 'primary'}
+                                action={props.createAction}
+                                icon={props.createButtonIcon}
+                                text={props.createButtonText}
+                            />
+                        ) : ''
                   )}
               </CCol>
               <CCol xs="6" md="3" lg="2">

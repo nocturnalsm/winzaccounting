@@ -55,7 +55,8 @@ class BankController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = $this->bank->getById($id);
+        return response()->json($data);
     }
 
     /**

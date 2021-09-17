@@ -1,5 +1,4 @@
-import DTable from '../../../components/datatable/DTable'
-import {CCard, CCardBody, CBadge} from '@coreui/react'
+import MasterList from '../../../containers/MasterList'
 
 const PermissionList = () => {
     const fields = [
@@ -28,19 +27,12 @@ const PermissionList = () => {
     ];
 
     return (
-        <CCard>
-            <CCardBody>
-                <DTable
-                    _id="permissionslist"
-                    defaultSort="name"
-                    fields={fields}
-                    apiUrl="/api/admin/permissions"
-                />
-            </CCardBody>
-        </CCard>
-
+        <MasterList
+            tableId="permissionslist"
+            fields={fields}
+            apiUrl="/api/admin/permissions"
+        />
     );
-
 }
 
 export default PermissionList

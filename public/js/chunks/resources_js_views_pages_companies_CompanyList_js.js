@@ -1,5 +1,47 @@
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_companies_CompanyList_js"],{
 
+/***/ "./resources/js/components/datatable/CreateButton.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/datatable/CreateButton.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
+/* harmony import */ var _coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @coreui/icons-react */ "./node_modules/@coreui/icons-react/es/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+var CreateButton = function CreateButton(props) {
+  var _props$disabled, _props$color, _props$icon, _props$text;
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_0__.CButton, {
+    className: props.className,
+    disabled: (_props$disabled = props.disabled) !== null && _props$disabled !== void 0 ? _props$disabled : false,
+    color: (_props$color = props.color) !== null && _props$color !== void 0 ? _props$color : 'primary',
+    onClick: function onClick(event) {
+      return props.action(event);
+    },
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      name: (_props$icon = props.icon) !== null && _props$icon !== void 0 ? _props$icon : 'cil-plus'
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+      className: "ml-2",
+      children: (_props$text = props.text) !== null && _props$text !== void 0 ? _props$text : 'Add'
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CreateButton);
+
+/***/ }),
+
 /***/ "./resources/js/components/datatable/DTToolbar.js":
 /*!********************************************************!*\
   !*** ./resources/js/components/datatable/DTToolbar.js ***!
@@ -33,7 +75,7 @@ var DTToolbarShow = function DTToolbarShow(props) {
     onClick: function onClick(event) {
       return props.showAction(props.item, event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cil-magnifying-glass"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -55,7 +97,7 @@ var DTToolbarEdit = function DTToolbarEdit(props) {
       return props.editAction(props.item, event);
     } //{props.editLink ? props.editLink.replace(/\/$/, '') + "/" + props._id : ''}
     ,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cilPencil"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -76,7 +118,7 @@ var DTToolbarDelete = function DTToolbarDelete(props) {
     onClick: function onClick(event) {
       return props.deleteAction(props.item, event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cilTrash"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -128,16 +170,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../store */ "./resources/js/store.js");
-/* harmony import */ var _alert__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../alert */ "./resources/js/alert.js");
-/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
-/* harmony import */ var _DTToolbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DTToolbar */ "./resources/js/components/datatable/DTToolbar.js");
-/* harmony import */ var _coreui_icons_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @coreui/icons-react */ "./node_modules/@coreui/icons-react/es/index.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _alert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../alert */ "./resources/js/alert.js");
+/* harmony import */ var _DTToolbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DTToolbar */ "./resources/js/components/datatable/DTToolbar.js");
+/* harmony import */ var _CreateButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CreateButton */ "./resources/js/components/datatable/CreateButton.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../store */ "./resources/js/store.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -176,9 +218,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function (props, ref) {
-  var _props$createButtonIc, _props$createButtonTe, _ref3, _params$limit;
+  var _props$createButtonDi, _props$createButtonCo, _ref3, _params$limit;
 
-  var appLoading = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
+  var appLoading = (0,react_redux__WEBPACK_IMPORTED_MODULE_6__.useSelector)(function (state) {
     return state.appLoading;
   });
 
@@ -232,7 +274,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
 
         var newFilter = _objectSpread(_objectSpread({}, currParams), values);
 
-        if (Object.keys(newFilter).length > 0 && !(0,lodash__WEBPACK_IMPORTED_MODULE_9__.isEqual)(newFilter, currParams)) {
+        if (Object.keys(newFilter).length > 0 && !(0,lodash__WEBPACK_IMPORTED_MODULE_8__.isEqual)(newFilter, currParams)) {
           fetchData({
             filter: newFilter
           });
@@ -253,7 +295,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         field['filter'] = false;
 
         slots[field.key] = function (item, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_7__.default, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_4__["default"], {
             item: item,
             createAction: props.createAction,
             editAction: props.editAction,
@@ -291,7 +333,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       } else if (field.type == 'badge') {
         slots[field.key] = function (item) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("td", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CBadge, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_9__.CBadge, {
               color: "success",
               children: item[field.key]
             }, index)
@@ -320,7 +362,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
                 break;
               }
 
-              _store__WEBPACK_IMPORTED_MODULE_4__.store.dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(true));
+              _store__WEBPACK_IMPORTED_MODULE_7__.store.dispatch((0,_store__WEBPACK_IMPORTED_MODULE_7__.setAppLoading)(true));
               _context.prev = 3;
               newParams = {
                 page: page !== null && page !== void 0 ? page : 1,
@@ -330,7 +372,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
                 filter: filter
               };
               _context.next = 7;
-              return axios__WEBPACK_IMPORTED_MODULE_3___default().get(props.apiUrl, {
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get(props.apiUrl, {
                 params: newParams
               });
 
@@ -345,13 +387,13 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
             case 13:
               _context.prev = 13;
               _context.t0 = _context["catch"](3);
-              _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+              _alert__WEBPACK_IMPORTED_MODULE_3__["default"].error({
                 text: _context.t0.response.data.message
               });
 
             case 16:
               _context.prev = 16;
-              _store__WEBPACK_IMPORTED_MODULE_4__.store.dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
+              _store__WEBPACK_IMPORTED_MODULE_7__.store.dispatch((0,_store__WEBPACK_IMPORTED_MODULE_7__.setAppLoading)(false));
               return _context.finish(16);
 
             case 19:
@@ -380,7 +422,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
 
     var oldParams = (_params$filter2 = params.filter) !== null && _params$filter2 !== void 0 ? _params$filter2 : {};
 
-    if (Object.keys(newFilter).length != 0 && !(0,lodash__WEBPACK_IMPORTED_MODULE_9__.isEqual)(newFilter, oldParams)) {
+    if (Object.keys(newFilter).length != 0 && !(0,lodash__WEBPACK_IMPORTED_MODULE_8__.isEqual)(newFilter, oldParams)) {
       fetchData({
         filter: newFilter
       });
@@ -407,29 +449,24 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CRow, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_9__.CRow, {
       className: "pb-2",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CCol, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_9__.CCol, {
         xs: "6",
         md: "9",
         lg: "10",
-        children: props.topButtonSlot ? props.topButtonSlot : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CButton, {
-          color: "primary",
-          onClick: function onClick(event) {
-            return props.createAction(event);
-          },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_8__.default, {
-            name: (_props$createButtonIc = props.createButtonIcon) !== null && _props$createButtonIc !== void 0 ? _props$createButtonIc : 'cil-plus'
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-            className: "ml-2",
-            children: (_props$createButtonTe = props.createButtonText) !== null && _props$createButtonTe !== void 0 ? _props$createButtonTe : 'Add'
-          })]
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CCol, {
+        children: props.topButtonsSlot ? props.topButtonsSlot : props.createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_CreateButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          disabled: (_props$createButtonDi = props.createButtonDisabled) !== null && _props$createButtonDi !== void 0 ? _props$createButtonDi : false,
+          color: (_props$createButtonCo = props.createButtonColor) !== null && _props$createButtonCo !== void 0 ? _props$createButtonCo : 'primary',
+          action: props.createAction,
+          icon: props.createButtonIcon,
+          text: props.createButtonText
+        }) : ''
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_9__.CCol, {
         xs: "6",
         md: "3",
         lg: "2",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CSelect, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_9__.CSelect, {
           placeholder: "Items per page",
           custom: true,
           name: "pagechange",
@@ -453,7 +490,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
           })]
         })
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CDataTable, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_9__.CDataTable, {
       items: data.data,
       fields: fields,
       columnFilter: true,
@@ -461,7 +498,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       footer: true,
       columnFilterValue: params.filter,
       itemsPerPage: params.limit,
-      onColumnFilterChange: (0,lodash__WEBPACK_IMPORTED_MODULE_9__.debounce)(handleFilterChange, 300),
+      onColumnFilterChange: (0,lodash__WEBPACK_IMPORTED_MODULE_8__.debounce)(handleFilterChange, 300),
       loading: appLoading,
       sorterValue: {
         column: params.sort,
@@ -472,7 +509,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       onSorterValueChange: handleSort,
       scopedSlots: customFields,
       columnFilterSlot: props.customFilterInput
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_6__.CPagination, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_9__.CPagination, {
       activePage: params.page ? data.count <= params.limit ? 1 : params.page : 1,
       pages: data.count ? Math.ceil(data.count / ((_params$limit = params.limit) !== null && _params$limit !== void 0 ? _params$limit : 10)) : 0,
       onActivePageChange: handlePageChange
@@ -480,6 +517,153 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
   });
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DTable);
+
+/***/ }),
+
+/***/ "./resources/js/containers/MasterList.js":
+/*!***********************************************!*\
+  !*** ./resources/js/containers/MasterList.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _components_datatable_DTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/datatable/DTable */ "./resources/js/components/datatable/DTable.js");
+/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
+/* harmony import */ var _alert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../alert */ "./resources/js/alert.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_datatable_CreateButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/datatable/CreateButton */ "./resources/js/components/datatable/CreateButton.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+
+
+var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function (props, ref) {
+  var _props$showToolbar, _props$createButtonDi2, _props$createButtonVi2, _props$handleEdit, _props$handleCreate, _props$handleDelete, _jsx2;
+
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle)(ref, function () {
+    return {
+      fetchData: function fetchData(params) {
+        var _params$method, _params$data;
+
+        axios__WEBPACK_IMPORTED_MODULE_4___default()({
+          method: (_params$method = params.method) !== null && _params$method !== void 0 ? _params$method : 'get',
+          url: params.url,
+          data: (_params$data = params.data) !== null && _params$data !== void 0 ? _params$data : {}
+        }).then(function (response) {
+          params.success(response);
+        })["catch"](function (error) {
+          _alert__WEBPACK_IMPORTED_MODULE_3__["default"].error({
+            text: error.response.message
+          });
+          params.error(error);
+        });
+      }
+    };
+  });
+
+  var handleDelete = function handleDelete(data, clickEvent) {
+    _alert__WEBPACK_IMPORTED_MODULE_3__["default"].confirm({
+      title: 'Are you sure to delete this data ?',
+      confirmAction: function confirmAction() {
+        axios__WEBPACK_IMPORTED_MODULE_4___default()["delete"](props.apiUrl + data.id).then(function () {
+          _alert__WEBPACK_IMPORTED_MODULE_3__["default"].success({
+            text: "Data successfully deleted"
+          });
+          dtRef.current.refresh();
+        })["catch"](function (error) {
+          _alert__WEBPACK_IMPORTED_MODULE_3__["default"].error({
+            text: error.response
+          });
+        });
+      }
+    });
+  };
+
+  var handleCreate = function handleCreate() {
+    history.push(props.createUrl);
+  };
+
+  var handleEdit = function handleEdit(data, event) {
+    history.push(props.editUrl + "/" + data.id);
+  };
+
+  var toolbarButtons = {
+    create: {
+      visible: true,
+      disabled: false
+    },
+    show: {
+      visible: true,
+      disabled: false
+    },
+    edit: {
+      visible: true,
+      disabled: false
+    },
+    "delete": {
+      visible: true,
+      disabled: false
+    }
+  };
+  toolbarButtons = _objectSpread(_objectSpread({}, toolbarButtons), props.toolbarButtons);
+
+  var topButtonsSlot = function topButtonsSlot() {
+    var _props$createButtonVi, _props$createButtonDi, _props$createButtonCo;
+
+    var createButtonVisible = (_props$createButtonVi = props.createButtonVisible) !== null && _props$createButtonVi !== void 0 ? _props$createButtonVi : true;
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_CreateButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        className: "mr-2",
+        disabled: (_props$createButtonDi = props.createButtonDisabled) !== null && _props$createButtonDi !== void 0 ? _props$createButtonDi : false,
+        color: (_props$createButtonCo = props.createButtonColor) !== null && _props$createButtonCo !== void 0 ? _props$createButtonCo : 'primary',
+        action: handleCreate,
+        icon: props.createButtonIcon,
+        text: props.createButtonText
+      }) : '', props.topButtonsSlot]
+    });
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCard, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCardBody, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_1__["default"], (_jsx2 = {
+        _id: props.tableId,
+        fields: props.fields,
+        ref: props.tableRef,
+        apiUrl: props.apiUrl,
+        showToolbar: (_props$showToolbar = props.showToolbar) !== null && _props$showToolbar !== void 0 ? _props$showToolbar : true,
+        createButtonDisabled: (_props$createButtonDi2 = props.createButtonDisabled) !== null && _props$createButtonDi2 !== void 0 ? _props$createButtonDi2 : false,
+        createButtonVisible: (_props$createButtonVi2 = props.createButtonVisible) !== null && _props$createButtonVi2 !== void 0 ? _props$createButtonVi2 : true,
+        customFilterInput: props.customFilterInput,
+        editAction: (_props$handleEdit = props.handleEdit) !== null && _props$handleEdit !== void 0 ? _props$handleEdit : handleEdit,
+        createAction: (_props$handleCreate = props.handleCreate) !== null && _props$handleCreate !== void 0 ? _props$handleCreate : handleCreate,
+        deleteAction: (_props$handleDelete = props.handleDelete) !== null && _props$handleDelete !== void 0 ? _props$handleDelete : handleDelete,
+        showButtonVisible: toolbarButtons.show.visible,
+        editButtonVisible: toolbarButtons.edit.visible
+      }, _defineProperty(_jsx2, "createButtonVisible", toolbarButtons.create.visible), _defineProperty(_jsx2, "deleteButtonVisible", toolbarButtons["delete"].visible), _defineProperty(_jsx2, "showButtonDisabled", toolbarButtons.show.disabled), _defineProperty(_jsx2, "editButtonDisabled", toolbarButtons.edit.disabled), _defineProperty(_jsx2, "createButtonDisabled", toolbarButtons.create.disabled), _defineProperty(_jsx2, "deleteButtonDisabled", toolbarButtons["delete"].disabled), _defineProperty(_jsx2, "topButtonsSlot", topButtonsSlot()), _jsx2))
+    })
+  });
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MasterList);
 
 /***/ }),
 
@@ -494,10 +678,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/datatable/DTable */ "./resources/js/components/datatable/DTable.js");
-/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
+/* harmony import */ var _containers_MasterList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../containers/MasterList */ "./resources/js/containers/MasterList.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -519,19 +701,11 @@ var CompanyList = function CompanyList() {
     label: 'Action',
     type: 'toolbar'
   }];
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCard, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CCardBody, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_0__.default, {
-        _id: "companieslist",
-        defaultSort: "name",
-        fields: fields,
-        apiUrl: "/api/admin/companies",
-        editLink: "/currencies/edit",
-        createLink: "/currencies/create",
-        deleteLink: "/currencies/delete",
-        showLink: "/currencies/show"
-      })
-    })
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_containers_MasterList__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    tableId: "companieslist",
+    fields: fields,
+    apiUrl: "/api/admin/companies",
+    showToolbar: false
   });
 };
 

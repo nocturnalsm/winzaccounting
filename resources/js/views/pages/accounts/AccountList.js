@@ -1,11 +1,7 @@
-import DTable from '../../../components/datatable/DTable'
-import {CCard, CCardBody, CBadge, CSelect} from '@coreui/react'
+import MasterList from '../../../containers/MasterList'
+import {CBadge, CSelect} from '@coreui/react'
 import { useState, useEffect, useRef } from 'react';
-import MyAlert from '../../../alert'
-import axios from 'axios';
 import { useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-
 
 const AccountList = () => {
 
@@ -15,8 +11,8 @@ const AccountList = () => {
         (tableData.filter && tableData.filter.type) ?? ''
     )
     const activeCompany = useSelector(state => state.activeCompany)
-
-    let history = useHistory()
+    
+    const ref = useRef(null)
     const dtRef = useRef(null)
     let badges = ['primary', 'warning', 'light', 'success', 'danger']
 
@@ -63,71 +59,44 @@ const AccountList = () => {
         }
     }, [filterType, activeCompany])
 
-    const handleDelete = (data, clickEvent) => {
-        MyAlert.confirm({
-            title: 'Are you sure to delete this data ?',
-            confirmAction: () => {
-                axios.delete('/api/setup/accounts/' + data.id)
-                .then(() => {
-                    MyAlert.success({text: "Data successfully deleted"})
-                    dtRef.current.refresh()
-                })
-                .catch((error) => {
-                    MyAlert.error({text: error.response})
-                })
-            }
-        })
-    }
-    const handleCreate = () => {
-        history.push('/accounts/create')
-    }
-    const handleEdit = (data, event) => {
-        history.push('/accounts/' + data.id)
-    }
 
     useEffect(() => {
-        axios.get("/api/setup/account-types")
-        .then(response => {
-            if (response){
-                setAccountTypes(response.data)
+        ref.current.fetchData({
+            url: "/api/setup/account-types",
+            success: response => {
+                if (response){
+                    setAccountTypes(response.data)
+                }
             }
-        })
-        .catch(error => {
-            MyAlert.error({text: error.response.message})
-        })
+        })        
     }, [])
 
     const customFilterInput = {
         type: (
-                  <CSelect value={filterType} aria-label="column name: 'accountType' filter input" onChange={event => setFilterType(event.target.value)} size="sm">
-                      <option value="">All</option>
-                      {
-                          accountTypes.map((item, index) => (
-                              <option key={index} value={item.id}>{item.name}</option>
-                          ))
-                      }
-                  </CSelect>
-                )
+            <CSelect value={filterType} aria-label="column name: 'accountType' filter input" onChange={event => setFilterType(event.target.value)} size="sm">
+                <option value="">All</option>
+                {
+                    accountTypes.map((item, index) => (
+                        <option key={index} value={item.id}>{item.name}</option>
+                    ))
+                }
+            </CSelect>
+        )
     }
 
-    return (
-        <CCard>
-            <CCardBody>
-                <DTable
-                    _id="accountslist"
-                    fields={fields}
-                    ref={dtRef}
-                    apiUrl="/api/setup/accounts"
-                    showToolbar={true}
-                    customFilterInput={customFilterInput}
-                    editAction={handleEdit}
-                    createAction={handleCreate}
-                    deleteAction={handleDelete}
-                    showButtonVisible={false}
-                />
-            </CCardBody>
-        </CCard>
-
+    return (        
+        <MasterList
+            tableId="accountslist"
+            fields={fields}
+            ref={ref}
+            tableRef={dtRef}
+            apiUrl="/api/setup/accounts"
+            showToolbar={true}
+            customFilterInput={customFilterInput}
+            editUrl="/accounts"
+            createUrl="/accounts/create"       
+            toolbarButtons={{show: {visible: false}}}
+        />
     );
 
 }

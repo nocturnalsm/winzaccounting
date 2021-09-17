@@ -1,17 +1,11 @@
-import DTable from '../../../components/datatable/DTable'
-import {CCard, CCardBody} from '@coreui/react'
-import { useState, useEffect, useRef } from 'react';
-import MyAlert from '../../../alert'
-import axios from 'axios';
+import MasterList from '../../../containers/MasterList'
+import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 
 const BankAccountList = () => {
-
-    let tableData = JSON.parse(localStorage.getItem('datatable.bankaccountslist')) || {}
+    
     const activeCompany = useSelector(state => state.activeCompany)
 
-    let history = useHistory()
     const dtRef = useRef(null)
     const fields = [
         {
@@ -57,44 +51,17 @@ const BankAccountList = () => {
         }
     }, [activeCompany])
 
-    const handleDelete = (data, clickEvent) => {
-        MyAlert.confirm({
-            title: 'Are you sure to delete this data ?',
-            confirmAction: () => {
-                axios.delete('/api/setup/bank-accounts/' + data.id)
-                .then(() => {
-                    MyAlert.success({text: "Data successfully deleted"})
-                    dtRef.current.refresh()
-                })
-                .catch((error) => {
-                    MyAlert.error({text: error.response})
-                })
-            }
-        })
-    }
-    const handleCreate = () => {
-        history.push('/bank-accounts/create')
-    }
-    const handleEdit = (data, event) => {
-        history.push('/bank-accounts/' + data.id)
-    }
-
     return (
-        <CCard>
-            <CCardBody>
-                <DTable
-                    _id="bankaccountslist"
-                    fields={fields}
-                    ref={dtRef}
-                    apiUrl="/api/setup/bank-accounts"
-                    showToolbar={true}
-                    editAction={handleEdit}
-                    createAction={handleCreate}
-                    deleteAction={handleDelete}
-                    showButtonVisible={false}
-                />
-            </CCardBody>
-        </CCard>
+        <MasterList
+            tableId="bankaccountslist"
+            fields={fields}
+            tableRef={dtRef}
+            apiUrl="/api/setup/bank-accounts"
+            showToolbar={true}
+            editUrl="/bank-accounts"
+            createUrl="/bank-accounts/create"
+            toolbarButtons={{show: {visible: false}}}
+        />
 
     );
 

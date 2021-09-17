@@ -1,12 +1,12 @@
-import DTable from '../../../components/datatable/DTable'
-import {CCard, CCardBody, CBadge, CSelect} from '@coreui/react'
-import { useState, useEffect, useRef } from 'react';
-import MyAlert from '../../../alert'
-import axios from 'axios';
+import {CBadge, CSelect} from '@coreui/react'
+import {useState, useEffect, useRef} from 'react'
+import MasterList from '../../../containers/MasterList'
 
 const UserList = () => {
     const [roles, setRoles] = useState([]);
-    const dtRef = useRef(null)
+
+    const ref = useRef(null)
+    const tableRef = useRef(null)    
 
     const fields = [
         {
@@ -36,32 +36,29 @@ const UserList = () => {
                 }
                 </td>
             )
-        },
-        {
-            label: 'Action',
-            type: 'toolbar',
         }
     ];
 
 
     const onChangeRoleFilter = (event) => {
         const value = event.target.value;
-        dtRef.current.setCustomFilter({roleName: value})
+        tableRef.current.setCustomFilter({roleName: value})
     }
 
     useEffect(() => {
-        axios.get("/api/admin/roles", {
-            params: {
-                limit: 5000,
-                sort: 'name'
+        ref.current.fetchData({
+            url: "/api/admin/roles",
+            data: {
+                params: {
+                    limit: 5000,
+                    sort: 'name'
+                }
+            },
+            success: (response) => {                      
+                if (response.data){
+                    setRoles(response.data.data)
+                }
             }
-        }).then(response => {
-            if (response.data){
-                setRoles(response.data.data)
-            }
-        })
-        .catch(error => {
-            MyAlert.error({text: error.response.message})
         })
     }, [])
 
@@ -80,20 +77,16 @@ const UserList = () => {
     }
 
     return (
-        <CCard>
-            <CCardBody>
-                <DTable
-                    _id="userslist"
-                    defaultSort="name"
-                    fields={fields}
-                    ref={dtRef}
-                    apiUrl="/api/admin/users"
-                    showToolbar={true}                    
-                    customFilterInput={customFilterInput}
-                />
-            </CCardBody>
-        </CCard>
-
+        <MasterList 
+            tableId="userslist"                    
+            fields={fields}
+            ref={ref}
+            tableRef={tableRef}
+            apiUrl="/api/admin/users"
+            showToolbar={false}                    
+            customFilterInput={customFilterInput}    
+            createButtonVisible={false}        
+        />            
     );
 
 }

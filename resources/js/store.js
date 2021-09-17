@@ -4,6 +4,7 @@ const initialState = {
   sidebarShow: true,
   auth: JSON.parse(localStorage.getItem("appState")) || {},
   appLoading: false,
+  appEditing: false,
   activeCompany: {}
 }
 
@@ -22,6 +23,14 @@ const setAppLoading = (loading) => {
   let payload = {appLoading: loading}
   return {
       type: 'APP_LOADING',
+      payload
+  }
+}
+
+const setAppEditing = (isEditing) => {
+  let payload = {appEditing: isEditing}
+  return {
+      type: 'APP_EDITING',
       payload
   }
 }
@@ -50,4 +59,4 @@ const changeState = (state = initialState, { type, ...rest }) => {
 }
 
 const store = createStore(changeState)
-export {store, setAppLoading, setAuth, setActiveCompany}
+export {store, setAppLoading, setAuth, setActiveCompany, setAppEditing}
