@@ -34,10 +34,10 @@ const MasterList = React.forwardRef((props, ref) => {
         MyAlert.confirm({
             title: 'Are you sure to delete this data ?',
             confirmAction: () => {
-                axios.delete(props.apiUrl + data.id)
+                axios.delete(props.apiUrl + "/" +data.id)
                 .then(() => {
                     MyAlert.success({text: "Data successfully deleted"})
-                    dtRef.current.refresh()
+                    props.tableRef.current.refresh()
                 })
                 .catch((error) => {
                     MyAlert.error({text: error.response})
@@ -114,6 +114,7 @@ const MasterList = React.forwardRef((props, ref) => {
                     createButtonDisabled={toolbarButtons.create.disabled}
                     deleteButtonDisabled={toolbarButtons.delete.disabled}
                     topButtonsSlot={topButtonsSlot()}
+                    defaultFilter={props.defaultFilter}
                 />
             </CCardBody>
         </CCard>

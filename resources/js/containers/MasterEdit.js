@@ -21,7 +21,7 @@ const MasterEdit = ({children, ...props}) => {
     const handleChange = (values) => {
         let newData = {...data, ...values}
         if (props.onChangeData){
-            newData = props.onChangeData(data, values)
+            newData = props.onChangeData(data, newData)
         }
         setData(newData)
     }
@@ -34,11 +34,13 @@ const MasterEdit = ({children, ...props}) => {
         event.preventDefault()
         event.stopPropagation()
         setValidated(true)
-        
+                
+        let request = props.formatData ? props.formatData(data) : data
+        setData(request)
+
         if (form.checkValidity() === true) {
             const submit = async () => {
-                try {
-                    let request = props.formatData ? props.formatData(data) : data
+                try {                    
                     const response = await axios({
                         method: id ? 'put' : 'post',
                         url: props.apiUrl + (id ? "/" +id : ''),
@@ -73,12 +75,12 @@ const MasterEdit = ({children, ...props}) => {
                 }
                 else {
                     MyAlert.success({text: 'Data saved successfully'})
-                    setSubmitError({})                    
+                    setSubmitError({})                     
                     if (!id){
                         setData({})
                     }
                     if (props.onSubmitSuccess){
-                        props.onSubmitSuccess(data, response)
+                        props.onSubmitSuccess(request, response)
                     }
                 }
                 ref.current.focus()

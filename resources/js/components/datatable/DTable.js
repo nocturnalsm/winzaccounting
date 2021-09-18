@@ -18,17 +18,23 @@ const DTable = React.forwardRef((props, ref) => {
     const [params, setParams] = useState({})
 
     const initialParams = () => {
-        return JSON.parse(localStorage.getItem('datatable.' + props._id)) || {
+        let data = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {
             page: 1,
             limit: 10,
             sort: null,
             order: 'asc',
-            filter: props.customFilterValue ?? {}
+            filter: {}
         };
+        if (props.defaultFilter){
+            let {filter, ...rest} = data
+            filter = {...filter, ...props.defaultFilter}
+            data = {...rest, filter}
+        }
+        return data
     }
 
     useEffect(() => {
-        let data = initialParams()
+        let data = initialParams()        
         fetchData(data)
     }, [])
 

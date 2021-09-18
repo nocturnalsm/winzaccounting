@@ -61,6 +61,7 @@ const BankAccountList = () => {
             editUrl="/bank-accounts"
             createUrl="/bank-accounts/create"
             toolbarButtons={{show: {visible: false}}}
+            defaultFilter={{company_id: activeCompany.id}}
         />
 
     );

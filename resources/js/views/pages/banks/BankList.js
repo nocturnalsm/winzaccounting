@@ -57,6 +57,7 @@ const BankList = () => {
             editUrl="/banks"               
             createUrl="/banks/create"         
             topButtonsSlot={topButtonsSlot}
+            defaultFilter={{company_id: activeCompany.id}}
         />
     );
 

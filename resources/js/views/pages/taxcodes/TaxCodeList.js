@@ -48,6 +48,7 @@ const TaxCodeList = () => {
             apiUrl="/api/setup/taxcodes"
             createUrl='/tax-codes/create'
             editUrl='/tax-codes'
+            defaultFilter={{company_id: activeCompany.id}}
         />
     );
 

@@ -9,13 +9,15 @@ const AccountEdit = (props) => {
 
     const [parents, setParents] = useState([])
     const [accountTypes, setAccountTypes] = useState([])    
+    const [initialData, setInitialData] = useState({account_type: '', parent: ''})
     const activeCompany = useSelector(state => state.activeCompany)
 
-    const getParents = (type) => {
+    const getParents = (type, id) => {        
         axios.get("api/setup/account-parents", {
             params: {
                 type: type,
-                company_id: activeCompany.id
+                company_id: activeCompany.id,        
+                id: id        
             }
         })
         .then(response => {
@@ -43,31 +45,42 @@ const AccountEdit = (props) => {
 
     }, [])
   
+    const prefix = (data) => {        
+        let account_type = data.account_type ?? initialData.account_type
+        if (account_type != ''){
+            return accountTypes[parseInt(account_type) - 1] ? accountTypes[parseInt(account_type) - 1].prefix : ''
+        }
+    }
+
     return (
         <MasterEdit
             apiUrl="/api/setup/accounts"
             onGetDataSuccess={response => {
-                getParents(response.data.account_type)
+                getParents(response.data.account_type, response.data.id)
             }}
-            onSubmitSuccess={data => {
-                let {account_type, parent} = data;
-                if (data.id){
-                    setData({
+            onSubmitSuccess={(data, response) => {                
+                let {account_type, parent} = data;                                      
+                if (!data.id){
+                    setInitialData({
                         account_type: account_type,
                         parent: parent
                     })
                 }
-                getParents(account_type)
+                getParents(account_type, data.id)
             }}
             formatData={data => {
-                return {...data, company_id: activeCompany.id}
+                let {account_type, parent } = data
+                return {...data, 
+                        parent: parent ?? initialData.parent,
+                        account_type: account_type ?? initialData.account_type,
+                        company_id: activeCompany.id}
             }}
             onChangeData={(oldData, newData) => {
                 if (newData.account_type && oldData.account_type != newData.account_type){
                     newData.parent = ''
-                    getParents(newData.account_type)
-                    return newData
+                    getParents(newData.account_type)                    
                 }                
+                return newData
             }}
         >
         {props => (
@@ -83,7 +96,7 @@ const AccountEdit = (props) => {
                     innerRef={props.ref}
                     disabled={props.loading}
                     required
-                    value={props.data.account_type ?? ''}
+                    value={props.data.account_type ?? initialData.account_type}
                     onChange={e => props.handleChange({account_type: e.target.value})}
                     invalid={props.isInvalid('account_type')}                    
                     >
@@ -108,7 +121,7 @@ const AccountEdit = (props) => {
                         autoComplete="off"
                         disabled={props.loading}
                         required
-                        value={props.data.parent ?? ''}
+                        value={props.data.parent ?? initialData.parent}
                         onChange={e => props.handleChange({parent: e.target.value})}
                         invalid={props.isInvalid('parent')}
                     >
@@ -128,10 +141,7 @@ const AccountEdit = (props) => {
                 <CCol sm="8" lg="3">
                     <CInputGroup className="has-validation">
                     <CInputGroupText>
-                    {
-                        (props.data.account_type  && accountTypes[parseInt(props.data.account_type) - 1]) ?
-                        accountTypes[parseInt(props.data.account_type) - 1].prefix : ''
-                    }
+                    {prefix(props.data)}
                     </CInputGroupText>
                     <CInput
                         placeholder="Enter account number"

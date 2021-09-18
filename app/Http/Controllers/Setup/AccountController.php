@@ -106,7 +106,8 @@ class AccountController extends Controller
     {
         $type = $request->type ?? '';
         $company_id = $request->company_id ?? '';
-        $data = $this->account->getParents($company_id, $type);
+        $id = $request->id ?? '';
+        $data = $this->account->getParents($company_id, $type, $id);
         if ($data){
             return response()->json($data);
         }

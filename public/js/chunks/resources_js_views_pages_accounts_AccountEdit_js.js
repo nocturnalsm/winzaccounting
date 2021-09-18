@@ -99,7 +99,7 @@ var MasterEdit = function MasterEdit(_ref) {
     var newData = _objectSpread(_objectSpread({}, data), values);
 
     if (props.onChangeData) {
-      newData = props.onChangeData(data, values);
+      newData = props.onChangeData(data, newData);
     }
 
     setData(newData);
@@ -113,30 +113,31 @@ var MasterEdit = function MasterEdit(_ref) {
     event.preventDefault();
     event.stopPropagation();
     setValidated(true);
+    var request = props.formatData ? props.formatData(data) : data;
+    setData(request);
 
     if (form.checkValidity() === true) {
       var submit = /*#__PURE__*/function () {
         var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-          var request, response;
+          var response;
           return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
                   _context.prev = 0;
-                  request = props.formatData ? props.formatData(data) : data;
-                  _context.next = 4;
+                  _context.next = 3;
                   return axios__WEBPACK_IMPORTED_MODULE_7___default()({
                     method: id ? 'put' : 'post',
                     url: props.apiUrl + (id ? "/" + id : ''),
                     data: request
                   });
 
-                case 4:
+                case 3:
                   response = _context.sent;
                   return _context.abrupt("return", response);
 
-                case 8:
-                  _context.prev = 8;
+                case 7:
+                  _context.prev = 7;
                   _context.t0 = _context["catch"](0);
                   return _context.abrupt("return", {
                     error: {
@@ -145,12 +146,12 @@ var MasterEdit = function MasterEdit(_ref) {
                     }
                   });
 
-                case 11:
+                case 10:
                 case "end":
                   return _context.stop();
               }
             }
-          }, _callee, null, [[0, 8]]);
+          }, _callee, null, [[0, 7]]);
         }));
 
         return function submit() {
@@ -188,7 +189,7 @@ var MasterEdit = function MasterEdit(_ref) {
           }
 
           if (props.onSubmitSuccess) {
-            props.onSubmitSuccess(data, response);
+            props.onSubmitSuccess(request, response);
           }
         }
 
@@ -351,15 +352,24 @@ var AccountEdit = function AccountEdit(props) {
       accountTypes = _useState4[0],
       setAccountTypes = _useState4[1];
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    account_type: '',
+    parent: ''
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      initialData = _useState6[0],
+      setInitialData = _useState6[1];
+
   var activeCompany = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.activeCompany;
   });
 
-  var getParents = function getParents(type) {
+  var getParents = function getParents(type, id) {
     axios__WEBPACK_IMPORTED_MODULE_5___default().get("api/setup/account-parents", {
       params: {
         type: type,
-        company_id: activeCompany.id
+        company_id: activeCompany.id,
+        id: id
       }
     }).then(function (response) {
       var parentsData = response.data;
@@ -385,26 +395,41 @@ var AccountEdit = function AccountEdit(props) {
       });
     });
   }, []);
+
+  var prefix = function prefix(data) {
+    var _data$account_type;
+
+    var account_type = (_data$account_type = data.account_type) !== null && _data$account_type !== void 0 ? _data$account_type : initialData.account_type;
+
+    if (account_type != '') {
+      return accountTypes[parseInt(account_type) - 1] ? accountTypes[parseInt(account_type) - 1].prefix : '';
+    }
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__["default"], {
     apiUrl: "/api/setup/accounts",
     onGetDataSuccess: function onGetDataSuccess(response) {
-      getParents(response.data.account_type);
+      getParents(response.data.account_type, response.data.id);
     },
-    onSubmitSuccess: function onSubmitSuccess(data) {
+    onSubmitSuccess: function onSubmitSuccess(data, response) {
       var account_type = data.account_type,
           parent = data.parent;
 
-      if (data.id) {
-        setData({
+      if (!data.id) {
+        setInitialData({
           account_type: account_type,
           parent: parent
         });
       }
 
-      getParents(account_type);
+      getParents(account_type, data.id);
     },
     formatData: function formatData(data) {
+      var account_type = data.account_type,
+          parent = data.parent;
       return _objectSpread(_objectSpread({}, data), {}, {
+        parent: parent !== null && parent !== void 0 ? parent : initialData.parent,
+        account_type: account_type !== null && account_type !== void 0 ? account_type : initialData.account_type,
         company_id: activeCompany.id
       });
     },
@@ -412,8 +437,9 @@ var AccountEdit = function AccountEdit(props) {
       if (newData.account_type && oldData.account_type != newData.account_type) {
         newData.parent = '';
         getParents(newData.account_type);
-        return newData;
       }
+
+      return newData;
     },
     children: function children(props) {
       var _props$data$account_t, _props$data$parent, _props$data$number, _props$data$name;
@@ -436,7 +462,7 @@ var AccountEdit = function AccountEdit(props) {
               innerRef: props.ref,
               disabled: props.loading,
               required: true,
-              value: (_props$data$account_t = props.data.account_type) !== null && _props$data$account_t !== void 0 ? _props$data$account_t : '',
+              value: (_props$data$account_t = props.data.account_type) !== null && _props$data$account_t !== void 0 ? _props$data$account_t : initialData.account_type,
               onChange: function onChange(e) {
                 return props.handleChange({
                   account_type: e.target.value
@@ -470,7 +496,7 @@ var AccountEdit = function AccountEdit(props) {
               autoComplete: "off",
               disabled: props.loading,
               required: true,
-              value: (_props$data$parent = props.data.parent) !== null && _props$data$parent !== void 0 ? _props$data$parent : '',
+              value: (_props$data$parent = props.data.parent) !== null && _props$data$parent !== void 0 ? _props$data$parent : initialData.parent,
               onChange: function onChange(e) {
                 return props.handleChange({
                   parent: e.target.value
@@ -499,7 +525,7 @@ var AccountEdit = function AccountEdit(props) {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInputGroup, {
               className: "has-validation",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInputGroupText, {
-                children: props.data.account_type && accountTypes[parseInt(props.data.account_type) - 1] ? accountTypes[parseInt(props.data.account_type) - 1].prefix : ''
+                children: prefix(props.data)
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
                 placeholder: "Enter account number",
                 autoComplete: "off",

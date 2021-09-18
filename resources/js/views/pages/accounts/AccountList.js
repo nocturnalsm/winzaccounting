@@ -53,7 +53,7 @@ const AccountList = () => {
     ];
 
     useEffect(() => {
-        if (Object.keys(activeCompany).length > 0){
+        if (Object.keys(activeCompany).length > 0){            
             let customFilter = {company_id: activeCompany.id, type: filterType}
             dtRef.current.setCustomFilter(customFilter)
         }
@@ -93,6 +93,7 @@ const AccountList = () => {
             apiUrl="/api/setup/accounts"
             showToolbar={true}
             customFilterInput={customFilterInput}
+            defaultFilter={{company_id: activeCompany.id}}
             editUrl="/accounts"
             createUrl="/accounts/create"       
             toolbarButtons={{show: {visible: false}}}

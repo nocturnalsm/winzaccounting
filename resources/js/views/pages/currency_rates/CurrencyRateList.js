@@ -48,6 +48,7 @@ const CurrencyRateList = () => {
             apiUrl="/api/setup/currency-rates"
             editUrl='/currency-rates'
             createUrl='/currency-rates/create'
+            defaultFilter={{company_id: activeCompany.id}}
         />
     );
 

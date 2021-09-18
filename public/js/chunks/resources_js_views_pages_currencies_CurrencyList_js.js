@@ -181,6 +181,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var _excluded = ["filter"];
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -192,6 +193,10 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -250,15 +255,26 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       setParams = _useState10[1];
 
   var initialParams = function initialParams() {
-    var _props$customFilterVa;
-
-    return JSON.parse(localStorage.getItem('datatable.' + props._id)) || {
+    var data = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {
       page: 1,
       limit: 10,
       sort: null,
       order: 'asc',
-      filter: (_props$customFilterVa = props.customFilterValue) !== null && _props$customFilterVa !== void 0 ? _props$customFilterVa : {}
+      filter: {}
     };
+
+    if (props.defaultFilter) {
+      var _data = data,
+          filter = _data.filter,
+          rest = _objectWithoutProperties(_data, _excluded);
+
+      filter = _objectSpread(_objectSpread({}, filter), props.defaultFilter);
+      data = _objectSpread(_objectSpread({}, rest), {}, {
+        filter: filter
+      });
+    }
+
+    return data;
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
@@ -585,11 +601,11 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
     _alert__WEBPACK_IMPORTED_MODULE_3__["default"].confirm({
       title: 'Are you sure to delete this data ?',
       confirmAction: function confirmAction() {
-        axios__WEBPACK_IMPORTED_MODULE_4___default()["delete"](props.apiUrl + data.id).then(function () {
+        axios__WEBPACK_IMPORTED_MODULE_4___default()["delete"](props.apiUrl + "/" + data.id).then(function () {
           _alert__WEBPACK_IMPORTED_MODULE_3__["default"].success({
             text: "Data successfully deleted"
           });
-          dtRef.current.refresh();
+          props.tableRef.current.refresh();
         })["catch"](function (error) {
           _alert__WEBPACK_IMPORTED_MODULE_3__["default"].error({
             text: error.response
@@ -659,7 +675,7 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
         deleteAction: (_props$handleDelete = props.handleDelete) !== null && _props$handleDelete !== void 0 ? _props$handleDelete : handleDelete,
         showButtonVisible: toolbarButtons.show.visible,
         editButtonVisible: toolbarButtons.edit.visible
-      }, _defineProperty(_jsx2, "createButtonVisible", toolbarButtons.create.visible), _defineProperty(_jsx2, "deleteButtonVisible", toolbarButtons["delete"].visible), _defineProperty(_jsx2, "showButtonDisabled", toolbarButtons.show.disabled), _defineProperty(_jsx2, "editButtonDisabled", toolbarButtons.edit.disabled), _defineProperty(_jsx2, "createButtonDisabled", toolbarButtons.create.disabled), _defineProperty(_jsx2, "deleteButtonDisabled", toolbarButtons["delete"].disabled), _defineProperty(_jsx2, "topButtonsSlot", topButtonsSlot()), _jsx2))
+      }, _defineProperty(_jsx2, "createButtonVisible", toolbarButtons.create.visible), _defineProperty(_jsx2, "deleteButtonVisible", toolbarButtons["delete"].visible), _defineProperty(_jsx2, "showButtonDisabled", toolbarButtons.show.disabled), _defineProperty(_jsx2, "editButtonDisabled", toolbarButtons.edit.disabled), _defineProperty(_jsx2, "createButtonDisabled", toolbarButtons.create.disabled), _defineProperty(_jsx2, "deleteButtonDisabled", toolbarButtons["delete"].disabled), _defineProperty(_jsx2, "topButtonsSlot", topButtonsSlot()), _defineProperty(_jsx2, "defaultFilter", props.defaultFilter), _jsx2))
     })
   });
 });
@@ -749,7 +765,10 @@ var CurrencyList = function CurrencyList() {
     apiUrl: "/api/setup/currencies",
     editUrl: "/currencies",
     createUrl: "/currencies/create",
-    topButtonsSlot: topButtonsSlot
+    topButtonsSlot: topButtonsSlot,
+    defaultFilter: {
+      company_id: activeCompany.id
+    }
   });
 };
 

@@ -57,6 +57,7 @@ const CurrencyList = () => {
             editUrl="/currencies"
             createUrl="/currencies/create"
             topButtonsSlot={topButtonsSlot}
+            defaultFilter={{company_id: activeCompany.id}}
         />
     );
 

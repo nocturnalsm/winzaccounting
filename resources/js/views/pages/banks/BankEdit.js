@@ -1,13 +1,10 @@
 import MasterEdit from '../../../containers/MasterEdit'
-import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { CInput, CCol, CFormGroup, CLabel } from '@coreui/react'
 
 const BankEdit = (props) => {
 
-    const activeCompany = useSelector(state => state.activeCompany)
-
-    const ref = useRef(null)
+    const activeCompany = useSelector(state => state.activeCompany)    
 
     return (
         <MasterEdit 

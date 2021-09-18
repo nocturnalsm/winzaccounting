@@ -91,16 +91,18 @@ class AccountRepository extends BaseRepository
     {
         return AccountType::select('id','name','prefix')->get();
     }
-    public function getParents($company_id, $type)
+    public function getParents($company_id, $type, $id = '')
     {
       if (trim($type) != "" && trim($company_id) != ""){
           $type = AccountType::find($type);
           $prefix = $type->prefix;
           $data = $type->accounts()
                   ->select('id','name', DB::raw("CONCAT('{$prefix}', number) AS number"))
-                  ->where("company_id", $company_id)
-                  ->get();
-          return $data;
+                  ->where("company_id", $company_id);
+          if (trim($id) != ""){
+                $data->where("id", "<>", $id);
+          }
+          return $data->get();
       }
       return false;
     }
