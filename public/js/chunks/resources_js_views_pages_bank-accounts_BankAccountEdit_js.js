@@ -170,7 +170,7 @@ var MasterEdit = function MasterEdit(_ref) {
             var _response$error$messa;
 
             var message = (_response$error$messa = response.error.message) !== null && _response$error$messa !== void 0 ? _response$error$messa : 'Something went wrong';
-            _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
+            _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
               text: message
             });
           }
@@ -179,7 +179,7 @@ var MasterEdit = function MasterEdit(_ref) {
             props.onSubmitError(data, response);
           }
         } else {
-          _alert__WEBPACK_IMPORTED_MODULE_5__["default"].success({
+          _alert__WEBPACK_IMPORTED_MODULE_5__.default.success({
             text: 'Data saved successfully'
           });
           setSubmitError({});
@@ -221,7 +221,7 @@ var MasterEdit = function MasterEdit(_ref) {
         }
       })["catch"](function (error) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
-        _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
+        _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
           text: error.message
         });
 
@@ -255,7 +255,7 @@ var MasterEdit = function MasterEdit(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCard, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardHeader, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
-        children: id && id != "" ? 'Edit Account' : 'Create Account'
+        children: id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardBody, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CForm, {
@@ -274,7 +274,7 @@ var MasterEdit = function MasterEdit(_ref) {
         },
         size: "md",
         color: "primary",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
           name: "cil-scrubber"
         }), " Submit"]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CButton, {
@@ -283,7 +283,7 @@ var MasterEdit = function MasterEdit(_ref) {
         onClick: resetForm,
         size: "md",
         color: "danger",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
           name: "cil-ban"
         }), " Reset"]
       })]
@@ -352,6 +352,14 @@ var BankAccountEdit = function BankAccountEdit(props) {
       accounts = _useState4[0],
       setAccounts = _useState4[1];
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    bank_id: '',
+    account_id: ''
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      initialData = _useState6[0],
+      setInitialData = _useState6[1];
+
   var activeCompany = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.activeCompany;
   });
@@ -369,7 +377,7 @@ var BankAccountEdit = function BankAccountEdit(props) {
         setAccounts(response.data.data);
       }
     })["catch"](function (error) {
-      _alert__WEBPACK_IMPORTED_MODULE_4__["default"].error({
+      _alert__WEBPACK_IMPORTED_MODULE_4__.default.error({
         text: error.response.message
       });
     });
@@ -383,15 +391,31 @@ var BankAccountEdit = function BankAccountEdit(props) {
     }).then(function (response) {
       setBanks(response.data.data);
     })["catch"](function (error) {
-      _alert__WEBPACK_IMPORTED_MODULE_4__["default"].error(error.response.data);
+      _alert__WEBPACK_IMPORTED_MODULE_4__.default.error(error.response.data);
     });
   }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__.default, {
+    title: "Bank Account",
     apiUrl: "/api/setup/bank-accounts",
     formatData: function formatData(data) {
+      var bank_id = data.bank_id,
+          account_id = data.account_id;
       return _objectSpread(_objectSpread({}, data), {}, {
+        bank_id: bank_id !== null && bank_id !== void 0 ? bank_id : initialData.bank_id,
+        account_id: account_id !== null && account_id !== void 0 ? account_id : initialData.account_id,
         company_id: activeCompany.id
       });
+    },
+    onSubmitSuccess: function onSubmitSuccess(request, response) {
+      var account_id = request.account_id,
+          bank_id = request.bank_id;
+
+      if (!request.id) {
+        setInitialData({
+          account_id: account_id,
+          bank_id: bank_id
+        });
+      }
     },
     children: function children(props) {
       var _props$data$bank_id, _props$data$number, _props$data$holder, _props$data$account_i;
@@ -414,7 +438,7 @@ var BankAccountEdit = function BankAccountEdit(props) {
               autoFocus: true,
               innerRef: props.ref,
               disabled: props.loading,
-              value: (_props$data$bank_id = props.data.bank_id) !== null && _props$data$bank_id !== void 0 ? _props$data$bank_id : '',
+              value: (_props$data$bank_id = props.data.bank_id) !== null && _props$data$bank_id !== void 0 ? _props$data$bank_id : initialData.bank_id,
               onChange: function onChange(e) {
                 return props.handleChange({
                   bank_id: e.target.value
@@ -499,7 +523,7 @@ var BankAccountEdit = function BankAccountEdit(props) {
               placeholder: "Choose account",
               autoComplete: "off",
               disabled: props.loading,
-              value: (_props$data$account_i = props.data.account_id) !== null && _props$data$account_i !== void 0 ? _props$data$account_i : '',
+              value: (_props$data$account_i = props.data.account_id) !== null && _props$data$account_i !== void 0 ? _props$data$account_i : initialData.account_id,
               onChange: function onChange(e) {
                 return props.handleChange({
                   account_id: e.target.value

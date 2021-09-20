@@ -28,7 +28,7 @@ const CurrencyList = () => {
     const activeCompany = useSelector(state => state.activeCompany)
     const dtRef = useRef(null)
     const history = useHistory()
-    
+
     useEffect(() => {
         if (Object.keys(activeCompany).length > 0){
             dtRef.current.setCustomFilter({company_id: activeCompany.id})
@@ -36,7 +36,7 @@ const CurrencyList = () => {
     }, [activeCompany])
 
     const topButtonsSlot = (
-          <>            
+          <>
             <CButton className="mr-2" color="primary" onClick={event => handleCreateRate(event)}>
                 <CIcon name="cil-plus" />
                 <span className="ml-2">Add Rate</span>
@@ -46,11 +46,11 @@ const CurrencyList = () => {
 
     const handleCreateRate = () => {
         history.push('/currencies/create-rate')
-    }   
+    }
 
     return (
-        <MasterList            
-            tableId="currencieslist"
+        <MasterList
+            tableId="currencyrateslist"
             fields={fields}
             tableRef={dtRef}
             apiUrl="/api/setup/currencies"

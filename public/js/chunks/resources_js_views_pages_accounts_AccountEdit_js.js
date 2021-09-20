@@ -170,7 +170,7 @@ var MasterEdit = function MasterEdit(_ref) {
             var _response$error$messa;
 
             var message = (_response$error$messa = response.error.message) !== null && _response$error$messa !== void 0 ? _response$error$messa : 'Something went wrong';
-            _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
+            _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
               text: message
             });
           }
@@ -179,7 +179,7 @@ var MasterEdit = function MasterEdit(_ref) {
             props.onSubmitError(data, response);
           }
         } else {
-          _alert__WEBPACK_IMPORTED_MODULE_5__["default"].success({
+          _alert__WEBPACK_IMPORTED_MODULE_5__.default.success({
             text: 'Data saved successfully'
           });
           setSubmitError({});
@@ -221,7 +221,7 @@ var MasterEdit = function MasterEdit(_ref) {
         }
       })["catch"](function (error) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
-        _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
+        _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
           text: error.message
         });
 
@@ -255,7 +255,7 @@ var MasterEdit = function MasterEdit(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCard, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardHeader, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
-        children: id && id != "" ? 'Edit Account' : 'Create Account'
+        children: id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardBody, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CForm, {
@@ -274,7 +274,7 @@ var MasterEdit = function MasterEdit(_ref) {
         },
         size: "md",
         color: "primary",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
           name: "cil-scrubber"
         }), " Submit"]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CButton, {
@@ -283,7 +283,7 @@ var MasterEdit = function MasterEdit(_ref) {
         onClick: resetForm,
         size: "md",
         color: "danger",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
           name: "cil-ban"
         }), " Reset"]
       })]
@@ -379,7 +379,7 @@ var AccountEdit = function AccountEdit(props) {
       });
       setParents(parentsData);
     })["catch"](function (error) {
-      _alert__WEBPACK_IMPORTED_MODULE_4__["default"].error(error.response.data);
+      _alert__WEBPACK_IMPORTED_MODULE_4__.default.error(error.response.data);
     });
   };
 
@@ -390,7 +390,7 @@ var AccountEdit = function AccountEdit(props) {
         setAccountTypes(response.data);
       }
     })["catch"](function (error) {
-      _alert__WEBPACK_IMPORTED_MODULE_4__["default"].error({
+      _alert__WEBPACK_IMPORTED_MODULE_4__.default.error({
         text: error.response.message
       });
     });
@@ -406,7 +406,8 @@ var AccountEdit = function AccountEdit(props) {
     }
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__.default, {
+    title: "Account",
     apiUrl: "/api/setup/accounts",
     onGetDataSuccess: function onGetDataSuccess(response) {
       getParents(response.data.account_type, response.data.id);

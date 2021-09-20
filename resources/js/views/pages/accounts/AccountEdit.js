@@ -8,16 +8,16 @@ import axios from 'axios'
 const AccountEdit = (props) => {
 
     const [parents, setParents] = useState([])
-    const [accountTypes, setAccountTypes] = useState([])    
+    const [accountTypes, setAccountTypes] = useState([])
     const [initialData, setInitialData] = useState({account_type: '', parent: ''})
     const activeCompany = useSelector(state => state.activeCompany)
 
-    const getParents = (type, id) => {        
+    const getParents = (type, id) => {
         axios.get("api/setup/account-parents", {
             params: {
                 type: type,
-                company_id: activeCompany.id,        
-                id: id        
+                company_id: activeCompany.id,
+                id: id
             }
         })
         .then(response => {
@@ -32,7 +32,7 @@ const AccountEdit = (props) => {
 
     const ref = useRef(null)
 
-    useEffect(() => {        
+    useEffect(() => {
         axios.get("/api/setup/account-types")
         .then(response => {
             if (response){
@@ -41,11 +41,11 @@ const AccountEdit = (props) => {
         })
         .catch(error => {
             MyAlert.error({text: error.response.message})
-        })        
+        })
 
     }, [])
-  
-    const prefix = (data) => {        
+
+    const prefix = (data) => {
         let account_type = data.account_type ?? initialData.account_type
         if (account_type != ''){
             return accountTypes[parseInt(account_type) - 1] ? accountTypes[parseInt(account_type) - 1].prefix : ''
@@ -53,13 +53,13 @@ const AccountEdit = (props) => {
     }
 
     return (
-        <MasterEdit
+        <MasterEdit title="Account"
             apiUrl="/api/setup/accounts"
             onGetDataSuccess={response => {
                 getParents(response.data.account_type, response.data.id)
             }}
-            onSubmitSuccess={(data, response) => {                
-                let {account_type, parent} = data;                                      
+            onSubmitSuccess={(data, response) => {
+                let {account_type, parent} = data;
                 if (!data.id){
                     setInitialData({
                         account_type: account_type,
@@ -70,7 +70,7 @@ const AccountEdit = (props) => {
             }}
             formatData={data => {
                 let {account_type, parent } = data
-                return {...data, 
+                return {...data,
                         parent: parent ?? initialData.parent,
                         account_type: account_type ?? initialData.account_type,
                         company_id: activeCompany.id}
@@ -78,8 +78,8 @@ const AccountEdit = (props) => {
             onChangeData={(oldData, newData) => {
                 if (newData.account_type && oldData.account_type != newData.account_type){
                     newData.parent = ''
-                    getParents(newData.account_type)                    
-                }                
+                    getParents(newData.account_type)
+                }
                 return newData
             }}
         >
@@ -98,7 +98,7 @@ const AccountEdit = (props) => {
                     required
                     value={props.data.account_type ?? initialData.account_type}
                     onChange={e => props.handleChange({account_type: e.target.value})}
-                    invalid={props.isInvalid('account_type')}                    
+                    invalid={props.isInvalid('account_type')}
                     >
                         <option value=""></option>
                     {

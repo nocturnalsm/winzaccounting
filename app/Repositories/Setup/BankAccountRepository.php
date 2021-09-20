@@ -19,7 +19,7 @@ class BankAccountRepository extends BaseRepository
         $this->data = $bank;
         $this->listFilters = [
             'account_name' => function($query, $key, $value){
-                $query->where(DB::raw("CONCAT(account_number, account_name)"), "LIKE", "%{$value}%");
+                return $query->where(DB::raw("CONCAT(account_number, account_name)"), "LIKE", "%{$value}%");
             }
         ];
     }

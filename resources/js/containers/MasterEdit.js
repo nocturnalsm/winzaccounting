@@ -16,8 +16,8 @@ const MasterEdit = ({children, ...props}) => {
     const [submitError, setSubmitError] = useState({})
 
     const dispatch = useDispatch()
-    const loading = useSelector(state => state.appLoading)    
-    
+    const loading = useSelector(state => state.appLoading)
+
     const handleChange = (values) => {
         let newData = {...data, ...values}
         if (props.onChangeData){
@@ -34,13 +34,13 @@ const MasterEdit = ({children, ...props}) => {
         event.preventDefault()
         event.stopPropagation()
         setValidated(true)
-                
+
         let request = props.formatData ? props.formatData(data) : data
         setData(request)
 
         if (form.checkValidity() === true) {
             const submit = async () => {
-                try {                    
+                try {
                     const response = await axios({
                         method: id ? 'put' : 'post',
                         url: props.apiUrl + (id ? "/" +id : ''),
@@ -75,7 +75,7 @@ const MasterEdit = ({children, ...props}) => {
                 }
                 else {
                     MyAlert.success({text: 'Data saved successfully'})
-                    setSubmitError({})                     
+                    setSubmitError({})
                     if (!id){
                         setData({})
                     }
@@ -94,7 +94,7 @@ const MasterEdit = ({children, ...props}) => {
     }
 
     useEffect(() => {
-        dispatch(setAppEditing(true));        
+        dispatch(setAppEditing(true));
 
         if (id){
             dispatch(setAppLoading(true))
@@ -102,7 +102,7 @@ const MasterEdit = ({children, ...props}) => {
             .then(response => {
                 dispatch(setAppLoading(false))
                 let dataId = id ? {id: id} : {}
-                setData({...dataId, ...response.data})                
+                setData({...dataId, ...response.data})
                 ref.current.focus()
                 if (props.onGetDataSuccess){
                     props.onGetDataSuccess(response)
@@ -143,11 +143,11 @@ const MasterEdit = ({children, ...props}) => {
     return (
         <CCard>
             <CCardHeader>
-                <h3>{id && id != "" ? 'Edit Account' : 'Create Account'}</h3>
-            </CCardHeader>            
+                <h3>{id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title}</h3>
+            </CCardHeader>
             <CCardBody>
                 <CForm className="form-horizontal needs-validation" noValidate wasValidated={validated} onSubmit={handleSubmit}>
-                    {children(childProps)}              
+                    {children(childProps)}
                 </CForm>
             </CCardBody>
             <CCardFooter>

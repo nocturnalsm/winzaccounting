@@ -9,7 +9,7 @@ const TaxCodeEdit = (props) => {
 
     const [accounts, setAccounts] = useState([])
     const activeCompany = useSelector(state => state.activeCompany)
-    
+
     useEffect(() => {
         axios.get("/api/setup/accounts", {
             params: {
@@ -29,13 +29,13 @@ const TaxCodeEdit = (props) => {
     }, [])
 
     return (
-        <MasterEdit 
+        <MasterEdit title="Tax Code"
             apiUrl="/api/setup/taxcodes"
             formatData={data => {
                 return {...data, company_id: activeCompany.id}
             }}>
             {props => (
-                <>            
+                <>
                     <CFormGroup row>
                         <CCol sm="4" lg="2">
                             <CLabel>Tax Name</CLabel>

@@ -6,11 +6,11 @@ import MyAlert from "../../../alert";
 import axios from 'axios'
 
 const BankAccountEdit = (props) => {
-    
+
     const [banks, setBanks] = useState([])
     const [accounts, setAccounts] = useState([])
-
-    const activeCompany = useSelector(state => state.activeCompany)    
+    const [initialData, setInitialData] = useState({bank_id: '', account_id: ''})
+    const activeCompany = useSelector(state => state.activeCompany)
 
     useEffect(() => {
         axios.get("/api/setup/accounts", {
@@ -39,15 +39,28 @@ const BankAccountEdit = (props) => {
         })
         .catch(error => {
             MyAlert.error(error.response.data)
-        })        
+        })
 
     }, [])
 
     return (
-        <MasterEdit
+        <MasterEdit title="Bank Account"
             apiUrl="/api/setup/bank-accounts"
             formatData={data => {
-                return {...data, company_id: activeCompany.id}
+                let {bank_id, account_id} = data
+                return {...data,
+                        bank_id: bank_id ?? initialData.bank_id,
+                        account_id: account_id ?? initialData.account_id,
+                        company_id: activeCompany.id}
+            }}
+            onSubmitSuccess={(request, response) => {
+                let {account_id, bank_id} = request;
+                if (!request.id){
+                    setInitialData({
+                        account_id: account_id,
+                        bank_id: bank_id
+                    })
+                }
             }}
             >
             {props => (
@@ -63,7 +76,7 @@ const BankAccountEdit = (props) => {
                             autoFocus={true}
                             innerRef={props.ref}
                             disabled={props.loading}
-                            value={props.data.bank_id ?? ''}
+                            value={props.data.bank_id ?? initialData.bank_id}
                             onChange={e => props.handleChange({bank_id: e.target.value})}
                             invalid={props.isInvalid('bank_id')}
                             >
@@ -124,7 +137,7 @@ const BankAccountEdit = (props) => {
                               placeholder="Choose account"
                               autoComplete="off"
                               disabled={props.loading}
-                              value={props.data.account_id ?? ''}
+                              value={props.data.account_id ?? initialData.account_id}
                               onChange={e => props.handleChange({account_id: e.target.value})}
                             >
                                 <option value=""></option>
@@ -138,7 +151,7 @@ const BankAccountEdit = (props) => {
                         </CCol>
                     </CFormGroup>
                 </>
-            )}            
+            )}
         </MasterEdit>
     )
 }

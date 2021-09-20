@@ -23,7 +23,7 @@ const DTable = React.forwardRef((props, ref) => {
             limit: 10,
             sort: null,
             order: 'asc',
-            filter: {}
+            filter: props.defaultFilter ?? {}
         };
         if (props.defaultFilter){
             let {filter, ...rest} = data
@@ -34,7 +34,7 @@ const DTable = React.forwardRef((props, ref) => {
     }
 
     useEffect(() => {
-        let data = initialParams()        
+        let data = initialParams()
         fetchData(data)
     }, [])
 
@@ -42,8 +42,12 @@ const DTable = React.forwardRef((props, ref) => {
 
         setCustomFilter(values) {
             let currParams = params.filter ?? initialParams().filter;
+            console.log('curr', currParams)
             let newFilter = {...currParams, ...values}
+            console.log('value', values)
+            console.log('new',newFilter)
             if (Object.keys(newFilter).length > 0 && !isEqual(newFilter, currParams)){
+                console.log('fetch')
                 fetchData({filter: newFilter})
             }
         },
@@ -101,6 +105,8 @@ const DTable = React.forwardRef((props, ref) => {
             }
             else if (field.type == 'custom'){
                 slots[field.key] = field.onRender;
+                field.sorter = true
+                return field;
             }
 
         })
@@ -169,8 +175,8 @@ const DTable = React.forwardRef((props, ref) => {
                   {
                     props.topButtonsSlot ? props.topButtonsSlot : (
                         props.createButtonVisible ? (
-                            <CreateButton 
-                                disabled={props.createButtonDisabled ?? false} 
+                            <CreateButton
+                                disabled={props.createButtonDisabled ?? false}
                                 color={props.createButtonColor ?? 'primary'}
                                 action={props.createAction}
                                 icon={props.createButtonIcon}

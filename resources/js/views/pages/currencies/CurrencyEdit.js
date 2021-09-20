@@ -7,7 +7,7 @@ const CurrencyEdit = (props) => {
     const activeCompany = useSelector(state => state.activeCompany)
 
     return (
-        <MasterEdit 
+        <MasterEdit title="Currency"
             apiUrl="/api/setup/currencies"
             formatData={data => {
                 return {...data, company_id: activeCompany.id}

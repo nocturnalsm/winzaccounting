@@ -4,13 +4,14 @@ import { CInput, CCol, CFormGroup, CLabel } from '@coreui/react'
 
 const BankEdit = (props) => {
 
-    const activeCompany = useSelector(state => state.activeCompany)    
+    const activeCompany = useSelector(state => state.activeCompany)
 
     return (
-        <MasterEdit 
-            apiUrl="/api/setup/banks"            
+        <MasterEdit title="Bank"
+            apiUrl="/api/setup/banks"
             formatData={data => {
-                return {...data, company_id: activeCompany.id}
+                return {...data,
+                        company_id: activeCompany.id}
             }}
             >
             {props => (
