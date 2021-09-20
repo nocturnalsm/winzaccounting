@@ -26,7 +26,7 @@ class BankAccountRepository extends BaseRepository
     public function validateUsing($params, $id = "")
     {
         return [
-            'bank_id' => 'required|exists:App\Models\Bank,id',
+            'bank_id' => 'bail|required|exists:App\Models\Bank,id',
             'number' => [
                 'required',
                 Rule::unique(BankAccount::class)->where(function ($query) use($params, $id) {
@@ -39,7 +39,16 @@ class BankAccountRepository extends BaseRepository
                 }),
 
             ],
-            'holder' => 'required'
+            'holder' => 'required',
+            'account_id' => function($attribute, $value, $fail) use ($params){
+                if ($value != ""){
+                    $query = Account::where("id", $value)
+                                     ->where("company_id", $params["company_id"]);                                     
+                    if (!$query->exists()){
+                        $fail("Parent Account does not exist");
+                    }
+                }
+            }
         ];
     }
 

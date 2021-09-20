@@ -118,7 +118,7 @@ const DTable = React.forwardRef((props, ref) => {
     const fetchData = async (request) => {
         let { page, limit, sort, order, filter } = { ...params, ...request}
 
-        if (!appLoading){
+        
             store.dispatch(setAppLoading(true));
             try {
                 let newParams = {
@@ -144,7 +144,7 @@ const DTable = React.forwardRef((props, ref) => {
             finally {
                 store.dispatch(setAppLoading(false));
             }
-        }
+        
     }
     const handlePageChange = newPage => {
         if (newPage > 0 && newPage != params.page){
@@ -202,7 +202,7 @@ const DTable = React.forwardRef((props, ref) => {
           <CDataTable
               items={data.data}
               fields={fields}
-              columnFilter
+              columnFilter={{external: true, lazy: true}}
               clickableRows={true}
               footer
               columnFilterValue={params.filter}
@@ -211,7 +211,7 @@ const DTable = React.forwardRef((props, ref) => {
               loading={appLoading}
               sorterValue={{column: params.sort, asc: params.order == 'asc' ?? true}}
               hover
-              sorter
+              sorter={{external:true}}
               onSorterValueChange={handleSort}
               scopedSlots = {customFields}
               columnFilterSlot = {props.customFilterInput}

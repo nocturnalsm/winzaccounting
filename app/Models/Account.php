@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     use HasFactory;
+    use \Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
+
+    public function getParentKeyName()
+    {
+        return 'parent';
+    }
 
     protected $fillable = [
         'number',

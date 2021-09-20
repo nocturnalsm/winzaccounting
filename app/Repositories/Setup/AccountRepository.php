@@ -22,7 +22,7 @@ class AccountRepository extends BaseRepository
             ],
             "number" => function($query, $key, $value){
                 return
-                    $query->where(DB::raw("CONCAT(at.prefix, accounts.number)"), "LIKE", "%{$value}%");
+                    $query->where(DB::raw("CONCAT(at.prefix, laravel_cte.number)"), "LIKE", "%{$value}%");
             }
         ];
     }
@@ -30,7 +30,7 @@ class AccountRepository extends BaseRepository
     public function validateUsing($params, $id = "")
     {
         return [
-            'company_id' => 'required',
+            'company_id' => 'bail|required|exists:App\Models\Company,id',
             'number' => [
                 'required',
                 Rule::unique(Account::class)->where(function ($query) use($params, $id) {
@@ -55,22 +55,45 @@ class AccountRepository extends BaseRepository
                 }),
 
             ],
-            'account_type' => 'required'
+            'account_type' => 'required',
+            'parent' => function($attr, $value, $fail) use($params){
+                            if ($value != "" && $value == (isset($params["id"]) ? $params["id"] : "")){
+                                $fail("Parent account cannot has the same id as the data");
+                            }
+                            else {
+                                if ($value != "" && $value != "0"){
+                                    $query = Account::where("id", $value)                                                
+                                                    ->where("company_id", $params["company_id"]);
+                                    if (!$query->exists()){
+                                        $fail('Account does not exists');
+                                    }
+                                }
+                            }
+                        }
         ];
     }
 
     public function listQuery($data)
     {
-        return $data->select("accounts.id", "accounts.name", "accountType",
-                             DB::raw("CONCAT(at.prefix, accounts.number) AS number"),
-                             "accounts.parent", "accounts.account_type",
+       
+        $constraint = function($query){
+            $query->whereNull("parent")
+                  ->orWhere("parent", "0");
+        };
+
+        
+            
+        $data = $data->treeOf($constraint)                    
+                    ->select("laravel_cte.id", "laravel_cte.name", "accountType", "depth",
+                             DB::raw("CONCAT(at.prefix, laravel_cte.number) AS number"),
+                             "laravel_cte.parent", "laravel_cte.account_type",
                              DB::raw("IFNULL(balance.amount,0) AS balance")
                      )
                      ->leftJoinSub(
                          AccountType::select("id", "prefix", DB::raw("name AS accountType")),
                          "at",
                          function($join){
-                             $join->on("at.id", "=", "accounts.account_type");
+                             $join->on("at.id", "=", "laravel_cte.account_type");
                          }
                      )
                      ->leftJoinSub(
@@ -78,13 +101,16 @@ class AccountRepository extends BaseRepository
                             ->where("date", "<=", Date("Y-m-d"))
                             ->orderBy("date"),
                           "balance", function($join){
-                              $join->on("accounts.id", "=", "balance.account_id");
+                              $join->on("laravel_cte.id", "=", "balance.account_id");
                       });
+        return $data;
+     
     }
     public function listSort($data, $sortBy, $order)
     {
-        $data->orderBy(DB::raw('accounts.account_type'), 'asc')
-             ->orderBy(DB::raw('accounts.number'), 'asc');
+        $data->orderBy(DB::raw('laravel_cte.account_type'), 'asc')
+             ->orderBy(DB::raw('laravel_cte.number'), 'asc')
+             ->depthFirst();
         return $data;
     }
     public function getTypes()

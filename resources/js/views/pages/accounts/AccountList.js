@@ -30,7 +30,14 @@ const AccountList = () => {
         },
         {
             label: 'Number',
-            key: 'number'
+            key: 'number',
+            type: 'custom',
+            onRender: (item, index) => 
+            (
+                <td>
+                    {("--").repeat(item.depth) + "  " + item.number}                    
+                </td>
+            )
         },
         {
             label: 'Name',

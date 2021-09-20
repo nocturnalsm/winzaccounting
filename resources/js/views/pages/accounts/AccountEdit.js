@@ -55,7 +55,7 @@ const AccountEdit = (props) => {
     return (
         <MasterEdit title="Account"
             apiUrl="/api/setup/accounts"
-            onGetDataSuccess={response => {
+            onOpen={response => {
                 getParents(response.data.account_type, response.data.id)
             }}
             onSubmitSuccess={(data, response) => {

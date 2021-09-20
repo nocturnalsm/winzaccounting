@@ -17,7 +17,7 @@ class CurrencyRepository extends BaseRepository
     public function validateUsing($params, $id = "")
     {        
         return [
-            'company_id' => 'required',
+            'company_id' => 'bail|required|exists:App\Models\Company,id',
             'name' => [
                 'required',                
                 Rule::unique(Currency::class)->where(function ($query) use($params, $id) {

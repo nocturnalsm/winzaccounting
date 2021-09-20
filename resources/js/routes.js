@@ -18,7 +18,10 @@ const BankEdit = React.lazy(() => import('./views/pages/banks/BankEdit'))
 const BankList = React.lazy(() => import('./views/pages/banks/BankList'))
 const CurrencyRateEdit = React.lazy(() => import('./views/pages/currency_rates/CurrencyRateEdit'))
 const CurrencyRateList = React.lazy(() => import('./views/pages/currency_rates/CurrencyRateList'))
-
+const UnitEdit = React.lazy(() => import('./views/pages/units/UnitEdit'))
+const UnitList = React.lazy(() => import('./views/pages/units/UnitList'))
+const ProductCategoryEdit = React.lazy(() => import('./views/pages/product-categories/ProductCategoryEdit'))
+const ProductCategoryList = React.lazy(() => import('./views/pages/product-categories/ProductCategoryList'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -50,7 +53,14 @@ const routes = [
   { path: '/bank-accounts', name: 'Bank Accounts', component: BankAccountList},
   { path: '/currency-rates/create', name: 'Create Currency Rate', component: CurrencyRateEdit},
   { path: '/currency-rates/:id', name: 'Edit Currency Rate', component: CurrencyRateEdit},
-  { path: '/currency-rates', name: 'Currency Rates', component: CurrencyRateList}
+  { path: '/currency-rates', name: 'Currency Rates', component: CurrencyRateList},
+  { path: '/units/create', name: 'Create Unit', component: UnitEdit},
+  { path: '/units/:id', name: 'Edit Unit', component: UnitEdit},
+  { path: '/units', name: 'Units', component: UnitList},
+  { path: '/product-categories/create', name: 'Create Product Category', component: ProductCategoryEdit},
+  { path: '/product-categories/:id', name: 'Edit Product Category', component: ProductCategoryEdit},
+  { path: '/product-categories', name: 'Product Category', component: ProductCategoryList}
+
 
 ]
 

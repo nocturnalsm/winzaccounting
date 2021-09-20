@@ -16,7 +16,7 @@ class TaxCodeRepository extends BaseRepository
     {
         $this->data = $taxCode;
         $this->listFilters =  [
-            'account' => function($query, $key, $value){
+            'account_name' => function($query, $key, $value){
                 return 
                     $query->where(DB::raw("CONCAT(account_number, account_name)"), "LIKE", "%{$value}%");
             }
@@ -42,7 +42,7 @@ class TaxCodeRepository extends BaseRepository
     public function validateUsing($params, $id = "")
     {        
         return [
-            'company_id' => 'required',
+            'company_id' => 'bail|required|exists:App\Models\Company,id',
             'code' => [
                 'required',                
                 Rule::unique(TaxCode::class)->where(function ($query) use($params, $id) {
@@ -66,8 +66,16 @@ class TaxCodeRepository extends BaseRepository
                 }),
                 
             ],
-            'percentage' => 'required|numeric|min:0|max:100',
-            'account_id' => 'exists:accounts,id'
+            'percentage' => 'required|numeric|min:0|max:100',            
+            'account_id' => function($attribute, $value, $fail) use ($params){
+                if ($value != ""){
+                    $query = Account::where("id", $value)
+                                     ->where("company_id", $params["company_id"]);                                     
+                    if (!$query->exists()){
+                        $fail("Account does not exist");
+                    }
+                }
+            },
         ];
     }
 }

@@ -19,7 +19,7 @@ const TaxCodeList = () => {
         },
         {
             label: 'Linked Account',
-            key: 'account',
+            key: 'account_name',
             type: 'custom',
             onRender: (item) => (
                 <td>{item.account_number ? item.account_number +' - '+ item.account_name : ''}</td>

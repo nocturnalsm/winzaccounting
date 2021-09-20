@@ -1,4 +1,4 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_companies_CompanyList_js"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_product-categories_ProductCategoryList_js"],{
 
 /***/ "./resources/js/components/datatable/CreateButton.js":
 /*!***********************************************************!*\
@@ -691,10 +691,10 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
 
 /***/ }),
 
-/***/ "./resources/js/views/pages/companies/CompanyList.js":
-/*!***********************************************************!*\
-  !*** ./resources/js/views/pages/companies/CompanyList.js ***!
-  \***********************************************************/
+/***/ "./resources/js/views/pages/product-categories/ProductCategoryList.js":
+/*!****************************************************************************!*\
+  !*** ./resources/js/views/pages/product-categories/ProductCategoryList.js ***!
+  \****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -703,37 +703,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _containers_MasterList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../containers/MasterList */ "./resources/js/containers/MasterList.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
-var CompanyList = function CompanyList() {
+
+
+var ProductCategoryList = function ProductCategoryList() {
+  var activeCompany = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
+    return state.activeCompany;
+  });
+  var dtRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   var fields = [{
     label: 'Name',
-    key: 'name'
+    key: 'name',
+    type: 'custom',
+    onRender: function onRender(item, index) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+        children: "--".repeat(item.depth) + "  " + item.name
+      });
+    }
   }, {
-    label: 'Type',
-    key: 'company_type'
-  }, {
-    label: 'Tax ID',
-    key: 'tax_number'
-  }, {
-    label: 'URL',
-    key: 'url',
-    type: 'url'
+    label: 'Code',
+    key: 'code'
   }, {
     label: 'Action',
     type: 'toolbar'
   }];
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_containers_MasterList__WEBPACK_IMPORTED_MODULE_0__["default"], {
-    tableId: "companieslist",
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    if (Object.keys(activeCompany).length > 0) {
+      dtRef.current.setCustomFilter({
+        company_id: activeCompany.id
+      });
+    }
+  }, [activeCompany]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_containers_MasterList__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    tableId: "productcategorieslist",
     fields: fields,
-    apiUrl: "/api/admin/companies",
-    showToolbar: false
+    tableRef: dtRef,
+    apiUrl: "/api/setup/product-categories",
+    defaultFilter: {
+      company_id: activeCompany.id
+    },
+    editUrl: "/product-categories",
+    createUrl: "/product-categories/create"
   });
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CompanyList);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProductCategoryList);
 
 /***/ }),
 

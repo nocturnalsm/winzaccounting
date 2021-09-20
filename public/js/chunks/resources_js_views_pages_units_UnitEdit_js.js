@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_currency_rates_CurrencyRateEdit_js"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_pages_units_UnitEdit_js"],{
 
 /***/ "./resources/js/containers/MasterEdit.js":
 /*!***********************************************!*\
@@ -299,10 +299,10 @@ var MasterEdit = function MasterEdit(_ref) {
 
 /***/ }),
 
-/***/ "./resources/js/views/pages/currency_rates/CurrencyRateEdit.js":
-/*!*********************************************************************!*\
-  !*** ./resources/js/views/pages/currency_rates/CurrencyRateEdit.js ***!
-  \*********************************************************************/
+/***/ "./resources/js/views/pages/units/UnitEdit.js":
+/*!****************************************************!*\
+  !*** ./resources/js/views/pages/units/UnitEdit.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -345,57 +345,47 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var CurrencyRateEdit = function CurrencyRateEdit(props) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    currency_id: ''
-  }),
+var UnitEdit = function UnitEdit(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      initialData = _useState2[0],
-      setInitialData = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      currencies = _useState4[0],
-      setCurrencies = _useState4[1];
+      units = _useState2[0],
+      setUnits = _useState2[1];
 
   var activeCompany = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.activeCompany;
   });
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_5___default().get("api/setup/currencies", {
+
+  var getUnits = function getUnits(id) {
+    axios__WEBPACK_IMPORTED_MODULE_5___default().get("api/setup/per_units", {
       params: {
-        filter: {
-          company_id: activeCompany.id
-        },
-        limit: 1000
+        unit: id,
+        company_id: activeCompany.id
       }
     }).then(function (response) {
-      setCurrencies(response.data.data);
+      setUnits(response.data);
     })["catch"](function (error) {
       _alert__WEBPACK_IMPORTED_MODULE_4__["default"].error(error.response.data);
     });
-  }, []);
+  };
+
+  var ref = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__["default"], {
-    title: "Currency Rate",
-    apiUrl: "/api/setup/currency-rates",
+    title: "Unit",
+    apiUrl: "/api/setup/units",
+    onOpen: function onOpen(response) {
+      if (response) {
+        getUnits(response.data.id);
+      } else {
+        getUnits();
+      }
+    },
     formatData: function formatData(data) {
-      var currency_id = data.currency_id;
       return _objectSpread(_objectSpread({}, data), {}, {
-        currency_id: currency_id !== null && currency_id !== void 0 ? currency_id : initialData.currency_id,
         company_id: activeCompany.id
       });
     },
-    onSubmitSuccess: function onSubmitSuccess(request, response) {
-      var currency_id = request.currency_id;
-
-      if (!request.id) {
-        setInitialData({
-          currency_id: currency_id
-        });
-      }
-    },
     children: function children(props) {
-      var _props$data$currency_, _props$data$start, _props$data$end, _props$data$buy, _props$data$sell;
+      var _props$data$name, _props$data$code, _props$data$qty_per_u, _props$data$qty_unit;
 
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
@@ -404,133 +394,101 @@ var CurrencyRateEdit = function CurrencyRateEdit(props) {
             sm: "4",
             lg: "2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Currency"
+              children: "Unit Name"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "8",
+            lg: "5",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
+              placeholder: "Enter unit name",
+              autoComplete: "off",
+              autoFocus: "true",
+              type: "text",
+              innerRef: props.ref,
+              disabled: props.loading,
+              onChange: function onChange(e) {
+                return props.handleChange({
+                  name: e.target.value
+                });
+              },
+              value: (_props$data$name = props.data.name) !== null && _props$data$name !== void 0 ? _props$data$name : '',
+              invalid: props.isInvalid('name'),
+              required: true
+            }), props.feedback('name', "Please enter a name")]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
+          row: true,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "4",
+            lg: "2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
+              children: "Unit Code"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
             lg: "3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CSelect, {
-              placeholder: "Choose Currency",
-              autoFocus: true,
-              innerRef: props.ref,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
+              placeholder: "Enter unit code",
+              autoComplete: "off",
+              type: "text",
               disabled: props.loading,
-              required: true,
-              value: (_props$data$currency_ = props.data.currency_id) !== null && _props$data$currency_ !== void 0 ? _props$data$currency_ : initialData.currency_id,
               onChange: function onChange(e) {
                 return props.handleChange({
-                  currency_id: e.target.value
+                  code: e.target.value
                 });
               },
-              invalid: props.isInvalid('currency_id'),
+              value: (_props$data$code = props.data.code) !== null && _props$data$code !== void 0 ? _props$data$code : '',
+              invalid: props.isInvalid('code')
+            }), props.feedback('code')]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
+          row: true,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "4",
+            lg: "2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
+              children: "Qty per Unit"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "4",
+            lg: "2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
+              placeholder: "Enter quantity per unit",
+              autoComplete: "off",
+              type: "number",
+              disabled: props.loading,
+              onChange: function onChange(e) {
+                return props.handleChange({
+                  qty_per_unit: e.target.value
+                });
+              },
+              value: (_props$data$qty_per_u = props.data.qty_per_unit) !== null && _props$data$qty_per_u !== void 0 ? _props$data$qty_per_u : '',
+              invalid: props.isInvalid('qty_per_unit')
+            }), props.feedback('qty_per_unit')]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+            sm: "4",
+            lg: "2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CSelect, {
+              type: "text",
+              placeholder: "Choose Unit",
+              autoComplete: "off",
+              disabled: props.loading,
+              value: (_props$data$qty_unit = props.data.qty_unit) !== null && _props$data$qty_unit !== void 0 ? _props$data$qty_unit : '',
+              onChange: function onChange(e) {
+                return props.handleChange({
+                  qty_unit: e.target.value
+                });
+              },
+              invalid: props.isInvalid('qty_unit'),
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
                 value: ""
-              }), currencies.map(function (item, index) {
+              }), units.map(function (item, index) {
                 return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
                   value: item.id,
                   children: item.name
                 }, item.id);
               })]
-            }), props.feedback('currency_id')]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
-          row: true,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "4",
-            lg: "2",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Valid From"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "8",
-            lg: "3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
-              placeholder: "Choose start date",
-              autoComplete: "off",
-              type: "date",
-              disabled: props.loading,
-              onChange: function onChange(e) {
-                return props.handleChange({
-                  start: e.target.value
-                });
-              },
-              value: (_props$data$start = props.data.start) !== null && _props$data$start !== void 0 ? _props$data$start : '',
-              invalid: props.isInvalid('start')
-            }), props.feedback('start', 'Choose start date')]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
-          row: true,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "4",
-            lg: "2",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "To"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "8",
-            lg: "3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
-              placeholder: "Choose end date",
-              autoComplete: "off",
-              type: "date",
-              disabled: props.loading,
-              onChange: function onChange(e) {
-                return props.handleChange({
-                  end: e.target.value
-                });
-              },
-              value: (_props$data$end = props.data.end) !== null && _props$data$end !== void 0 ? _props$data$end : '',
-              invalid: props.isInvalid('end')
-            }), props.feedback('end', 'Please choose end date')]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
-          row: true,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "4",
-            lg: "2",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Buy"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "8",
-            lg: "5",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
-              placeholder: "Enter buy rate",
-              autoComplete: "off",
-              type: "number",
-              disabled: props.loading,
-              onChange: function onChange(e) {
-                return props.handleChange({
-                  buy: e.target.value
-                });
-              },
-              value: (_props$data$buy = props.data.buy) !== null && _props$data$buy !== void 0 ? _props$data$buy : '',
-              invalid: props.isInvalid('buy')
-            }), props.feedback('buy')]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
-          row: true,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "4",
-            lg: "2",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Sell"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "8",
-            lg: "5",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
-              placeholder: "Enter sell rate",
-              autoComplete: "off",
-              type: "number",
-              disabled: props.loading,
-              onChange: function onChange(e) {
-                return props.handleChange({
-                  sell: e.target.value
-                });
-              },
-              value: (_props$data$sell = props.data.sell) !== null && _props$data$sell !== void 0 ? _props$data$sell : '',
-              invalid: props.isInvalid('sell')
-            }), props.feedback('sell')]
+            }), props.feedback('qty_unit')]
           })]
         })]
       });
@@ -538,7 +496,7 @@ var CurrencyRateEdit = function CurrencyRateEdit(props) {
   });
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CurrencyRateEdit);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UnitEdit);
 
 /***/ })
 

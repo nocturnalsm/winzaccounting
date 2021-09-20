@@ -21,7 +21,7 @@ class CurrencyRateRepository extends BaseRepository
     public function validateUsing($params, $id = "")
     {
         return [
-            'currency_id' => 'required|exists:App\Models\Currency,id',
+            'currency_id' => 'bail|required|exists:App\Models\Currency,id',
             'start' => [
                 'bail',
                 'required_without:end',
@@ -72,8 +72,8 @@ class CurrencyRateRepository extends BaseRepository
                 }),
 
             ],
-            'buy' => 'required_without:sell',
-            'sell' => 'required_without:buy'
+            'buy' => 'required_without:sell|min:0',
+            'sell' => 'required_without:buy|min:0'
         ];
     }
     public function listQuery($data)
