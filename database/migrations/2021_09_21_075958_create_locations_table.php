@@ -22,7 +22,7 @@ class CreateLocationsTable extends Migration
             $table->string('city')->nullable();            
             $table->string('region')->nullable();
             $table->string('province')->nullable();
-            $tanle->string('zip_code')->nullable();
+            $table->string('zip_code')->nullable();
             $table->unsignedInteger('country')->nullable();
             $table->smallInteger('status')->nullable();
             $table->timestamps();
