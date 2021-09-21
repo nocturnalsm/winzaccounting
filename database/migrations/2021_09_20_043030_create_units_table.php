@@ -20,6 +20,7 @@ class CreateUnitsTable extends Migration
             $table->string('code', 10);
             $table->decimal('qty_per_unit')->nullable();
             $table->unsignedInteger('qty_unit')->nullable();
+            $table->smallInteger('status')->nullable();
             $table->timestamps();
         });
     }
