@@ -3,10 +3,9 @@ import {
   CDropdown,  
   CDropdownItem,
   CDropdownMenu,
-  CDropdownToggle,
-  CDropdownDivider
+  CDropdownToggle
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
+
 
 const TopMenu = (props) => {
     return (

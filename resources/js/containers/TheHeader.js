@@ -24,7 +24,7 @@ import {
   TheHeaderDropdownTasks
 }  from './index'
 
-import { SetupMenu, AdminMenu } from './menus/index';
+import { SetupMenu, LedgerMenu, AdminMenu } from './menus/index';
 
 const TheHeader = () => {
   const dispatch = useDispatch()
@@ -61,6 +61,7 @@ const TheHeader = () => {
           <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
         </CHeaderNavItem>
         <SetupMenu className="px-3" />
+        <LedgerMenu className="px-3" />
         <AdminMenu className="px-3" />
         <CHeaderNavItem className="px-3">
           <CHeaderNavLink>Settings</CHeaderNavLink>
