@@ -7,7 +7,7 @@ import axios from 'axios'
 
 const UnitEdit = (props) => {
 
-    const [units, setUnits] = useState([])    
+    const [units, setUnits] = useState([])
     const activeCompany = useSelector(state => state.activeCompany)
 
     const getUnits = (id) => {
@@ -22,11 +22,11 @@ const UnitEdit = (props) => {
         })
     }
 
-    const ref = useRef(null)    
+    const ref = useRef(null)
 
     return (
         <MasterEdit title="Unit"
-            apiUrl="/api/setup/units"            
+            apiUrl="/api/setup/units"
             onOpen={response => {
                 if (response){
                     getUnits(response.data.id)
@@ -34,13 +34,16 @@ const UnitEdit = (props) => {
                 else {
                     getUnits()
                 }
-            }}            
-            formatData={data => {                
+            }}
+            onSubmitSuccess={request => {
+                getUnits(request.id)
+            }}
+            formatData={data => {
                 return {...data, company_id: activeCompany.id}
             }}
         >
         {props => (
-            <>                                 
+            <>
             <CFormGroup row>
                 <CCol sm="4" lg="2">
                     <CLabel>Unit Name</CLabel>
@@ -49,7 +52,7 @@ const UnitEdit = (props) => {
                     <CInput
                         placeholder="Enter unit name"
                         autoComplete="off"
-                        autoFocus="true"
+                        autoFocus={true}
                         type="text"
                         innerRef={props.ref}
                         disabled={props.loading}
@@ -99,7 +102,7 @@ const UnitEdit = (props) => {
                         type="text"
                         placeholder="Choose Unit"
                         autoComplete="off"
-                        disabled={props.loading}                        
+                        disabled={props.loading}
                         value={props.data.qty_unit ?? ''}
                         onChange={e => props.handleChange({qty_unit: e.target.value})}
                         invalid={props.isInvalid('qty_unit')}

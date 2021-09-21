@@ -29,7 +29,7 @@ var CreateButton = function CreateButton(props) {
     onClick: function onClick(event) {
       return props.action(event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
       name: (_props$icon = props.icon) !== null && _props$icon !== void 0 ? _props$icon : 'cil-plus'
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
       className: "ml-2",
@@ -75,7 +75,7 @@ var DTToolbarShow = function DTToolbarShow(props) {
     onClick: function onClick(event) {
       return props.showAction(props.item, event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
       name: "cil-magnifying-glass"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -97,7 +97,7 @@ var DTToolbarEdit = function DTToolbarEdit(props) {
       return props.editAction(props.item, event);
     } //{props.editLink ? props.editLink.replace(/\/$/, '') + "/" + props._id : ''}
     ,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
       name: "cilPencil"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -118,7 +118,7 @@ var DTToolbarDelete = function DTToolbarDelete(props) {
     onClick: function onClick(event) {
       return props.deleteAction(props.item, event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
       name: "cilTrash"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -318,7 +318,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         field['filter'] = false;
 
         slots[field.key] = function (item, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_4__.default, {
             item: item,
             createAction: props.createAction,
             editAction: props.editAction,
@@ -406,7 +406,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
             case 12:
               _context.prev = 12;
               _context.t0 = _context["catch"](2);
-              _alert__WEBPACK_IMPORTED_MODULE_3__["default"].error({
+              _alert__WEBPACK_IMPORTED_MODULE_3__.default.error({
                 text: _context.t0.response.data.message
               });
 
@@ -474,7 +474,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         xs: "6",
         md: "9",
         lg: "10",
-        children: props.topButtonsSlot ? props.topButtonsSlot : props.createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_CreateButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        children: props.topButtonsSlot ? props.topButtonsSlot : props.createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_CreateButton__WEBPACK_IMPORTED_MODULE_5__.default, {
           disabled: (_props$createButtonDi = props.createButtonDisabled) !== null && _props$createButtonDi !== void 0 ? _props$createButtonDi : false,
           color: (_props$createButtonCo = props.createButtonColor) !== null && _props$createButtonCo !== void 0 ? _props$createButtonCo : 'primary',
           action: props.createAction,
@@ -596,7 +596,7 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
         }).then(function (response) {
           params.success(response);
         })["catch"](function (error) {
-          _alert__WEBPACK_IMPORTED_MODULE_3__["default"].error({
+          _alert__WEBPACK_IMPORTED_MODULE_3__.default.error({
             text: error.response.message
           });
           params.error(error);
@@ -606,16 +606,16 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
   });
 
   var handleDelete = function handleDelete(data, clickEvent) {
-    _alert__WEBPACK_IMPORTED_MODULE_3__["default"].confirm({
+    _alert__WEBPACK_IMPORTED_MODULE_3__.default.confirm({
       title: 'Are you sure to delete this data ?',
       confirmAction: function confirmAction() {
-        axios__WEBPACK_IMPORTED_MODULE_4___default()["delete"](props.apiUrl + "/" + data.id).then(function () {
-          _alert__WEBPACK_IMPORTED_MODULE_3__["default"].success({
+        axios__WEBPACK_IMPORTED_MODULE_4___default().delete(props.apiUrl + "/" + data.id).then(function () {
+          _alert__WEBPACK_IMPORTED_MODULE_3__.default.success({
             text: "Data successfully deleted"
           });
           props.tableRef.current.refresh();
         })["catch"](function (error) {
-          _alert__WEBPACK_IMPORTED_MODULE_3__["default"].error({
+          _alert__WEBPACK_IMPORTED_MODULE_3__.default.error({
             text: error.response
           });
         });
@@ -656,7 +656,7 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
 
     var createButtonVisible = (_props$createButtonVi = props.createButtonVisible) !== null && _props$createButtonVi !== void 0 ? _props$createButtonVi : true;
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: [createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_CreateButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      children: [createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_CreateButton__WEBPACK_IMPORTED_MODULE_5__.default, {
         className: "mr-2",
         disabled: (_props$createButtonDi = props.createButtonDisabled) !== null && _props$createButtonDi !== void 0 ? _props$createButtonDi : false,
         color: (_props$createButtonCo = props.createButtonColor) !== null && _props$createButtonCo !== void 0 ? _props$createButtonCo : 'primary',
@@ -669,7 +669,7 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCard, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCardBody, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_1__["default"], (_jsx2 = {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_1__.default, (_jsx2 = {
         _id: props.tableId,
         fields: props.fields,
         ref: props.tableRef,
@@ -739,7 +739,7 @@ var ProductCategoryList = function ProductCategoryList() {
       });
     }
   }, [activeCompany]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_containers_MasterList__WEBPACK_IMPORTED_MODULE_0__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_containers_MasterList__WEBPACK_IMPORTED_MODULE_0__.default, {
     tableId: "productcategorieslist",
     fields: fields,
     tableRef: dtRef,

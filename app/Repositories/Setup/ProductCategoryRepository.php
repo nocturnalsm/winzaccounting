@@ -41,14 +41,14 @@ class ProductCategoryRepository extends BaseRepository
                     return $query;
                 }),
 
-            ],            
+            ],
             'parent' => function($attr, $value, $fail) use($params){
                             if ($value != "" && $value == (isset($params["id"]) ? $params["id"] : "")){
                                 $fail("Parent category cannot has the same id as the data");
                             }
                             else {
                                 if ($value != "" && $value != "0"){
-                                    $query = ProductCategory::where("id", $value)                                                
+                                    $query = ProductCategory::where("id", $value)
                                                             ->where("company_id", $params["company_id"]);
                                     if (!$query->exists()){
                                         $fail('Product Category does not exists');
@@ -60,20 +60,23 @@ class ProductCategoryRepository extends BaseRepository
     }
 
     public function listQuery($data)
-    {       
+    {
         $constraint = function($query){
             $query->whereNull("parent")
                   ->orWhere("parent", "0");
         };
-        $data = $data->treeOf($constraint)                    
+        $data = $data->treeOf($constraint)
                     ->select("id", "name", "code", "depth", "parent", "company_id");
         return $data;
-     
+
     }
     public function listSort($data, $sortBy, $order)
     {
-        return $data->depthFirst()
-                    ->orderBy($sortBy, $order);
+        $data->depthFirst();
+        if ($sortBy != ""){
+            $data->orderBy($sortBy, $order);
+        }
+        return $data;
     }
     public function getParents($company_id, $id = '')
     {

@@ -18,7 +18,7 @@ const ProductCategoryEdit = (props) => {
                 id: id
             }
         })
-        .then(response => {            
+        .then(response => {
             setParents(response.data);
         })
         .catch(error => {
@@ -26,7 +26,7 @@ const ProductCategoryEdit = (props) => {
         })
     }
 
-    const ref = useRef(null)        
+    const ref = useRef(null)
 
     return (
         <MasterEdit title="Product Category"
@@ -53,10 +53,10 @@ const ProductCategoryEdit = (props) => {
                 return {...data,
                         parent: parent ?? initialData.parent,
                         company_id: activeCompany.id}
-            }}            
+            }}
         >
         {props => (
-            <>                                    
+            <>
             <CFormGroup row>
                 <CCol sm="4" lg="2">
                     <CLabel>Category Name</CLabel>
@@ -81,7 +81,7 @@ const ProductCategoryEdit = (props) => {
                 <CCol sm="4" lg="2">
                     <CLabel>Category Code</CLabel>
                 </CCol>
-                <CCol sm="8" lg="3">                    
+                <CCol sm="8" lg="3">
                     <CInput
                         placeholder="Enter category code"
                         autoComplete="off"
@@ -91,7 +91,7 @@ const ProductCategoryEdit = (props) => {
                         value={props.data.code ?? ''}
                         invalid={props.isInvalid('code')}
                     />
-                    {props.feedback('code')}                    
+                    {props.feedback('code')}
                 </CCol>
             </CFormGroup>
             <CFormGroup row>
