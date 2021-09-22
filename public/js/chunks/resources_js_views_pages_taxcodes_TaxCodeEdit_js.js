@@ -96,6 +96,8 @@ var MasterEdit = function MasterEdit(_ref) {
   });
 
   var handleChange = function handleChange(values) {
+    console.log(values);
+
     var newData = _objectSpread(_objectSpread({}, data), values);
 
     if (props.onChangeData) {

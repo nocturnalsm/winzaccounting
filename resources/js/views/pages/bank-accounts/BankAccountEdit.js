@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { CSelect, CInput, CCol, CFormGroup, CLabel} from '@coreui/react'
 import MyAlert from "../../../alert";
+import BankSearch from '../../../components/search/BankSearch'
 import axios from 'axios'
 
 const BankAccountEdit = (props) => {
@@ -70,24 +71,17 @@ const BankAccountEdit = (props) => {
                             <CLabel>Bank</CLabel>
                         </CCol>
                         <CCol sm="8" lg="3">
-                            <CSelect
-                            placeholder="Choose Bank"
-                            required
-                            autoFocus={true}
-                            innerRef={props.ref}
-                            disabled={props.loading}
-                            value={props.data.bank_id ?? initialData.bank_id}
-                            onChange={e => props.handleChange({bank_id: e.target.value})}
-                            invalid={props.isInvalid('bank_id')}
-                            >
-                              <option value=""></option>
-                            {
-                              banks ?
-                              banks.map((item, index) => (
-                                  <option key={item.id} value={item.id}>{item.name}</option>
-                              )) : ''
-                            }
-                            </CSelect>
+                            <BankSearch
+                              placeholder="Choose Bank"
+                              required
+                              autoFocus={true}
+                              innerRef={props.ref}
+                              disabled={props.loading}
+                              value={props.data.bank_id ?? initialData.bank_id}
+                              onChange={value => props.handleChange({bank_id: value})}
+                              invalid={props.isInvalid('bank_id')}
+                              filter={{company_id: activeCompany.id}}
+                            />
                             {props.feedback('bank_id')}
                         </CCol>
                     </CFormGroup>

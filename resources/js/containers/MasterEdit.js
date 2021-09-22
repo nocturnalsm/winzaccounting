@@ -19,13 +19,14 @@ const MasterEdit = ({children, ...props}) => {
     const loading = useSelector(state => state.appLoading)
 
     const handleChange = (values) => {
+        console.log(values)
         let newData = {...data, ...values}
         if (props.onChangeData){
             newData = props.onChangeData(data, newData)
         }
         setData(newData)
     }
-    
+
     const ref = useRef(null)
     const history = useHistory()
 
@@ -103,7 +104,7 @@ const MasterEdit = ({children, ...props}) => {
                 dispatch(setAppLoading(false))
                 let dataId = id ? {id: id} : {}
                 setData({...dataId, ...response.data})
-                ref.current.focus()                
+                ref.current.focus()
                 if (props.onOpen){
                     props.onOpen(response)
                 }
