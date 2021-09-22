@@ -26,7 +26,7 @@ class BaseRepository implements RepositoryInterface
         $list = new PaginatedList($data);
         
         if ($this->listFilters && count($this->listFilters) > 0){            
-            $list->setFilters($this->listFilters);
+            $list->setFilterRules($this->listFilters);
         }
 
         if (method_exists($this, 'listFilter')){                        
@@ -41,7 +41,14 @@ class BaseRepository implements RepositoryInterface
             });
         }
 
-        return $list->make($request);
+        $params = $request->all();
+        $page = isset($params['page']) ? $params['page'] : 1;
+        $limit = isset($params['limit']) ? $params['limit'] : 10;
+        $sortBy = isset($params['sort']) ? $params['sort'] : '';
+        $order = isset($params['order']) ? $params['order'] : 'asc';
+        $filter = isset($params['filter']) ? json_decode($params['filter'], true) : '';
+
+        return $list->make($page, $limit, $sortBy, $order, $filter);
     }
     public function getById(String $id)
     {
@@ -79,6 +86,54 @@ class BaseRepository implements RepositoryInterface
         $data = $this->data->findOrFail($id);
         $data->delete();
         return true;
+    }
+    public function search(Request $request, $rules = null)
+    {
+        $params = $request->all();        
+        $query = isset($params["q"]) ? $params["q"] : ""; 
+        $filter = isset($params["filter"]) ? json_decode($params['filter'], true) : '';                         
+        $sortBy = isset($params['sort']) ? $params['sort'] : '';
+        $order = isset($params['order']) ? $params['order'] : 'ASC';        
+        $data = $this->data;
+        
+        if (method_exists($this, 'listQuery')){
+            $data = $this->listQuery($data);
+        }
+        if (is_array($filter)){
+            if (method_exists($this, 'searchFilter')){
+                $data = $this->searchFilter($data, $filter);
+            }
+            else {
+                foreach ($filter as $key=>$flt){
+                    $data->where($key, $flt);                
+                }
+            }
+        }
+
+        $list = new PaginatedList($data);
+        $list->setFilterOperator("OR");
+        
+        if (is_null($rules) && method_exists($this, 'getSearchRules')){
+            $rules = $this->getSearchRules();
+        }
+
+        $valueFilters = [];
+        if (is_array($rules)){            
+            $list->setFilterRules($rules);
+            foreach ($rules as $key => $rule){
+                $value = isset($flt["value"]) ? trim($flt["value"]) : trim($query);
+                $valueFilters[$key] = $value;
+            }
+        }
+        
+        if (method_exists($this, 'listSort')){
+            $list->useSort(function($data, $sortBy, $order){
+                return $this->listSort($data, $sortBy, $order);
+            });
+        }
+
+        return $list->make(1, '', $sortBy, $order, $valueFilters);
+
     }
 
 }

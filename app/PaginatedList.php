@@ -2,14 +2,13 @@
 
 namespace App;
 
-use Illuminate\Http\Request;
-
 class PaginatedList
 {
     private $filterFunction;
     private $queryFunction;
     private $sortFunction;
-    private $filters = [];
+    private $filterOperator = "AND";
+    private $filterRules = [];
     private $data;
 
     public function __construct($data)
@@ -17,16 +16,11 @@ class PaginatedList
         $this->data = $data;
         $this->filterFunction = $this->defaultFilter();
     }
-    public function make(Request $request)
+    public function make($page = 1, $limit = '', $sortBy = '', $order = 'asc', $filter = '')
     {
+        
         $data = $this->data;
-        $params = $request->all();
-        $page = isset($params['page']) ? $params['page'] : 1;
-        $limit = isset($params['limit']) ? $params['limit'] : 10;
-        $sortBy = isset($params['sort']) ? $params['sort'] : '';
-        $order = isset($params['order']) ? $params['order'] : 'ASC';
-        $filter = isset($params['filter']) ? json_decode($params['filter'], true) : '';
-
+        
         if (is_callable($this->queryFunction)){
             $data = ($this->queryFunction)($data);
         }
@@ -46,9 +40,11 @@ class PaginatedList
             }
         }
 
-        $data = $data->limit($limit)
-                     ->offset(($page - 1)*$limit);
-
+        if (trim($limit) != ''){
+            $data = $data->limit($limit)
+                         ->offset(($page - 1)*$limit);
+        }
+        
         return [
             "count" => $count,
             "data" => $data->get()
@@ -75,17 +71,17 @@ class PaginatedList
     private function defaultFilter()
     {
         return function($data, $filter){
-
+            
             $data = $data->where(function($query) use ($filter){
                 foreach ($filter as $key=>$value){
                     if (trim($value) != ""){
-                        if (isset($this->filters[$key])){
-                            $itemFilter = $this->filters[$key];
+                        if (isset($this->filterRules[$key])){
+                            $itemFilter = $this->filterRules[$key];
                             if ($itemFilter != false){
                                 if (is_callable($itemFilter)){
                                     $query = $itemFilter($query, $key, $value);
                                 }
-                                else if (is_array($itemFilter)){
+                                else if (is_array($itemFilter)){                                    
                                     $key = isset($itemFilter["key"]) ? $itemFilter["key"] : $key;
                                     if (isset($itemFilter["operator"])){
                                         $value = strtolower(trim($itemFilter["operator"])) == "like" ? "%{$value}%" : $value;
@@ -102,27 +98,36 @@ class PaginatedList
                         }
                     }
                 }
-          });
+          });         
+          
           return $data;
         };
     }
-    public function setFilters($filter)
+    public function setFilterRules($rules)
     {
-        if (is_array($filter)){
-            $this->filters = array_merge($this->filters, $filter);
+        if (is_array($rules)){
+            $this->filterRules = array_merge($this->filterRules, $rules);
         }
+    }
+    public function setFilterOperator($operator)
+    {
+        $this->filterOperator = $operator;
     }
     private function setWhereLike($query, $key, $value)
     {
         return $this->setWhereOperator($query, $key, "LIKE", "%{$value}%");
-    }
-    private function setWhereOperator($query, $key, $operator, $value)
-    {
-        return $query->where($key, $operator, $value);
-    }
+    }    
     private function setWhereEqual($query, $key, $value)
     {
-        return $query->where($key, $value);
+        return $this->setWhereOperator($query, $key, "=", $value);
     }
-
+    private function setWhereOperator($query, $key, $operator, $value)
+    {        
+        if ($this->filterOperator == "AND" ){
+            return $query->where($key, $operator, $value);
+        }
+        else if ($this->filterOperator == "OR" ){            
+            return $query->orWhere($key, $operator, $value);
+        }
+    }
 }

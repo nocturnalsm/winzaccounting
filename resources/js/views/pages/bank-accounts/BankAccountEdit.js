@@ -1,48 +1,15 @@
 import MasterEdit from '../../../containers/MasterEdit'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { CSelect, CInput, CCol, CFormGroup, CLabel} from '@coreui/react'
-import MyAlert from "../../../alert";
-import BankSearch from '../../../components/search/BankSearch'
-import axios from 'axios'
+import { CInput, CCol, CFormGroup, CLabel} from '@coreui/react'
+import SearchSelect from '../../../components/SearchSelect'
 
 const BankAccountEdit = (props) => {
 
-    const [banks, setBanks] = useState([])
-    const [accounts, setAccounts] = useState([])
     const [initialData, setInitialData] = useState({bank_id: '', account_id: ''})
     const activeCompany = useSelector(state => state.activeCompany)
 
-    useEffect(() => {
-        axios.get("/api/setup/accounts", {
-            params: {
-                limit: 10000,
-                filter: {company_id: activeCompany.id, account_type: 1}
-            }
-        })
-        .then(response => {
-            if (response){
-                setAccounts(response.data.data)
-            }
-        })
-        .catch(error => {
-            MyAlert.error({text: error.response.message})
-        })
-
-        axios.get("api/setup/banks", {
-          params: {
-              limit: 10000,
-              filter: {company_id: activeCompany.id}
-          }
-        })
-        .then(response => {
-            setBanks(response.data.data);
-        })
-        .catch(error => {
-            MyAlert.error(error.response.data)
-        })
-
-    }, [])
+    const bankSearch = useRef(null)
 
     return (
         <MasterEdit title="Bank Account"
@@ -53,6 +20,14 @@ const BankAccountEdit = (props) => {
                         bank_id: bank_id ?? initialData.bank_id,
                         account_id: account_id ?? initialData.account_id,
                         company_id: activeCompany.id}
+            }}
+            onOpen={response => {
+                if (response){
+                    let data = response.data
+                    if (data.id){
+                        bankSearch.current.setSelected({id: data.bank_id, name: data.bank_name})
+                    }
+                }
             }}
             onSubmitSuccess={(request, response) => {
                 let {account_id, bank_id} = request;
@@ -71,16 +46,19 @@ const BankAccountEdit = (props) => {
                             <CLabel>Bank</CLabel>
                         </CCol>
                         <CCol sm="8" lg="3">
-                            <BankSearch
+                            <SearchSelect
                               placeholder="Choose Bank"
+                              url="/api/setup/banks/search"
+                              filter={{company_id: activeCompany.id}}
+                              optionLabel={e => e.name}
+                              optionValue={e => e.id}
                               required
+                              ref={bankSearch}
                               autoFocus={true}
                               innerRef={props.ref}
-                              disabled={props.loading}
-                              value={props.data.bank_id ?? initialData.bank_id}
-                              onChange={value => props.handleChange({bank_id: value})}
-                              invalid={props.isInvalid('bank_id')}
-                              filter={{company_id: activeCompany.id}}
+                              disabled={props.loading}                              
+                              onChange={value => props.handleChange({bank_id: (value ? value.id : "")})}
+                              invalid={props.isInvalid('bank_id')}                              
                             />
                             {props.feedback('bank_id')}
                         </CCol>
@@ -118,7 +96,7 @@ const BankAccountEdit = (props) => {
                             invalid={props.isInvalid('holder')}
                             required
                             />
-                            {props.isInvalid('holder')}
+                            {props.feedback('holder')}
                         </CCol>
                     </CFormGroup>
                     <CFormGroup row>
@@ -126,22 +104,17 @@ const BankAccountEdit = (props) => {
                             <CLabel>Linked to Account</CLabel>
                         </CCol>
                         <CCol sm="8" lg="5">
-                            <CSelect
-                              type="text"
+                            <SearchSelect                              
                               placeholder="Choose account"
                               autoComplete="off"
                               disabled={props.loading}
                               value={props.data.account_id ?? initialData.account_id}
-                              onChange={e => props.handleChange({account_id: e.target.value})}
-                            >
-                                <option value=""></option>
-                            {
-                                accounts ?
-                                accounts.map((item, index) => (
-                                    <option key={item.id} value={item.id}>{item.number} - {item.name}</option>
-                                )) : ''
-                            }
-                            </CSelect>
+                              onChange={value => props.handleChange({account_id: (value ? value.id : "")})}
+                              filter={{company_id: activeCompany.id}}
+                              url="/api/setup/accounts/search"
+                              optionLabel={e => e.number + ' ' + e.name}
+                              optionValue={e => e.id}
+                            />                            
                         </CCol>
                     </CFormGroup>
                 </>

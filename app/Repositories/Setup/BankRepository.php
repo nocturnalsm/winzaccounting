@@ -32,4 +32,15 @@ class BankRepository extends BaseRepository
             ]
         ];
     }
+
+    public function getSearchRules()
+    {
+        return [
+            "name" => ["operator" => "like"]
+        ];
+    }
+    public function searchFilter($data, $filter)
+    {
+        return $data->where("company_id", $filter["company_id"]);
+    }
 }

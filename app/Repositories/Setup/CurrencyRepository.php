@@ -33,5 +33,15 @@ class CurrencyRepository extends BaseRepository
             'code' => 'max:3',
             'sign' => 'max:10'            
         ];
+    }    
+    public function getSearchRules()
+    {
+        return [
+            "name" => ["operator" => "like"]            
+        ];
+    }
+    public function searchFilter($data, $filter)
+    {
+        return $data->where("company_id", $filter["company_id"]);
     }
 }

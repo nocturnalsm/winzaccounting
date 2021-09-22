@@ -86,5 +86,31 @@ class BankAccountRepository extends BaseRepository
                                          ->limit(1), 'balance');
         return $data;
     }
+    public function getById(String $id)
+    {
+        $data = $this->data->where("id", $id)
+                           ->select("*")
+                           ->selectSub(
+                                Bank::select("name")
+                                    ->whereColumn("id", "bank_accounts.bank_id"), 
+                                'bank_name'
+                            )
+                            ->leftJoinSub(
+                                Account::select(
+                                    DB::raw("accounts.id AS linked_account_id"),
+                                    DB::raw("CONCAT(types.prefix, accounts.number) AS account_number"),
+                                    DB::raw("accounts.name AS account_name")
+                                )
+                                ->leftJoin(DB::raw("account_types types"), "accounts.account_type","=","types.id"),
+                                "accounts",
+                                function($join){
+                                    $join->on("bank_accounts.account_id", "=", "linked_account_id");
+                                }
+                            );
+        if (!$data){
+            throw new \Exception("Data not found");
+        }
+        return $data->first();
+    }
 
 }

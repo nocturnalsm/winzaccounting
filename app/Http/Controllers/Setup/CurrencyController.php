@@ -97,4 +97,10 @@ class CurrencyController extends Controller
         $result = $this->currency->delete($id);
         return $result;
     }
+
+    public function search(Request $request)
+    {
+        $data = $this->currency->search($request);
+        return response()->json($data);
+    }
 }

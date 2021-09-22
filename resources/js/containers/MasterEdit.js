@@ -27,6 +27,8 @@ const MasterEdit = ({children, ...props}) => {
         setData(newData)
     }
 
+    
+
     const ref = useRef(null)
     const history = useHistory()
 
@@ -103,7 +105,7 @@ const MasterEdit = ({children, ...props}) => {
             .then(response => {
                 dispatch(setAppLoading(false))
                 let dataId = id ? {id: id} : {}
-                setData({...dataId, ...response.data})
+                setData({...dataId, ...response.data})                
                 ref.current.focus()
                 if (props.onOpen){
                     props.onOpen(response)

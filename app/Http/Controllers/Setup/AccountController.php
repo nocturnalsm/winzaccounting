@@ -96,6 +96,12 @@ class AccountController extends Controller
         return $result;
     }
 
+    public function search(Request $request)
+    {
+        $data = $this->account->search($request);
+        return response()->json($data);
+    }
+
     public function account_types()
     {
         $data = $this->account->getTypes();

@@ -20,10 +20,10 @@ class AccountRepository extends BaseRepository
             "type" => [
                 "key" => "account_type"
             ],
-            "number" => function($query, $key, $value){
-                return
-                    $query->where(DB::raw("CONCAT(at.prefix, laravel_cte.number)"), "LIKE", "%{$value}%");
-            }
+            "number" => [
+                "operator" => "like",
+                "key" => DB::raw("CONCAT(at.prefix, laravel_cte.number)")
+            ]
         ];
     }
 
@@ -131,5 +131,21 @@ class AccountRepository extends BaseRepository
           return $data->get();
       }
       return false;
+    }
+
+    public function getSearchRules()
+    {
+        return [
+            "name" => ["operator" => "like"],
+            "number" => [
+                "operator" => "like",
+                "key" => DB::raw("CONCAT(at.prefix, laravel_cte.number)")
+            ]
+        ];
+    }
+
+    public function searchFilter($data, $filter)
+    {
+        return $data->where("company_id", $filter["company_id"]);
     }
 }

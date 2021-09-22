@@ -95,4 +95,15 @@ class BankController extends Controller
         $result = $this->bank->delete($id);
         return $result;
     }
+    /**
+     * Search resource from storage according to user's rquest
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {        
+        $data = $this->bank->search($request);
+        return response()->json($data);
+    }
 }
