@@ -102,8 +102,8 @@ class BankController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function search(Request $request)
-    {        
-        $data = $this->bank->search($request);
+    {
+        $data = $this->bank->searchByName($request);
         return response()->json($data);
     }
 }

@@ -4,12 +4,12 @@ namespace App;
 
 class PaginatedList
 {
-    private $filterFunction;
-    private $queryFunction;
-    private $sortFunction;
-    private $filterOperator = "AND";
-    private $filterRules = [];
-    private $data;
+    protected $filterFunction;
+    protected $queryFunction;
+    protected $sortFunction;
+    protected $filterOperator = "AND";
+    protected $filterRules = [];
+    protected $data;
 
     public function __construct($data)
     {
@@ -18,9 +18,9 @@ class PaginatedList
     }
     public function make($page = 1, $limit = '', $sortBy = '', $order = 'asc', $filter = '')
     {
-        
+
         $data = $this->data;
-        
+
         if (is_callable($this->queryFunction)){
             $data = ($this->queryFunction)($data);
         }
@@ -44,7 +44,7 @@ class PaginatedList
             $data = $data->limit($limit)
                          ->offset(($page - 1)*$limit);
         }
-        
+
         return [
             "count" => $count,
             "data" => $data->get()
@@ -68,24 +68,23 @@ class PaginatedList
             $this->sortFunction = $function;
         }
     }
-    private function defaultFilter()
+    protected function defaultFilter()
     {
         return function($data, $filter){
-            
             $data = $data->where(function($query) use ($filter){
                 foreach ($filter as $key=>$value){
                     if (trim($value) != ""){
                         if (isset($this->filterRules[$key])){
                             $itemFilter = $this->filterRules[$key];
-                            if ($itemFilter != false){
+                            if ($itemFilter !== false){
                                 if (is_callable($itemFilter)){
                                     $query = $itemFilter($query, $key, $value);
                                 }
-                                else if (is_array($itemFilter)){                                    
+                                else if (is_array($itemFilter)){
                                     $key = isset($itemFilter["key"]) ? $itemFilter["key"] : $key;
                                     if (isset($itemFilter["operator"])){
                                         $value = strtolower(trim($itemFilter["operator"])) == "like" ? "%{$value}%" : $value;
-                                        $query = $this->setWhereOperator($query, $key, $itemFilter["operator"], $value);
+                                        $query = $this->setWhere($query, $key, $itemFilter["operator"], $value);
                                     }
                                     else {
                                         $query = $this->setWhereEqual($query, $key, $value);
@@ -98,8 +97,8 @@ class PaginatedList
                         }
                     }
                 }
-          });         
-          
+          });
+
           return $data;
         };
     }
@@ -115,18 +114,18 @@ class PaginatedList
     }
     private function setWhereLike($query, $key, $value)
     {
-        return $this->setWhereOperator($query, $key, "LIKE", "%{$value}%");
-    }    
+        return $this->setWhere($query, $key, "LIKE", "%{$value}%");
+    }
     private function setWhereEqual($query, $key, $value)
     {
-        return $this->setWhereOperator($query, $key, "=", $value);
+        return $this->setWhere($query, $key, "=", $value);
     }
-    private function setWhereOperator($query, $key, $operator, $value)
-    {        
+    private function setWhere($query, $key, $operator, $value)
+    {
         if ($this->filterOperator == "AND" ){
             return $query->where($key, $operator, $value);
         }
-        else if ($this->filterOperator == "OR" ){            
+        else if ($this->filterOperator == "OR" ){
             return $query->orWhere($key, $operator, $value);
         }
     }

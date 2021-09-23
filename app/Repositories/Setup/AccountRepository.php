@@ -62,7 +62,7 @@ class AccountRepository extends BaseRepository
                             }
                             else {
                                 if ($value != "" && $value != "0"){
-                                    $query = Account::where("id", $value)                                                
+                                    $query = Account::where("id", $value)
                                                     ->where("company_id", $params["company_id"]);
                                     if (!$query->exists()){
                                         $fail('Account does not exists');
@@ -75,15 +75,15 @@ class AccountRepository extends BaseRepository
 
     public function listQuery($data)
     {
-       
+
         $constraint = function($query){
             $query->whereNull("parent")
                   ->orWhere("parent", "0");
         };
 
-        
-            
-        $data = $data->treeOf($constraint)                    
+
+
+        $data = $data->treeOf($constraint)
                     ->select("laravel_cte.id", "laravel_cte.name", "accountType", "depth",
                              DB::raw("CONCAT(at.prefix, laravel_cte.number) AS number"),
                              "laravel_cte.parent", "laravel_cte.account_type",
@@ -104,7 +104,7 @@ class AccountRepository extends BaseRepository
                               $join->on("laravel_cte.id", "=", "balance.account_id");
                       });
         return $data;
-     
+
     }
     public function listSort($data, $sortBy, $order)
     {
@@ -132,20 +132,16 @@ class AccountRepository extends BaseRepository
       }
       return false;
     }
-
-    public function getSearchRules()
+    public function searchByNumberName(Request $request)
     {
-        return [
-            "name" => ["operator" => "like"],
+        $qRules = [
             "number" => [
-                "operator" => "like",
-                "key" => DB::raw("CONCAT(at.prefix, laravel_cte.number)")
-            ]
+              "operator" => "like",
+              "key" => DB::raw("CONCAT(at.prefix, laravel_cte.number)")
+            ],
+            "name"   => ["operator" => "like"]
         ];
-    }
-
-    public function searchFilter($data, $filter)
-    {
-        return $data->where("company_id", $filter["company_id"]);
+        $filterRules = ["company_id" => []];
+        return $this->search($request, $qRules, $filterRules);
     }
 }

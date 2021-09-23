@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use App\PaginatedList;
+use App\SearchList;
 
 class BaseRepository implements RepositoryInterface
 {
@@ -24,12 +25,12 @@ class BaseRepository implements RepositoryInterface
         }
 
         $list = new PaginatedList($data);
-        
-        if ($this->listFilters && count($this->listFilters) > 0){            
+
+        if ($this->listFilters && count($this->listFilters) > 0){
             $list->setFilterRules($this->listFilters);
         }
 
-        if (method_exists($this, 'listFilter')){                        
+        if (method_exists($this, 'listFilter')){
             $list->useFilter(function($data, $filter) {
                 return $this->listFilter($data, $filter);
             });
@@ -87,52 +88,35 @@ class BaseRepository implements RepositoryInterface
         $data->delete();
         return true;
     }
-    public function search(Request $request, $rules = null)
+    public function search(Request $request, $qRules, $filterRules = [])
     {
-        $params = $request->all();        
-        $query = isset($params["q"]) ? $params["q"] : ""; 
-        $filter = isset($params["filter"]) ? json_decode($params['filter'], true) : '';                         
+        $params = $request->all();
+        $query = isset($params["q"]) ? $params["q"] : "";
+        $filter = isset($params["filter"]) ? json_decode($params['filter'], true) : '';
         $sortBy = isset($params['sort']) ? $params['sort'] : '';
-        $order = isset($params['order']) ? $params['order'] : 'ASC';        
+        $order = isset($params['order']) ? $params['order'] : 'ASC';
+
         $data = $this->data;
-        
         if (method_exists($this, 'listQuery')){
             $data = $this->listQuery($data);
         }
-        if (is_array($filter)){
-            if (method_exists($this, 'searchFilter')){
-                $data = $this->searchFilter($data, $filter);
-            }
-            else {
-                foreach ($filter as $key=>$flt){
-                    $data->where($key, $flt);                
-                }
+        $list = new SearchList($data);
+
+        $qFilter = [];
+        if (is_array($qRules)){
+            foreach ($qRules as $key => $rule){
+                $value = isset($rule["value"]) ? trim($rule["value"]) : trim($query);
+                $qFilter[$key] = $value;
             }
         }
 
-        $list = new PaginatedList($data);
-        $list->setFilterOperator("OR");
-        
-        if (is_null($rules) && method_exists($this, 'getSearchRules')){
-            $rules = $this->getSearchRules();
-        }
-
-        $valueFilters = [];
-        if (is_array($rules)){            
-            $list->setFilterRules($rules);
-            foreach ($rules as $key => $rule){
-                $value = isset($flt["value"]) ? trim($flt["value"]) : trim($query);
-                $valueFilters[$key] = $value;
-            }
-        }
-        
         if (method_exists($this, 'listSort')){
             $list->useSort(function($data, $sortBy, $order){
                 return $this->listSort($data, $sortBy, $order);
             });
         }
 
-        return $list->make(1, '', $sortBy, $order, $valueFilters);
+        return $list->makeList($qFilter, $qRules, $filter, $filterRules, $sortBy, $order);
 
     }
 

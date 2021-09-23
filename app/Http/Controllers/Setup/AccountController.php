@@ -98,7 +98,7 @@ class AccountController extends Controller
 
     public function search(Request $request)
     {
-        $data = $this->account->search($request);
+        $data = $this->account->searchByNumberName($request);
         return response()->json($data);
     }
 
