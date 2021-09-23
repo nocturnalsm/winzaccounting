@@ -132,16 +132,21 @@ class AccountRepository extends BaseRepository
       }
       return false;
     }
-    public function searchByNumberName(Request $request)
+    public function search(Request $request, $filterRules = [], $qRules = [])
     {
-        $qRules = [
-            "number" => [
-              "operator" => "like",
-              "key" => DB::raw("CONCAT(at.prefix, laravel_cte.number)")
-            ],
-            "name"   => ["operator" => "like"]
-        ];
-        $filterRules = ["company_id" => []];
-        return $this->search($request, $qRules, $filterRules);
+        if ($qRules == []){
+            $qRules = [
+                "number" => [
+                    "operator" => "like",
+                    "key" => DB::raw("CONCAT(at.prefix, laravel_cte.number)")
+                ],
+                "name"   => ["operator" => "like"]
+            ];
+        }
+        if ($filterRules == []){
+            $filterRules = ["company_id" => []];
+        }
+        return parent::search($request, $filterRules, $qRules);
     }
+
 }

@@ -26,7 +26,7 @@ const BankEdit = (props) => {
                         autoFocus={true}
                         autoComplete="off"
                         type="text"
-                        innerRef={props.ref}
+                        innerRef={props.inputRefs('name')}
                         disabled={props.loading}
                         onChange={e => props.handleChange({name: e.target.value})}
                         value={props.data.name ?? ''}

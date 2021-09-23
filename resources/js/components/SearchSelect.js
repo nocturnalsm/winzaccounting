@@ -1,9 +1,9 @@
-import React, { useState, useImperativeHandle } from 'react';
+import React, { useState, useImperativeHandle, useRef } from 'react';
 import AsyncSelect from 'react-select/async';
 import MyAlert from '../alert.js';
 import axios from 'axios';
 
-const SearchSelect = React.forwardRef (({
+const SearchSelect = React.forwardRef(({
       invalid, 
       optionLabel,
       optionValue,
@@ -13,6 +13,7 @@ const SearchSelect = React.forwardRef (({
       innerRef, ...restProps}, ref) => {  
   
   const [inputValue, setValue] = useState(null);  
+  const selectRef = useRef(null)
   const [selectedValue, setSelectedValue] = useState(null);
   
   // handle input change event
@@ -42,14 +43,16 @@ const SearchSelect = React.forwardRef (({
 
       setSelected(value) {         
           setSelectedValue(value)
+      },
+      focus(){
+          selectRef.current.focus()
       }
 
   }));
 
   // handle selection
   const handleChange = newValue => {
-      setSelectedValue(newValue);
-      //console.log('That', newValue)
+      setSelectedValue(newValue);      
       onChange(newValue == null ? "" : newValue)      
   }
 
@@ -74,10 +77,10 @@ const SearchSelect = React.forwardRef (({
       <AsyncSelect {...restProps}
         cacheOptions
         defaultOptions
-        isClearable
-        ref={innerRef}
+        isClearable        
         className={"react-select" +(invalid ? ' is-invalid' : '')}
         classNamePrefix="react-select"
+        ref={selectRef}        
         value={selectedValue}                
         getOptionLabel={optionLabel}
         getOptionValue={optionValue}

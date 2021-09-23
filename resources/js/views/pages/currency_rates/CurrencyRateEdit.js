@@ -4,28 +4,13 @@ import { useSelector } from "react-redux";
 import { CSelect, CInput, CCol, CFormGroup, CLabel } from '@coreui/react'
 import MyAlert from "../../../alert";
 import axios from 'axios'
+import SearchSelect from '../../../components/SearchSelect'
 
 const CurrencyRateEdit = (props) => {
 
     const [initialData, setInitialData] = useState({currency_id: ''})
     const [currencies, setCurrencies] = useState([])
-    const activeCompany = useSelector(state => state.activeCompany)
-
-    useEffect(() => {
-        axios.get("api/setup/currencies", {
-          params: {
-              filter: {company_id: activeCompany.id},
-              limit: 1000
-          }
-        })
-        .then(response => {
-            setCurrencies(response.data.data);
-        })
-        .catch(error => {
-            MyAlert.error(error.response.data)
-        })
-
-    }, [])
+    const activeCompany = useSelector(state => state.activeCompany)    
 
     return (
         <MasterEdit title="Currency Rate"
@@ -50,23 +35,16 @@ const CurrencyRateEdit = (props) => {
                             <CLabel>Currency</CLabel>
                         </CCol>
                         <CCol sm="8" lg="3">
-                            <CSelect
-                            placeholder="Choose Currency"
-                            autoFocus={true}
-                            innerRef={props.ref}
-                            disabled={props.loading}
-                            required
-                            value={props.data.currency_id ?? initialData.currency_id}
-                            onChange={e => props.handleChange({currency_id: e.target.value})}
-                            invalid={props.isInvalid('currency_id')}
-                            >
-                              <option value=""></option>
-                            {
-                              currencies.map((item, index) => (
-                                  <option key={item.id} value={item.id}>{item.name}</option>
-                              ))
-                            }
-                            </CSelect>
+                            <SearchSelect
+                                placeholder="Choose Currency"
+                                autoFocus={true}
+                                ref={props.ref}
+                                disabled={props.loading}
+                                required
+                                value={props.data.currency_id ?? initialData.currency_id}
+                                onChange={e => props.handleChange({currency_id: e.target.value})}
+                                invalid={props.isInvalid('currency_id')}
+                            />                              
                             {props.feedback('currency_id')}
                         </CCol>
                     </CFormGroup>

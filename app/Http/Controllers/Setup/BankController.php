@@ -103,7 +103,7 @@ class BankController extends Controller
      */
     public function search(Request $request)
     {
-        $data = $this->bank->searchByName($request);
+        $data = $this->bank->search($request);        
         return response()->json($data);
     }
 }

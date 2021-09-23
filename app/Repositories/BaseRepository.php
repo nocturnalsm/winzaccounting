@@ -88,7 +88,7 @@ class BaseRepository implements RepositoryInterface
         $data->delete();
         return true;
     }
-    public function search(Request $request, $qRules, $filterRules = [])
+    public function search(Request $request, $filterRules = [], $qRules = [])
     {
         $params = $request->all();
         $query = isset($params["q"]) ? $params["q"] : "";

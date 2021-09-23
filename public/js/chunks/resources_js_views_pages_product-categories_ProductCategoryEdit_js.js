@@ -62,8 +62,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
-
-var MasterEdit = function MasterEdit(_ref) {
+var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function (_ref, ref) {
   var children = _ref.children,
       props = _objectWithoutProperties(_ref, _excluded);
 
@@ -96,8 +95,6 @@ var MasterEdit = function MasterEdit(_ref) {
   });
 
   var handleChange = function handleChange(values) {
-    console.log(values);
-
     var newData = _objectSpread(_objectSpread({}, data), values);
 
     if (props.onChangeData) {
@@ -107,8 +104,15 @@ var MasterEdit = function MasterEdit(_ref) {
     setData(newData);
   };
 
-  var ref = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useHistory)();
+  var inputRefs = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)({});
+
+  var refs = function refs(index) {
+    if (!inputRefs.current.hasOwnProperty(index)) {
+      inputRefs.current[index] = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+
+    return inputRefs.current[index];
+  };
 
   var handleSubmit = function handleSubmit(event) {
     var form = event.currentTarget;
@@ -168,11 +172,16 @@ var MasterEdit = function MasterEdit(_ref) {
         if (response.error) {
           if (response.error.errors) {
             setSubmitError(response.error.errors);
+            var firstError = Object.keys(response.error.errors)[0];
+
+            if (inputRefs.current && inputRefs.current.hasOwnProperty(firstError)) {
+              inputRefs.current[firstError].current.focus();
+            }
           } else {
             var _response$error$messa;
 
             var message = (_response$error$messa = response.error.message) !== null && _response$error$messa !== void 0 ? _response$error$messa : 'Something went wrong';
-            _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+            _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
               text: message
             });
           }
@@ -181,7 +190,7 @@ var MasterEdit = function MasterEdit(_ref) {
             props.onSubmitError(data, response);
           }
         } else {
-          _alert__WEBPACK_IMPORTED_MODULE_5__.default.success({
+          _alert__WEBPACK_IMPORTED_MODULE_5__["default"].success({
             text: 'Data saved successfully'
           });
           setSubmitError({});
@@ -193,9 +202,15 @@ var MasterEdit = function MasterEdit(_ref) {
           if (props.onSubmitSuccess) {
             props.onSubmitSuccess(request, response);
           }
+
+          var firstKey = Object.keys(inputRefs.current)[0];
+          console.log(inputRefs.current);
+
+          if (inputRefs.current[firstKey].current) {
+            inputRefs.current[firstKey].current.focus();
+          }
         }
 
-        ref.current.focus();
         setValidated(false);
       });
     }
@@ -216,22 +231,19 @@ var MasterEdit = function MasterEdit(_ref) {
           id: id
         } : {};
         setData(_objectSpread(_objectSpread({}, dataId), response.data));
-        ref.current.focus();
 
         if (props.onOpen) {
           props.onOpen(response);
         }
       })["catch"](function (error) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
-        _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+        _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
           text: error.message
         });
 
         if (props.onGetDataError) {
           props.onGetDataError(error);
         }
-
-        history.back();
       });
     } else {
       if (props.onOpen) {
@@ -244,11 +256,22 @@ var MasterEdit = function MasterEdit(_ref) {
       dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppEditing)(false));
     };
   }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useImperativeHandle)(ref, function () {
+    return {
+      getRef: function getRef(index) {
+        var resultRef = refs(index);
+
+        if (resultRef) {
+          return resultRef.current;
+        }
+      }
+    };
+  });
   var childProps = {
-    loading: loading,
     data: data,
+    loading: loading,
+    inputRefs: refs,
     handleChange: handleChange,
-    ref: ref,
     isInvalid: function isInvalid(property) {
       return submitError.hasOwnProperty(property);
     },
@@ -280,7 +303,7 @@ var MasterEdit = function MasterEdit(_ref) {
         },
         size: "md",
         color: "primary",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
           name: "cil-scrubber"
         }), " Submit"]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CButton, {
@@ -289,14 +312,13 @@ var MasterEdit = function MasterEdit(_ref) {
         onClick: resetForm,
         size: "md",
         color: "danger",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
           name: "cil-ban"
         }), " Reset"]
       })]
     })]
   });
-};
-
+});
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MasterEdit);
 
 /***/ }),
@@ -374,12 +396,12 @@ var ProductCategoryEdit = function ProductCategoryEdit(props) {
     }).then(function (response) {
       setParents(response.data);
     })["catch"](function (error) {
-      _alert__WEBPACK_IMPORTED_MODULE_4__.default.error(error.response.data);
+      _alert__WEBPACK_IMPORTED_MODULE_4__["default"].error(error.response.data);
     });
   };
 
   var ref = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__.default, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__["default"], {
     title: "Product Category",
     apiUrl: "/api/setup/product-categories",
     onOpen: function onOpen(response) {

@@ -1,6 +1,7 @@
 import MasterEdit from '../../../containers/MasterEdit'
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from "react-redux";
+import SearchSelect from '../../../components/SearchSelect'
 import { CSelect, CInput, CInputGroup, CInputGroupText, CCol, CFormGroup, CLabel} from '@coreui/react'
 import MyAlert from "../../../alert";
 import axios from 'axios'
@@ -90,23 +91,18 @@ const AccountEdit = (props) => {
                     <CLabel>Account Type</CLabel>
                 </CCol>
                 <CCol sm="8" lg="3">
-                    <CSelect
-                    placeholder="Choose Account Type"
-                    autoFocus={true}
-                    innerRef={props.ref}
-                    disabled={props.loading}
-                    required
-                    value={props.data.account_type ?? initialData.account_type}
-                    onChange={e => props.handleChange({account_type: e.target.value})}
-                    invalid={props.isInvalid('account_type')}
-                    >
-                        <option value=""></option>
-                    {
-                        accountTypes.map((item, index) => (
-                            <option key={item.id} value={item.id}>{item.name}</option>
-                        ))
-                    }
-                    </CSelect>
+                    <SearchSelect
+                        placeholder="Choose Account Type"
+                        autoFocus={true}
+                        ref={props.inputRefs('account_type')}
+                        disabled={props.loading}
+                        required
+                        optionValue={e => e.id}
+                        optionLabel={e => e.name}                                                  
+                        ref={props.inputRefs('bank_id')}
+                        onChange={value => props.handleChange({account_type: value ? value.id : ""})}
+                        invalid={props.isInvalid('account_type')}
+                    />
                     {props.feedback('account_type')}
                 </CCol>
             </CFormGroup>
@@ -115,22 +111,20 @@ const AccountEdit = (props) => {
                     <CLabel>Parent Account</CLabel>
                 </CCol>
                 <CCol sm="8" lg="5">
-                    <CSelect
-                        type="text"
+                    <SearchSelect                        
+                        async
                         placeholder="Choose parent account"
                         autoComplete="off"
                         disabled={props.loading}
-                        required
-                        value={props.data.parent ?? initialData.parent}
-                        onChange={e => props.handleChange({parent: e.target.value})}
+                        ref={props.inputRefs('parent')}
+                        url="/api/setup/accounts/parents"
+                        required                        
+                        onChange={value => props.handleChange({parent: value ? value.id : ""})}
+                        filter={{id: props.data.id, company_id: activeCompany.id, account_type: props.data.account_type}}
                         invalid={props.isInvalid('parent')}
-                    >
-                    {
-                        parents.map((item, index) => (
-                            <option key={item.id} value={item.id}>{item.number} - {item.name}</option>
-                        ))
-                    }
-                    </CSelect>
+                        optionLabel={e => e.name}
+                        optionValue={e => e.id}
+                    />                    
                     {props.feedback('parent')}
                 </CCol>
             </CFormGroup>
@@ -151,6 +145,7 @@ const AccountEdit = (props) => {
                         onChange={e =>props.handleChange({number: e.target.value})}
                         value={props.data.number ?? ''}
                         invalid={props.isInvalid('number')}
+                        innerRef={props.inputRefs('number')}
                         required
                     />
                     {props.feedback('number')}
@@ -170,6 +165,7 @@ const AccountEdit = (props) => {
                     onChange={e => props.handleChange({name: e.target.value})}
                     value={props.data.name ?? ''}
                     invalid={props.isInvalid('name')}
+                    innerRef={props.inputRefs('name')}
                     required
                     />
                     {props.feedback('name', "Please enter a name")}

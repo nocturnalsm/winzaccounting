@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import React, { useState, useEffect, useRef, useImperativeHandle } from "react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CCard, CCardBody, CCardFooter, CCardHeader, CForm, CButton, CInvalidFeedback } from '@coreui/react'
 import { setAppEditing, setAppLoading} from "../store";
@@ -7,7 +7,7 @@ import MyAlert from "../alert";
 import CIcon from '@coreui/icons-react'
 import axios from 'axios'
 
-const MasterEdit = ({children, ...props}) => {
+const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
 
     const {id} = useParams()
     const [initialData, setInitialData] = useState({})
@@ -18,8 +18,7 @@ const MasterEdit = ({children, ...props}) => {
     const dispatch = useDispatch()
     const loading = useSelector(state => state.appLoading)
 
-    const handleChange = (values) => {
-        console.log(values)
+    const handleChange = (values) => {        
         let newData = {...data, ...values}
         if (props.onChangeData){
             newData = props.onChangeData(data, newData)
@@ -27,10 +26,14 @@ const MasterEdit = ({children, ...props}) => {
         setData(newData)
     }
 
-    
-
-    const ref = useRef(null)
-    const history = useHistory()
+    const inputRefs = useRef({});
+        
+    const refs = (index) => {
+        if (!inputRefs.current.hasOwnProperty(index)){
+            inputRefs.current[index] = React.createRef()
+        }
+        return inputRefs.current[index]
+    }    
 
     const handleSubmit = (event) => {
         const form = event.currentTarget
@@ -67,6 +70,10 @@ const MasterEdit = ({children, ...props}) => {
                 if (response.error){
                     if (response.error.errors){
                         setSubmitError(response.error.errors);
+                        let firstError = Object.keys(response.error.errors)[0];
+                        if (inputRefs.current && inputRefs.current.hasOwnProperty(firstError)){                            
+                            inputRefs.current[firstError].current.focus()
+                        }
                     }
                     else {
                         let message = response.error.message ?? 'Something went wrong';
@@ -75,6 +82,7 @@ const MasterEdit = ({children, ...props}) => {
                     if (props.onSubmitError){
                         props.onSubmitError(data, response)
                     }
+                    
                 }
                 else {
                     MyAlert.success({text: 'Data saved successfully'})
@@ -85,8 +93,12 @@ const MasterEdit = ({children, ...props}) => {
                     if (props.onSubmitSuccess){
                         props.onSubmitSuccess(request, response)
                     }
-                }
-                ref.current.focus()
+                    let firstKey = Object.keys(inputRefs.current)[0];     
+                    console.log(inputRefs.current)               
+                    if (inputRefs.current[firstKey].current){      
+                        inputRefs.current[firstKey].current.focus()
+                    }
+                }                
                 setValidated(false);
             });
         }
@@ -105,8 +117,7 @@ const MasterEdit = ({children, ...props}) => {
             .then(response => {
                 dispatch(setAppLoading(false))
                 let dataId = id ? {id: id} : {}
-                setData({...dataId, ...response.data})                
-                ref.current.focus()
+                setData({...dataId, ...response.data})                                
                 if (props.onOpen){
                     props.onOpen(response)
                 }
@@ -116,8 +127,7 @@ const MasterEdit = ({children, ...props}) => {
                 MyAlert.error({text: error.message})
                 if (props.onGetDataError){
                     props.onGetDataError(error)
-                }
-                history.back()
+                }                
             })
         }
         else {
@@ -135,11 +145,22 @@ const MasterEdit = ({children, ...props}) => {
         }
     }, []);
 
-    let childProps = {
-        loading: loading,
+    useImperativeHandle(ref, () => ({
+
+        getRef(index) {           
+            let resultRef = refs(index)            
+            if (resultRef){                                
+                return resultRef.current;
+            }
+        }
+
+    }));
+
+    let childProps = {        
         data: data,
-        handleChange: handleChange,
-        ref: ref,
+        loading: loading,        
+        inputRefs: refs,
+        handleChange: handleChange,        
         isInvalid: (property) => submitError.hasOwnProperty(property),
         feedback: (property, errorText) => (
             <CInvalidFeedback>{
@@ -169,6 +190,6 @@ const MasterEdit = ({children, ...props}) => {
             </CCardFooter>
         </CCard>
     )
-}
+})
 
 export default MasterEdit

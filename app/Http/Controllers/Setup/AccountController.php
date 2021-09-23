@@ -98,7 +98,7 @@ class AccountController extends Controller
 
     public function search(Request $request)
     {
-        $data = $this->account->searchByNumberName($request);
+        $data = $this->account->search($request);
         return response()->json($data);
     }
 
@@ -109,14 +109,13 @@ class AccountController extends Controller
     }
 
     public function account_parents(Request $request)
-    {
-        $type = $request->type ?? '';
-        $company_id = $request->company_id ?? '';
-        $id = $request->id ?? '';
-        $data = $this->account->getParents($company_id, $type, $id);
-        if ($data){
-            return response()->json($data);
-        }
-        return response(400);
+    {                       
+        $filterRules = [
+            "company_id" => [],
+            "id" => ["operator" => "<>"],
+            "account_type" => []
+        ];
+        $data = $this->account->search($request, $filterRules);
+        return response()->json($data);
     }
 }
