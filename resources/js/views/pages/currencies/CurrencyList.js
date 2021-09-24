@@ -50,7 +50,7 @@ const CurrencyList = () => {
 
     return (
         <MasterList
-            tableId="currencyrateslist"
+            tableId="currencieslist"
             fields={fields}
             tableRef={dtRef}
             apiUrl="/api/setup/currencies"

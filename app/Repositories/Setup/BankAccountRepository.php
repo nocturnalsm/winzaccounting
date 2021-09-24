@@ -43,7 +43,7 @@ class BankAccountRepository extends BaseRepository
             'account_id' => function($attribute, $value, $fail) use ($params){
                 if ($value != ""){
                     $query = Account::where("id", $value)
-                                     ->where("company_id", $params["company_id"]);                                     
+                                     ->where("company_id", $params["company_id"]);
                     if (!$query->exists()){
                         $fail("Parent Account does not exist");
                     }
@@ -92,7 +92,7 @@ class BankAccountRepository extends BaseRepository
                            ->select("*")
                            ->selectSub(
                                 Bank::select("name")
-                                    ->whereColumn("id", "bank_accounts.bank_id"), 
+                                    ->whereColumn("id", "bank_accounts.bank_id"),
                                 'bank_name'
                             )
                             ->leftJoinSub(
@@ -112,5 +112,4 @@ class BankAccountRepository extends BaseRepository
         }
         return $data->first();
     }
-
 }

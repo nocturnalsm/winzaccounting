@@ -1,5 +1,5 @@
 import MasterEdit from '../../../containers/MasterEdit'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { CSelect, CInput, CCol, CFormGroup, CLabel } from '@coreui/react'
 import MyAlert from "../../../alert";
@@ -9,11 +9,12 @@ import SearchSelect from '../../../components/SearchSelect'
 const CurrencyRateEdit = (props) => {
 
     const [initialData, setInitialData] = useState({currency_id: ''})
-    const [currencies, setCurrencies] = useState([])
-    const activeCompany = useSelector(state => state.activeCompany)    
+    const activeCompany = useSelector(state => state.activeCompany)
+    const ref = useRef(null)
 
     return (
         <MasterEdit title="Currency Rate"
+            ref={ref}
             apiUrl="/api/setup/currency-rates"
             formatData={data => {
                 let { currency_id } = data
@@ -27,6 +28,14 @@ const CurrencyRateEdit = (props) => {
                     setInitialData({currency_id: currency_id})
                 }
             }}
+            onOpen={response => {
+                if (response){
+                    let data = response.data
+                    if (data.id){
+                        ref.current.getRef('currency_id').setSelected({id: data.currency_id, name: data.currency_name})
+                    }
+                }
+            }}
             >
             {props => (
                 <>
@@ -36,15 +45,19 @@ const CurrencyRateEdit = (props) => {
                         </CCol>
                         <CCol sm="8" lg="3">
                             <SearchSelect
+                                async
                                 placeholder="Choose Currency"
                                 autoFocus={true}
-                                ref={props.ref}
+                                ref={props.inputRefs('currency_id')}
+                                filter={{company_id: activeCompany.id}}
                                 disabled={props.loading}
                                 required
-                                value={props.data.currency_id ?? initialData.currency_id}
-                                onChange={e => props.handleChange({currency_id: e.target.value})}
+                                optionLabel={e => e.name}
+                                optionValue={e => e.id}
+                                url="/api/setup/currencies/search"
+                                onChange={value => props.handleChange({currency_id: value ? value.id : ""})}
                                 invalid={props.isInvalid('currency_id')}
-                            />                              
+                            />
                             {props.feedback('currency_id')}
                         </CCol>
                     </CFormGroup>
@@ -56,6 +69,7 @@ const CurrencyRateEdit = (props) => {
                             <CInput
                               placeholder="Choose start date"
                               autoComplete="off"
+                              innerRef={props.inputRefs("start")}
                               type="date"
                               disabled={props.loading}
                               onChange={e => props.handleChange({start: e.target.value})}
@@ -73,6 +87,7 @@ const CurrencyRateEdit = (props) => {
                             <CInput
                               placeholder="Choose end date"
                               autoComplete="off"
+                              innerRef={props.inputRefs("end")}
                               type="date"
                               disabled={props.loading}
                               onChange={e => props.handleChange({end: e.target.value})}
@@ -95,6 +110,7 @@ const CurrencyRateEdit = (props) => {
                             onChange={e => props.handleChange({buy: e.target.value})}
                             value={props.data.buy ?? ''}
                             invalid={props.isInvalid('buy')}
+                            innerRef={props.inputRefs("buy")}
                             />
                             {props.feedback('buy')}
                         </CCol>
@@ -112,6 +128,7 @@ const CurrencyRateEdit = (props) => {
                             onChange={e => props.handleChange({sell: e.target.value})}
                             value={props.data.sell ?? ''}
                             invalid={props.isInvalid('sell')}
+                            innerRef={props.inputRefs("sell")}
                             />
                             {props.feedback('sell')}
                         </CCol>

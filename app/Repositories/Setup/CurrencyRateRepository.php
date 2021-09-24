@@ -6,6 +6,7 @@ use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\CurrencyRate;
+use App\Models\Currency;
 
 class CurrencyRateRepository extends BaseRepository
 {
@@ -81,5 +82,19 @@ class CurrencyRateRepository extends BaseRepository
         $data = $data->join("currencies", "currency_rates.currency_id", "=", "currencies.id")
                      ->select("currency_rates.*", "currencies.name", "currencies.company_id");
         return $data;
+    }
+    public function getById(String $id)
+    {
+        $data = $this->data->where("id", $id)
+                           ->select("*")
+                           ->selectSub(
+                                Currency::select("name")
+                                         ->whereColumn("id", "currency_rates.currency_id"),
+                                'currency_name'
+                            );
+        if (!$data){
+            throw new \Exception("Data not found");
+        }
+        return $data->first();
     }
 }

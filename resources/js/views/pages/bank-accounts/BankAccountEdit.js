@@ -24,15 +24,12 @@ const BankAccountEdit = (props) => {
             }}
             onOpen={response => {
                 if (response){
-                    let data = response.data                    
-                    if (ref.current){                                                    
-                        if (data.id){                                               
-                            ref.current.getRef('bank_id').setSelected({id: data.bank_id, name: data.bank_name})
-                        
-                        }                    
-                        if (data.account_id){
-                            ref.current.getRef('account_id').setSelected({id: data.account_id, number: data.account_number, name: data.account_name})
-                        }
+                    let data = response.data
+                    if (data.id){
+                        ref.current.getRef('bank_id').setSelected({id: data.bank_id, name: data.bank_name})
+                    }
+                    if (data.account_id){
+                        ref.current.getRef('account_id').setSelected({id: data.account_id, number: data.account_number, name: data.account_name})
                     }
                 }
             }}
@@ -61,11 +58,11 @@ const BankAccountEdit = (props) => {
                               optionLabel={e => e.name}
                               disabled={props.loading}
                               placeholder="Choose Bank"
-                              url="/api/setup/banks/search"                              
+                              url="/api/setup/banks/search"
                               ref={props.inputRefs('bank_id')}
-                              filter={{company_id: activeCompany.id}}                              
-                              invalid={props.isInvalid('bank_id')}                                                                                          
-                              onChange={value => props.handleChange({bank_id: (value ? value.id : "")})}                              
+                              filter={{company_id: activeCompany.id}}
+                              invalid={props.isInvalid('bank_id')}
+                              onChange={value => props.handleChange({bank_id: (value ? value.id : "")})}
                             />
                             {props.feedback('bank_id')}
                         </CCol>
@@ -113,7 +110,7 @@ const BankAccountEdit = (props) => {
                             <CLabel>Linked to Account</CLabel>
                         </CCol>
                         <CCol sm="8" lg="5">
-                            <SearchSelect                              
+                            <SearchSelect
                               async
                               placeholder="Choose account"
                               autoComplete="off"
@@ -125,7 +122,7 @@ const BankAccountEdit = (props) => {
                               optionLabel={e => e.number + ' ' + e.name}
                               optionValue={e => e.id}
                               ref={props.inputRefs('account_id')}
-                            />                            
+                            />
                         </CCol>
                     </CFormGroup>
                 </>

@@ -13,24 +13,6 @@ const AccountEdit = (props) => {
     const [initialData, setInitialData] = useState({account_type: '', parent: ''})
     const activeCompany = useSelector(state => state.activeCompany)
 
-    const getParents = (type, id) => {
-        axios.get("api/setup/account-parents", {
-            params: {
-                type: type,
-                company_id: activeCompany.id,
-                id: id
-            }
-        })
-        .then(response => {
-            let parentsData = response.data;
-            parentsData.unshift({id: 0, name: "--Top Level--"})
-            setParents(parentsData);
-        })
-        .catch(error => {
-            MyAlert.error(error.response.data)
-        })
-    }
-
     const ref = useRef(null)
 
     useEffect(() => {
@@ -55,6 +37,7 @@ const AccountEdit = (props) => {
 
     return (
         <MasterEdit title="Account"
+            ref={ref}
             apiUrl="/api/setup/accounts"
             onOpen={response => {
                 getParents(response.data.account_type, response.data.id)
@@ -98,7 +81,7 @@ const AccountEdit = (props) => {
                         disabled={props.loading}
                         required
                         optionValue={e => e.id}
-                        optionLabel={e => e.name}                                                  
+                        optionLabel={e => e.name}
                         ref={props.inputRefs('bank_id')}
                         onChange={value => props.handleChange({account_type: value ? value.id : ""})}
                         invalid={props.isInvalid('account_type')}
@@ -111,20 +94,20 @@ const AccountEdit = (props) => {
                     <CLabel>Parent Account</CLabel>
                 </CCol>
                 <CCol sm="8" lg="5">
-                    <SearchSelect                        
+                    <SearchSelect
                         async
                         placeholder="Choose parent account"
                         autoComplete="off"
                         disabled={props.loading}
                         ref={props.inputRefs('parent')}
                         url="/api/setup/accounts/parents"
-                        required                        
+                        required
                         onChange={value => props.handleChange({parent: value ? value.id : ""})}
                         filter={{id: props.data.id, company_id: activeCompany.id, account_type: props.data.account_type}}
                         invalid={props.isInvalid('parent')}
                         optionLabel={e => e.name}
                         optionValue={e => e.id}
-                    />                    
+                    />
                     {props.feedback('parent')}
                 </CCol>
             </CFormGroup>
