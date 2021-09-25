@@ -18,12 +18,13 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
     const dispatch = useDispatch()
     const loading = useSelector(state => state.appLoading)
 
-    const handleChange = (values) => {        
+    const handleChange = (values) => {       
+        let oldData = data 
         let newData = {...data, ...values}
-        if (props.onChangeData){
-            newData = props.onChangeData(data, newData)
-        }
         setData(newData)
+        if (props.onChangeData){
+            props.onChangeData(oldData, newData)
+        }       
     }
 
     const inputRefs = useRef({});
@@ -93,8 +94,7 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
                     if (props.onSubmitSuccess){
                         props.onSubmitSuccess(request, response)
                     }
-                    let firstKey = Object.keys(inputRefs.current)[0];     
-                    console.log(inputRefs.current)               
+                    let firstKey = Object.keys(inputRefs.current)[0];                         
                     if (inputRefs.current[firstKey].current){      
                         inputRefs.current[firstKey].current.focus()
                     }

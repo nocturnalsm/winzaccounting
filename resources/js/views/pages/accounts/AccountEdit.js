@@ -10,7 +10,7 @@ const AccountEdit = (props) => {
     const [accountTypes, setAccountTypes] = useState([])
     const [initialData, setInitialData] = useState({account_type: '', parent: ''})
     const activeCompany = useSelector(state => state.activeCompany)
-
+    const [urlParams, setUrlParams] = useState({id: null, account_type: null})
     const ref = useRef(null)
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const AccountEdit = (props) => {
         })
 
     }, [])
-
+    
     const prefix = (data) => {
         let account_type = data.account_type ?? initialData.account_type
         if (account_type != ''){
@@ -35,12 +35,20 @@ const AccountEdit = (props) => {
             ref={ref}
             apiUrl="/api/setup/accounts"
             onOpen={response => {
-                if (response){
+                if (response){                    
                     let data = response.data
                     if (data.id){
                         ref.current.getRef('account_type').setSelected({id: data.account_type, name: data.account_type_name})
                         ref.current.getRef('parent').setSelected({id: data.parent, number: data.parent_number, name: data.parent_name})
+                        setUrlParams({
+                            id: data.id, 
+                            company_id: activeCompany.id, 
+                            account_type: data.account_type
+                        })                        
                     }
+                }
+                else {
+                    setUrlParams({company_id: activeCompany.id})
                 }
             }}
             onSubmitSuccess={(data, response) => {
@@ -60,15 +68,15 @@ const AccountEdit = (props) => {
                         account_type: account_type ?? initialData.account_type,
                         company_id: activeCompany.id}
             }}
-            onChangeData={(oldData, newData) => {                
-                if (newData.account_type && oldData.account_type != newData.account_type){
-                    newData.parent = ''
-                    ref.current.getRef('parent').setSelected(null)
-                    ref.current.getRef('parent').clearOptions()
-                    ref.current.getRef('parent').loadOptions()
-                    //getParents(newData.account_type)
-                }
-                return newData
+            onChangeData={(oldData, newData) => {                                          
+                if (newData.account_type && oldData.account_type != newData.account_type){  
+                    setUrlParams({
+                        id: newData.id, 
+                        company_id: activeCompany.id, 
+                        account_type: newData.account_type
+                    }) 
+                    ref.current.getRef('parent').setSelected(null)   
+                }                
             }}
         >
         {props => (
@@ -105,11 +113,7 @@ const AccountEdit = (props) => {
                         disabled={props.loading}
                         ref={props.inputRefs('parent')}
                         url="/api/setup/accounts/parents"
-                        urlParams={{
-                            id: props.data.id, 
-                            company_id: activeCompany.id, 
-                            account_type: props.data.account_type
-                        }}                        
+                        urlParams={urlParams}                        
                         required
                         onChange={value => props.handleChange({parent: value ? value.id : ""})}                        
                         invalid={props.isInvalid('parent')}

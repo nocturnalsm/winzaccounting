@@ -95,13 +95,15 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
   });
 
   var handleChange = function handleChange(values) {
+    var oldData = data;
+
     var newData = _objectSpread(_objectSpread({}, data), values);
 
-    if (props.onChangeData) {
-      newData = props.onChangeData(data, newData);
-    }
-
     setData(newData);
+
+    if (props.onChangeData) {
+      props.onChangeData(oldData, newData);
+    }
   };
 
   var inputRefs = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)({});
@@ -204,7 +206,6 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
           }
 
           var firstKey = Object.keys(inputRefs.current)[0];
-          console.log(inputRefs.current);
 
           if (inputRefs.current[firstKey].current) {
             inputRefs.current[firstKey].current.focus();

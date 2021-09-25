@@ -1705,7 +1705,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var _excluded = ["async", "invalid", "defaultOptions", "optionLabel", "optionValue", "defaultValue", "options", "url", "urlParams", "filter", "onChange", "innerRef"];
+var _excluded = ["async", "invalid", "defaultOptions", "optionLabel", "optionValue", "defaultValue", "options", "url", "filter", "onChange", "urlParams", "innerRef"];
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -1744,27 +1744,28 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
       defaultValue = _ref.defaultValue,
       options = _ref.options,
       url = _ref.url,
-      urlParams = _ref.urlParams,
       filter = _ref.filter,
       onChange = _ref.onChange,
+      urlParams = _ref.urlParams,
       innerRef = _ref.innerRef,
       restProps = _objectWithoutProperties(_ref, _excluded);
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-      _useState2 = _slicedToArray(_useState, 2),
-      inputValue = _useState2[0],
-      setValue = _useState2[1];
-
   var selectRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-      _useState4 = _slicedToArray(_useState3, 2),
-      selectedValue = _useState4[0],
-      setSelectedValue = _useState4[1]; // handle input change event
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      selectedValue = _useState2[0],
+      setSelectedValue = _useState2[1]; // handle input change event
 
 
-  var handleInputChange = function handleInputChange(newValue) {
-    setValue(newValue);
+  var handleInputChange = function handleInputChange(value) {
+    onChange(value);
+  }; // handle selection
+
+
+  var handleChange = function handleChange(value) {
+    setSelectedValue(value);
+    onChange(value);
   };
 
   var customStyles = {
@@ -1798,7 +1799,6 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
         selectRef.current.focus();
       },
       clearOptions: function clearOptions() {
-        console.log(selectRef.current);
         selectRef.current.state.defaultOptions = [];
       },
       loadOptions: function loadOptions() {
@@ -1807,13 +1807,7 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
         });
       }
     };
-  }); // handle selection
-
-  var handleChange = function handleChange(newValue) {
-    setSelectedValue(newValue);
-    onChange(newValue == null ? "" : newValue);
-  }; // load options using API call
-
+  }); // load options using API call
 
   var loadOptions = function loadOptions(inputValue, callback) {
     axios__WEBPACK_IMPORTED_MODULE_3___default().get(url, {
@@ -1824,7 +1818,6 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
       var options = response.data.data;
       callback(options);
     })["catch"](function (error) {
-      console.log(error);
       _alert_js__WEBPACK_IMPORTED_MODULE_2__["default"].error({
         text: error.response
       });
@@ -1834,7 +1827,6 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
   if (async) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_select_async__WEBPACK_IMPORTED_MODULE_1__["default"], _objectSpread(_objectSpread({}, restProps), {}, {
       cacheOptions: true,
-      defaultOptions: defaultOptions !== null && defaultOptions !== void 0 ? defaultOptions : true,
       isClearable: true,
       className: "react-select" + (invalid ? ' is-invalid' : ''),
       classNamePrefix: "react-select",
@@ -1963,13 +1955,15 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
   });
 
   var handleChange = function handleChange(values) {
+    var oldData = data;
+
     var newData = _objectSpread(_objectSpread({}, data), values);
 
-    if (props.onChangeData) {
-      newData = props.onChangeData(data, newData);
-    }
-
     setData(newData);
+
+    if (props.onChangeData) {
+      props.onChangeData(oldData, newData);
+    }
   };
 
   var inputRefs = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)({});
@@ -2072,7 +2066,6 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
           }
 
           var firstKey = Object.keys(inputRefs.current)[0];
-          console.log(inputRefs.current);
 
           if (inputRefs.current[firstKey].current) {
             inputRefs.current[firstKey].current.focus();
@@ -2253,6 +2246,15 @@ var AccountEdit = function AccountEdit(props) {
   var activeCompany = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.activeCompany;
   });
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    id: null,
+    account_type: null
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      urlParams = _useState6[0],
+      setUrlParams = _useState6[1];
+
   var ref = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     fetch("/api/setup/accounts/types").then(function (response) {
@@ -2294,7 +2296,16 @@ var AccountEdit = function AccountEdit(props) {
             number: data.parent_number,
             name: data.parent_name
           });
+          setUrlParams({
+            id: data.id,
+            company_id: activeCompany.id,
+            account_type: data.account_type
+          });
         }
+      } else {
+        setUrlParams({
+          company_id: activeCompany.id
+        });
       }
     },
     onSubmitSuccess: function onSubmitSuccess(data, response) {
@@ -2320,13 +2331,13 @@ var AccountEdit = function AccountEdit(props) {
     },
     onChangeData: function onChangeData(oldData, newData) {
       if (newData.account_type && oldData.account_type != newData.account_type) {
-        newData.parent = '';
+        setUrlParams({
+          id: newData.id,
+          company_id: activeCompany.id,
+          account_type: newData.account_type
+        });
         ref.current.getRef('parent').setSelected(null);
-        ref.current.getRef('parent').clearOptions();
-        ref.current.getRef('parent').loadOptions(); //getParents(newData.account_type)
       }
-
-      return newData;
     },
     children: function children(props) {
       var _props$data$number, _props$data$name;
@@ -2382,11 +2393,7 @@ var AccountEdit = function AccountEdit(props) {
               disabled: props.loading,
               ref: props.inputRefs('parent'),
               url: "/api/setup/accounts/parents",
-              urlParams: {
-                id: props.data.id,
-                company_id: activeCompany.id,
-                account_type: props.data.account_type
-              },
+              urlParams: urlParams,
               required: true,
               onChange: function onChange(value) {
                 return props.handleChange({
