@@ -9,6 +9,12 @@ class Account extends Model
 {
     use HasFactory;
     use \Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
+    
+    const ASSETS = 1;
+    const LIABILITIES = 2;
+    const CAPITAL = 3;
+    const INCOME = 4;
+    const EXPENSES = 5;
 
     public function getParentKeyName()
     {
@@ -32,20 +38,18 @@ class Account extends Model
     {
         return $this->belongsTo(AccountType::class);
     }
-
-    public function parent()
-    {
-        return $this->belongsTo(Account::class);
-    }
-
-    public function childs()
-    {
-        return $this->hasMany(Account::class);
-    }
-
+   
     public function balances()
     {
         return $this->hasMany(AccountBalance::class);
-    }
+    }    
 
+    public function scopeDetail($query)
+    {
+        return $query->whereNotExists(function($query){
+                        $query->from("accounts")
+                              ->whereColumn("parent", "laravel_cte.id");
+                    });
+    }
+    
 }

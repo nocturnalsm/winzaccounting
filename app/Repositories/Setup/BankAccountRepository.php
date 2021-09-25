@@ -3,6 +3,7 @@
 namespace App\Repositories\Setup;
 
 use App\Repositories\BaseRepository;
+use App\Repositories\Setup\AccountRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\BankAccount;
@@ -13,10 +14,11 @@ use DB;
 
 class BankAccountRepository extends BaseRepository
 {
+    const ACCOUNT_TYPE = 1;
 
-    public function __construct(BankAccount $bank)
+    public function __construct()
     {
-        $this->data = $bank;
+        $this->data = new BankAccount;
         $this->listFilters = [
             'account_name' => function($query, $key, $value){
                 return $query->where(DB::raw("CONCAT(account_number, account_name)"), "LIKE", "%{$value}%");
@@ -111,5 +113,14 @@ class BankAccountRepository extends BaseRepository
             throw new \Exception("Data not found");
         }
         return $data->first();
+    }
+    public function searchAccount($request)
+    {                       
+        $accountRepository = new AccountRepository;        
+        $accountRepository->setData(
+            Account::whereAccountType(Account::ASSETS)                   
+                   ->detail()                   
+        );       
+        return $accountRepository->search($request);
     }
 }

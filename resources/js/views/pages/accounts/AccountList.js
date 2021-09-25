@@ -69,7 +69,7 @@ const AccountList = () => {
 
     useEffect(() => {
         ref.current.fetchData({
-            url: "/api/setup/account-types",
+            url: "/api/setup/accounts/types",
             success: response => {
                 if (response){
                     setAccountTypes(response.data)

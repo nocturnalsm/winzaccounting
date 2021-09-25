@@ -11,9 +11,9 @@ use App\Models\Currency;
 class CurrencyRateRepository extends BaseRepository
 {
 
-    public function __construct(CurrencyRate $currencyRate)
+    public function __construct()
     {
-        $this->data = $currencyRate;
+        $this->data = new CurrencyRate;
         $this->listFilters = [
             "start" => ["operator" => ">="],
             "end" => ["operator" => "<="]

@@ -12,9 +12,9 @@ use DB;
 class TaxCodeRepository extends BaseRepository
 {   
 
-    public function __construct(TaxCode $taxCode)
+    public function __construct()
     {
-        $this->data = $taxCode;
+        $this->data = new TaxCode;
         $this->listFilters =  [
             'account_name' => function($query, $key, $value){
                 return 
@@ -77,5 +77,43 @@ class TaxCodeRepository extends BaseRepository
                 }
             },
         ];
+    }
+    public function search(Request $request, $qRules = [])
+    {
+        if ($qRules == []){
+            $qRules = ["name" => ["operator" => "like"]];
+        }        
+        return parent::search($request, $qRules);
+    }
+    public function getById($id)
+    {        
+        $data = $this->data->where("id", $id)
+             ->select("*", "accounts.*")
+             ->leftJoinSub(
+                Account::select(
+                    DB::raw("accounts.id AS linked_account_id"),
+                    DB::raw("CONCAT(types.prefix, accounts.number) AS account_number"),
+                    DB::raw("accounts.name AS account_name")
+                )
+                ->leftJoin(DB::raw("account_types types"), "accounts.account_type","=","types.id"),
+                "accounts",
+                function($join){
+                    $join->on("tax_codes.account_id", "=", "linked_account_id");
+                }
+             );
+        if (!$data){
+            throw new \Exception("Data not found");
+        }
+        return $data->first();
+    }
+    public function searchAccount($request)
+    {                       
+        $accountRepository = new AccountRepository;        
+        $accountRepository->setData(
+            Account::whereAccountType(Account::EXPENSES)
+                   ->whereCompanyId($request->company_id ?? NULL)
+                   ->detail()                   
+        );       
+        return $accountRepository->search($request);
     }
 }

@@ -7,10 +7,10 @@ use App\PaginatedList;
 class SearchList extends PaginatedList
 {
 
-    public function makeList($qFilter, $qRules, $filter, $filterRules, $sortBy = '', $order = 'asc')
+    public function makeList($qFilter, $qRules, $sortBy = '', $order = 'asc')
     {
         $data = $this->data;
-
+        
         if (is_callable($this->queryFunction)){
             $data = ($this->queryFunction)($data);
         }
@@ -18,10 +18,8 @@ class SearchList extends PaginatedList
         $filterFunction = $this->defaultFilter();
         $this->setFilterOperator("OR");
         $this->setFilterRules($qRules);
+        
         $data = ($filterFunction)($data, $qFilter);
-        $this->setFilterOperator("AND");
-        $this->setFilterRules($filterRules);
-        $data = ($filterFunction)($data, $filter);
 
         if (is_callable($this->sortFunction)){
             $data = ($this->sortFunction)($data, $sortBy, $order);

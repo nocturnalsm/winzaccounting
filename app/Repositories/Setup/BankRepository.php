@@ -10,9 +10,9 @@ use App\Models\Bank;
 class BankRepository extends BaseRepository
 {
 
-    public function __construct(Bank $bank)
+    public function __construct()
     {
-        $this->data = $bank;
+        $this->data = new Bank;
     }
     public function validateUsing($params, $id = "")
     {
@@ -32,15 +32,13 @@ class BankRepository extends BaseRepository
             ]
         ];
     }
-    public function search(Request $request, $qRules = [], $filterRules = [])
+    public function search(Request $request, $qRules = [])
     {
         if ($qRules == []){
             $qRules = ["name" => ["operator" => "like"]];
-        }
-        if ($filterRules == []){
-            $filterRules = ["company_id" => []];
-        }
-        return parent::search($request, $filterRules, $qRules);
+        }        
+        $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);                            
+        return parent::search($request, $qRules);
     }
 
 }

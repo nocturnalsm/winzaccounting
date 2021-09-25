@@ -13,9 +13,9 @@ use DB;
 class AccountRepository extends BaseRepository
 {
 
-    public function __construct(Account $account)
+    public function __construct()
     {
-        $this->data = $account;
+        $this->data = new Account;
         $this->listFilters = [
             "type" => [
                 "key" => "account_type"
@@ -81,8 +81,6 @@ class AccountRepository extends BaseRepository
                   ->orWhere("parent", "0");
         };
 
-
-
         $data = $data->treeOf($constraint)
                     ->select("laravel_cte.id", "laravel_cte.name", "accountType", "depth",
                              DB::raw("CONCAT(at.prefix, laravel_cte.number) AS number"),
@@ -132,7 +130,7 @@ class AccountRepository extends BaseRepository
       }
       return false;
     }
-    public function search(Request $request, $filterRules = [], $qRules = [])
+    public function search(Request $request, $qRules = [])
     {
         if ($qRules == []){
             $qRules = [
@@ -142,11 +140,46 @@ class AccountRepository extends BaseRepository
                 ],
                 "name"   => ["operator" => "like"]
             ];
+        }        
+        if (isset($request->detail)){
+            $this->data = $this->data->detail();
         }
-        if ($filterRules == []){
-            $filterRules = ["company_id" => []];
+        if (isset($request->account_type)){
+            $this->data = $this->data->whereAccountType($request->account_type);
         }
-        return parent::search($request, $filterRules, $qRules);
+        if (isset($request->company_id)){
+            $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);
+        }
+        return parent::search($request, $qRules);
     }
-
+    public function searchParents(Request $request)
+    {
+        $this->setData(Account::where("laravel_cte.id", "<>", $request->id));
+        return $this->search($request);
+    }
+    public function getById(String $id)
+    {
+        $data = $this->data->where("accounts.id", $id)
+                           ->select("*")
+                           ->selectSub(
+                                AccountType::select("name")
+                                            ->whereColumn("id", "accounts.account_type"),
+                                'account_type_name'
+                            )
+                            ->leftJoinSub(
+                                Account::select("accounts.id",                                    
+                                    DB::raw("CONCAT(types.prefix, accounts.number) AS parent_number"),
+                                    DB::raw("accounts.name AS parent_name")
+                                )
+                                ->leftJoin(DB::raw("account_types types"), "accounts.account_type","=","types.id"),
+                                "parents",
+                                function($join){
+                                    $join->on("accounts.parent", "=", "parents.id");
+                                }
+                            );
+        if (!$data){
+            throw new \Exception("Data not found");
+        }
+        return $data->first();
+    }
 }

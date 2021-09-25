@@ -11,9 +11,9 @@ use DB;
 class UnitRepository extends BaseRepository
 {
 
-    public function __construct(Unit $unit)
+    public function __construct()
     {
-        $this->data = $unit;       
+        $this->data = new Unit;   
         $this->listFilters = [
             'qty_unit_name' => [
                 'key' => 'qtyunit.name', 'operator' => 'like'

@@ -49,7 +49,7 @@ const CurrencyRateEdit = (props) => {
                                 placeholder="Choose Currency"
                                 autoFocus={true}
                                 ref={props.inputRefs('currency_id')}
-                                filter={{company_id: activeCompany.id}}
+                                urlParams={{company_id: activeCompany.id}}
                                 disabled={props.loading}
                                 required
                                 optionLabel={e => e.name}

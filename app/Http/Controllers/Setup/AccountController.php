@@ -109,13 +109,8 @@ class AccountController extends Controller
     }
 
     public function account_parents(Request $request)
-    {                       
-        $filterRules = [
-            "company_id" => [],
-            "id" => ["operator" => "<>"],
-            "account_type" => []
-        ];
-        $data = $this->account->search($request, $filterRules);
+    {                                       
+        $data = $this->account->searchParents($request);
         return response()->json($data);
     }
 }

@@ -60,7 +60,7 @@ const BankAccountEdit = (props) => {
                               placeholder="Choose Bank"
                               url="/api/setup/banks/search"
                               ref={props.inputRefs('bank_id')}
-                              filter={{company_id: activeCompany.id}}
+                              urlParams={{company_id: activeCompany.id}}
                               invalid={props.isInvalid('bank_id')}
                               onChange={value => props.handleChange({bank_id: (value ? value.id : "")})}
                             />
@@ -116,9 +116,9 @@ const BankAccountEdit = (props) => {
                               autoComplete="off"
                               disabled={props.loading}
                               value={props.data.account_id ?? initialData.account_id}
-                              onChange={value => props.handleChange({account_id: (value ? value.id : "")})}
-                              filter={{company_id: activeCompany.id}}
-                              url="/api/setup/accounts/search"
+                              onChange={value => props.handleChange({account_id: (value ? value.id : "")})}                              
+                              url="/api/setup/bank-accounts/search-account"
+                              urlParams={{company_id: activeCompany.id}}
                               optionLabel={e => e.number + ' ' + e.name}
                               optionValue={e => e.id}
                               ref={props.inputRefs('account_id')}

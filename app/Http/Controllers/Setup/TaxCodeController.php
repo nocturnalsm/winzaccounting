@@ -93,4 +93,15 @@ class TaxCodeController extends Controller
         $result = $this->taxCode->delete($id);
         return $result;
     }
+
+    public function search(Request $request)
+    {
+        $data = $this->taxCode->search($request);
+        return response()->json($data);
+    }
+    public function search_account(Request $request)
+    {
+        $data = $this->taxCode->searchAccount($request);
+        return response()->json($data);
+    }
 }

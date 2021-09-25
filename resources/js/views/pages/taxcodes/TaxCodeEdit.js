@@ -1,39 +1,30 @@
 import MasterEdit from '../../../containers/MasterEdit'
-import { useState, useEffect } from "react";
+import SearchSelect from '../../../components/SearchSelect'
+import { useRef } from "react";
 import { useSelector } from "react-redux";
-import { CSelect, CInput, CCol, CFormGroup, CLabel } from '@coreui/react'
-import MyAlert from "../../../alert";
-import axios from 'axios'
+import { CInput, CCol, CFormGroup, CLabel } from '@coreui/react'
 
 const TaxCodeEdit = (props) => {
-
-    const [accounts, setAccounts] = useState([])
+    
     const activeCompany = useSelector(state => state.activeCompany)
-
-    useEffect(() => {
-        axios.get("/api/setup/accounts", {
-            params: {
-                limit: 10000,
-                filter: {company_id: activeCompany.id}
-            }
-        })
-        .then(response => {
-            if (response){
-                setAccounts(response.data.data)
-            }
-        })
-        .catch(error => {
-            MyAlert.error({text: error.response.message})
-        })
-
-    }, [])
+    const ref = useRef(null)    
 
     return (
         <MasterEdit title="Tax Code"
+            ref={ref}
             apiUrl="/api/setup/taxcodes"
             formatData={data => {
                 return {...data, company_id: activeCompany.id}
-            }}>
+            }}
+            onOpen={response => {
+                if (response){
+                    let data = response.data                    
+                    if (data.id){                                               
+                        ref.current.getRef('account_id').setSelected({id: data.account_id, number: data.account_number, name: data.account_name})                    
+                    }                                            
+                }
+            }}
+            >
             {props => (
                 <>
                     <CFormGroup row>
@@ -46,7 +37,7 @@ const TaxCodeEdit = (props) => {
                             autoFocus={true}
                             autoComplete="off"
                             type="text"
-                            innerRef={props.ref}
+                            innerRef={props.inputRefs('name')}
                             disabled={props.loading}
                             onChange={e => props.handleChange({name: e.target.value})}
                             value={props.data.name ?? ''}
@@ -67,6 +58,7 @@ const TaxCodeEdit = (props) => {
                             autoComplete="off"
                             disabled={props.loading}
                             value={props.data.code ?? ''}
+                            innerRef={props.inputRefs('code')}
                             onChange={e => props.handleChange({code: e.target.value})}
                             invalid={props.isInvalid('code')}
                             />
@@ -83,6 +75,7 @@ const TaxCodeEdit = (props) => {
                             placeholder="Enter tax percentage"
                             autoComplete="off"
                             disabled={props.loading}
+                            innerRef={props.inputRefs('percentage')}
                             value={props.data.percentage ?? ''}
                             onChange={e => props.handleChange({percentage: e.target.value})}
                             invalid={props.isInvalid('percentage')}
@@ -95,22 +88,18 @@ const TaxCodeEdit = (props) => {
                             <CLabel>Linked to Account</CLabel>
                         </CCol>
                         <CCol sm="8" lg="5">
-                            <CSelect
-                              type="text"
-                              placeholder="Choose account"
+                            <SearchSelect
+                              async                                                          
+                              optionValue={e => e.id}                                                                                          
                               autoComplete="off"
-                              disabled={props.loading}
-                              value={props.data.account_id ?? ''}
-                              onChange={e => props.handleChange({account_id: e.target.value})}
-                            >
-                                <option value=""></option>
-                            {
-                                accounts ?
-                                accounts.map((item, index) => (
-                                    <option key={item.id} value={item.id}>{item.number} - {item.name}</option>
-                                )) : ''
-                            }
-                            </CSelect>
+                              disabled={props.loading}             
+                              placeholder="Choose account"
+                              url="/api/setup/taxcodes/search-account"
+                              urlParams={{company_id: activeCompany.id}}
+                              ref={props.inputRefs('account_id')}
+                              optionLabel={e => e.number + " " + e.name}                 
+                              onChange={value => props.handleChange({account_id: value ? value.id : ""})}
+                            />                                
                         </CCol>
                     </CFormGroup>
                 </>

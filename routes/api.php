@@ -31,6 +31,7 @@ Route::prefix('setup')->group(function(){
     Route::get('currencies/search', [App\Http\Controllers\Setup\CurrencyController::class, 'search']);
     Route::resource('currencies', App\Http\Controllers\Setup\CurrencyController::class);
     Route::resource('currency-rates', App\Http\Controllers\Setup\CurrencyRateController::class);    
+    Route::get('taxcodes/search-account', [App\Http\Controllers\Setup\TaxCodeController::class, 'search_account']);
     Route::get('taxcodes/search', [App\Http\Controllers\Setup\TaxCodeController::class, 'search']);
     Route::resource('taxcodes', App\Http\Controllers\Setup\TaxCodeController::class);
     Route::get('accounts/search', [App\Http\Controllers\Setup\AccountController::class, 'search']);
@@ -39,6 +40,7 @@ Route::prefix('setup')->group(function(){
     Route::resource('accounts', App\Http\Controllers\Setup\AccountController::class);    
     Route::get('banks/search', [App\Http\Controllers\Setup\BankController::class, 'search']);
     Route::resource('banks', App\Http\Controllers\Setup\BankController::class);    
+    Route::get('bank-accounts/search-account', [App\Http\Controllers\Setup\BankAccountController::class, 'search_account']);
     Route::resource('bank-accounts', App\Http\Controllers\Setup\BankAccountController::class);
     Route::get('units/search', [App\Http\Controllers\Setup\UnitController::class, 'search']);
     Route::get('units/per_units', [App\Http\Controllers\Setup\UnitController::class, 'per_unit']);

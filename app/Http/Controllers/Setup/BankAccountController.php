@@ -95,4 +95,9 @@ class BankAccountController extends Controller
         $result = $this->bankAccount->delete($id);
         return $result;
     }
+    public function search_account(Request $request)
+    {
+        $data = $this->bankAccount->searchAccount($request);
+        return response()->json($data);
+    }
 }

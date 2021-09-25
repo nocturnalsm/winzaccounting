@@ -70,7 +70,7 @@ class PaginatedList
     }
     protected function defaultFilter()
     {
-        return function($data, $filter){
+        return function($data, $filter){            
             $data = $data->where(function($query) use ($filter){
                 foreach ($filter as $key=>$value){
                     if (trim($value) != ""){

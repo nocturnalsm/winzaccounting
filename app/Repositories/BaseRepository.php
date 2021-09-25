@@ -11,11 +11,13 @@ use App\SearchList;
 
 class BaseRepository implements RepositoryInterface
 {
-    protected $data;
-    protected $filterFunction;
-    protected $queryFunction;
+    protected $data;    
     protected $listFilters;
 
+    public function setData($data)
+    {
+        $this->data = $data;
+    }
     public function getList(Request $request) : Array
     {
         $data = $this->data;
@@ -23,7 +25,7 @@ class BaseRepository implements RepositoryInterface
         if (method_exists($this, 'listQuery')){
             $data = $this->listQuery($data);
         }
-
+        
         $list = new PaginatedList($data);
 
         if ($this->listFilters && count($this->listFilters) > 0){
@@ -41,7 +43,7 @@ class BaseRepository implements RepositoryInterface
                 return $this->listSort($data, $sortBy, $order);
             });
         }
-
+        
         $params = $request->all();
         $page = isset($params['page']) ? $params['page'] : 1;
         $limit = isset($params['limit']) ? $params['limit'] : 10;
@@ -88,20 +90,20 @@ class BaseRepository implements RepositoryInterface
         $data->delete();
         return true;
     }
-    public function search(Request $request, $filterRules = [], $qRules = [])
+    public function search(Request $request, $qRules = [])
     {
         $params = $request->all();
         $query = isset($params["q"]) ? $params["q"] : "";
-        $filter = isset($params["filter"]) ? json_decode($params['filter'], true) : '';
         $sortBy = isset($params['sort']) ? $params['sort'] : '';
         $order = isset($params['order']) ? $params['order'] : 'ASC';
 
         $data = $this->data;
+        
         if (method_exists($this, 'listQuery')){
             $data = $this->listQuery($data);
         }
-        $list = new SearchList($data);
-
+        
+        $list = new SearchList($data);        
         $qFilter = [];
         if (is_array($qRules)){
             foreach ($qRules as $key => $rule){
@@ -116,7 +118,7 @@ class BaseRepository implements RepositoryInterface
             });
         }
 
-        return $list->makeList($qFilter, $qRules, $filter, $filterRules, $sortBy, $order);
+        return $list->makeList($qFilter, $qRules, $sortBy, $order);
 
     }
 

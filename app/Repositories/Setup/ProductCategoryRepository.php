@@ -11,9 +11,9 @@ use DB;
 class ProductCategoryRepository extends BaseRepository
 {
 
-    public function __construct(ProductCategory $category)
+    public function __construct()
     {
-        $this->data = $category;
+        $this->data = new ProductCategory;
     }
 
     public function validateUsing($params, $id = "")

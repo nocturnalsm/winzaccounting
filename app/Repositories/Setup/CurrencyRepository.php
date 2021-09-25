@@ -10,9 +10,9 @@ use App\Models\Currency;
 class CurrencyRepository extends BaseRepository
 {
 
-    public function __construct(Currency $currency)
+    public function __construct()
     {
-        $this->data = $currency;
+        $this->data = new Currency;
     }
     public function validateUsing($params, $id = "")
     {
@@ -34,14 +34,11 @@ class CurrencyRepository extends BaseRepository
             'sign' => 'max:10'
         ];
     }
-    public function search(Request $request, $qRules = [], $filterRules = [])
+    public function search(Request $request, $qRules = [])
     {
         if ($qRules == []){
             $qRules = ["name" => ["operator" => "like"]];
         }
-        if ($filterRules == []){
-            $filterRules = ["company_id" => []];
-        }
-        return parent::search($request, $filterRules, $qRules);
+        return parent::search($request, $qRules);
     }
 }
