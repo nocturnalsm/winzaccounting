@@ -3,6 +3,7 @@ import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 import MyAlert from '../alert.js';
 import axios from 'axios';
+import {debounce, isEqual} from 'lodash';
 
 const SearchSelect = React.forwardRef(({
       async,
@@ -11,36 +12,56 @@ const SearchSelect = React.forwardRef(({
       optionLabel,
       optionValue,
       defaultValue,
-      options,
       url,
       filter,
       onChange,
-      urlParams,
-      value,
+      urlParams,      
       innerRef, ...restProps}, ref) => {
 
     const selectRef = useRef(null)
-    const [selectedValue, setSelectedValue] = useState(null);
+    const [selectedValue, setSelectedValue] = useState({})
+    const [queryParams, setQueryParams] = useState(urlParams)
+    const [options, setOptions] = useState([])
+    const [value, setValue] = useState('')
 
-    // handle input change event
-    const handleInputChange = inputValue => {
-        onChange(inputValue);
-    };
-    // handle selection
-    const handleChange = inputValue => {
-        setSelectedValue(inputValue);
-        onChange(inputValue);
-    }
-    
+    useEffect(() => {        
+       setSelectedValue(defaultValue)       
+    }, [defaultValue])
+
     useEffect(() => {
-        if(value){
-          setSelectedValue(value)
-          console.log(value)
-        }
+        loadOptions()
     }, [value])
+    
+    const handleInputChange = (inputValue) => {
+        setValue(inputValue)        
+    }
+    // handle selection
+    const handleChange = (inputValue, action) => {     
+        switch (action.action){           
+            case 'select-option':
+                setSelectedValue(inputValue)
+                onChange(inputValue)
+                return;
+            case 'clear':                
+                setSelectedValue(null)
+                onChange(inputValue)
+            default:
+                return;
+        }
+    }
 
     useEffect(() => {
-        loadOptions('')
+        if (queryParams){
+            loadOptions(value)
+        }
+    }, [queryParams])
+   
+    useEffect(() => {        
+        if (urlParams){
+            if (!isEqual(queryParams, urlParams)){
+                setQueryParams(urlParams)            
+            }        
+        }        
     }, [urlParams])
 
     const customStyles = {
@@ -81,27 +102,27 @@ const SearchSelect = React.forwardRef(({
     }));
 
     // load options using API call
-    const loadOptions = (inputValue, callback) => {
-        axios.get(url, {
-            params: {q: inputValue, ...urlParams}
-        })
-        .then((response) => {
-            if (callback){
-              let options = response.data.data;
-              callback(options)
-            }
-        })
-        .catch(error => {
-            console.log(error)
-            MyAlert.error({text: error.response})
-        })
+    const loadOptions = () => {        
+        const getData = () => {
+            axios.get(url, {
+                params: {q: value, ...queryParams}
+            })
+            .then((response) => {            
+                let options = response.data.data;
+                setOptions(options)
+            })
+            .catch(error => {
+                console.log(error)
+                MyAlert.error({text: error.response})
+            })
+        }
+        debounce(getData, 1000)
     };
 
     if (async){
         return (
-            <AsyncSelect {...restProps}
-                cacheOptions
-                defaultOptions
+            <Select {...restProps}
+                cacheOptions                
                 isClearable
                 className={"react-select" +(invalid ? ' is-invalid' : '')}
                 classNamePrefix="react-select"
@@ -109,10 +130,10 @@ const SearchSelect = React.forwardRef(({
                 value={selectedValue}
                 getOptionLabel={optionLabel}
                 getOptionValue={optionValue}
-                loadOptions={loadOptions}
+                options={options}
                 onInputChange={handleInputChange}
                 onChange={handleChange}
-                styles={customStyles}
+                styles={customStyles}                
             />
         );
     }
@@ -132,6 +153,7 @@ const SearchSelect = React.forwardRef(({
                 onInputChange={handleInputChange}
                 onChange={handleChange}
                 styles={customStyles}
+                defaultValue={defaultValue}
             />
         );
     }

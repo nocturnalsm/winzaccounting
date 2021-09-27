@@ -1,5 +1,5 @@
 import MasterEdit from '../../../containers/MasterEdit'
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { CInput, CCol, CFormGroup, CLabel} from '@coreui/react'
 import SearchSelect from '../../../components/SearchSelect'
@@ -7,13 +7,12 @@ import SearchSelect from '../../../components/SearchSelect'
 const BankAccountEdit = (props) => {
 
     const [initialData, setInitialData] = useState({bank_id: '', account_id: ''})
+    const [bank, setBank] = useState(null)
+    const [account, setAccount] = useState(null)
     const activeCompany = useSelector(state => state.activeCompany)
-
-    const ref = useRef(null)
-
+    
     return (
         <MasterEdit title="Bank Account"
-            ref={ref}
             apiUrl="/api/setup/bank-accounts"
             formatData={data => {
                 let {bank_id, account_id} = data
@@ -22,14 +21,11 @@ const BankAccountEdit = (props) => {
                         account_id: account_id ?? initialData.account_id,
                         company_id: activeCompany.id}
             }}
-            onOpen={response => {
-                if (response){
-                    let data = response.data
-                    if (data.id){
-                        ref.current.getRef('bank_id').setSelected({id: data.bank_id, name: data.bank_name})
-                    }
+            onOpen={data => {
+                if (data){
+                    setBank({id: data.bank_id, name: data.bank_name})
                     if (data.account_id){
-                        ref.current.getRef('account_id').setSelected({id: data.account_id, number: data.account_number, name: data.account_name})
+                        setAccount({id: data.account_id, number: data.account_number, name: data.account_name})
                     }
                 }
             }}
@@ -56,6 +52,7 @@ const BankAccountEdit = (props) => {
                               autoFocus={true}
                               optionValue={e => e.id}
                               optionLabel={e => e.name}
+                              defaultValue={bank}
                               disabled={props.loading}
                               placeholder="Choose Bank"
                               url="/api/setup/banks/search"
@@ -114,6 +111,7 @@ const BankAccountEdit = (props) => {
                               async
                               placeholder="Choose account"
                               autoComplete="off"
+                              defaultValue={account}
                               disabled={props.loading}
                               value={props.data.account_id ?? initialData.account_id}
                               onChange={value => props.handleChange({account_id: (value ? value.id : "")})}                              

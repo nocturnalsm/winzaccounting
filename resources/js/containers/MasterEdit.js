@@ -119,7 +119,7 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
                 let dataId = id ? {id: id} : {}
                 setData({...dataId, ...response.data})                                
                 if (props.onOpen){
-                    props.onOpen(response)
+                    props.onOpen(response.data)
                 }
             })
             .catch(error => {

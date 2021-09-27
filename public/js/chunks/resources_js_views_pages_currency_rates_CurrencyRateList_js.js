@@ -29,7 +29,7 @@ var CreateButton = function CreateButton(props) {
     onClick: function onClick(event) {
       return props.action(event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: (_props$icon = props.icon) !== null && _props$icon !== void 0 ? _props$icon : 'cil-plus'
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
       className: "ml-2",
@@ -75,7 +75,7 @@ var DTToolbarShow = function DTToolbarShow(props) {
     onClick: function onClick(event) {
       return props.showAction(props.item, event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cil-magnifying-glass"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -97,7 +97,7 @@ var DTToolbarEdit = function DTToolbarEdit(props) {
       return props.editAction(props.item, event);
     } //{props.editLink ? props.editLink.replace(/\/$/, '') + "/" + props._id : ''}
     ,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cilPencil"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -118,7 +118,7 @@ var DTToolbarDelete = function DTToolbarDelete(props) {
     onClick: function onClick(event) {
       return props.deleteAction(props.item, event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cilTrash"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -223,10 +223,23 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function (_ref, ref) {
-  var _props$createButtonDi, _props$createButtonCo, _ref4, _params$limit;
+  var _props$createButtonDi, _props$createButtonCo, _ref3, _params$limit;
 
   var customFilter = _ref.customFilter,
       props = _objectWithoutProperties(_ref, _excluded);
+
+  var initialParams = function initialParams() {
+    var _data$page, _data$limit, _data$order, _data$filter;
+
+    var data = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {};
+    return {
+      page: (_data$page = data.page) !== null && _data$page !== void 0 ? _data$page : 1,
+      limit: (_data$limit = data.limit) !== null && _data$limit !== void 0 ? _data$limit : 10,
+      sort: data.sort,
+      order: (_data$order = data.order) !== null && _data$order !== void 0 ? _data$order : 'asc',
+      filter: (_data$filter = data.filter) !== null && _data$filter !== void 0 ? _data$filter : {}
+    };
+  };
 
   var appLoading = (0,react_redux__WEBPACK_IMPORTED_MODULE_6__.useSelector)(function (state) {
     return state.appLoading;
@@ -252,26 +265,37 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       fields = _useState8[0],
       setFields = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initialParams()),
       _useState10 = _slicedToArray(_useState9, 2),
       params = _useState10[0],
       setParams = _useState10[1];
 
-  var initialParams = function initialParams() {
-    var data = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {
-      page: 1,
-      limit: 10,
-      sort: null,
-      order: 'asc',
-      filter: customFilter !== null && customFilter !== void 0 ? customFilter : {}
+  var changeParams = function changeParams(values) {
+    var newValues = _objectSpread(_objectSpread({}, params), values);
+
+    var _newValues = newValues,
+        page = _newValues.page,
+        limit = _newValues.limit,
+        sort = _newValues.sort,
+        order = _newValues.order,
+        filter = _newValues.filter;
+    newValues = {
+      page: page !== null && page !== void 0 ? page : 1,
+      limit: limit !== null && limit !== void 0 ? limit : 10,
+      sort: sort,
+      order: order !== null && order !== void 0 ? order : 'asc',
+      filter: filter
     };
-    return data;
+
+    if (!(0,lodash__WEBPACK_IMPORTED_MODULE_8__.isEqual)(params, newValues)) {
+      setParams(newValues);
+    }
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    var data = initialParams();
-    fetchData(data);
-  }, []);
+    fetchData();
+    localStorage.setItem('datatable.' + props._id, JSON.stringify(params));
+  }, [params]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var _params$filter;
 
@@ -279,11 +303,9 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
 
     var newFilter = _objectSpread(_objectSpread({}, currParams), customFilter);
 
-    if (Object.keys(newFilter).length > 0 && !(0,lodash__WEBPACK_IMPORTED_MODULE_8__.isEqual)(newFilter, currParams)) {
-      fetchData({
-        filter: newFilter
-      });
-    }
+    changeParams({
+      filter: newFilter
+    });
   }, [customFilter]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useImperativeHandle)(ref, function () {
     return {
@@ -302,7 +324,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         field['filter'] = false;
 
         slots[field.key] = function (item, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_4__.default, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_4__["default"], {
             item: item,
             createAction: props.createAction,
             editAction: props.editAction,
@@ -357,94 +379,82 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
   }, []);
 
   var fetchData = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(request) {
-      var _params$request, page, limit, sort, order, filter, newParams, response;
-
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _params$request = _objectSpread(_objectSpread({}, params), request), page = _params$request.page, limit = _params$request.limit, sort = _params$request.sort, order = _params$request.order, filter = _params$request.filter;
               _store__WEBPACK_IMPORTED_MODULE_7__.store.dispatch((0,_store__WEBPACK_IMPORTED_MODULE_7__.setAppLoading)(true));
-              _context.prev = 2;
-              newParams = {
-                page: page !== null && page !== void 0 ? page : 1,
-                limit: limit !== null && limit !== void 0 ? limit : 10,
-                sort: sort,
-                order: order !== null && order !== void 0 ? order : 'asc',
-                filter: filter
-              };
-              _context.next = 6;
+              _context.prev = 1;
+              _context.next = 4;
               return axios__WEBPACK_IMPORTED_MODULE_2___default().get(props.apiUrl, {
-                params: newParams
+                params: params
               });
 
-            case 6:
+            case 4:
               response = _context.sent;
               setData(response.data);
-              setParams(newParams);
-              localStorage.setItem('datatable.' + props._id, JSON.stringify(newParams));
-              _context.next = 15;
+              _context.next = 11;
               break;
 
-            case 12:
-              _context.prev = 12;
-              _context.t0 = _context["catch"](2);
-              _alert__WEBPACK_IMPORTED_MODULE_3__.default.error({
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](1);
+              _alert__WEBPACK_IMPORTED_MODULE_3__["default"].error({
                 text: _context.t0.response.data.message
               });
 
-            case 15:
-              _context.prev = 15;
+            case 11:
+              _context.prev = 11;
               _store__WEBPACK_IMPORTED_MODULE_7__.store.dispatch((0,_store__WEBPACK_IMPORTED_MODULE_7__.setAppLoading)(false));
-              return _context.finish(15);
+              return _context.finish(11);
 
-            case 18:
+            case 14:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[2, 12, 15, 18]]);
+      }, _callee, null, [[1, 8, 11, 14]]);
     }));
 
-    return function fetchData(_x) {
+    return function fetchData() {
       return _ref2.apply(this, arguments);
     };
   }();
 
   var handlePageChange = function handlePageChange(newPage) {
-    if (newPage > 0 && newPage != params.page) {
-      fetchData({
+    if (newPage && params.page != newPage) {
+      changeParams({
         page: newPage
       });
     }
   };
 
-  var handleFilterChange = function handleFilterChange(newFilter) {
-    var _params$filter2;
+  var handleFilterChange = function handleFilterChange(filter) {
+    var newFilter = _objectSpread(_objectSpread({}, params.filter), filter);
 
-    var oldParams = (_params$filter2 = params.filter) !== null && _params$filter2 !== void 0 ? _params$filter2 : {};
-
-    if (Object.keys(newFilter).length != 0 && !(0,lodash__WEBPACK_IMPORTED_MODULE_8__.isEqual)(newFilter, oldParams)) {
-      fetchData({
+    if (!(0,lodash__WEBPACK_IMPORTED_MODULE_8__.isEqual)(params.filter, newFilter)) {
+      changeParams({
         filter: newFilter
       });
     }
   };
 
   var handlePerRowsChange = function handlePerRowsChange(newLimit) {
-    fetchData({
-      limit: newLimit
-    });
+    if (params.limit != newLimit) {
+      changeParams({
+        limit: newLimit
+      });
+    }
   };
 
   var handleSort = function handleSort(newSort) {
-    var _ref3;
+    var sort = newSort.column;
+    var order = newSort.asc == true ? 'asc' : 'desc';
 
-    if (newSort.column != params.sort || newSort.asc != ((_ref3 = params.order == 'asc') !== null && _ref3 !== void 0 ? _ref3 : true)) {
-      var sort = newSort.column;
-      var order = newSort.asc == true ? 'asc' : 'desc';
-      fetchData({
+    if (params.sort && sort != params.sort && params.order && order != params.order) {
+      changeParams({
         sort: sort,
         order: order
       });
@@ -458,7 +468,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         xs: "6",
         md: "9",
         lg: "10",
-        children: props.topButtonsSlot ? props.topButtonsSlot : props.createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_CreateButton__WEBPACK_IMPORTED_MODULE_5__.default, {
+        children: props.topButtonsSlot ? props.topButtonsSlot : props.createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_CreateButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
           disabled: (_props$createButtonDi = props.createButtonDisabled) !== null && _props$createButtonDi !== void 0 ? _props$createButtonDi : false,
           color: (_props$createButtonCo = props.createButtonColor) !== null && _props$createButtonCo !== void 0 ? _props$createButtonCo : 'primary',
           action: props.createAction,
@@ -508,7 +518,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       loading: appLoading,
       sorterValue: {
         column: params.sort,
-        asc: (_ref4 = params.order == 'asc') !== null && _ref4 !== void 0 ? _ref4 : true
+        asc: (_ref3 = params.order == 'asc') !== null && _ref3 !== void 0 ? _ref3 : true
       },
       hover: true,
       sorter: {
@@ -546,8 +556,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_datatable_CreateButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/datatable/CreateButton */ "./resources/js/components/datatable/CreateButton.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var _excluded = ["toolbarButtons", "customFilter"];
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
@@ -582,6 +594,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
+
 var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function (_ref, ref) {
   var _props$showToolbar, _props$createButtonDi2, _props$createButtonVi2, _props$handleEdit, _props$handleCreate, _props$handleDelete, _jsx2;
 
@@ -589,7 +602,7 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
       customFilter = _ref.customFilter,
       props = _objectWithoutProperties(_ref, _excluded);
 
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useHistory)();
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
@@ -597,40 +610,22 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
       setTableCustomFilter = _useState2[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    setTableCustomFilter(customFilter);
+    if (!(0,lodash__WEBPACK_IMPORTED_MODULE_6__.isEqual)(tableCustomFilter, customFilter)) {
+      setTableCustomFilter(customFilter);
+    }
   }, [customFilter]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle)(ref, function () {
-    return {
-      fetchData: function fetchData(params) {
-        var _params$method, _params$data;
-
-        axios__WEBPACK_IMPORTED_MODULE_4___default()({
-          method: (_params$method = params.method) !== null && _params$method !== void 0 ? _params$method : 'get',
-          url: params.url,
-          data: (_params$data = params.data) !== null && _params$data !== void 0 ? _params$data : {}
-        }).then(function (response) {
-          params.success(response);
-        })["catch"](function (error) {
-          _alert__WEBPACK_IMPORTED_MODULE_3__.default.error({
-            text: error.response.message
-          });
-          params.error(error);
-        });
-      }
-    };
-  });
 
   var handleDelete = function handleDelete(data, clickEvent) {
-    _alert__WEBPACK_IMPORTED_MODULE_3__.default.confirm({
+    _alert__WEBPACK_IMPORTED_MODULE_3__["default"].confirm({
       title: 'Are you sure to delete this data ?',
       confirmAction: function confirmAction() {
-        axios__WEBPACK_IMPORTED_MODULE_4___default().delete(props.apiUrl + "/" + data.id).then(function () {
-          _alert__WEBPACK_IMPORTED_MODULE_3__.default.success({
+        axios__WEBPACK_IMPORTED_MODULE_4___default()["delete"](props.apiUrl + "/" + data.id).then(function () {
+          _alert__WEBPACK_IMPORTED_MODULE_3__["default"].success({
             text: "Data successfully deleted"
           });
           props.tableRef.current.refresh();
         })["catch"](function (error) {
-          _alert__WEBPACK_IMPORTED_MODULE_3__.default.error({
+          _alert__WEBPACK_IMPORTED_MODULE_3__["default"].error({
             text: error.response
           });
         });
@@ -670,8 +665,8 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
     var _props$createButtonVi, _props$createButtonDi, _props$createButtonCo;
 
     var createButtonVisible = (_props$createButtonVi = props.createButtonVisible) !== null && _props$createButtonVi !== void 0 ? _props$createButtonVi : true;
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: [createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_CreateButton__WEBPACK_IMPORTED_MODULE_5__.default, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+      children: [createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_datatable_CreateButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
         className: "mr-2",
         disabled: (_props$createButtonDi = props.createButtonDisabled) !== null && _props$createButtonDi !== void 0 ? _props$createButtonDi : false,
         color: (_props$createButtonCo = props.createButtonColor) !== null && _props$createButtonCo !== void 0 ? _props$createButtonCo : 'primary',
@@ -682,9 +677,9 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
     });
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCard, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCardBody, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_1__.default, (_jsx2 = {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCard, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCardBody, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_1__["default"], (_jsx2 = {
         _id: props.tableId,
         fields: props.fields,
         ref: props.tableRef,
@@ -722,6 +717,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -741,15 +742,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var CurrencyRateList = function CurrencyRateList() {
-  var _ref, _ref2;
-
   var activeCompany = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(function (state) {
     return state.activeCompany;
   });
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
-      customFIlter = _useState2[0],
+      customFilter = _useState2[0],
       setCustomFilter = _useState2[1];
 
   var fields = [{
@@ -775,20 +774,34 @@ var CurrencyRateList = function CurrencyRateList() {
     label: 'Action',
     type: 'toolbar'
   }];
-  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {}, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    var _ref, _ref2;
+
+    var tableData = JSON.parse(localStorage.getItem('datatable.currencyrateslist')) || {};
+    console.log(tableData.filter);
+    setCustomFilter({
+      start: (_ref = tableData.filter && tableData.filter.start) !== null && _ref !== void 0 ? _ref : '',
+      end: (_ref2 = tableData.filter && tableData.filter.end) !== null && _ref2 !== void 0 ? _ref2 : '',
+      company_id: activeCompany.id
+    });
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    setCustomFilter(_objectSpread(_objectSpread({}, customFilter), {}, {
+      company_id: activeCompany.id
+    }));
+  }, [activeCompany]);
 
   var onChangeDate = function onChangeDate(type, event) {
     var value = event.target.value;
     var newFilter = {};
     newFilter[type] = value;
-    dtRef.current.setCustomFilter(newFilter);
+    setCustomFilter(_objectSpread(_objectSpread({}, customFilter), newFilter));
   };
 
-  var tableData = JSON.parse(localStorage.getItem('datatable.currencyrateslist')) || {};
   var customFilterInput = {
     start: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CInput, {
       type: "date",
-      value: (_ref = tableData.filter && tableData.filter.start) !== null && _ref !== void 0 ? _ref : '',
+      value: customFilter.start,
       "aria-label": "column name: 'start' filter input",
       onChange: function onChange(event) {
         return onChangeDate('start', event);
@@ -797,7 +810,7 @@ var CurrencyRateList = function CurrencyRateList() {
     }),
     end: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CInput, {
       type: "date",
-      value: (_ref2 = tableData.filter && tableData.filter.end) !== null && _ref2 !== void 0 ? _ref2 : '',
+      value: customFilter.end,
       "aria-label": "column name: 'end' filter input",
       onChange: function onChange(event) {
         return onChangeDate('end', event);
@@ -805,16 +818,13 @@ var CurrencyRateList = function CurrencyRateList() {
       size: "sm"
     })
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_containers_MasterList__WEBPACK_IMPORTED_MODULE_0__.default, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_containers_MasterList__WEBPACK_IMPORTED_MODULE_0__["default"], {
     tableId: "currencyrateslist",
     fields: fields,
-    tableRef: dtRef,
     apiUrl: "/api/setup/currency-rates",
     editUrl: "/currency-rates",
     createUrl: "/currency-rates/create",
-    customFilter: {
-      company_id: activeCompany.id
-    },
+    customFilter: customFilter,
     customFilterInput: customFilterInput
   });
 };

@@ -99,7 +99,7 @@ class UnitController extends Controller
 
     public function per_unit(Request $request)
     {
-        $units = $this->unit->getPerUnit($request->company_id, $request->unit);
-        return response() ->json($units);
+        $units = $this->unit->getPerUnit($request);
+        return response()->json($units);
     }
 }

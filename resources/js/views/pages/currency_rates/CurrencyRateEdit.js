@@ -1,15 +1,14 @@
 import MasterEdit from '../../../containers/MasterEdit'
 import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { CSelect, CInput, CCol, CFormGroup, CLabel } from '@coreui/react'
-import MyAlert from "../../../alert";
-import axios from 'axios'
+import { CInput, CCol, CFormGroup, CLabel } from '@coreui/react'
 import SearchSelect from '../../../components/SearchSelect'
 
 const CurrencyRateEdit = (props) => {
 
     const [initialData, setInitialData] = useState({currency_id: ''})
     const activeCompany = useSelector(state => state.activeCompany)
+    const [currency, setCurrency] = useState(null)
     const ref = useRef(null)
 
     return (
@@ -28,12 +27,9 @@ const CurrencyRateEdit = (props) => {
                     setInitialData({currency_id: currency_id})
                 }
             }}
-            onOpen={response => {
-                if (response){
-                    let data = response.data
-                    if (data.id){
-                        ref.current.getRef('currency_id').setSelected({id: data.currency_id, name: data.currency_name})
-                    }
+            onOpen={data => {
+                if (data && data.id){
+                    setCurrency({id: data.currency_id, name: data.currency_name})
                 }
             }}
             >
@@ -52,6 +48,7 @@ const CurrencyRateEdit = (props) => {
                                 urlParams={{company_id: activeCompany.id}}
                                 disabled={props.loading}
                                 required
+                                defaultValue={currency}
                                 optionLabel={e => e.name}
                                 optionValue={e => e.id}
                                 url="/api/setup/currencies/search"

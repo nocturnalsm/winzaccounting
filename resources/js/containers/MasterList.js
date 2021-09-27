@@ -5,6 +5,7 @@ import MyAlert from '../alert'
 import axios from 'axios';
 import CreateButton from '../components/datatable/CreateButton'
 import { useHistory } from 'react-router-dom'
+import { isEqual } from 'lodash';
 
 
 const MasterList = React.forwardRef((
@@ -18,28 +19,11 @@ const MasterList = React.forwardRef((
     let history = useHistory()
     const [tableCustomFilter, setTableCustomFilter] = useState({})
 
-    useEffect(() => {
-        setTableCustomFilter(customFilter)
-    }, [customFilter])
-
-    useImperativeHandle(ref, () => ({
-
-        fetchData(params) {
-            axios({
-                method: params.method ?? 'get',
-                url: params.url,
-                data: params.data ?? {}
-            })
-            .then(response => {
-                params.success(response)
-            })
-            .catch(error => {
-                MyAlert.error({text: error.response.message})
-                params.error(error)
-            })
+    useEffect(() => {        
+        if (!isEqual(tableCustomFilter, customFilter)){                   
+            setTableCustomFilter(customFilter)
         }
-
-    }));
+    }, [customFilter])
 
     const handleDelete = (data, clickEvent) => {
         MyAlert.confirm({

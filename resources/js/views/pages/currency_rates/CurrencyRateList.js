@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 const CurrencyRateList = () => {
 
     const activeCompany = useSelector(state => state.activeCompany)
-    const [customFIlter, setCustomFilter] = useState({})
+    const [customFilter, setCustomFilter] = useState({})
     const fields = [
         {
             label: 'Currency',
@@ -39,35 +39,43 @@ const CurrencyRateList = () => {
     ];
 
     useEffect(() => {
-
+        let tableData = JSON.parse(localStorage.getItem('datatable.currencyrateslist')) || {}
+        console.log(tableData.filter)
+        setCustomFilter({
+            start: (tableData.filter && tableData.filter.start) ?? '',
+            end: (tableData.filter && tableData.filter.end) ?? '',
+            company_id: activeCompany.id
+        })
     }, [])
+
+    useEffect(() => {        
+        setCustomFilter({...customFilter, company_id: activeCompany.id})
+    }, [activeCompany])
 
     const onChangeDate = (type, event) => {
         const value = event.target.value;
         let newFilter = {}
         newFilter[type] = value;
-        dtRef.current.setCustomFilter(newFilter)
+        setCustomFilter({...customFilter, ...newFilter})
     }
-
-    let tableData = JSON.parse(localStorage.getItem('datatable.currencyrateslist')) || {}
+    
     const customFilterInput = {
         start: (
-                  <CInput type="date" value={(tableData.filter && tableData.filter.start) ?? ''} aria-label="column name: 'start' filter input" onChange={event => onChangeDate('start', event)} size="sm" />
+                  <CInput type="date" value={customFilter.start} aria-label="column name: 'start' filter input" onChange={event => onChangeDate('start', event)} size="sm" />
                 ),
         end: (
-                  <CInput type="date" value={(tableData.filter && tableData.filter.end) ?? ''} aria-label="column name: 'end' filter input" onChange={event => onChangeDate('end', event)} size="sm" />
+                  <CInput type="date" value={customFilter.end} aria-label="column name: 'end' filter input" onChange={event => onChangeDate('end', event)} size="sm" />
                 )
     }
 
     return (
         <MasterList
             tableId="currencyrateslist"
-            fields={fields}
-            tableRef={dtRef}
+            fields={fields}            
             apiUrl="/api/setup/currency-rates"
             editUrl='/currency-rates'
             createUrl='/currency-rates/create'
-            customFilter={{company_id: activeCompany.id}}
+            customFilter={customFilter}
             customFilterInput={customFilterInput}
         />
     );

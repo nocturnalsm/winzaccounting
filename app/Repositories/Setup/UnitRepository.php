@@ -68,22 +68,41 @@ class UnitRepository extends BaseRepository
 
     public function listQuery($data)
     {
-        return $data->select("units.*", DB::raw("qtyunit.name as qty_unit_name"))                     
-                     ->leftJoinSub(
-                         Unit::select("id","name"),
-                         'qtyunit',
-                         function($join){
-                             $join->on("units.qty_unit", "=", "qtyunit.id");
-                         }
+        return $data->select("*")
+                    ->selectSub(
+                         Unit::select("name")
+                              ->whereColumn("id", "units.qty_unit"),
+                         'qty_unit_name'
                     );
     }      
-    public function getPerUnit($company_id, $unit_id)
+    public function search(Request $request, $qRules = [])
     {
-        $data = Unit::select('id','name')
-                     ->where("company_id", $company_id);
-        if (trim($unit_id) != ""){
-            $data->where("id", "<>", $unit_id);            
+        if ($qRules == []){
+            $qRules = ["name" => ["operator" => "like"]];
+        }   
+        $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);
+        return parent::search($request, $qRules);
+    }
+    public function getPerUnit(Request $request)
+    {
+        if (isset($request->exclude_id)){
+            $this->data = $this->data->where("id", "<>", $request->exclude_id);
+            return $this->search($request);
         }
-        return $data->get();
+    }
+    public function getById($id)
+    {
+        $data = $this->data->whereId($id)  
+                     ->select("*")                   
+                     ->selectSub(
+                         DB::table(DB::raw("units as unit_child"))
+                              ->select("name")
+                              ->whereColumn("unit_child.id", "units.qty_unit"),
+                        "qty_per_unit_name"
+                     );
+        if (!$data){
+            throw new \Exception("Data not found");
+        }
+        return $data->first();
     }
 }

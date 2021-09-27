@@ -39,6 +39,9 @@ class CurrencyRepository extends BaseRepository
         if ($qRules == []){
             $qRules = ["name" => ["operator" => "like"]];
         }
+        if (isset($request->company_id)){
+            $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);
+        }
         return parent::search($request, $qRules);
     }
 }

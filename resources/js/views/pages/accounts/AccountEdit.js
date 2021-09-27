@@ -25,8 +25,7 @@ const AccountEdit = (props) => {
                 setAccountTypes(data)
             }}
         )
-        .catch(error => {
-            console.log(error)
+        .catch(error => {            
             MyAlert.error({text: error.response.message})
         })
 

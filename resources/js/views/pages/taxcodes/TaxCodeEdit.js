@@ -1,12 +1,14 @@
 import MasterEdit from '../../../containers/MasterEdit'
 import SearchSelect from '../../../components/SearchSelect'
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { CInput, CCol, CFormGroup, CLabel } from '@coreui/react'
 
 const TaxCodeEdit = (props) => {
     
-    const activeCompany = useSelector(state => state.activeCompany)
+    const activeCompany = useSelector(state => state.activeCompany)    
+    const [defaultAccount, setDefaultAccount] = useState(null)
+
     const ref = useRef(null)    
 
     return (
@@ -15,15 +17,16 @@ const TaxCodeEdit = (props) => {
             apiUrl="/api/setup/taxcodes"
             formatData={data => {
                 return {...data, company_id: activeCompany.id}
-            }}
-            onOpen={response => {
-                if (response){
-                    let data = response.data                    
-                    if (data.id){                                               
-                        ref.current.getRef('account_id').setSelected({id: data.account_id, number: data.account_number, name: data.account_name})                    
-                    }                                            
-                }
-            }}
+            }}                                
+            onOpen={data => {
+                if (data && data.account_id){
+                    setDefaultAccount({
+                        id: data.account_id, 
+                        number: data.account_number, 
+                        name: data.account_name
+                    })
+                }                
+            }}  
             >
             {props => (
                 <>
@@ -94,6 +97,7 @@ const TaxCodeEdit = (props) => {
                               autoComplete="off"
                               disabled={props.loading}             
                               placeholder="Choose account"
+                              defaultValue={defaultAccount}
                               url="/api/setup/taxcodes/search-account"
                               urlParams={{company_id: activeCompany.id}}
                               ref={props.inputRefs('account_id')}

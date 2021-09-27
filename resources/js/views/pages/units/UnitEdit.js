@@ -1,42 +1,28 @@
 import MasterEdit from '../../../containers/MasterEdit'
 import { useState, useRef } from 'react';
 import { useSelector } from "react-redux";
-import { CSelect, CInput, CCol, CFormGroup, CLabel} from '@coreui/react'
-import MyAlert from "../../../alert";
-import axios from 'axios'
+import { CInput, CCol, CFormGroup, CLabel} from '@coreui/react'
+import SearchSelect from '../../../components/SearchSelect'
 
 const UnitEdit = (props) => {
 
-    const [units, setUnits] = useState([])
+    const [perUnit, setPerUnit] = useState(null)
     const activeCompany = useSelector(state => state.activeCompany)
-
-    const getUnits = (id) => {
-        axios.get("api/setup/per_units", {
-            params: {unit: id, company_id: activeCompany.id}
-        })
-        .then(response => {
-            setUnits(response.data);
-        })
-        .catch(error => {
-            MyAlert.error(error.response.data)
-        })
-    }
-
-    const ref = useRef(null)
+    const [urlParams, setUrlParams] = useState()
 
     return (
         <MasterEdit title="Unit"
             apiUrl="/api/setup/units"
-            onOpen={response => {
-                if (response){
-                    getUnits(response.data.id)
-                }
-                else {
-                    getUnits()
+            onOpen={data => {
+                if (data){
+                    if (data.qty_per_unit){
+                        setPerUnit({id: data.qty_per_unit, name: data.qty_per_unit_name})   
+                    }                                        
+                    setUrlParams({exclude_id: data.id, company_id: activeCompany.id})
                 }
             }}
             onSubmitSuccess={request => {
-                getUnits(request.id)
+                //getUnits(request.id)
             }}
             formatData={data => {
                 return {...data, company_id: activeCompany.id}
@@ -54,7 +40,7 @@ const UnitEdit = (props) => {
                         autoComplete="off"
                         autoFocus={true}
                         type="text"
-                        innerRef={props.ref}
+                        innerRef={props.inputRefs('name')}
                         disabled={props.loading}
                         onChange={e => props.handleChange({name: e.target.value})}
                         value={props.data.name ?? ''}
@@ -71,6 +57,7 @@ const UnitEdit = (props) => {
                 <CCol sm="8" lg="3">
                     <CInput
                         placeholder="Enter unit code"
+                        innerRef={props.inputRefs('code')}
                         autoComplete="off"
                         type="text"
                         disabled={props.loading}
@@ -90,6 +77,7 @@ const UnitEdit = (props) => {
                         placeholder="Enter quantity per unit"
                         autoComplete="off"
                         type="number"
+                        innerRef={props.inputRefs('qty_per_unit')}
                         disabled={props.loading}
                         onChange={e =>props.handleChange({qty_per_unit: e.target.value})}
                         value={props.data.qty_per_unit ?? ''}
@@ -98,22 +86,19 @@ const UnitEdit = (props) => {
                     {props.feedback('qty_per_unit')}
                 </CCol>
                 <CCol sm="4" lg="2">
-                    <CSelect
-                        type="text"
+                    <SearchSelect     
+                        async                   
                         placeholder="Choose Unit"
                         autoComplete="off"
                         disabled={props.loading}
-                        value={props.data.qty_unit ?? ''}
-                        onChange={e => props.handleChange({qty_unit: e.target.value})}
+                        defaultValue={perUnit}
+                        optionLabel={e => e.name}                        
+                        optionValue={e => e.id}
+                        ref={props.inputRefs('per_unit')}   
+                        url="api/setup/units/per_units"
+                        onChange={value => props.handleChange({qty_unit: value ? value.id : ''})}
                         invalid={props.isInvalid('qty_unit')}
-                    >
-                        <option value=""></option>
-                    {
-                        units.map((item, index) => (
-                            <option key={item.id} value={item.id}>{item.name}</option>
-                        ))
-                    }
-                    </CSelect>
+                    />
                     {props.feedback('qty_unit')}
                 </CCol>
             </CFormGroup>

@@ -5,7 +5,7 @@ import DTToolbar from './DTToolbar'
 import CreateButton from './CreateButton'
 import { useSelector } from 'react-redux';
 import { store, setAppLoading } from '../../store';
-import {debounce, initial, isEqual} from 'lodash';
+import {debounce, isEqual} from 'lodash';
 import {CDataTable,CPagination, CRow, CCol, CButton, CSelect, CBadge} from '@coreui/react';
 
 const DTable = React.forwardRef(({
@@ -13,35 +13,48 @@ const DTable = React.forwardRef(({
     ...props},
     ref) => {
 
+    const initialParams = () => {
+        let data = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {}
+        return {
+            page: data.page ?? 1,
+            limit: data.limit ?? 10,
+            sort: data.sort,
+            order: data.order ?? 'asc',
+            filter: data.filter ?? {}
+        };
+    }
+
     const appLoading = useSelector(state => state.appLoading);
     const [data, setData] = useState([]);
     const [showToolbar, setShowToolbar] = useState(true);
     const [customFields, setCustomFields] = useState({});
     const [fields, setFields] = useState(props.fields);
-    const [params, setParams] = useState({})
+    const [params, setParams] = useState(initialParams())    
 
-    const initialParams = () => {
-        let data = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {
-            page: 1,
-            limit: 10,
-            sort: null,
-            order: 'asc',
-            filter: customFilter ?? {}
-        };
-        return data
+    const changeParams = (values) => {
+        let newValues = {...params, ...values}
+        let { page, limit, sort, order, filter } = newValues
+        newValues = {
+            page: page ?? 1,
+            limit: limit ?? 10,
+            sort: sort,
+            order: order ?? 'asc',
+            filter: filter
+        }
+        if (!isEqual(params, newValues)){            
+            setParams(newValues)
+        }
     }
 
-    useEffect(() => {
-        let data = initialParams()
-        fetchData(data)
-    }, [])
+    useEffect(() => {        
+        fetchData()
+        localStorage.setItem('datatable.' +props._id, JSON.stringify(params))
+    }, [params])
 
-    useEffect(() => {
+    useEffect(() => {        
         let currParams = params.filter ?? initialParams().filter;
         let newFilter = {...currParams, ...customFilter}
-        if (Object.keys(newFilter).length > 0 && !isEqual(newFilter, currParams)){
-            fetchData({filter: newFilter})
-        }
+        changeParams({filter: newFilter})
     }, [customFilter])
 
     useImperativeHandle(ref, () => ({
@@ -108,57 +121,50 @@ const DTable = React.forwardRef(({
 
     }, [])
 
-    const fetchData = async (request) => {
-        let { page, limit, sort, order, filter } = { ...params, ...request}
-
-            store.dispatch(setAppLoading(true));
-            try {
-                let newParams = {
-                    page: page ?? 1,
-                    limit: limit ?? 10,
-                    sort: sort,
-                    order: order ?? 'asc',
-                    filter: filter
+    const fetchData = async () => {
+    
+        store.dispatch(setAppLoading(true));
+        try {            
+            const response = await axios.get(props.apiUrl,
+                {
+                    params: params
                 }
-
-                const response = await axios.get(props.apiUrl,
-                    {
-                        params: newParams
-                    }
-                );
-                setData(response.data);
-                setParams(newParams)
-                localStorage.setItem('datatable.' +props._id, JSON.stringify(newParams))
-            }
-            catch (error){
-                MyAlert.error({text: error.response.data.message});
-            }
-            finally {
-                store.dispatch(setAppLoading(false));
-            }
+            );
+            setData(response.data);
+        }
+        catch (error){
+            MyAlert.error({text: error.response.data.message});
+        }
+        finally {
+            store.dispatch(setAppLoading(false));
+        }
 
     }
     const handlePageChange = newPage => {
-        if (newPage > 0 && newPage != params.page){
-            fetchData({page: newPage});
+        if (newPage && params.page != newPage){            
+            changeParams({page: newPage});
         }
   	};
-    const handleFilterChange = (newFilter) => {
-        let oldParams = params.filter ?? {}
-        if (Object.keys(newFilter).length != 0 && !isEqual(newFilter, oldParams)){
-            fetchData({filter: newFilter})
+    const handleFilterChange = (filter) => {       
+        let newFilter = {...params.filter, ...filter}
+        if (!isEqual(params.filter, newFilter)){
+            changeParams({filter: newFilter})
         }
     }
   	const handlePerRowsChange = newLimit => {
-        fetchData({limit: newLimit});
-  	};
-    const handleSort = (newSort) => {
-        if (newSort.column != params.sort || newSort.asc != (params.order == 'asc' ?? true)){
-            let sort = newSort.column;
-            let order = newSort.asc == true ? 'asc' : 'desc'
-            fetchData({sort: sort, order: order});
+        if (params.limit != newLimit){
+            changeParams({limit: newLimit});
         }
   	};
+
+    const handleSort = (newSort) => {        
+        let sort = newSort.column;
+        let order = newSort.asc == true ? 'asc' : 'desc'
+        if ((params.sort && sort != params.sort) 
+          && (params.order && order != params.order)){
+            changeParams({sort: sort, order: order});
+        }
+  	}
 
     return (
         <>
