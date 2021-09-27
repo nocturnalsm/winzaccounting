@@ -4,38 +4,51 @@ import AsyncSelect from 'react-select/async';
 import MyAlert from '../alert.js';
 import axios from 'axios';
 
-const SearchSelect = React.forwardRef(({      
+const SearchSelect = React.forwardRef(({
       async,
-      invalid, 
+      invalid,
       defaultOptions,
       optionLabel,
       optionValue,
       defaultValue,
       options,
-      url,                   
-      filter, 
-      onChange, 
+      url,
+      filter,
+      onChange,
       urlParams,
-      innerRef, ...restProps}, ref) => {  
-      
+      value,
+      innerRef, ...restProps}, ref) => {
+
     const selectRef = useRef(null)
-    const [selectedValue, setSelectedValue] = useState(null);        
-        
+    const [selectedValue, setSelectedValue] = useState(null);
+
     // handle input change event
-    const handleInputChange = value => {    
-        onChange(value);
+    const handleInputChange = inputValue => {
+        onChange(inputValue);
     };
     // handle selection
-    const handleChange = value => {                            
-        setSelectedValue(value);   
-        onChange(value);     
+    const handleChange = inputValue => {
+        setSelectedValue(inputValue);
+        onChange(inputValue);
     }
-    const customStyles = {        
-        control: (provided, state) => {        
-            if (invalid){          
-                const borderColor = '#e55353';          
+    
+    useEffect(() => {
+        if(value){
+          setSelectedValue(value)
+          console.log(value)
+        }
+    }, [value])
+
+    useEffect(() => {
+        loadOptions('')
+    }, [urlParams])
+
+    const customStyles = {
+        control: (provided, state) => {
+            if (invalid){
+                const borderColor = '#e55353';
                 const backgroundRepeat = 'no-repeat';
-                const backgroundSize = 'calc(0.75em + 0.375rem) calc(0.75em + 0.375rem)';          
+                const backgroundSize = 'calc(0.75em + 0.375rem) calc(0.75em + 0.375rem)';
                 return { ...provided, borderColor, backgroundRepeat, backgroundSize };
             }
             else {
@@ -50,13 +63,13 @@ const SearchSelect = React.forwardRef(({
 
     useImperativeHandle(ref, () => ({
 
-        setSelected(value) {         
+        setSelected(value) {
             setSelectedValue(value)
         },
         focus(){
             selectRef.current.focus()
         },
-        clearOptions(){          
+        clearOptions(){
             selectRef.current.state.defaultOptions = []
         },
         loadOptions(){
@@ -65,60 +78,64 @@ const SearchSelect = React.forwardRef(({
             })
         }
 
-    }));  
+    }));
 
     // load options using API call
-    const loadOptions = (inputValue, callback) => {                
+    const loadOptions = (inputValue, callback) => {
         axios.get(url, {
             params: {q: inputValue, ...urlParams}
         })
         .then((response) => {
-            let options = response.data.data;                    
-            callback(options)      
+            if (callback){
+              let options = response.data.data;
+              callback(options)
+            }
         })
-        .catch(error => {          
+        .catch(error => {
+            console.log(error)
             MyAlert.error({text: error.response})
         })
     };
 
     if (async){
         return (
-            <AsyncSelect {...restProps}            
-                cacheOptions                
-                isClearable        
+            <AsyncSelect {...restProps}
+                cacheOptions
+                defaultOptions
+                isClearable
                 className={"react-select" +(invalid ? ' is-invalid' : '')}
                 classNamePrefix="react-select"
-                ref={selectRef}        
-                value={selectedValue}                
+                ref={selectRef}
+                value={selectedValue}
                 getOptionLabel={optionLabel}
                 getOptionValue={optionValue}
                 loadOptions={loadOptions}
                 onInputChange={handleInputChange}
                 onChange={handleChange}
                 styles={customStyles}
-            />     
+            />
         );
     }
     else {
         return (
-            <Select {...restProps}            
+            <Select {...restProps}
                 defaultOptions={defaultOptions ?? true}
-                isClearable        
+                isClearable
                 className={"react-select" +(invalid ? ' is-invalid' : '')}
                 classNamePrefix="react-select"
-                ref={selectRef}        
-                value={selectedValue}       
-                options={options}         
+                ref={selectRef}
+                value={selectedValue}
+                options={options}
                 defaultValue={defaultValue}
                 getOptionLabel={optionLabel}
-                getOptionValue={optionValue}            
+                getOptionValue={optionValue}
                 onInputChange={handleInputChange}
                 onChange={handleChange}
                 styles={customStyles}
-            />     
+            />
         );
     }
-  
+
 })
 
 export default SearchSelect

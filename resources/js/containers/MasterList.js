@@ -1,4 +1,4 @@
-import React, { useImperativeHandle } from 'react'
+import React, { useImperativeHandle, useState, useEffect } from 'react'
 import DTable from '../components/datatable/DTable'
 import {CCard, CCardBody} from '@coreui/react'
 import MyAlert from '../alert'
@@ -7,19 +7,30 @@ import CreateButton from '../components/datatable/CreateButton'
 import { useHistory } from 'react-router-dom'
 
 
-const MasterList = React.forwardRef((props, ref) => {    
+const MasterList = React.forwardRef((
+    {
+      toolbarButtons,
+      customFilter,
+      ...props
+    },
+    ref) => {
 
-    let history = useHistory()    
-    
+    let history = useHistory()
+    const [tableCustomFilter, setTableCustomFilter] = useState({})
+
+    useEffect(() => {
+        setTableCustomFilter(customFilter)
+    }, [customFilter])
+
     useImperativeHandle(ref, () => ({
 
-        fetchData(params) {            
+        fetchData(params) {
             axios({
                 method: params.method ?? 'get',
                 url: params.url,
                 data: params.data ?? {}
             })
-            .then(response => {                
+            .then(response => {
                 params.success(response)
             })
             .catch(error => {
@@ -51,7 +62,7 @@ const MasterList = React.forwardRef((props, ref) => {
     const handleEdit = (data, event) => {
         history.push(props.editUrl + "/" +data.id)
     }
-    let toolbarButtons = {
+    let toolbarDefaultButtons = {
         create: {
             visible: true,
             disabled: false,
@@ -69,24 +80,24 @@ const MasterList = React.forwardRef((props, ref) => {
             disabled: false,
         },
     }
-    toolbarButtons = {...toolbarButtons, ...props.toolbarButtons}
+    toolbarButtons = {...toolbarButtons, ...toolbarDefaultButtons}
 
-    const topButtonsSlot = () => { 
+    const topButtonsSlot = () => {
         const createButtonVisible = props.createButtonVisible ?? true
         return (
             <>
-                {createButtonVisible ? 
-                    (                
+                {createButtonVisible ?
+                    (
                         <CreateButton className="mr-2"
-                            disabled={props.createButtonDisabled ?? false} 
+                            disabled={props.createButtonDisabled ?? false}
                             color={props.createButtonColor ?? 'primary'}
                             action={handleCreate}
                             icon={props.createButtonIcon}
                             text={props.createButtonText}
                         />
                     ) : ''
-                }     
-                {props.topButtonsSlot}                
+                }
+                {props.topButtonsSlot}
             </>
         )
     }
@@ -114,7 +125,7 @@ const MasterList = React.forwardRef((props, ref) => {
                     createButtonDisabled={toolbarButtons.create.disabled}
                     deleteButtonDisabled={toolbarButtons.delete.disabled}
                     topButtonsSlot={topButtonsSlot()}
-                    defaultFilter={props.defaultFilter}
+                    customFilter={tableCustomFilter}
                 />
             </CCardBody>
         </CCard>

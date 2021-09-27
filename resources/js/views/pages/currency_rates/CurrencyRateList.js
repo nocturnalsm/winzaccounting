@@ -1,13 +1,12 @@
 import MasterList from '../../../containers/MasterList'
 import { CInput } from '@coreui/react'
-import { useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 
 const CurrencyRateList = () => {
 
     const activeCompany = useSelector(state => state.activeCompany)
-
-    const dtRef = useRef(null)
+    const [customFIlter, setCustomFilter] = useState({})
     const fields = [
         {
             label: 'Currency',
@@ -40,10 +39,8 @@ const CurrencyRateList = () => {
     ];
 
     useEffect(() => {
-        if (Object.keys(activeCompany).length > 0){
-            dtRef.current.setCustomFilter({company_id: activeCompany.id})
-        }
-    }, [activeCompany])
+
+    }, [])
 
     const onChangeDate = (type, event) => {
         const value = event.target.value;
@@ -70,7 +67,7 @@ const CurrencyRateList = () => {
             apiUrl="/api/setup/currency-rates"
             editUrl='/currency-rates'
             createUrl='/currency-rates/create'
-            defaultFilter={{company_id: activeCompany.id}}
+            customFilter={{company_id: activeCompany.id}}
             customFilterInput={customFilterInput}
         />
     );

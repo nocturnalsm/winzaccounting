@@ -6,7 +6,7 @@ import { CInput, CInputGroup, CInputGroupText, CCol, CFormGroup, CLabel} from '@
 import MyAlert from "../../../alert";
 
 const AccountEdit = (props) => {
-   
+
     const [accountTypes, setAccountTypes] = useState([])
     const [initialData, setInitialData] = useState({account_type: '', parent: ''})
     const activeCompany = useSelector(state => state.activeCompany)
@@ -15,14 +15,23 @@ const AccountEdit = (props) => {
 
     useEffect(() => {
         fetch("/api/setup/accounts/types")
-        .then(response => response.json())
-        .then(data => setAccountTypes(data))
+        .then(response => {
+          if (response) {
+            response.json()
+          }}
+        )
+        .then(data => {
+            if (data) {
+                setAccountTypes(data)
+            }}
+        )
         .catch(error => {
+            console.log(error)
             MyAlert.error({text: error.response.message})
         })
 
     }, [])
-    
+
     const prefix = (data) => {
         let account_type = data.account_type ?? initialData.account_type
         if (account_type != ''){
@@ -35,16 +44,14 @@ const AccountEdit = (props) => {
             ref={ref}
             apiUrl="/api/setup/accounts"
             onOpen={response => {
-                if (response){                    
+                if (response){
                     let data = response.data
                     if (data.id){
-                        ref.current.getRef('account_type').setSelected({id: data.account_type, name: data.account_type_name})
-                        ref.current.getRef('parent').setSelected({id: data.parent, number: data.parent_number, name: data.parent_name})
                         setUrlParams({
-                            id: data.id, 
-                            company_id: activeCompany.id, 
+                            id: data.id,
+                            company_id: activeCompany.id,
                             account_type: data.account_type
-                        })                        
+                        })
                     }
                 }
                 else {
@@ -68,15 +75,15 @@ const AccountEdit = (props) => {
                         account_type: account_type ?? initialData.account_type,
                         company_id: activeCompany.id}
             }}
-            onChangeData={(oldData, newData) => {                                          
-                if (newData.account_type && oldData.account_type != newData.account_type){  
+            onChangeData={(oldData, newData) => {
+                if (newData.account_type && oldData.account_type != newData.account_type){
                     setUrlParams({
-                        id: newData.id, 
-                        company_id: activeCompany.id, 
+                        id: newData.id,
+                        company_id: activeCompany.id,
                         account_type: newData.account_type
-                    }) 
-                    ref.current.getRef('parent').setSelected(null)   
-                }                
+                    })
+                    ref.current.getRef('parent').setSelected(null)
+                }
             }}
         >
         {props => (
@@ -86,13 +93,14 @@ const AccountEdit = (props) => {
                     <CLabel>Account Type</CLabel>
                 </CCol>
                 <CCol sm="8" lg="3">
-                    <SearchSelect                                                
+                    <SearchSelect
                         required
                         autoFocus={true}
-                        options={accountTypes}                        
+                        options={accountTypes}
                         optionValue={e => e.id}
                         optionLabel={e => e.name}
-                        disabled={props.loading}                                            
+                        disabled={props.loading}
+                        value={{id: props.data.account_type, name: props.data.account_type_name}}
                         ref={props.inputRefs('account_type')}
                         placeholder="Choose Account Type"
                         onChange={value => props.handleChange({account_type: value ? value.id : ""})}
@@ -109,13 +117,14 @@ const AccountEdit = (props) => {
                     <SearchSelect
                         async
                         placeholder="Choose parent account"
-                        autoComplete="off"                        
+                        autoComplete="off"
                         disabled={props.loading}
                         ref={props.inputRefs('parent')}
                         url="/api/setup/accounts/parents"
-                        urlParams={urlParams}                        
+                        value={{id: props.data.parent, number: props.data.parent_number, name: props.data.parent_name}}
+                        urlParams={urlParams}
                         required
-                        onChange={value => props.handleChange({parent: value ? value.id : ""})}                        
+                        onChange={value => props.handleChange({parent: value ? value.id : ""})}
                         invalid={props.isInvalid('parent')}
                         optionLabel={e => e.number + " " +e.name}
                         optionValue={e => e.id}

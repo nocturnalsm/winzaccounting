@@ -1,6 +1,6 @@
 import MasterList from '../../../containers/MasterList'
 import { useSelector } from 'react-redux'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 
 const TaxCodeList = () => {
     const fields = [
@@ -31,24 +31,16 @@ const TaxCodeList = () => {
         }
     ];
 
-    const activeCompany = useSelector(state => state.activeCompany)    
-    const dtRef = useRef(null)
-    
-    useEffect(() => {
-        if (Object.keys(activeCompany).length > 0){
-            dtRef.current.setCustomFilter({company_id: activeCompany.id})
-        }
-    }, [activeCompany])
-    
+    const activeCompany = useSelector(state => state.activeCompany)
+
     return (
         <MasterList
             tableId="taxcodeslist"
-            tableRef={dtRef}
             fields={fields}
             apiUrl="/api/setup/taxcodes"
             createUrl='/tax-codes/create'
             editUrl='/tax-codes'
-            defaultFilter={{company_id: activeCompany.id}}
+            customFilter={{company_id: activeCompany.id}}
         />
     );
 

@@ -29,7 +29,7 @@ var CreateButton = function CreateButton(props) {
     onClick: function onClick(event) {
       return props.action(event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
       name: (_props$icon = props.icon) !== null && _props$icon !== void 0 ? _props$icon : 'cil-plus'
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
       className: "ml-2",
@@ -75,7 +75,7 @@ var DTToolbarShow = function DTToolbarShow(props) {
     onClick: function onClick(event) {
       return props.showAction(props.item, event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
       name: "cil-magnifying-glass"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -97,7 +97,7 @@ var DTToolbarEdit = function DTToolbarEdit(props) {
       return props.editAction(props.item, event);
     } //{props.editLink ? props.editLink.replace(/\/$/, '') + "/" + props._id : ''}
     ,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
       name: "cilPencil"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -118,7 +118,7 @@ var DTToolbarDelete = function DTToolbarDelete(props) {
     onClick: function onClick(event) {
       return props.deleteAction(props.item, event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
       name: "cilTrash"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -181,7 +181,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var _excluded = ["filter"];
+var _excluded = ["customFilter"];
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -193,10 +193,6 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -210,6 +206,9 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 
 
@@ -222,8 +221,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function (props, ref) {
-  var _props$createButtonDi, _props$createButtonCo, _ref3, _params$limit;
+
+var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function (_ref, ref) {
+  var _props$createButtonDi, _props$createButtonCo, _ref4, _params$limit;
+
+  var customFilter = _ref.customFilter,
+      props = _objectWithoutProperties(_ref, _excluded);
 
   var appLoading = (0,react_redux__WEBPACK_IMPORTED_MODULE_6__.useSelector)(function (state) {
     return state.appLoading;
@@ -255,27 +258,13 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       setParams = _useState10[1];
 
   var initialParams = function initialParams() {
-    var _props$defaultFilter;
-
     var data = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {
       page: 1,
       limit: 10,
       sort: null,
       order: 'asc',
-      filter: (_props$defaultFilter = props.defaultFilter) !== null && _props$defaultFilter !== void 0 ? _props$defaultFilter : {}
+      filter: customFilter !== null && customFilter !== void 0 ? customFilter : {}
     };
-
-    if (props.defaultFilter) {
-      var _data = data,
-          filter = _data.filter,
-          rest = _objectWithoutProperties(_data, _excluded);
-
-      filter = _objectSpread(_objectSpread({}, filter), props.defaultFilter);
-      data = _objectSpread(_objectSpread({}, rest), {}, {
-        filter: filter
-      });
-    }
-
     return data;
   };
 
@@ -283,26 +272,21 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
     var data = initialParams();
     fetchData(data);
   }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    var _params$filter;
+
+    var currParams = (_params$filter = params.filter) !== null && _params$filter !== void 0 ? _params$filter : initialParams().filter;
+
+    var newFilter = _objectSpread(_objectSpread({}, currParams), customFilter);
+
+    if (Object.keys(newFilter).length > 0 && !(0,lodash__WEBPACK_IMPORTED_MODULE_8__.isEqual)(newFilter, currParams)) {
+      fetchData({
+        filter: newFilter
+      });
+    }
+  }, [customFilter]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useImperativeHandle)(ref, function () {
     return {
-      setCustomFilter: function setCustomFilter(values) {
-        var _params$filter;
-
-        var currParams = (_params$filter = params.filter) !== null && _params$filter !== void 0 ? _params$filter : initialParams().filter;
-        console.log('curr', currParams);
-
-        var newFilter = _objectSpread(_objectSpread({}, currParams), values);
-
-        console.log('value', values);
-        console.log('new', newFilter);
-
-        if (Object.keys(newFilter).length > 0 && !(0,lodash__WEBPACK_IMPORTED_MODULE_8__.isEqual)(newFilter, currParams)) {
-          console.log('fetch');
-          fetchData({
-            filter: newFilter
-          });
-        }
-      },
       refresh: function refresh() {
         fetchData();
       }
@@ -318,7 +302,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         field['filter'] = false;
 
         slots[field.key] = function (item, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_4__.default, {
             item: item,
             createAction: props.createAction,
             editAction: props.editAction,
@@ -373,7 +357,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
   }, []);
 
   var fetchData = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(request) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(request) {
       var _params$request, page, limit, sort, order, filter, newParams, response;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -406,7 +390,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
             case 12:
               _context.prev = 12;
               _context.t0 = _context["catch"](2);
-              _alert__WEBPACK_IMPORTED_MODULE_3__["default"].error({
+              _alert__WEBPACK_IMPORTED_MODULE_3__.default.error({
                 text: _context.t0.response.data.message
               });
 
@@ -424,7 +408,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
     }));
 
     return function fetchData(_x) {
-      return _ref.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
 
@@ -455,9 +439,9 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
   };
 
   var handleSort = function handleSort(newSort) {
-    var _ref2;
+    var _ref3;
 
-    if (newSort.column != params.sort || newSort.asc != ((_ref2 = params.order == 'asc') !== null && _ref2 !== void 0 ? _ref2 : true)) {
+    if (newSort.column != params.sort || newSort.asc != ((_ref3 = params.order == 'asc') !== null && _ref3 !== void 0 ? _ref3 : true)) {
       var sort = newSort.column;
       var order = newSort.asc == true ? 'asc' : 'desc';
       fetchData({
@@ -474,7 +458,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         xs: "6",
         md: "9",
         lg: "10",
-        children: props.topButtonsSlot ? props.topButtonsSlot : props.createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_CreateButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        children: props.topButtonsSlot ? props.topButtonsSlot : props.createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_CreateButton__WEBPACK_IMPORTED_MODULE_5__.default, {
           disabled: (_props$createButtonDi = props.createButtonDisabled) !== null && _props$createButtonDi !== void 0 ? _props$createButtonDi : false,
           color: (_props$createButtonCo = props.createButtonColor) !== null && _props$createButtonCo !== void 0 ? _props$createButtonCo : 'primary',
           action: props.createAction,
@@ -524,7 +508,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       loading: appLoading,
       sorterValue: {
         column: params.sort,
-        asc: (_ref3 = params.order == 'asc') !== null && _ref3 !== void 0 ? _ref3 : true
+        asc: (_ref4 = params.order == 'asc') !== null && _ref4 !== void 0 ? _ref4 : true
       },
       hover: true,
       sorter: {
@@ -564,12 +548,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_datatable_CreateButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/datatable/CreateButton */ "./resources/js/components/datatable/CreateButton.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var _excluded = ["toolbarButtons", "customFilter"];
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 
 
@@ -580,10 +581,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function (props, ref) {
+
+var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function (_ref, ref) {
   var _props$showToolbar, _props$createButtonDi2, _props$createButtonVi2, _props$handleEdit, _props$handleCreate, _props$handleDelete, _jsx2;
 
+  var toolbarButtons = _ref.toolbarButtons,
+      customFilter = _ref.customFilter,
+      props = _objectWithoutProperties(_ref, _excluded);
+
   var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      tableCustomFilter = _useState2[0],
+      setTableCustomFilter = _useState2[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setTableCustomFilter(customFilter);
+  }, [customFilter]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle)(ref, function () {
     return {
       fetchData: function fetchData(params) {
@@ -596,7 +611,7 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
         }).then(function (response) {
           params.success(response);
         })["catch"](function (error) {
-          _alert__WEBPACK_IMPORTED_MODULE_3__["default"].error({
+          _alert__WEBPACK_IMPORTED_MODULE_3__.default.error({
             text: error.response.message
           });
           params.error(error);
@@ -606,16 +621,16 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
   });
 
   var handleDelete = function handleDelete(data, clickEvent) {
-    _alert__WEBPACK_IMPORTED_MODULE_3__["default"].confirm({
+    _alert__WEBPACK_IMPORTED_MODULE_3__.default.confirm({
       title: 'Are you sure to delete this data ?',
       confirmAction: function confirmAction() {
-        axios__WEBPACK_IMPORTED_MODULE_4___default()["delete"](props.apiUrl + "/" + data.id).then(function () {
-          _alert__WEBPACK_IMPORTED_MODULE_3__["default"].success({
+        axios__WEBPACK_IMPORTED_MODULE_4___default().delete(props.apiUrl + "/" + data.id).then(function () {
+          _alert__WEBPACK_IMPORTED_MODULE_3__.default.success({
             text: "Data successfully deleted"
           });
           props.tableRef.current.refresh();
         })["catch"](function (error) {
-          _alert__WEBPACK_IMPORTED_MODULE_3__["default"].error({
+          _alert__WEBPACK_IMPORTED_MODULE_3__.default.error({
             text: error.response
           });
         });
@@ -631,7 +646,7 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
     history.push(props.editUrl + "/" + data.id);
   };
 
-  var toolbarButtons = {
+  var toolbarDefaultButtons = {
     create: {
       visible: true,
       disabled: false
@@ -649,14 +664,14 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
       disabled: false
     }
   };
-  toolbarButtons = _objectSpread(_objectSpread({}, toolbarButtons), props.toolbarButtons);
+  toolbarButtons = _objectSpread(_objectSpread({}, toolbarButtons), toolbarDefaultButtons);
 
   var topButtonsSlot = function topButtonsSlot() {
     var _props$createButtonVi, _props$createButtonDi, _props$createButtonCo;
 
     var createButtonVisible = (_props$createButtonVi = props.createButtonVisible) !== null && _props$createButtonVi !== void 0 ? _props$createButtonVi : true;
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: [createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_CreateButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      children: [createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_CreateButton__WEBPACK_IMPORTED_MODULE_5__.default, {
         className: "mr-2",
         disabled: (_props$createButtonDi = props.createButtonDisabled) !== null && _props$createButtonDi !== void 0 ? _props$createButtonDi : false,
         color: (_props$createButtonCo = props.createButtonColor) !== null && _props$createButtonCo !== void 0 ? _props$createButtonCo : 'primary',
@@ -669,7 +684,7 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCard, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCardBody, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_1__["default"], (_jsx2 = {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_1__.default, (_jsx2 = {
         _id: props.tableId,
         fields: props.fields,
         ref: props.tableRef,
@@ -683,7 +698,7 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
         deleteAction: (_props$handleDelete = props.handleDelete) !== null && _props$handleDelete !== void 0 ? _props$handleDelete : handleDelete,
         showButtonVisible: toolbarButtons.show.visible,
         editButtonVisible: toolbarButtons.edit.visible
-      }, _defineProperty(_jsx2, "createButtonVisible", toolbarButtons.create.visible), _defineProperty(_jsx2, "deleteButtonVisible", toolbarButtons["delete"].visible), _defineProperty(_jsx2, "showButtonDisabled", toolbarButtons.show.disabled), _defineProperty(_jsx2, "editButtonDisabled", toolbarButtons.edit.disabled), _defineProperty(_jsx2, "createButtonDisabled", toolbarButtons.create.disabled), _defineProperty(_jsx2, "deleteButtonDisabled", toolbarButtons["delete"].disabled), _defineProperty(_jsx2, "topButtonsSlot", topButtonsSlot()), _defineProperty(_jsx2, "defaultFilter", props.defaultFilter), _jsx2))
+      }, _defineProperty(_jsx2, "createButtonVisible", toolbarButtons.create.visible), _defineProperty(_jsx2, "deleteButtonVisible", toolbarButtons["delete"].visible), _defineProperty(_jsx2, "showButtonDisabled", toolbarButtons.show.disabled), _defineProperty(_jsx2, "editButtonDisabled", toolbarButtons.edit.disabled), _defineProperty(_jsx2, "createButtonDisabled", toolbarButtons.create.disabled), _defineProperty(_jsx2, "deleteButtonDisabled", toolbarButtons["delete"].disabled), _defineProperty(_jsx2, "topButtonsSlot", topButtonsSlot()), _defineProperty(_jsx2, "customFilter", tableCustomFilter), _jsx2))
     })
   });
 });
@@ -702,10 +717,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _containers_MasterList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../containers/MasterList */ "./resources/js/containers/MasterList.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _containers_MasterList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../containers/MasterList */ "./resources/js/containers/MasterList.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -725,15 +748,24 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var UserList = function UserList() {
-  var _ref;
+  var _customFilter$roleNam;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       roles = _useState2[0],
       setRoles = _useState2[1];
 
-  var ref = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
-  var tableRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
+      _useState4 = _slicedToArray(_useState3, 2),
+      customFilter = _useState4[0],
+      setCustomFilter = _useState4[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    var tableData = JSON.parse(localStorage.getItem('datatable.userslist')) || {};
+    setCustomFilter({
+      roleName: tableData.filter && tableData.filter.roleName ? tableData.filter.roleName : ''
+    });
+  }, []);
   var fields = [{
     label: 'Name',
     key: 'name'
@@ -749,9 +781,9 @@ var UserList = function UserList() {
     type: 'custom',
     key: 'roleName',
     onRender: function onRender(item) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
         children: item.roles.map(function (badge, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_0__.CBadge, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CBadge, {
             color: "success",
             children: badge.name
           }, index);
@@ -762,54 +794,88 @@ var UserList = function UserList() {
 
   var onChangeRoleFilter = function onChangeRoleFilter(event) {
     var value = event.target.value;
-    tableRef.current.setCustomFilter({
+    setCustomFilter({
       roleName: value
     });
   };
 
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    ref.current.fetchData({
-      url: "/api/admin/roles",
-      data: {
-        params: {
-          limit: 5000,
-          sort: 'name'
-        }
-      },
-      success: function success(response) {
-        if (response.data) {
-          setRoles(response.data.data);
-        }
-      }
-    });
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    var fetchRoles = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var res, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return fetch('api/admin/roles?limit=1000&sort=name');
+
+              case 3:
+                res = _context.sent;
+
+                if (res.ok) {
+                  _context.next = 6;
+                  break;
+                }
+
+                throw new Error(res.status);
+
+              case 6:
+                _context.next = 8;
+                return res.json();
+
+              case 8:
+                data = _context.sent;
+                setRoles(data.data);
+                _context.next = 15;
+                break;
+
+              case 12:
+                _context.prev = 12;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+
+              case 15:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 12]]);
+      }));
+
+      return function fetchRoles() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    fetchRoles();
   }, []);
-  var tableData = JSON.parse(localStorage.getItem('datatable.userslist')) || {};
   var customFilterInput = {
-    roleName: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_0__.CSelect, {
-      value: (_ref = tableData.filter && tableData.filter.roleName) !== null && _ref !== void 0 ? _ref : '',
+    roleName: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CSelect, {
+      value: (_customFilter$roleNam = customFilter.roleName) !== null && _customFilter$roleNam !== void 0 ? _customFilter$roleNam : '',
       "aria-label": "column name: 'roleName' filter input",
       onChange: onChangeRoleFilter,
       size: "sm",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
         value: "",
         children: "All"
       }), roles.map(function (item, index) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
           value: item.name,
           children: item.name
         }, index);
       })]
     })
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_containers_MasterList__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_containers_MasterList__WEBPACK_IMPORTED_MODULE_3__.default, {
     tableId: "userslist",
     fields: fields,
-    ref: ref,
-    tableRef: tableRef,
     apiUrl: "/api/admin/users",
     showToolbar: false,
     customFilterInput: customFilterInput,
-    createButtonVisible: false
+    createButtonVisible: false,
+    customFilter: customFilter
   });
 };
 

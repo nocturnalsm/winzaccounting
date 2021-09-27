@@ -1,6 +1,5 @@
 import MasterList from '../../../containers/MasterList'
 import { useSelector } from 'react-redux'
-import { useEffect, useRef } from 'react'
 import { CButton } from '@coreui/react'
 import { useHistory } from 'react-router-dom'
 import CIcon from '@coreui/icons-react';
@@ -26,14 +25,7 @@ const CurrencyList = () => {
     ];
 
     const activeCompany = useSelector(state => state.activeCompany)
-    const dtRef = useRef(null)
     const history = useHistory()
-
-    useEffect(() => {
-        if (Object.keys(activeCompany).length > 0){
-            dtRef.current.setCustomFilter({company_id: activeCompany.id})
-        }
-    }, [activeCompany])
 
     const topButtonsSlot = (
           <>
@@ -52,12 +44,11 @@ const CurrencyList = () => {
         <MasterList
             tableId="currencieslist"
             fields={fields}
-            tableRef={dtRef}
             apiUrl="/api/setup/currencies"
             editUrl="/currencies"
             createUrl="/currencies/create"
             topButtonsSlot={topButtonsSlot}
-            defaultFilter={{company_id: activeCompany.id}}
+            customFilter={{company_id: activeCompany.id}}
         />
     );
 

@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux'
 
 const BankAccountList = () => {
-    
+
     const activeCompany = useSelector(state => state.activeCompany)
 
     const dtRef = useRef(null)
@@ -45,12 +45,6 @@ const BankAccountList = () => {
         }
     ];
 
-    useEffect(() => {
-        if (Object.keys(activeCompany).length > 0){
-            dtRef.current.setCustomFilter({company_id: activeCompany.id})
-        }
-    }, [activeCompany])
-
     return (
         <MasterList
             tableId="bankaccountslist"
@@ -61,7 +55,7 @@ const BankAccountList = () => {
             editUrl="/bank-accounts"
             createUrl="/bank-accounts/create"
             toolbarButtons={{show: {visible: false}}}
-            defaultFilter={{company_id: activeCompany.id}}
+            customFilter={{company_id: activeCompany.id}}
         />
 
     );

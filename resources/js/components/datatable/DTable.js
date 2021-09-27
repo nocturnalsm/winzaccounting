@@ -8,7 +8,10 @@ import { store, setAppLoading } from '../../store';
 import {debounce, initial, isEqual} from 'lodash';
 import {CDataTable,CPagination, CRow, CCol, CButton, CSelect, CBadge} from '@coreui/react';
 
-const DTable = React.forwardRef((props, ref) => {
+const DTable = React.forwardRef(({
+    customFilter,
+    ...props},
+    ref) => {
 
     const appLoading = useSelector(state => state.appLoading);
     const [data, setData] = useState([]);
@@ -23,13 +26,8 @@ const DTable = React.forwardRef((props, ref) => {
             limit: 10,
             sort: null,
             order: 'asc',
-            filter: props.defaultFilter ?? {}
+            filter: customFilter ?? {}
         };
-        if (props.defaultFilter){
-            let {filter, ...rest} = data
-            filter = {...filter, ...props.defaultFilter}
-            data = {...rest, filter}
-        }
         return data
     }
 
@@ -38,23 +36,18 @@ const DTable = React.forwardRef((props, ref) => {
         fetchData(data)
     }, [])
 
-    useImperativeHandle(ref, () => ({
+    useEffect(() => {
+        let currParams = params.filter ?? initialParams().filter;
+        let newFilter = {...currParams, ...customFilter}
+        if (Object.keys(newFilter).length > 0 && !isEqual(newFilter, currParams)){
+            fetchData({filter: newFilter})
+        }
+    }, [customFilter])
 
-        setCustomFilter(values) {
-            let currParams = params.filter ?? initialParams().filter;
-            console.log('curr', currParams)
-            let newFilter = {...currParams, ...values}
-            console.log('value', values)
-            console.log('new',newFilter)
-            if (Object.keys(newFilter).length > 0 && !isEqual(newFilter, currParams)){
-                console.log('fetch')
-                fetchData({filter: newFilter})
-            }
-        },
+    useImperativeHandle(ref, () => ({
         refresh() {
             fetchData()
         }
-
     }));
 
     useEffect(() => {
@@ -118,7 +111,6 @@ const DTable = React.forwardRef((props, ref) => {
     const fetchData = async (request) => {
         let { page, limit, sort, order, filter } = { ...params, ...request}
 
-        
             store.dispatch(setAppLoading(true));
             try {
                 let newParams = {
@@ -144,7 +136,7 @@ const DTable = React.forwardRef((props, ref) => {
             finally {
                 store.dispatch(setAppLoading(false));
             }
-        
+
     }
     const handlePageChange = newPage => {
         if (newPage > 0 && newPage != params.page){
