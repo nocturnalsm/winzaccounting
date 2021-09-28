@@ -16,9 +16,14 @@ const UnitEdit = (props) => {
             onOpen={data => {
                 if (data){
                     if (data.qty_per_unit){
-                        setPerUnit({id: data.qty_per_unit, name: data.qty_per_unit_name})   
-                    }                                        
+                        setPerUnit({id: data.qty_per_unit, name: data.qty_per_unit_name})
+                    }
+                    console.log(activeCompany)
                     setUrlParams({exclude_id: data.id, company_id: activeCompany.id})
+                }
+                else {
+                    console.log(activeCompany)
+                    setUrlParams({company_id: activeCompany.id})
                 }
             }}
             onSubmitSuccess={request => {
@@ -86,15 +91,16 @@ const UnitEdit = (props) => {
                     {props.feedback('qty_per_unit')}
                 </CCol>
                 <CCol sm="4" lg="2">
-                    <SearchSelect     
-                        async                   
+                    <SearchSelect
+                        async
                         placeholder="Choose Unit"
                         autoComplete="off"
                         disabled={props.loading}
                         defaultValue={perUnit}
-                        optionLabel={e => e.name}                        
+                        optionLabel={e => e.name}
                         optionValue={e => e.id}
-                        ref={props.inputRefs('per_unit')}   
+                        urlParams={urlParams}
+                        ref={props.inputRefs('per_unit')}
                         url="api/setup/units/per_units"
                         onChange={value => props.handleChange({qty_unit: value ? value.id : ''})}
                         invalid={props.isInvalid('qty_unit')}

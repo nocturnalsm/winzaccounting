@@ -15,34 +15,31 @@ const SearchSelect = React.forwardRef(({
       url,
       filter,
       onChange,
-      urlParams,      
+      urlParams,
       innerRef, ...restProps}, ref) => {
 
     const selectRef = useRef(null)
     const [selectedValue, setSelectedValue] = useState({})
     const [queryParams, setQueryParams] = useState(urlParams)
-    const [options, setOptions] = useState([])
+    const [options, setOptions] = useState()
+    const [prevParams, setPrevParams] = useState(false)
     const [value, setValue] = useState('')
 
-    useEffect(() => {        
-       setSelectedValue(defaultValue)       
+    useEffect(() => {
+       setSelectedValue(defaultValue)
     }, [defaultValue])
 
-    useEffect(() => {
-        loadOptions()
-    }, [value])
-    
     const handleInputChange = (inputValue) => {
-        setValue(inputValue)        
+        setValue(inputValue)
     }
     // handle selection
-    const handleChange = (inputValue, action) => {     
-        switch (action.action){           
+    const handleChange = (inputValue, action) => {
+        switch (action.action){
             case 'select-option':
                 setSelectedValue(inputValue)
                 onChange(inputValue)
                 return;
-            case 'clear':                
+            case 'clear':
                 setSelectedValue(null)
                 onChange(inputValue)
             default:
@@ -50,18 +47,24 @@ const SearchSelect = React.forwardRef(({
         }
     }
 
+    const onFocus = () => {
+        if (!options){
+            loadOptions()
+        }
+    }
+
     useEffect(() => {
         if (queryParams){
-            loadOptions(value)
+            loadOptions()
         }
     }, [queryParams])
-   
-    useEffect(() => {        
+
+    useEffect(() => {
         if (urlParams){
             if (!isEqual(queryParams, urlParams)){
-                setQueryParams(urlParams)            
-            }        
-        }        
+                setQueryParams(urlParams)
+            }
+        }
     }, [urlParams])
 
     const customStyles = {
@@ -89,40 +92,35 @@ const SearchSelect = React.forwardRef(({
         },
         focus(){
             selectRef.current.focus()
-        },
-        clearOptions(){
-            selectRef.current.state.defaultOptions = []
-        },
-        loadOptions(){
-            selectRef.current.loadOptions(null, (options) => {
-                return options
-            })
         }
-
     }));
 
     // load options using API call
-    const loadOptions = () => {        
-        const getData = () => {
-            axios.get(url, {
-                params: {q: value, ...queryParams}
-            })
-            .then((response) => {            
-                let options = response.data.data;
-                setOptions(options)
-            })
-            .catch(error => {
-                console.log(error)
-                MyAlert.error({text: error.response})
-            })
+      const loadOptions = () => {
+        let newParams = {q: value, ...queryParams}
+        let oldParams = {q: value, ...oldParams}
+        console.log(newParams)
+        console.log(oldParams)
+        if (isEqual(newParams, oldParams)){
+            return;
         }
-        debounce(getData, 1000)
+        axios.get(url, {
+            params: newParams
+        })
+        .then((response) => {
+            let options = response.data.data;
+            setOptions(options || [])
+        })
+        .catch(error => {
+            console.log(error)
+            MyAlert.error({text: error.response})
+        })
     };
 
     if (async){
         return (
             <Select {...restProps}
-                cacheOptions                
+                cacheOptions
                 isClearable
                 className={"react-select" +(invalid ? ' is-invalid' : '')}
                 classNamePrefix="react-select"
@@ -133,7 +131,8 @@ const SearchSelect = React.forwardRef(({
                 options={options}
                 onInputChange={handleInputChange}
                 onChange={handleChange}
-                styles={customStyles}                
+                styles={customStyles}
+                onFocus={onFocus}
             />
         );
     }

@@ -10,7 +10,7 @@ const BankAccountEdit = (props) => {
     const [bank, setBank] = useState(null)
     const [account, setAccount] = useState(null)
     const activeCompany = useSelector(state => state.activeCompany)
-    
+
     return (
         <MasterEdit title="Bank Account"
             apiUrl="/api/setup/bank-accounts"
@@ -22,6 +22,7 @@ const BankAccountEdit = (props) => {
                         company_id: activeCompany.id}
             }}
             onOpen={data => {
+                console.log(activeCompany)
                 if (data){
                     setBank({id: data.bank_id, name: data.bank_name})
                     if (data.account_id){
@@ -114,7 +115,7 @@ const BankAccountEdit = (props) => {
                               defaultValue={account}
                               disabled={props.loading}
                               value={props.data.account_id ?? initialData.account_id}
-                              onChange={value => props.handleChange({account_id: (value ? value.id : "")})}                              
+                              onChange={value => props.handleChange({account_id: (value ? value.id : "")})}
                               url="/api/setup/bank-accounts/search-account"
                               urlParams={{company_id: activeCompany.id}}
                               optionLabel={e => e.number + ' ' + e.name}

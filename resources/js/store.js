@@ -5,7 +5,7 @@ const initialState = {
   auth: JSON.parse(localStorage.getItem("appState")) || {},
   appLoading: false,
   appEditing: false,
-  activeCompany: {}
+  activeCompany: JSON.parse(localStorage.getItem("activeCompany")) || {}
 }
 
 const setActiveCompany = (company) => {

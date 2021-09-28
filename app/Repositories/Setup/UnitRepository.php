@@ -13,7 +13,7 @@ class UnitRepository extends BaseRepository
 
     public function __construct()
     {
-        $this->data = new Unit;   
+        $this->data = new Unit;
         $this->listFilters = [
             'qty_unit_name' => [
                 'key' => 'qtyunit.name', 'operator' => 'like'
@@ -24,7 +24,7 @@ class UnitRepository extends BaseRepository
     public function validateUsing($params, $id = "")
     {
         return [
-            'company_id' => 'bail|required|exists:App\Models\Company,id',         
+            'company_id' => 'bail|required|exists:App\Models\Company,id',
             'name' => [
                 'required',
                 Rule::unique(Unit::class)->where(function ($query) use($params, $id) {
@@ -36,7 +36,7 @@ class UnitRepository extends BaseRepository
                     return $query;
                 }),
             ],
-            'code' => [               
+            'code' => [
                 Rule::unique(Unit::class)->where(function ($query) use($params, $id) {
                     $query = $query->where('code', $params["code"])
                                    ->where('company_id', $params["company_id"]);
@@ -56,7 +56,7 @@ class UnitRepository extends BaseRepository
                                 else {
                                     if ($value != ""){
                                         $query = Unit::where("id", $value)
-                                                    ->where("company_id", $params["company_id"]);                                     
+                                                    ->where("company_id", $params["company_id"]);
                                         if (!$query->exists()){
                                             $fail("Child Unit does not exist");
                                         }
@@ -74,12 +74,12 @@ class UnitRepository extends BaseRepository
                               ->whereColumn("id", "units.qty_unit"),
                          'qty_unit_name'
                     );
-    }      
+    }
     public function search(Request $request, $qRules = [])
     {
         if ($qRules == []){
             $qRules = ["name" => ["operator" => "like"]];
-        }   
+        }
         $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);
         return parent::search($request, $qRules);
     }
@@ -87,13 +87,13 @@ class UnitRepository extends BaseRepository
     {
         if (isset($request->exclude_id)){
             $this->data = $this->data->where("id", "<>", $request->exclude_id);
-            return $this->search($request);
         }
+        return $this->search($request);
     }
     public function getById($id)
     {
-        $data = $this->data->whereId($id)  
-                     ->select("*")                   
+        $data = $this->data->whereId($id)
+                     ->select("*")
                      ->selectSub(
                          DB::table(DB::raw("units as unit_child"))
                               ->select("name")
