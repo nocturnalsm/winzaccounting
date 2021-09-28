@@ -97,13 +97,8 @@ class ProductCategoryController extends Controller
     }
 
     public function category_parents(Request $request)
-    {
-        $company_id = $request->company_id ?? '';
-        $id = $request->id ?? '';
-        $data = $this->category->getParents($company_id, $id);
-        if ($data){
-            return response()->json($data);
-        }
-        return response(400);
+    {        
+        $data = $this->category->searchParents($request);
+        return response()->json($data);
     }
 }

@@ -4,9 +4,16 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 
 const CurrencyRateList = () => {
-
+    const initialFilter = () => {
+        let tableData = JSON.parse(localStorage.getItem('datatable.currencyrateslist')) || {}
+        return {
+            start: (tableData.filter && tableData.filter.start) ?? '',
+            end: (tableData.filter && tableData.filter.end) ?? '',
+            company_id: activeCompany.id
+        }
+    }
     const activeCompany = useSelector(state => state.activeCompany)
-    const [customFilter, setCustomFilter] = useState({})
+    const [customFilter, setCustomFilter] = useState(initialFilter())
     const fields = [
         {
             label: 'Currency',
@@ -36,17 +43,7 @@ const CurrencyRateList = () => {
             label: 'Action',
             type: 'toolbar',
         }
-    ];
-
-    useEffect(() => {
-        let tableData = JSON.parse(localStorage.getItem('datatable.currencyrateslist')) || {}
-        console.log(tableData.filter)
-        setCustomFilter({
-            start: (tableData.filter && tableData.filter.start) ?? '',
-            end: (tableData.filter && tableData.filter.end) ?? '',
-            company_id: activeCompany.id
-        })
-    }, [])
+    ];   
 
     useEffect(() => {        
         setCustomFilter({...customFilter, company_id: activeCompany.id})
@@ -61,10 +58,10 @@ const CurrencyRateList = () => {
     
     const customFilterInput = {
         start: (
-                  <CInput type="date" value={customFilter.start} aria-label="column name: 'start' filter input" onChange={event => onChangeDate('start', event)} size="sm" />
+                  <CInput type="date" defaultValue={(customFilter ? customFilter.start : '')} aria-label="column name: 'start' filter input" onChange={event => onChangeDate('start', event)} size="sm" />
                 ),
         end: (
-                  <CInput type="date" value={customFilter.end} aria-label="column name: 'end' filter input" onChange={event => onChangeDate('end', event)} size="sm" />
+                  <CInput type="date" defaultValue={(customFilter ? customFilter.end : '')} aria-label="column name: 'end' filter input" onChange={event => onChangeDate('end', event)} size="sm" />
                 )
     }
 

@@ -1,12 +1,9 @@
 import MasterList from '../../../containers/MasterList'
-import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux'
 
 const BankAccountList = () => {
 
-    const activeCompany = useSelector(state => state.activeCompany)
-
-    const dtRef = useRef(null)
+    const activeCompany = useSelector(state => state.activeCompany)   
     const fields = [
         {
             label: 'Bank',
@@ -48,8 +45,7 @@ const BankAccountList = () => {
     return (
         <MasterList
             tableId="bankaccountslist"
-            fields={fields}
-            tableRef={dtRef}
+            fields={fields}            
             apiUrl="/api/setup/bank-accounts"
             showToolbar={true}
             editUrl="/bank-accounts"

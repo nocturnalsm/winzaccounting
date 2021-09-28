@@ -29,7 +29,7 @@ var CreateButton = function CreateButton(props) {
     onClick: function onClick(event) {
       return props.action(event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: (_props$icon = props.icon) !== null && _props$icon !== void 0 ? _props$icon : 'cil-plus'
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
       className: "ml-2",
@@ -75,7 +75,7 @@ var DTToolbarShow = function DTToolbarShow(props) {
     onClick: function onClick(event) {
       return props.showAction(props.item, event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cil-magnifying-glass"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -97,7 +97,7 @@ var DTToolbarEdit = function DTToolbarEdit(props) {
       return props.editAction(props.item, event);
     } //{props.editLink ? props.editLink.replace(/\/$/, '') + "/" + props._id : ''}
     ,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cilPencil"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -118,7 +118,7 @@ var DTToolbarDelete = function DTToolbarDelete(props) {
     onClick: function onClick(event) {
       return props.deleteAction(props.item, event);
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
       name: "cilTrash"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "d-none d-md-inline ml-2",
@@ -223,24 +223,19 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function (_ref, ref) {
-  var _props$createButtonDi, _props$createButtonCo, _ref3, _params$limit;
+  var _tableData$page, _tableData$limit, _tableData$order, _tableData$filter, _props$createButtonDi, _props$createButtonCo, _ref3, _params$limit;
 
   var customFilter = _ref.customFilter,
       props = _objectWithoutProperties(_ref, _excluded);
 
-  var initialParams = function initialParams() {
-    var _data$page, _data$limit, _data$order, _data$filter;
-
-    var data = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {};
-    return {
-      page: (_data$page = data.page) !== null && _data$page !== void 0 ? _data$page : 1,
-      limit: (_data$limit = data.limit) !== null && _data$limit !== void 0 ? _data$limit : 10,
-      sort: data.sort,
-      order: (_data$order = data.order) !== null && _data$order !== void 0 ? _data$order : 'asc',
-      filter: (_data$filter = data.filter) !== null && _data$filter !== void 0 ? _data$filter : {}
-    };
+  var tableData = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {};
+  var initialParams = {
+    page: (_tableData$page = tableData.page) !== null && _tableData$page !== void 0 ? _tableData$page : 1,
+    limit: (_tableData$limit = tableData.limit) !== null && _tableData$limit !== void 0 ? _tableData$limit : 10,
+    sort: tableData.sort,
+    order: (_tableData$order = tableData.order) !== null && _tableData$order !== void 0 ? _tableData$order : 'asc',
+    filter: (_tableData$filter = tableData.filter) !== null && _tableData$filter !== void 0 ? _tableData$filter : {}
   };
-
   var appLoading = (0,react_redux__WEBPACK_IMPORTED_MODULE_6__.useSelector)(function (state) {
     return state.appLoading;
   });
@@ -265,7 +260,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       fields = _useState8[0],
       setFields = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initialParams()),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initialParams),
       _useState10 = _slicedToArray(_useState9, 2),
       params = _useState10[0],
       setParams = _useState10[1];
@@ -297,11 +292,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
     localStorage.setItem('datatable.' + props._id, JSON.stringify(params));
   }, [params]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    var _params$filter;
-
-    var currParams = (_params$filter = params.filter) !== null && _params$filter !== void 0 ? _params$filter : initialParams().filter;
-
-    var newFilter = _objectSpread(_objectSpread({}, currParams), customFilter);
+    var newFilter = _objectSpread(_objectSpread({}, params.filter), customFilter);
 
     changeParams({
       filter: newFilter
@@ -324,7 +315,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         field['filter'] = false;
 
         slots[field.key] = function (item, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_4__.default, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_DTToolbar__WEBPACK_IMPORTED_MODULE_4__["default"], {
             item: item,
             createAction: props.createAction,
             editAction: props.editAction,
@@ -401,7 +392,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
             case 8:
               _context.prev = 8;
               _context.t0 = _context["catch"](1);
-              _alert__WEBPACK_IMPORTED_MODULE_3__.default.error({
+              _alert__WEBPACK_IMPORTED_MODULE_3__["default"].error({
                 text: _context.t0.response.data.message
               });
 
@@ -468,7 +459,7 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         xs: "6",
         md: "9",
         lg: "10",
-        children: props.topButtonsSlot ? props.topButtonsSlot : props.createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_CreateButton__WEBPACK_IMPORTED_MODULE_5__.default, {
+        children: props.topButtonsSlot ? props.topButtonsSlot : props.createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_CreateButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
           disabled: (_props$createButtonDi = props.createButtonDisabled) !== null && _props$createButtonDi !== void 0 ? _props$createButtonDi : false,
           color: (_props$createButtonCo = props.createButtonColor) !== null && _props$createButtonCo !== void 0 ? _props$createButtonCo : 'primary',
           action: props.createAction,
@@ -609,6 +600,11 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
       tableCustomFilter = _useState2[0],
       setTableCustomFilter = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      tableKey = _useState4[0],
+      setTableKey = _useState4[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (!(0,lodash__WEBPACK_IMPORTED_MODULE_6__.isEqual)(tableCustomFilter, customFilter)) {
       setTableCustomFilter(customFilter);
@@ -616,16 +612,16 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
   }, [customFilter]);
 
   var handleDelete = function handleDelete(data, clickEvent) {
-    _alert__WEBPACK_IMPORTED_MODULE_3__.default.confirm({
+    _alert__WEBPACK_IMPORTED_MODULE_3__["default"].confirm({
       title: 'Are you sure to delete this data ?',
       confirmAction: function confirmAction() {
-        axios__WEBPACK_IMPORTED_MODULE_4___default().delete(props.apiUrl + "/" + data.id).then(function () {
-          _alert__WEBPACK_IMPORTED_MODULE_3__.default.success({
+        axios__WEBPACK_IMPORTED_MODULE_4___default()["delete"](props.apiUrl + "/" + data.id).then(function () {
+          _alert__WEBPACK_IMPORTED_MODULE_3__["default"].success({
             text: "Data successfully deleted"
           });
-          props.tableRef.current.refresh();
+          setTableKey(tableKey + 1);
         })["catch"](function (error) {
-          _alert__WEBPACK_IMPORTED_MODULE_3__.default.error({
+          _alert__WEBPACK_IMPORTED_MODULE_3__["default"].error({
             text: error.response
           });
         });
@@ -666,7 +662,7 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
 
     var createButtonVisible = (_props$createButtonVi = props.createButtonVisible) !== null && _props$createButtonVi !== void 0 ? _props$createButtonVi : true;
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-      children: [createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_datatable_CreateButton__WEBPACK_IMPORTED_MODULE_5__.default, {
+      children: [createButtonVisible ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_datatable_CreateButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
         className: "mr-2",
         disabled: (_props$createButtonDi = props.createButtonDisabled) !== null && _props$createButtonDi !== void 0 ? _props$createButtonDi : false,
         color: (_props$createButtonCo = props.createButtonColor) !== null && _props$createButtonCo !== void 0 ? _props$createButtonCo : 'primary',
@@ -679,7 +675,7 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCard, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCardBody, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_1__.default, (_jsx2 = {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_datatable_DTable__WEBPACK_IMPORTED_MODULE_1__["default"], (_jsx2 = {
         _id: props.tableId,
         fields: props.fields,
         ref: props.tableRef,
@@ -693,7 +689,7 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
         deleteAction: (_props$handleDelete = props.handleDelete) !== null && _props$handleDelete !== void 0 ? _props$handleDelete : handleDelete,
         showButtonVisible: toolbarButtons.show.visible,
         editButtonVisible: toolbarButtons.edit.visible
-      }, _defineProperty(_jsx2, "createButtonVisible", toolbarButtons.create.visible), _defineProperty(_jsx2, "deleteButtonVisible", toolbarButtons["delete"].visible), _defineProperty(_jsx2, "showButtonDisabled", toolbarButtons.show.disabled), _defineProperty(_jsx2, "editButtonDisabled", toolbarButtons.edit.disabled), _defineProperty(_jsx2, "createButtonDisabled", toolbarButtons.create.disabled), _defineProperty(_jsx2, "deleteButtonDisabled", toolbarButtons["delete"].disabled), _defineProperty(_jsx2, "topButtonsSlot", topButtonsSlot()), _defineProperty(_jsx2, "customFilter", tableCustomFilter), _jsx2))
+      }, _defineProperty(_jsx2, "createButtonVisible", toolbarButtons.create.visible), _defineProperty(_jsx2, "deleteButtonVisible", toolbarButtons["delete"].visible), _defineProperty(_jsx2, "showButtonDisabled", toolbarButtons.show.disabled), _defineProperty(_jsx2, "editButtonDisabled", toolbarButtons.edit.disabled), _defineProperty(_jsx2, "createButtonDisabled", toolbarButtons.create.disabled), _defineProperty(_jsx2, "deleteButtonDisabled", toolbarButtons["delete"].disabled), _defineProperty(_jsx2, "topButtonsSlot", topButtonsSlot()), _defineProperty(_jsx2, "customFilter", tableCustomFilter), _jsx2), props.tableId + '_' + tableKey)
     })
   });
 });
@@ -742,11 +738,22 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var CurrencyRateList = function CurrencyRateList() {
+  var initialFilter = function initialFilter() {
+    var _ref, _ref2;
+
+    var tableData = JSON.parse(localStorage.getItem('datatable.currencyrateslist')) || {};
+    return {
+      start: (_ref = tableData.filter && tableData.filter.start) !== null && _ref !== void 0 ? _ref : '',
+      end: (_ref2 = tableData.filter && tableData.filter.end) !== null && _ref2 !== void 0 ? _ref2 : '',
+      company_id: activeCompany.id
+    };
+  };
+
   var activeCompany = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(function (state) {
     return state.activeCompany;
   });
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(initialFilter()),
       _useState2 = _slicedToArray(_useState, 2),
       customFilter = _useState2[0],
       setCustomFilter = _useState2[1];
@@ -775,17 +782,6 @@ var CurrencyRateList = function CurrencyRateList() {
     type: 'toolbar'
   }];
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
-    var _ref, _ref2;
-
-    var tableData = JSON.parse(localStorage.getItem('datatable.currencyrateslist')) || {};
-    console.log(tableData.filter);
-    setCustomFilter({
-      start: (_ref = tableData.filter && tableData.filter.start) !== null && _ref !== void 0 ? _ref : '',
-      end: (_ref2 = tableData.filter && tableData.filter.end) !== null && _ref2 !== void 0 ? _ref2 : '',
-      company_id: activeCompany.id
-    });
-  }, []);
-  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     setCustomFilter(_objectSpread(_objectSpread({}, customFilter), {}, {
       company_id: activeCompany.id
     }));
@@ -801,7 +797,7 @@ var CurrencyRateList = function CurrencyRateList() {
   var customFilterInput = {
     start: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CInput, {
       type: "date",
-      value: customFilter.start,
+      defaultValue: customFilter ? customFilter.start : '',
       "aria-label": "column name: 'start' filter input",
       onChange: function onChange(event) {
         return onChangeDate('start', event);
@@ -810,7 +806,7 @@ var CurrencyRateList = function CurrencyRateList() {
     }),
     end: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CInput, {
       type: "date",
-      value: customFilter.end,
+      defaultValue: customFilter ? customFilter.end : '',
       "aria-label": "column name: 'end' filter input",
       onChange: function onChange(event) {
         return onChangeDate('end', event);
@@ -818,7 +814,7 @@ var CurrencyRateList = function CurrencyRateList() {
       size: "sm"
     })
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_containers_MasterList__WEBPACK_IMPORTED_MODULE_0__.default, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_containers_MasterList__WEBPACK_IMPORTED_MODULE_0__["default"], {
     tableId: "currencyrateslist",
     fields: fields,
     apiUrl: "/api/setup/currency-rates",

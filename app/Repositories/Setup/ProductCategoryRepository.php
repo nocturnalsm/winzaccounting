@@ -78,16 +78,34 @@ class ProductCategoryRepository extends BaseRepository
         }
         return $data;
     }
-    public function getParents($company_id, $id = '')
+    public function search(Request $request, $qRules = [])
     {
-      if (trim($company_id) != ""){
-          $data = ProductCategory::select('id','name')
-                                 ->where("company_id", $company_id);
-          if (trim($id) != ""){
-                $data->where("id", "<>", $id);
-          }
-          return $data->get();
-      }
-      return false;
+        if ($qRules == []){
+            $qRules = ["name" => ["operator" => "like"]];
+        }        
+        $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);                            
+        return parent::search($request, $qRules);
+    }
+    public function searchParents(Request $request)
+    {
+        if (isset($request->exclude_id)){
+            $this->data = $this->data->where("id", "<>", $request->exclude_id);
+        }
+        return $this->search($request);
+    }
+    public function getById($id)
+    {
+        $data = $this->data->select("*")
+                           ->selectSub(
+                               DB::table(DB::raw("product_categories as pc"))
+                                 ->select("name")
+                                 ->whereColumn("pc.id", "product_categories.parent"),
+                               'parent_name'                                 
+                           )
+                           ->whereId($id);
+        if (!$data){
+            throw new \Exception("Data not found");
+        }
+        return $data->first();
     }
 }

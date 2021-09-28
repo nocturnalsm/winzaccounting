@@ -41,7 +41,6 @@ const CurrencyRateEdit = (props) => {
                         </CCol>
                         <CCol sm="8" lg="3">
                             <SearchSelect
-                                async
                                 placeholder="Choose Currency"
                                 autoFocus={true}
                                 ref={props.inputRefs('currency_id')}

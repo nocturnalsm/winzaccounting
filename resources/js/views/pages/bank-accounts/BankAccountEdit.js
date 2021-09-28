@@ -48,7 +48,6 @@ const BankAccountEdit = (props) => {
                         </CCol>
                         <CCol sm="8" lg="3">
                             <SearchSelect
-                              async
                               required
                               autoFocus={true}
                               optionValue={e => e.id}
@@ -109,7 +108,6 @@ const BankAccountEdit = (props) => {
                         </CCol>
                         <CCol sm="8" lg="5">
                             <SearchSelect
-                              async
                               placeholder="Choose account"
                               autoComplete="off"
                               defaultValue={account}

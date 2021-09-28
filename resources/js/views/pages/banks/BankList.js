@@ -2,7 +2,6 @@ import MasterList from '../../../containers/MasterList'
 import { CButton } from '@coreui/react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { useEffect } from 'react'
 import CIcon from '@coreui/icons-react';
 
 
@@ -24,10 +23,7 @@ const BankList = () => {
 
     const activeCompany = useSelector(state => state.activeCompany)
     let history = useHistory()
-
-    const handleCreate = () => {
-        history.push('/banks/create')
-    }
+    
     const handleCreateAccount = () => {
         history.push('/banks/create-account')
     }

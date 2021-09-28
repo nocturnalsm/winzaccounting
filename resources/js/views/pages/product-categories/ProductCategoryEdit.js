@@ -1,43 +1,31 @@
 import MasterEdit from '../../../containers/MasterEdit'
 import { useState, useRef } from 'react';
 import { useSelector } from "react-redux";
-import { CSelect, CInput, CCol, CFormGroup, CLabel} from '@coreui/react'
-import MyAlert from "../../../alert";
-import axios from 'axios'
+import { CInput, CCol, CFormGroup, CLabel} from '@coreui/react'
+import SearchSelect from '../../../components/SearchSelect'
 
 const ProductCategoryEdit = (props) => {
 
-    const [parents, setParents] = useState([])
     const [initialData, setInitialData] = useState({account_type: '', parent: ''})
     const activeCompany = useSelector(state => state.activeCompany)
-
-    const getParents = (id) => {
-        axios.get("api/setup/product-category-parents", {
-            params: {
-                company_id: activeCompany.id,
-                id: id
-            }
-        })
-        .then(response => {
-            setParents(response.data);
-        })
-        .catch(error => {
-            MyAlert.error(error.response.data)
-        })
-    }
-
-    const ref = useRef(null)
+    const [parentCategory, setParentCategory] = useState(null)    
+    const [urlParams, setUrlParams] = useState()
+    const [defaultOptions, setDefaultOptions] = useState(false)
 
     return (
         <MasterEdit title="Product Category"
             apiUrl="/api/setup/product-categories"
-            onOpen={response => {
-                if (response){
-                    getParents(response.data.id)
+            onOpen={data => {
+                if (data){
+                    if (data.parent){
+                        setParentCategory({id: data.parent, name: data.parent_name})
+                    }
+                    setUrlParams({exclude_id: data.id, company_id: activeCompany.id})
                 }
-                else {
-                    getParents()
+                else {                    
+                    setUrlParams({company_id: activeCompany.id})
                 }
+                setDefaultOptions(true)
             }}
             onSubmitSuccess={(data, response) => {
                 let {parent} = data;
@@ -46,7 +34,7 @@ const ProductCategoryEdit = (props) => {
                         parent: parent
                     })
                 }
-                getParents(data.id)
+                //getParents(data.id)
             }}
             formatData={data => {
                 let {parent } = data
@@ -66,7 +54,7 @@ const ProductCategoryEdit = (props) => {
                     placeholder="Enter category name"
                     autoComplete="off"
                     autoFocus={true}
-                    innerRef={props.ref}
+                    innerRef={props.inputRefs('name')}
                     type="text"
                     disabled={props.loading}
                     onChange={e => props.handleChange({name: e.target.value})}
@@ -86,6 +74,7 @@ const ProductCategoryEdit = (props) => {
                         placeholder="Enter category code"
                         autoComplete="off"
                         type="text"
+                        innerRef={props.inputRefs('code')}
                         disabled={props.loading}
                         onChange={e =>props.handleChange({code: e.target.value})}
                         value={props.data.code ?? ''}
@@ -99,22 +88,19 @@ const ProductCategoryEdit = (props) => {
                     <CLabel>Parent Category</CLabel>
                 </CCol>
                 <CCol sm="8" lg="5">
-                    <CSelect
-                        type="text"
+                    <SearchSelect
                         placeholder="Choose parent category"
-                        autoComplete="off"
+                        defaultOptions={defaultOptions}
+                        url="api/setup/product-categories/parents"
+                        urlParams={urlParams}
+                        optionLabel={e => e.name}
+                        optionValue={e => e.id}
                         disabled={props.loading}
-                        value={props.data.parent ?? initialData.parent}
-                        onChange={e => props.handleChange({parent: e.target.value})}
+                        defaultValue={parentCategory}
+                        ref={props.inputRefs('parent')}
+                        onChange={value => props.handleChange({parent: value ? value.id : ''})}
                         invalid={props.isInvalid('parent')}
-                    >
-                        <option value="0"></option>
-                    {
-                        parents.map((item, index) => (
-                            <option key={item.id} value={item.id}>{item.name}</option>
-                        ))
-                    }
-                    </CSelect>
+                    />
                     {props.feedback('parent')}
                 </CCol>
             </CFormGroup>

@@ -9,6 +9,7 @@ const UnitEdit = (props) => {
     const [perUnit, setPerUnit] = useState(null)
     const activeCompany = useSelector(state => state.activeCompany)
     const [urlParams, setUrlParams] = useState()
+    const [defaultOptions, setDefaultOptions] = useState(false)
 
     return (
         <MasterEdit title="Unit"
@@ -18,12 +19,12 @@ const UnitEdit = (props) => {
                     if (data.qty_per_unit){
                         setPerUnit({id: data.qty_per_unit, name: data.qty_per_unit_name})
                     }
-                    console.log(activeCompany)
                     setUrlParams({exclude_id: data.id, company_id: activeCompany.id})
+                    setDefaultOptions(true)
                 }
-                else {
-                    console.log(activeCompany)
+                else {                    
                     setUrlParams({company_id: activeCompany.id})
+                    setDefaultOptions(true)
                 }
             }}
             onSubmitSuccess={request => {
@@ -91,9 +92,9 @@ const UnitEdit = (props) => {
                     {props.feedback('qty_per_unit')}
                 </CCol>
                 <CCol sm="4" lg="2">
-                    <SearchSelect
-                        async
+                    <SearchSelect                        
                         placeholder="Choose Unit"
+                        defaultOptions={defaultOptions}
                         autoComplete="off"
                         disabled={props.loading}
                         defaultValue={perUnit}

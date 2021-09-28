@@ -1,4 +1,4 @@
-import React, { useImperativeHandle, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import DTable from '../components/datatable/DTable'
 import {CCard, CCardBody} from '@coreui/react'
 import MyAlert from '../alert'
@@ -18,6 +18,7 @@ const MasterList = React.forwardRef((
 
     let history = useHistory()
     const [tableCustomFilter, setTableCustomFilter] = useState({})
+    const [tableKey, setTableKey] = useState(0)
 
     useEffect(() => {        
         if (!isEqual(tableCustomFilter, customFilter)){                   
@@ -32,7 +33,7 @@ const MasterList = React.forwardRef((
                 axios.delete(props.apiUrl + "/" +data.id)
                 .then(() => {
                     MyAlert.success({text: "Data successfully deleted"})
-                    props.tableRef.current.refresh()
+                    setTableKey(tableKey+1)
                 })
                 .catch((error) => {
                     MyAlert.error({text: error.response})
@@ -91,6 +92,7 @@ const MasterList = React.forwardRef((
                 <DTable
                     _id={props.tableId}
                     fields={props.fields}
+                    key={props.tableId + '_' +tableKey}
                     ref={props.tableRef}
                     apiUrl={props.apiUrl}
                     showToolbar={props.showToolbar ?? true}

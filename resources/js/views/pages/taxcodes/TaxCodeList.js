@@ -1,6 +1,5 @@
 import MasterList from '../../../containers/MasterList'
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
 
 const TaxCodeList = () => {
     const fields = [

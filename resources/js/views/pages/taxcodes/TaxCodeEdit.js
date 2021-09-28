@@ -1,6 +1,6 @@
 import MasterEdit from '../../../containers/MasterEdit'
 import SearchSelect from '../../../components/SearchSelect'
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { CInput, CCol, CFormGroup, CLabel } from '@coreui/react'
 
@@ -9,11 +9,8 @@ const TaxCodeEdit = (props) => {
     const activeCompany = useSelector(state => state.activeCompany)    
     const [defaultAccount, setDefaultAccount] = useState(null)
 
-    const ref = useRef(null)    
-
     return (
         <MasterEdit title="Tax Code"
-            ref={ref}
             apiUrl="/api/setup/taxcodes"
             formatData={data => {
                 return {...data, company_id: activeCompany.id}
@@ -91,8 +88,7 @@ const TaxCodeEdit = (props) => {
                             <CLabel>Linked to Account</CLabel>
                         </CCol>
                         <CCol sm="8" lg="5">
-                            <SearchSelect
-                              async                                                          
+                            <SearchSelect                                            
                               optionValue={e => e.id}                                                                                          
                               autoComplete="off"
                               disabled={props.loading}             

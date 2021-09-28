@@ -3,7 +3,6 @@ import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 import MyAlert from '../alert.js';
 import axios from 'axios';
-import {debounce, isEqual} from 'lodash';
 
 const SearchSelect = React.forwardRef(({
       async,
@@ -19,19 +18,20 @@ const SearchSelect = React.forwardRef(({
       innerRef, ...restProps}, ref) => {
 
     const selectRef = useRef(null)
-    const [selectedValue, setSelectedValue] = useState({})
-    const [queryParams, setQueryParams] = useState(urlParams)
-    const [options, setOptions] = useState()
-    const [prevParams, setPrevParams] = useState(false)
-    const [value, setValue] = useState('')
-
+    const [selectedValue, setSelectedValue] = useState({})    
+    const [options, setOptions] = useState([])
+    
     useEffect(() => {
        setSelectedValue(defaultValue)
     }, [defaultValue])
 
-    const handleInputChange = (inputValue) => {
-        setValue(inputValue)
-    }
+    useEffect(() => {
+        if (typeof defaultOptions == 'undefined'
+           || defaultOptions === true){
+            loadOptions("")
+        }
+    }, [defaultOptions])
+
     // handle selection
     const handleChange = (inputValue, action) => {
         switch (action.action){
@@ -46,27 +46,7 @@ const SearchSelect = React.forwardRef(({
                 return;
         }
     }
-
-    const onFocus = () => {
-        if (!options){
-            loadOptions()
-        }
-    }
-
-    useEffect(() => {
-        if (queryParams){
-            loadOptions()
-        }
-    }, [queryParams])
-
-    useEffect(() => {
-        if (urlParams){
-            if (!isEqual(queryParams, urlParams)){
-                setQueryParams(urlParams)
-            }
-        }
-    }, [urlParams])
-
+    
     const customStyles = {
         control: (provided, state) => {
             if (invalid){
@@ -92,24 +72,28 @@ const SearchSelect = React.forwardRef(({
         },
         focus(){
             selectRef.current.focus()
+        },
+        loadOptions(){
+            asyncLoadOptions("")
         }
+
     }));
 
     // load options using API call
-      const loadOptions = () => {
-        let newParams = {q: value, ...queryParams}
-        let oldParams = {q: value, ...oldParams}
-        console.log(newParams)
-        console.log(oldParams)
-        if (isEqual(newParams, oldParams)){
-            return;
-        }
+    const loadOptions = (inputValue, callback) => {        
         axios.get(url, {
-            params: newParams
+            params: {q: inputValue, ...urlParams}
         })
-        .then((response) => {
-            let options = response.data.data;
-            setOptions(options || [])
+        .then((response) => {                       
+            let data = response.data.data;        
+            if (callback){                         
+                setTimeout(() => {
+                    callback(data)
+                }, 1000)         
+            }
+            else {                
+                setOptions(data)
+            }
         })
         .catch(error => {
             console.log(error)
@@ -119,7 +103,7 @@ const SearchSelect = React.forwardRef(({
 
     if (async){
         return (
-            <Select {...restProps}
+            <AsyncSelect {...restProps}
                 cacheOptions
                 isClearable
                 className={"react-select" +(invalid ? ' is-invalid' : '')}
@@ -128,11 +112,10 @@ const SearchSelect = React.forwardRef(({
                 value={selectedValue}
                 getOptionLabel={optionLabel}
                 getOptionValue={optionValue}
-                options={options}
-                onInputChange={handleInputChange}
+                loadOptions={loadOptions}               
                 onChange={handleChange}
                 styles={customStyles}
-                onFocus={onFocus}
+                defaultOptions={defaultOptions ?? true}
             />
         );
     }
@@ -145,14 +128,12 @@ const SearchSelect = React.forwardRef(({
                 classNamePrefix="react-select"
                 ref={selectRef}
                 value={selectedValue}
-                options={options}
-                defaultValue={defaultValue}
+                options={options}                
                 getOptionLabel={optionLabel}
-                getOptionValue={optionValue}
-                onInputChange={handleInputChange}
+                getOptionValue={optionValue}                
                 onChange={handleChange}
-                styles={customStyles}
-                defaultValue={defaultValue}
+                styles={customStyles}      
+                defaultOptions={defaultOptions ?? true}          
             />
         );
     }

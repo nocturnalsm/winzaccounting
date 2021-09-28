@@ -13,23 +13,22 @@ const DTable = React.forwardRef(({
     ...props},
     ref) => {
 
-    const initialParams = () => {
-        let data = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {}
-        return {
-            page: data.page ?? 1,
-            limit: data.limit ?? 10,
-            sort: data.sort,
-            order: data.order ?? 'asc',
-            filter: data.filter ?? {}
-        };
-    }
+    let tableData = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {}
+    let initialParams = {
+        page: tableData.page ?? 1,
+        limit: tableData.limit ?? 10,
+        sort: tableData.sort,
+        order: tableData.order ?? 'asc',
+        filter: tableData.filter ?? {}
+    };
+    
 
     const appLoading = useSelector(state => state.appLoading);
     const [data, setData] = useState([]);
     const [showToolbar, setShowToolbar] = useState(true);
     const [customFields, setCustomFields] = useState({});
     const [fields, setFields] = useState(props.fields);
-    const [params, setParams] = useState(initialParams())    
+    const [params, setParams] = useState(initialParams)    
 
     const changeParams = (values) => {
         let newValues = {...params, ...values}
@@ -51,9 +50,8 @@ const DTable = React.forwardRef(({
         localStorage.setItem('datatable.' +props._id, JSON.stringify(params))
     }, [params])
 
-    useEffect(() => {        
-        let currParams = params.filter ?? initialParams().filter;
-        let newFilter = {...currParams, ...customFilter}
+    useEffect(() => {       
+        let newFilter = {...params.filter, ...customFilter}
         changeParams({filter: newFilter})
     }, [customFilter])
 

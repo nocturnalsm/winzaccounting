@@ -1,11 +1,9 @@
 import MasterList from '../../../containers/MasterList'
-import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux'
 
 const ProductCategoryList = () => {
          
     const activeCompany = useSelector(state => state.activeCompany)    
-    const dtRef = useRef(null)
 
     const fields = [               
         {
@@ -29,19 +27,12 @@ const ProductCategoryList = () => {
         }
     ];
 
-    useEffect(() => {
-        if (Object.keys(activeCompany).length > 0){            
-            dtRef.current.setCustomFilter({company_id: activeCompany.id})
-        }
-    }, [activeCompany])
-    
     return (        
         <MasterList
             tableId="productcategorieslist"
-            fields={fields}            
-            tableRef={dtRef}
+            fields={fields}                        
             apiUrl="/api/setup/product-categories"
-            defaultFilter={{company_id: activeCompany.id}}
+            customFilter={{company_id: activeCompany.id}}
             editUrl="/product-categories"
             createUrl="/product-categories/create"       
         />
