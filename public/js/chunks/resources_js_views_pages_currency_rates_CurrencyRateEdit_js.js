@@ -1765,6 +1765,10 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
     setSelectedValue(defaultValue);
   }, [defaultValue]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (restProps.id == 'parent') {
+      console.log(defaultOptions);
+    }
+
     if (typeof defaultOptions == 'undefined' || defaultOptions === true) {
       loadOptions("");
     }
@@ -1861,7 +1865,7 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
       defaultOptions: defaultOptions !== null && defaultOptions !== void 0 ? defaultOptions : true
     }));
   } else {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], _objectSpread(_objectSpread({}, restProps), {}, _defineProperty({
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], _objectSpread(_objectSpread({}, restProps), {}, {
       defaultOptions: defaultOptions !== null && defaultOptions !== void 0 ? defaultOptions : true,
       isClearable: true,
       className: "react-select" + (invalid ? ' is-invalid' : ''),
@@ -1873,7 +1877,7 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
       getOptionValue: optionValue,
       onChange: handleChange,
       styles: customStyles
-    }, "defaultOptions", defaultOptions !== null && defaultOptions !== void 0 ? defaultOptions : true)));
+    }));
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SearchSelect);
@@ -1972,6 +1976,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
   var loading = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.appLoading;
   });
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useHistory)();
 
   var handleChange = function handleChange(values) {
     var oldData = data;
@@ -2163,10 +2168,14 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCard, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardHeader, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h3", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h4", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CButton, {
+          className: "btn-ghost",
+          onClick: function onClick(e) {
+            return history.goBack();
+          },
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
-            size: "lg",
+            size: "2xl",
             name: "cilArrowCircleLeft"
           })
         }), id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title]

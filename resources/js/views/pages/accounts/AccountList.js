@@ -73,7 +73,7 @@ const AccountList = () => {
                   throw new Error(res.status);
               }
               const data = await res.json();
-              setAccountTypes(data)
+              setAccountTypes(data.data)
           } catch (error) {
               console.log(error);
           }

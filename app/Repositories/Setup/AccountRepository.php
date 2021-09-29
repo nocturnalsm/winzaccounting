@@ -82,9 +82,9 @@ class AccountRepository extends BaseRepository
         };
 
         $data = $data->treeOf($constraint)
-                    ->select("laravel_cte.id", "laravel_cte.name", "accountType", "depth",
+                    ->select("laravel_cte.id", "laravel_cte.name", "accountType", "depth",                             
                              DB::raw("CONCAT(at.prefix, laravel_cte.number) AS number"),
-                             "laravel_cte.parent", "laravel_cte.account_type",
+                             "laravel_cte.parent", "laravel_cte.account_type", "at.prefix",
                              DB::raw("IFNULL(balance.amount,0) AS balance")
                      )
                      ->leftJoinSub(
@@ -113,7 +113,9 @@ class AccountRepository extends BaseRepository
     }
     public function getTypes()
     {
-        return AccountType::select('id','name','prefix')->get();
+        return [
+            "data" => AccountType::select('id','name','prefix')->get()
+        ];
     }
     public function getParents($company_id, $type, $id = '')
     {
@@ -160,11 +162,15 @@ class AccountRepository extends BaseRepository
     public function getById(String $id)
     {
         $data = $this->data->where("accounts.id", $id)
-                           ->select("*")
-                           ->selectSub(
-                                AccountType::select("name")
-                                            ->whereColumn("id", "accounts.account_type"),
-                                'account_type_name'
+                           ->select("accounts.*", "parents.parent_number", "parents.parent_name",
+                                    "account_types.prefix",
+                                    DB::raw("account_types.name as account_type_name"))
+                           ->joinSub(
+                                AccountType::select("id","prefix","name"),                                            
+                                'account_types',
+                                function($join){
+                                    $join->on("accounts.account_type","=", "account_types.id");
+                                }
                             )
                             ->leftJoinSub(
                                 Account::select("accounts.id",                                    

@@ -840,7 +840,7 @@ var AccountList = function AccountList() {
 
               case 8:
                 data = _context.sent;
-                setAccountTypes(data);
+                setAccountTypes(data.data);
                 _context.next = 15;
                 break;
 

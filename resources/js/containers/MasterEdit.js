@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useImperativeHandle } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CCard, CCardBody, CCardFooter, CCardHeader, CForm, CButton, CInvalidFeedback } from '@coreui/react'
 import { setAppEditing, setAppLoading} from "../store";
@@ -17,6 +17,7 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
 
     const dispatch = useDispatch()
     const loading = useSelector(state => state.appLoading)
+    let history = useHistory()
 
     const handleChange = (values) => {
         let oldData = data
@@ -173,12 +174,12 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
     return (
         <CCard>
             <CCardHeader>
-                <h3>
-                  <CButton>
-                    <CIcon size="lg" name="cilArrowCircleLeft" />
+                <h4>
+                  <CButton className="btn-ghost" onClick={e => history.goBack()}>
+                    <CIcon size="2xl" name="cilArrowCircleLeft" />
                   </CButton>
                   {id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title}
-                </h3>
+                </h4>
             </CCardHeader>
             <CCardBody>
                 <CForm className="form-horizontal needs-validation" noValidate wasValidated={validated} onSubmit={handleSubmit}>

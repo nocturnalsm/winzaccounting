@@ -1765,6 +1765,10 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
     setSelectedValue(defaultValue);
   }, [defaultValue]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (restProps.id == 'parent') {
+      console.log(defaultOptions);
+    }
+
     if (typeof defaultOptions == 'undefined' || defaultOptions === true) {
       loadOptions("");
     }
@@ -1861,7 +1865,7 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
       defaultOptions: defaultOptions !== null && defaultOptions !== void 0 ? defaultOptions : true
     }));
   } else {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], _objectSpread(_objectSpread({}, restProps), {}, _defineProperty({
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], _objectSpread(_objectSpread({}, restProps), {}, {
       defaultOptions: defaultOptions !== null && defaultOptions !== void 0 ? defaultOptions : true,
       isClearable: true,
       className: "react-select" + (invalid ? ' is-invalid' : ''),
@@ -1873,7 +1877,7 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
       getOptionValue: optionValue,
       onChange: handleChange,
       styles: customStyles
-    }, "defaultOptions", defaultOptions !== null && defaultOptions !== void 0 ? defaultOptions : true)));
+    }));
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SearchSelect);
@@ -1972,6 +1976,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
   var loading = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.appLoading;
   });
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useHistory)();
 
   var handleChange = function handleChange(values) {
     var oldData = data;
@@ -2163,10 +2168,14 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCard, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardHeader, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h3", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h4", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CButton, {
+          className: "btn-ghost",
+          onClick: function onClick(e) {
+            return history.goBack();
+          },
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
-            size: "lg",
+            size: "2xl",
             name: "cilArrowCircleLeft"
           })
         }), id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title]
@@ -2281,20 +2290,20 @@ var AccountEdit = function AccountEdit(props) {
       urlParams = _useState8[0],
       setUrlParams = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
       _useState10 = _slicedToArray(_useState9, 2),
-      defaultOptions = _useState10[0],
-      setDefaultOptions = _useState10[1];
+      prefix = _useState10[0],
+      setPrefix = _useState10[1];
 
-  var prefix = function prefix(data) {
-    var _data$account_type;
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState12 = _slicedToArray(_useState11, 2),
+      parentKey = _useState12[0],
+      setParentKey = _useState12[1];
 
-    var account_type = (_data$account_type = data.account_type) !== null && _data$account_type !== void 0 ? _data$account_type : initialData.account_type;
-
-    if (account_type != '') {
-      return accountTypes[parseInt(account_type) - 1] ? accountTypes[parseInt(account_type) - 1].prefix : '';
-    }
-  };
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      defaultOptions = _useState14[0],
+      setDefaultOptions = _useState14[1];
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__["default"], {
     title: "Account",
@@ -2305,6 +2314,7 @@ var AccountEdit = function AccountEdit(props) {
           id: data.account_type,
           name: data.account_type_name
         });
+        setPrefix(data.prefix);
 
         if (data.parent) {
           setParent({
@@ -2350,8 +2360,6 @@ var AccountEdit = function AccountEdit(props) {
     },
     onChangeData: function onChangeData(oldData, newData) {
       if (newData.account_type && oldData.account_type != newData.account_type) {
-        setDefaultOptions(false);
-
         if (newData.id) {
           setUrlParams({
             id: newData.id,
@@ -2366,7 +2374,7 @@ var AccountEdit = function AccountEdit(props) {
         }
 
         setParent(null);
-        setDefaultOptions(true);
+        setParentKey(parentKey + 1);
       }
     },
     children: function children(props) {
@@ -2399,9 +2407,13 @@ var AccountEdit = function AccountEdit(props) {
               ref: props.inputRefs('account_type'),
               placeholder: "Choose Account Type",
               onChange: function onChange(value) {
-                return props.handleChange({
+                props.handleChange({
                   account_type: value ? value.id : ""
                 });
+
+                if (value) {
+                  setPrefix(value.prefix);
+                }
               },
               invalid: props.isInvalid('account_type')
             }), props.feedback('account_type')]
@@ -2418,6 +2430,7 @@ var AccountEdit = function AccountEdit(props) {
             sm: "8",
             lg: "5",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_SearchSelect__WEBPACK_IMPORTED_MODULE_3__["default"], {
+              id: "parent",
               placeholder: "Choose parent account",
               disabled: props.loading,
               ref: props.inputRefs('parent'),
@@ -2437,7 +2450,7 @@ var AccountEdit = function AccountEdit(props) {
               optionValue: function optionValue(e) {
                 return e.id;
               }
-            }), props.feedback('parent')]
+            }, "parentSelect_" + parentKey), props.feedback('parent')]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_4__.CFormGroup, {
           row: true,
@@ -2453,7 +2466,7 @@ var AccountEdit = function AccountEdit(props) {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_4__.CInputGroup, {
               className: "has-validation",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_4__.CInputGroupText, {
-                children: prefix(props.data)
+                children: prefix
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_4__.CInput, {
                 placeholder: "Enter account number",
                 autoComplete: "off",

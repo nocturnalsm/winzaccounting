@@ -12,14 +12,10 @@ const AccountEdit = (props) => {
     const [initialData, setInitialData] = useState({account_type: '', parent: ''})
     const activeCompany = useSelector(state => state.activeCompany)
     const [urlParams, setUrlParams] = useState()
+    const [prefix, setPrefix] = useState()
+    const [parentKey, setParentKey] = useState(0)
     const [defaultOptions, setDefaultOptions] = useState(false)
 
-    const prefix = (data) => {
-        let account_type = data.account_type ?? initialData.account_type
-        if (account_type != ''){
-            return accountTypes[parseInt(account_type) - 1] ? accountTypes[parseInt(account_type) - 1].prefix : ''
-        }
-    }
 
     return (
         <MasterEdit title="Account"
@@ -27,6 +23,7 @@ const AccountEdit = (props) => {
             onOpen={data => {
                 if (data){
                     setAccountType({id: data.account_type, name: data.account_type_name})
+                    setPrefix(data.prefix)
                     if (data.parent){
                         setParent({id: data.parent, number: data.parent_number, name: data.parent_name})
                     }
@@ -59,8 +56,7 @@ const AccountEdit = (props) => {
                         company_id: activeCompany.id}
             }}
             onChangeData={(oldData, newData) => {
-                if (newData.account_type && oldData.account_type != newData.account_type){
-                    setDefaultOptions(false)
+                if (newData.account_type && oldData.account_type != newData.account_type){   
                     if (newData.id){
                       setUrlParams({
                           id: newData.id,
@@ -74,8 +70,8 @@ const AccountEdit = (props) => {
                           account_type: newData.account_type
                       })
                     }
-                    setParent(null)
-                    setDefaultOptions(true)
+                    setParent(null)            
+                    setParentKey(parentKey+1)                            
                 }
             }}
         >
@@ -87,7 +83,7 @@ const AccountEdit = (props) => {
                 </CCol>
                 <CCol sm="8" lg="3">
                     <SearchSelect
-                        required
+                        required                                                
                         autoFocus={true}
                         url="/api/setup/accounts/types"
                         optionValue={e => e.id}
@@ -96,7 +92,12 @@ const AccountEdit = (props) => {
                         defaultValue={accountType}
                         ref={props.inputRefs('account_type')}
                         placeholder="Choose Account Type"
-                        onChange={value => props.handleChange({account_type: value ? value.id : ""})}
+                        onChange={value => {
+                            props.handleChange({account_type: value ? value.id : ""})
+                            if (value){
+                                setPrefix(value.prefix)
+                            }                            
+                        }}
                         invalid={props.isInvalid('account_type')}
                     />
                     {props.feedback('account_type')}
@@ -108,7 +109,8 @@ const AccountEdit = (props) => {
                 </CCol>
                 <CCol sm="8" lg="5">
                     <SearchSelect
-                        placeholder="Choose parent account"
+                        id="parent"
+                        placeholder="Choose parent account"                        
                         disabled={props.loading}
                         ref={props.inputRefs('parent')}
                         url="/api/setup/accounts/parents"
@@ -119,6 +121,7 @@ const AccountEdit = (props) => {
                         invalid={props.isInvalid('parent')}
                         optionLabel={e => e.number + " " +e.name}
                         optionValue={e => e.id}
+                        key={"parentSelect_" + parentKey}
                     />
                     {props.feedback('parent')}
                 </CCol>
@@ -130,7 +133,7 @@ const AccountEdit = (props) => {
                 <CCol sm="8" lg="3">
                     <CInputGroup className="has-validation">
                     <CInputGroupText>
-                    {prefix(props.data)}
+                    {prefix}
                     </CInputGroupText>
                     <CInput
                         placeholder="Enter account number"
