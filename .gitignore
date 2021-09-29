@@ -35,3 +35,4 @@ docker-compose.override.yml
 npm-debug.log
 yarn-error.log
 /.vscode
+public/js/chunks/
