@@ -18,23 +18,23 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
     const dispatch = useDispatch()
     const loading = useSelector(state => state.appLoading)
 
-    const handleChange = (values) => {       
-        let oldData = data 
+    const handleChange = (values) => {
+        let oldData = data
         let newData = {...data, ...values}
         setData(newData)
         if (props.onChangeData){
             props.onChangeData(oldData, newData)
-        }       
+        }
     }
 
     const inputRefs = useRef({});
-        
+
     const refs = (index) => {
         if (!inputRefs.current.hasOwnProperty(index)){
             inputRefs.current[index] = React.createRef()
         }
         return inputRefs.current[index]
-    }    
+    }
 
     const handleSubmit = (event) => {
         const form = event.currentTarget
@@ -72,7 +72,7 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
                     if (response.error.errors){
                         setSubmitError(response.error.errors);
                         let firstError = Object.keys(response.error.errors)[0];
-                        if (inputRefs.current && inputRefs.current.hasOwnProperty(firstError)){                            
+                        if (inputRefs.current && inputRefs.current.hasOwnProperty(firstError)){
                             inputRefs.current[firstError].current.focus()
                         }
                     }
@@ -83,7 +83,7 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
                     if (props.onSubmitError){
                         props.onSubmitError(data, response)
                     }
-                    
+
                 }
                 else {
                     MyAlert.success({text: 'Data saved successfully'})
@@ -94,11 +94,11 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
                     if (props.onSubmitSuccess){
                         props.onSubmitSuccess(request, response)
                     }
-                    let firstKey = Object.keys(inputRefs.current)[0];                         
-                    if (inputRefs.current[firstKey].current){      
+                    let firstKey = Object.keys(inputRefs.current)[0];
+                    if (inputRefs.current[firstKey].current){
                         inputRefs.current[firstKey].current.focus()
                     }
-                }                
+                }
                 setValidated(false);
             });
         }
@@ -117,7 +117,7 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
             .then(response => {
                 dispatch(setAppLoading(false))
                 let dataId = id ? {id: id} : {}
-                setData({...dataId, ...response.data})                                
+                setData({...dataId, ...response.data})
                 if (props.onOpen){
                     props.onOpen(response.data)
                 }
@@ -127,7 +127,7 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
                 MyAlert.error({text: error.message})
                 if (props.onGetDataError){
                     props.onGetDataError(error)
-                }                
+                }
             })
         }
         else {
@@ -147,20 +147,20 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
 
     useImperativeHandle(ref, () => ({
 
-        getRef(index) {           
-            let resultRef = refs(index)            
-            if (resultRef){                                
+        getRef(index) {
+            let resultRef = refs(index)
+            if (resultRef){
                 return resultRef.current;
             }
         }
 
     }));
 
-    let childProps = {        
+    let childProps = {
         data: data,
-        loading: loading,        
+        loading: loading,
         inputRefs: refs,
-        handleChange: handleChange,        
+        handleChange: handleChange,
         isInvalid: (property) => submitError.hasOwnProperty(property),
         feedback: (property, errorText) => (
             <CInvalidFeedback>{
@@ -173,7 +173,12 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
     return (
         <CCard>
             <CCardHeader>
-                <h3>{id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title}</h3>
+                <h3>
+                  <CButton>
+                    <CIcon size="lg" name="cilArrowCircleLeft" />
+                  </CButton>
+                  {id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title}
+                </h3>
             </CCardHeader>
             <CCardBody>
                 <CForm className="form-horizontal needs-validation" noValidate wasValidated={validated} onSubmit={handleSubmit}>
