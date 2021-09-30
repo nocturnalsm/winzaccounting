@@ -25,10 +25,7 @@ const SearchSelect = React.forwardRef(({
        setSelectedValue(defaultValue)
     }, [defaultValue])
 
-    useEffect(() => {        
-        if (restProps.id == 'parent'){
-            console.log(defaultOptions)
-        }
+    useEffect(() => {               
         if (typeof defaultOptions == 'undefined' || defaultOptions === true){                 
             loadOptions("")
         }

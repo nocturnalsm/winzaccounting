@@ -9,9 +9,7 @@ const CurrencyEdit = (props) => {
     return (
         <MasterEdit title="Currency"
             apiUrl="/api/setup/currencies"
-            formatData={data => {
-                return {...data, company_id: activeCompany.id}
-            }}
+            formData={{id: '', name: '', code: '', sign: '', company_id: activeCompany.id}}
             >
             {props => (
                     <>

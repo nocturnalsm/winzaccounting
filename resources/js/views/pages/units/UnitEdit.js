@@ -29,7 +29,6 @@ const UnitEdit = (props) => {
                 }
             }}
             onSubmitSuccess={request => {
-                console.log(request)
                 setUnitKey(unitKey+1)
             }}
             formatData={data => {
@@ -106,7 +105,10 @@ const UnitEdit = (props) => {
                         urlParams={urlParams}
                         ref={props.inputRefs('per_unit')}
                         url="api/setup/units/per_units"
-                        onChange={value => props.handleChange({qty_unit: value ? value.id : ''})}
+                        onChange={value => {
+                            setPerUnit(value)
+                            props.handleChange({qty_unit: value ? value.id : ''})
+                        }}
                         invalid={props.isInvalid('qty_unit')}
                     />
                     {props.feedback('qty_unit')}

@@ -100,15 +100,14 @@ class AccountRepository extends BaseRepository
                             ->orderBy("date"),
                           "balance", function($join){
                               $join->on("laravel_cte.id", "=", "balance.account_id");
-                      });
+                      });                     
         return $data;
 
     }
     public function listSort($data, $sortBy, $order)
     {
-        $data->orderBy(DB::raw('laravel_cte.account_type'), 'asc')
-             ->orderBy(DB::raw('laravel_cte.number'), 'asc')
-             ->depthFirst();
+        $data->orderBy(DB::raw('laravel_cte.account_type'), 'asc')             
+             ->depthFirst();           
         return $data;
     }
     public function getTypes()
@@ -116,22 +115,7 @@ class AccountRepository extends BaseRepository
         return [
             "data" => AccountType::select('id','name','prefix')->get()
         ];
-    }
-    public function getParents($company_id, $type, $id = '')
-    {
-      if (trim($type) != "" && trim($company_id) != ""){
-          $type = AccountType::find($type);
-          $prefix = $type->prefix;
-          $data = $type->accounts()
-                  ->select('id','name', DB::raw("CONCAT('{$prefix}', number) AS number"))
-                  ->where("company_id", $company_id);
-          if (trim($id) != ""){
-                $data->where("id", "<>", $id);
-          }
-          return $data->get();
-      }
-      return false;
-    }
+    }    
     public function search(Request $request, $qRules = [])
     {
         if ($qRules == []){
@@ -152,11 +136,16 @@ class AccountRepository extends BaseRepository
         if (isset($request->company_id)){
             $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);
         }
+        $this->data = $this->data
+                           ->orderBy(DB::raw('laravel_cte.account_type'), 'asc')
+                           ->depthFirst();
+
         return parent::search($request, $qRules);
     }
     public function searchParents(Request $request)
     {
-        $this->setData(Account::where("laravel_cte.id", "<>", $request->id));
+        $this->data = $this->data
+                           ->where("laravel_cte.id", "<>", $request->id);
         return $this->search($request);
     }
     public function getById(String $id)

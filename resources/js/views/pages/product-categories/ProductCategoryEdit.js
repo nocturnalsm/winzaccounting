@@ -100,7 +100,10 @@ const ProductCategoryEdit = (props) => {
                         disabled={props.loading}
                         defaultValue={parentCategory}
                         ref={props.inputRefs('parent')}
-                        onChange={value => props.handleChange({parent: value ? value.id : ''})}
+                        onChange={value => {
+                            setParentCategory(value)
+                            props.handleChange({parent: value ? value.id : ''})
+                        }}
                         invalid={props.isInvalid('parent')}
                     />
                     {props.feedback('parent')}

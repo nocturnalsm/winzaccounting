@@ -7,11 +7,10 @@ import MyAlert from "../alert";
 import CIcon from '@coreui/icons-react'
 import axios from 'axios'
 
-const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
+const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
 
     const {id} = useParams()
-    const [initialData, setInitialData] = useState({})
-    const [data, setData] = useState({})
+    const [data, setData] = useState(formData)
     const [validated, setValidated] = useState(false)
     const [submitError, setSubmitError] = useState({})
 
@@ -24,7 +23,7 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
         let newData = {...data, ...values}
         setData(newData)
         if (props.onChangeData){
-            props.onChangeData(oldData, newData)
+            props.onChangeData(oldData, values)
         }
     }
 
@@ -90,7 +89,7 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
                     MyAlert.success({text: 'Data saved successfully'})
                     setSubmitError({})
                     if (!id){
-                        setData({})
+                        setData(formData)
                     }
                     if (props.onSubmitSuccess){
                         props.onSubmitSuccess(request, response)
@@ -118,7 +117,13 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
             .then(response => {
                 dispatch(setAppLoading(false))
                 let dataId = id ? {id: id} : {}
-                setData({...dataId, ...response.data})
+                let newData = {}
+                Object.keys(formData).filter(function(x){
+                    if (response.data[x] !== undefined) {
+                        newData[x] = response.data[x]
+                    }
+                });
+                setData(newData)      
                 if (props.onOpen){
                     props.onOpen(response.data)
                 }
@@ -173,9 +178,9 @@ const MasterEdit = React.forwardRef(({children, ...props}, ref) => {
     }
     return (
         <CCard>
-            <CCardHeader>
-                <h4>
-                  <CButton className="btn-ghost" onClick={e => history.goBack()}>
+            <CCardHeader className="py-0">
+                <h4 className="mb-0">
+                  <CButton className="btn-ghost pl-0" onClick={e => history.goBack()}>
                     <CIcon size="2xl" name="cilArrowCircleLeft" />
                   </CButton>
                   {id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title}
