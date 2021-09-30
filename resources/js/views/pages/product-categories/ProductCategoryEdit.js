@@ -8,9 +8,10 @@ const ProductCategoryEdit = (props) => {
 
     const [initialData, setInitialData] = useState({account_type: '', parent: ''})
     const activeCompany = useSelector(state => state.activeCompany)
-    const [parentCategory, setParentCategory] = useState(null)    
+    const [parentCategory, setParentCategory] = useState(null)
     const [urlParams, setUrlParams] = useState()
     const [defaultOptions, setDefaultOptions] = useState(false)
+    const [parentKey, setParentKey] = useState(0)
 
     return (
         <MasterEdit title="Product Category"
@@ -22,7 +23,7 @@ const ProductCategoryEdit = (props) => {
                     }
                     setUrlParams({exclude_id: data.id, company_id: activeCompany.id})
                 }
-                else {                    
+                else {
                     setUrlParams({company_id: activeCompany.id})
                 }
                 setDefaultOptions(true)
@@ -34,7 +35,7 @@ const ProductCategoryEdit = (props) => {
                         parent: parent
                     })
                 }
-                //getParents(data.id)
+                setParentKey(parentKey+1)
             }}
             formatData={data => {
                 let {parent } = data
@@ -90,6 +91,7 @@ const ProductCategoryEdit = (props) => {
                 <CCol sm="8" lg="5">
                     <SearchSelect
                         placeholder="Choose parent category"
+                        key={"parentSelect_" +parentKey}
                         defaultOptions={defaultOptions}
                         url="api/setup/product-categories/parents"
                         urlParams={urlParams}
