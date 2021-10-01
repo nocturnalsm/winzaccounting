@@ -26,7 +26,7 @@ const CurrencyEdit = (props) => {
                             innerRef={props.inputRefs('name')}
                             disabled={props.loading}
                             onChange={e => props.handleChange({name: e.target.value})}
-                            value={props.data.name ?? ''}
+                            value={props.data.name}
                             invalid={props.isInvalid('name')}
                             required
                             />
@@ -44,7 +44,7 @@ const CurrencyEdit = (props) => {
                             autoComplete="off"
                             innerRef={props.inputRefs('code')}
                             disabled={props.loading}
-                            value={props.data.code ?? ''}
+                            value={props.data.code}
                             onChange={e => props.handleChange({code: e.target.value})}
                             invalid={props.isInvalid('code')}
                             />
@@ -62,7 +62,7 @@ const CurrencyEdit = (props) => {
                             autoComplete="off"
                             disabled={props.loading}
                             innerRef={props.inputRefs('sign')}
-                            value={props.data.sign ?? ''}
+                            value={props.data.sign}
                             onChange={e => props.handleChange({sign: e.target.value})}
                             invalid={props.isInvalid('sign')}
                             />

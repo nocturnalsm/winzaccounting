@@ -15,6 +15,7 @@ const UnitEdit = (props) => {
     return (
         <MasterEdit title="Unit"
             apiUrl="/api/setup/units"
+            formData={{id: '', company_id: activeCompany.id, name: '', code: '', qty_per_unit: '', qty_unit: ''}}
             onOpen={data => {
                 if (data){
                     if (data.qty_per_unit){
@@ -29,11 +30,11 @@ const UnitEdit = (props) => {
                 }
             }}
             onSubmitSuccess={request => {
+                if (request.id == ''){
+                    setPerUnit(null)
+                }
                 setUnitKey(unitKey+1)
-            }}
-            formatData={data => {
-                return {...data, company_id: activeCompany.id}
-            }}
+            }}            
         >
         {props => (
             <>
@@ -50,7 +51,7 @@ const UnitEdit = (props) => {
                         innerRef={props.inputRefs('name')}
                         disabled={props.loading}
                         onChange={e => props.handleChange({name: e.target.value})}
-                        value={props.data.name ?? ''}
+                        value={props.data.name}
                         invalid={props.isInvalid('name')}
                         required
                     />
@@ -69,7 +70,7 @@ const UnitEdit = (props) => {
                         type="text"
                         disabled={props.loading}
                         onChange={e =>props.handleChange({code: e.target.value})}
-                        value={props.data.code ?? ''}
+                        value={props.data.code}
                         invalid={props.isInvalid('code')}
                     />
                     {props.feedback('code')}
@@ -87,7 +88,7 @@ const UnitEdit = (props) => {
                         innerRef={props.inputRefs('qty_per_unit')}
                         disabled={props.loading}
                         onChange={e =>props.handleChange({qty_per_unit: e.target.value})}
-                        value={props.data.qty_per_unit ?? ''}
+                        value={props.data.qty_per_unit}
                         invalid={props.isInvalid('qty_per_unit')}
                     />
                     {props.feedback('qty_per_unit')}
@@ -99,7 +100,7 @@ const UnitEdit = (props) => {
                         key={"selectUnit_" + unitKey}
                         autoComplete="off"
                         disabled={props.loading}
-                        defaultValue={perUnit}
+                        value={perUnit}
                         optionLabel={e => e.name}
                         optionValue={e => e.id}
                         urlParams={urlParams}

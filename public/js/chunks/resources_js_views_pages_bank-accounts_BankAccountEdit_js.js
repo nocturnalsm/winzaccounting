@@ -463,7 +463,7 @@ var EmotionCacheContext = /* #__PURE__ */(0,react__WEBPACK_IMPORTED_MODULE_0__.c
 // and we could have a special build just for that
 // but this is much easier and the native packages
 // might use a different theme context in the future anyway
-typeof HTMLElement !== 'undefined' ? /* #__PURE__ */(0,_emotion_cache__WEBPACK_IMPORTED_MODULE_1__.default)({
+typeof HTMLElement !== 'undefined' ? /* #__PURE__ */(0,_emotion_cache__WEBPACK_IMPORTED_MODULE_1__["default"])({
   key: 'css'
 }) : null);
 
@@ -510,11 +510,11 @@ var getTheme = function getTheme(outerTheme, theme) {
     throw new Error('[ThemeProvider] Please make your theme prop a plain object');
   }
 
-  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({}, outerTheme, theme);
+  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, outerTheme, theme);
 };
 
-var createCacheWithTheme = /* #__PURE__ */(0,_emotion_weak_memoize__WEBPACK_IMPORTED_MODULE_3__.default)(function (outerTheme) {
-  return (0,_emotion_weak_memoize__WEBPACK_IMPORTED_MODULE_3__.default)(function (theme) {
+var createCacheWithTheme = /* #__PURE__ */(0,_emotion_weak_memoize__WEBPACK_IMPORTED_MODULE_3__["default"])(function (outerTheme) {
+  return (0,_emotion_weak_memoize__WEBPACK_IMPORTED_MODULE_3__["default"])(function (theme) {
     return getTheme(outerTheme, theme);
   });
 });
@@ -534,7 +534,7 @@ function withTheme(Component) {
 
   var render = function render(props, ref) {
     var theme = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(ThemeContext);
-    return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Component, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({
+    return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Component, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({
       theme: theme,
       ref: ref
     }, props));
@@ -543,7 +543,7 @@ function withTheme(Component) {
 
   var WithTheme = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(render);
   WithTheme.displayName = "WithTheme(" + componentName + ")";
-  return (0,_isolated_hoist_non_react_statics_do_not_use_this_in_your_code_dist_emotion_react_isolated_hoist_non_react_statics_do_not_use_this_in_your_code_browser_esm_js__WEBPACK_IMPORTED_MODULE_6__.default)(WithTheme, Component);
+  return (0,_isolated_hoist_non_react_statics_do_not_use_this_in_your_code_dist_emotion_react_isolated_hoist_non_react_statics_do_not_use_this_in_your_code_browser_esm_js__WEBPACK_IMPORTED_MODULE_6__["default"])(WithTheme, Component);
 }
 
 // thus we only need to replace what is a valid character for JS, but not for CSS
@@ -1078,7 +1078,7 @@ var isProcessableValue = function isProcessableValue(value) {
   return value != null && typeof value !== 'boolean';
 };
 
-var processStyleName = /* #__PURE__ */(0,_emotion_memoize__WEBPACK_IMPORTED_MODULE_2__.default)(function (styleName) {
+var processStyleName = /* #__PURE__ */(0,_emotion_memoize__WEBPACK_IMPORTED_MODULE_2__["default"])(function (styleName) {
   return isCustomProperty(styleName) ? styleName : styleName.replace(hyphenateRegex, '-$&').toLowerCase();
 });
 
@@ -1100,7 +1100,7 @@ var processStyleValue = function processStyleValue(key, value) {
       }
   }
 
-  if (_emotion_unitless__WEBPACK_IMPORTED_MODULE_1__.default[key] !== 1 && !isCustomProperty(key) && typeof value === 'number' && value !== 0) {
+  if (_emotion_unitless__WEBPACK_IMPORTED_MODULE_1__["default"][key] !== 1 && !isCustomProperty(key) && typeof value === 'number' && value !== 0) {
     return value + 'px';
   }
 
@@ -1352,7 +1352,7 @@ var serializeStyles = function serializeStyles(args, registered, mergedProps) {
     match[1];
   }
 
-  var name = (0,_emotion_hash__WEBPACK_IMPORTED_MODULE_0__.default)(styles) + identifierName;
+  var name = (0,_emotion_hash__WEBPACK_IMPORTED_MODULE_0__["default"])(styles) + identifierName;
 
   if (true) {
     // $FlowFixMe SerializedStyles type doesn't have toString property (and we don't want to add it)
@@ -1839,14 +1839,14 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
       }
     })["catch"](function (error) {
       console.log(error);
-      _alert_js__WEBPACK_IMPORTED_MODULE_2__.default.error({
+      _alert_js__WEBPACK_IMPORTED_MODULE_2__["default"].error({
         text: error.response
       });
     });
   };
 
   if (async) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_select_async__WEBPACK_IMPORTED_MODULE_1__.default, _objectSpread(_objectSpread({}, restProps), {}, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_select_async__WEBPACK_IMPORTED_MODULE_1__["default"], _objectSpread(_objectSpread({}, restProps), {}, {
       cacheOptions: true,
       isClearable: true,
       className: "react-select" + (invalid ? ' is-invalid' : ''),
@@ -1861,7 +1861,7 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
       defaultOptions: defaultOptions !== null && defaultOptions !== void 0 ? defaultOptions : true
     }));
   } else {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_select__WEBPACK_IMPORTED_MODULE_5__.default, _objectSpread(_objectSpread({}, restProps), {}, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], _objectSpread(_objectSpread({}, restProps), {}, {
       defaultOptions: defaultOptions !== null && defaultOptions !== void 0 ? defaultOptions : true,
       isClearable: true,
       className: "react-select" + (invalid ? ' is-invalid' : ''),
@@ -1964,6 +1964,11 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
       submitError = _useState6[0],
       setSubmitError = _useState6[1];
 
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState8 = _slicedToArray(_useState7, 2),
+      submitted = _useState8[0],
+      setSubmitted = _useState8[1];
+
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var loading = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.appLoading;
@@ -1983,8 +1988,10 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    console.log(formData);
-  }, [formData]);
+    if (!id) {
+      setData(formData);
+    }
+  }, [submitted]);
   var inputRefs = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)({});
 
   var refs = function refs(index) {
@@ -2000,7 +2007,16 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
     event.preventDefault();
     event.stopPropagation();
     setValidated(true);
-    var request = props.formatData ? props.formatData(data) : data;
+    var newData = {};
+    console.log('That', formData);
+    Object.keys(formData).filter(function (x) {
+      if (data[x] !== undefined) {
+        newData[x] = data[x];
+      } else {
+        newData[x] = formData[x];
+      }
+    });
+    var request = props.formatData ? props.formatData(newData) : newData;
     setData(request);
 
     if (form.checkValidity() === true) {
@@ -2062,7 +2078,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
             var _response$error$messa;
 
             var message = (_response$error$messa = response.error.message) !== null && _response$error$messa !== void 0 ? _response$error$messa : 'Something went wrong';
-            _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+            _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
               text: message
             });
           }
@@ -2071,14 +2087,10 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
             props.onSubmitError(data, response);
           }
         } else {
-          _alert__WEBPACK_IMPORTED_MODULE_5__.default.success({
+          _alert__WEBPACK_IMPORTED_MODULE_5__["default"].success({
             text: 'Data saved successfully'
           });
           setSubmitError({});
-
-          if (!id) {
-            setData(formData);
-          }
 
           if (props.onSubmitSuccess) {
             props.onSubmitSuccess(request, response);
@@ -2089,6 +2101,8 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
           if (inputRefs.current[firstKey].current) {
             inputRefs.current[firstKey].current.focus();
           }
+
+          setSubmitted(submitted + 1);
         }
 
         setValidated(false);
@@ -2107,14 +2121,8 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
       dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(true));
       axios__WEBPACK_IMPORTED_MODULE_7___default().get(props.apiUrl + "/" + id).then(function (response) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
-        var newData = {};
-        Object.keys(formData).filter(function (x) {
-          if (response.data[x] !== undefined) {
-            newData[x] = response.data[x];
-          } else {
-            newData[x] = formData[x];
-          }
-        });
+
+        var newData = _objectSpread(_objectSpread({}, formData), response.data);
 
         if (formData.id) {
           newData.id = id;
@@ -2127,7 +2135,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
         }
       })["catch"](function (error) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
-        _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+        _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
           text: error.message
         });
 
@@ -2181,7 +2189,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
           onClick: function onClick(e) {
             return history.goBack();
           },
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
             size: "2xl",
             name: "cilArrowCircleLeft"
           })
@@ -2204,7 +2212,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
         },
         size: "md",
         color: "primary",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
           name: "cil-scrubber"
         }), " Submit"]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CButton, {
@@ -2213,7 +2221,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
         onClick: resetForm,
         size: "md",
         color: "danger",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
           name: "cil-ban"
         }), " Reset"]
       })]
@@ -2268,29 +2276,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var BankAccountEdit = function BankAccountEdit(props) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    bank_id: '',
-    account_id: ''
-  }),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
-      initialData = _useState2[0],
-      setInitialData = _useState2[1];
+      bank = _useState2[0],
+      setBank = _useState2[1];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      bank = _useState4[0],
-      setBank = _useState4[1];
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
-      _useState6 = _slicedToArray(_useState5, 2),
-      account = _useState6[0],
-      setAccount = _useState6[1];
+      account = _useState4[0],
+      setAccount = _useState4[1];
 
   var activeCompany = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.activeCompany;
   });
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
     id: '',
     bank_id: '',
     account_id: '',
@@ -2298,11 +2298,11 @@ var BankAccountEdit = function BankAccountEdit(props) {
     holder: '',
     company_id: activeCompany.id
   }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      formData = _useState8[0],
-      setFormData = _useState8[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      formData = _useState6[0],
+      setFormData = _useState6[1];
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__.default, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__["default"], {
     title: "Bank Account",
     apiUrl: "/api/setup/bank-accounts",
     formData: formData,
@@ -2327,6 +2327,7 @@ var BankAccountEdit = function BankAccountEdit(props) {
           bank_id = request.bank_id;
 
       if (request.id == "") {
+        console.log('set form');
         setFormData(_objectSpread(_objectSpread({}, formData), {}, {
           account_id: account_id,
           bank_id: bank_id
@@ -2334,8 +2335,6 @@ var BankAccountEdit = function BankAccountEdit(props) {
       }
     },
     children: function children(props) {
-      var _props$data$number, _props$data$holder;
-
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
           row: true,
@@ -2348,7 +2347,7 @@ var BankAccountEdit = function BankAccountEdit(props) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
             lg: "3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_SearchSelect__WEBPACK_IMPORTED_MODULE_4__.default, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_SearchSelect__WEBPACK_IMPORTED_MODULE_4__["default"], {
               required: true,
               autoFocus: true,
               optionValue: function optionValue(e) {
@@ -2394,7 +2393,7 @@ var BankAccountEdit = function BankAccountEdit(props) {
                   number: e.target.value
                 });
               },
-              value: (_props$data$number = props.data.number) !== null && _props$data$number !== void 0 ? _props$data$number : '',
+              value: props.data.number,
               invalid: props.isInvalid('number'),
               innerRef: props.inputRefs('number'),
               required: true
@@ -2421,7 +2420,7 @@ var BankAccountEdit = function BankAccountEdit(props) {
                   holder: e.target.value
                 });
               },
-              value: (_props$data$holder = props.data.holder) !== null && _props$data$holder !== void 0 ? _props$data$holder : '',
+              value: props.data.holder,
               invalid: props.isInvalid('holder'),
               innerRef: props.inputRefs('name'),
               required: true
@@ -2438,7 +2437,7 @@ var BankAccountEdit = function BankAccountEdit(props) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
             lg: "5",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_SearchSelect__WEBPACK_IMPORTED_MODULE_4__.default, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_SearchSelect__WEBPACK_IMPORTED_MODULE_4__["default"], {
               placeholder: "Choose account",
               autoComplete: "off",
               value: account,
@@ -2808,7 +2807,7 @@ AutosizeInput.defaultProps = {
 	injectStyles: true
 };
 
-exports.default = AutosizeInput;
+exports["default"] = AutosizeInput;
 
 /***/ }),
 
@@ -2867,14 +2866,14 @@ var makeAsyncSelect = function makeAsyncSelect(SelectComponent) {
   var _class, _temp;
 
   return _temp = _class = /*#__PURE__*/function (_Component) {
-    (0,_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__.default)(Async, _Component);
+    (0,_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(Async, _Component);
 
     var _super = (0,_dist_index_4bd03571_esm_js__WEBPACK_IMPORTED_MODULE_12__._)(Async);
 
     function Async(props) {
       var _this;
 
-      (0,_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_3__.default)(this, Async);
+      (0,_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_3__["default"])(this, Async);
 
       _this = _super.call(this);
       _this.select = void 0;
@@ -2929,7 +2928,7 @@ var makeAsyncSelect = function makeAsyncSelect(SelectComponent) {
                   loadedInputValue: inputValue,
                   loadedOptions: options || [],
                   passEmptyOptions: false,
-                  optionsCache: options ? (0,_dist_index_4bd03571_esm_js__WEBPACK_IMPORTED_MODULE_12__.a)((0,_dist_index_4bd03571_esm_js__WEBPACK_IMPORTED_MODULE_12__.a)({}, state.optionsCache), {}, (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)({}, inputValue, options)) : state.optionsCache
+                  optionsCache: options ? (0,_dist_index_4bd03571_esm_js__WEBPACK_IMPORTED_MODULE_12__.a)((0,_dist_index_4bd03571_esm_js__WEBPACK_IMPORTED_MODULE_12__.a)({}, state.optionsCache), {}, (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])({}, inputValue, options)) : state.optionsCache
                 };
               });
             });
@@ -2952,7 +2951,7 @@ var makeAsyncSelect = function makeAsyncSelect(SelectComponent) {
       return _this;
     }
 
-    (0,_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_4__.default)(Async, [{
+    (0,_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_4__["default"])(Async, [{
       key: "componentDidMount",
       value: function componentDidMount() {
         var _this2 = this;
@@ -3009,7 +3008,7 @@ var makeAsyncSelect = function makeAsyncSelect(SelectComponent) {
         var _this$props2 = this.props;
             _this$props2.loadOptions;
             var isLoadingProp = _this$props2.isLoading,
-            props = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__.default)(_this$props2, ["loadOptions", "isLoading"]);
+            props = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__["default"])(_this$props2, ["loadOptions", "isLoading"]);
 
         var _this$state = this.state,
             defaultOptions = _this$state.defaultOptions,
@@ -3019,7 +3018,7 @@ var makeAsyncSelect = function makeAsyncSelect(SelectComponent) {
             loadedOptions = _this$state.loadedOptions,
             passEmptyOptions = _this$state.passEmptyOptions;
         var options = passEmptyOptions ? [] : inputValue && loadedInputValue ? loadedOptions : defaultOptions || [];
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(SelectComponent, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(SelectComponent, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
           ref: function ref(_ref) {
             _this3.select = _ref;
           },
@@ -3102,7 +3101,7 @@ var _ref =  false ? 0 : {
 };
 
 var A11yText = function A11yText(props) {
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: _ref
   }, props));
 };
@@ -3567,7 +3566,7 @@ var stripDiacritics = function stripDiacritics(str) {
   });
 };
 
-var memoizedStripDiacriticsForInput = (0,memoize_one__WEBPACK_IMPORTED_MODULE_9__.default)(stripDiacritics);
+var memoizedStripDiacriticsForInput = (0,memoize_one__WEBPACK_IMPORTED_MODULE_9__["default"])(stripDiacritics);
 
 var trimString = function trimString(str) {
   return str.replace(/^\s+|\s+$/g, '');
@@ -3618,9 +3617,9 @@ function DummyInput(_ref) {
       _ref.exit;
       var innerRef = _ref.innerRef;
       _ref.emotion;
-      var props = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_6__.default)(_ref, ["in", "out", "onExited", "appear", "enter", "exit", "innerRef", "emotion"]);
+      var props = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_6__["default"])(_ref, ["in", "out", "onExited", "appear", "enter", "exit", "innerRef", "emotion"]);
 
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     ref: innerRef
   }, props, {
     css: /*#__PURE__*/(0,_emotion_react__WEBPACK_IMPORTED_MODULE_7__.css)({
@@ -4127,7 +4126,7 @@ function buildCategorizedOptions(props, selectValue) {
 function buildFocusableOptionsFromCategorizedOptions(categorizedOptions) {
   return categorizedOptions.reduce(function (optionsAccumulator, categorizedOption) {
     if (categorizedOption.type === 'group') {
-      optionsAccumulator.push.apply(optionsAccumulator, (0,_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_4__.default)(categorizedOption.options.map(function (option) {
+      optionsAccumulator.push.apply(optionsAccumulator, (0,_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_4__["default"])(categorizedOption.options.map(function (option) {
         return option.data;
       })));
     } else {
@@ -4221,7 +4220,7 @@ var shouldHideSelectedOptions = function shouldHideSelectedOptions(props) {
 var instanceId = 1;
 
 var Select = /*#__PURE__*/function (_Component) {
-  (0,_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_3__.default)(Select, _Component);
+  (0,_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_3__["default"])(Select, _Component);
 
   var _super = (0,_index_4bd03571_esm_js__WEBPACK_IMPORTED_MODULE_8__._)(Select);
 
@@ -4235,7 +4234,7 @@ var Select = /*#__PURE__*/function (_Component) {
   function Select(_props) {
     var _this;
 
-    (0,_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__.default)(this, Select);
+    (0,_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, Select);
 
     _this = _super.call(this, _props);
     _this.state = {
@@ -4346,7 +4345,7 @@ var Select = /*#__PURE__*/function (_Component) {
       } else if (!isDisabled) {
         // Select option if option is not disabled
         if (isMulti) {
-          _this.setValue([].concat((0,_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_4__.default)(selectValue), [newValue]), 'select-option', newValue);
+          _this.setValue([].concat((0,_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_4__["default"])(selectValue), [newValue]), 'select-option', newValue);
         } else {
           _this.setValue(newValue, 'select-option');
         }
@@ -4887,7 +4886,7 @@ var Select = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  (0,_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__.default)(Select, [{
+  (0,_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(Select, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.startListeningComposition();
@@ -5266,7 +5265,7 @@ var Select = /*#__PURE__*/function (_Component) {
 
       if (!isSearchable) {
         // use a dummy input to maintain focus/blur functionality
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(DummyInput, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(DummyInput, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
           id: id,
           innerRef: this.getInputRef,
           onBlur: this.onInputBlur,
@@ -5280,7 +5279,7 @@ var Select = /*#__PURE__*/function (_Component) {
         }, ariaAttributes));
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(Input, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(Input, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
         autoCapitalize: "none",
         autoComplete: "off",
         autoCorrect: "off",
@@ -5324,7 +5323,7 @@ var Select = /*#__PURE__*/function (_Component) {
           isFocused = _this$state4.isFocused;
 
       if (!this.hasValue() || !controlShouldRenderValue) {
-        return inputValue ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(Placeholder, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+        return inputValue ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(Placeholder, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
           key: "placeholder",
           isDisabled: isDisabled,
           isFocused: isFocused
@@ -5334,7 +5333,7 @@ var Select = /*#__PURE__*/function (_Component) {
       if (isMulti) {
         var selectValues = selectValue.map(function (opt, index) {
           var isOptionFocused = opt === focusedValue;
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(MultiValue, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(MultiValue, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
             components: {
               Container: MultiValueContainer,
               Label: MultiValueLabel,
@@ -5367,7 +5366,7 @@ var Select = /*#__PURE__*/function (_Component) {
       }
 
       var singleValue = selectValue[0];
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(SingleValue, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(SingleValue, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
         data: singleValue,
         isDisabled: isDisabled
       }), this.formatOptionLabel(singleValue, 'value'));
@@ -5393,7 +5392,7 @@ var Select = /*#__PURE__*/function (_Component) {
         onTouchEnd: this.onClearIndicatorTouchEnd,
         'aria-hidden': 'true'
       };
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(ClearIndicator, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(ClearIndicator, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
         innerProps: innerProps,
         isFocused: isFocused
       }));
@@ -5413,7 +5412,7 @@ var Select = /*#__PURE__*/function (_Component) {
       var innerProps = {
         'aria-hidden': 'true'
       };
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(LoadingIndicator, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(LoadingIndicator, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
         innerProps: innerProps,
         isDisabled: isDisabled,
         isFocused: isFocused
@@ -5431,7 +5430,7 @@ var Select = /*#__PURE__*/function (_Component) {
       var commonProps = this.commonProps;
       var isDisabled = this.props.isDisabled;
       var isFocused = this.state.isFocused;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(IndicatorSeparator, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(IndicatorSeparator, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
         isDisabled: isDisabled,
         isFocused: isFocused
       }));
@@ -5451,7 +5450,7 @@ var Select = /*#__PURE__*/function (_Component) {
         onTouchEnd: this.onDropdownIndicatorTouchEnd,
         'aria-hidden': 'true'
       };
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(DropdownIndicator, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(DropdownIndicator, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
         innerProps: innerProps,
         isDisabled: isDisabled,
         isFocused: isFocused
@@ -5514,7 +5513,7 @@ var Select = /*#__PURE__*/function (_Component) {
           onMouseOver: onHover,
           tabIndex: -1
         };
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(Option, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(Option, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
           innerProps: innerProps,
           data: data,
           isDisabled: isDisabled,
@@ -5538,7 +5537,7 @@ var Select = /*#__PURE__*/function (_Component) {
                 groupIndex = item.index;
             var groupId = "".concat(_this4.getElementId('group'), "-").concat(groupIndex);
             var headingId = "".concat(groupId, "-heading");
-            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(Group, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(Group, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
               key: groupId,
               data: data,
               options: options,
@@ -5577,12 +5576,12 @@ var Select = /*#__PURE__*/function (_Component) {
         menuPosition: menuPosition,
         menuShouldScrollIntoView: menuShouldScrollIntoView
       };
-      var menuElement = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(_index_4bd03571_esm_js__WEBPACK_IMPORTED_MODULE_8__.M, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, menuPlacementProps), function (_ref4) {
+      var menuElement = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(_index_4bd03571_esm_js__WEBPACK_IMPORTED_MODULE_8__.M, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, menuPlacementProps), function (_ref4) {
         var ref = _ref4.ref,
             _ref4$placerProps = _ref4.placerProps,
             placement = _ref4$placerProps.placement,
             maxHeight = _ref4$placerProps.maxHeight;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(Menu, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, menuPlacementProps, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(Menu, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, menuPlacementProps, {
           innerRef: ref,
           innerProps: {
             onMouseDown: _this4.onMenuMouseDown,
@@ -5596,7 +5595,7 @@ var Select = /*#__PURE__*/function (_Component) {
           onBottomArrive: onMenuScrollToBottom,
           lockEnabled: menuShouldBlockScroll
         }, function (scrollTargetRef) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(MenuList, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(MenuList, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
             innerRef: function innerRef(instance) {
               _this4.getMenuListRef(instance);
 
@@ -5611,7 +5610,7 @@ var Select = /*#__PURE__*/function (_Component) {
       // so we use the same component. the actual portalling logic is forked
       // within the component based on `menuPosition`
 
-      return menuPortalTarget || menuPosition === 'fixed' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(MenuPortal, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+      return menuPortalTarget || menuPosition === 'fixed' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(MenuPortal, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
         appendTo: menuPortalTarget,
         controlElement: this.controlRef,
         menuPlacement: menuPlacement,
@@ -5676,7 +5675,7 @@ var Select = /*#__PURE__*/function (_Component) {
           isFocused = _this$state5.isFocused,
           selectValue = _this$state5.selectValue;
       var focusableOptions = this.getFocusableOptions();
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(LiveRegion, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(LiveRegion, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
         ariaSelection: ariaSelection,
         focusedOption: focusedOption,
         focusedValue: focusedValue,
@@ -5701,7 +5700,7 @@ var Select = /*#__PURE__*/function (_Component) {
           menuIsOpen = _this$props14.menuIsOpen;
       var isFocused = this.state.isFocused;
       var commonProps = this.commonProps = this.getCommonProps();
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(SelectContainer, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(SelectContainer, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
         className: className,
         innerProps: {
           id: id,
@@ -5709,7 +5708,7 @@ var Select = /*#__PURE__*/function (_Component) {
         },
         isDisabled: isDisabled,
         isFocused: isFocused
-      }), this.renderLiveRegion(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(Control, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+      }), this.renderLiveRegion(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(Control, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
         innerRef: this.getControlRef,
         innerProps: {
           onMouseDown: this.onControlMouseDown,
@@ -5718,9 +5717,9 @@ var Select = /*#__PURE__*/function (_Component) {
         isDisabled: isDisabled,
         isFocused: isFocused,
         menuIsOpen: menuIsOpen
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(ValueContainer, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(ValueContainer, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
         isDisabled: isDisabled
-      }), this.renderPlaceholderOrValue(), this.renderInput()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(IndicatorsContainer, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, commonProps, {
+      }), this.renderPlaceholderOrValue(), this.renderInput()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(IndicatorsContainer, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, commonProps, {
         isDisabled: isDisabled
       }), this.renderClearIndicator(), this.renderLoadingIndicator(), this.renderIndicatorSeparator(), this.renderDropdownIndicator())), this.renderMenu(), this.renderFormField());
     }
@@ -5991,7 +5990,7 @@ function classNames(prefix, state, className) {
 
 var cleanValue = function cleanValue(value) {
   if (Array.isArray(value)) return value.filter(Boolean);
-  if ((0,_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_3__.default)(value) === 'object' && value !== null) return [value];
+  if ((0,_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_3__["default"])(value) === 'object' && value !== null) return [value];
   return [];
 }; // ==============================
 // Clean Common Props
@@ -6012,7 +6011,7 @@ var cleanCommonProps = function cleanCommonProps(props) {
       props.selectProps;
       props.setValue;
       props.theme;
-      var innerProps = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["className", "clearValue", "cx", "getStyles", "getValue", "hasValue", "isMulti", "isRtl", "options", "selectOption", "selectProps", "setValue", "theme"]);
+      var innerProps = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["className", "clearValue", "cx", "getStyles", "getValue", "hasValue", "isMulti", "isRtl", "options", "selectOption", "selectProps", "setValue", "theme"]);
 
   return _objectSpread2({}, innerProps);
 }; // ==============================
@@ -6369,21 +6368,21 @@ var menuCSS = function menuCSS(_ref2) {
       colors = _ref2$theme.colors;
   return _ref3 = {
     label: 'menu'
-  }, (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__.default)(_ref3, alignToControl(placement), '100%'), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__.default)(_ref3, "backgroundColor", colors.neutral0), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__.default)(_ref3, "borderRadius", borderRadius), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__.default)(_ref3, "boxShadow", '0 0 0 1px hsla(0, 0%, 0%, 0.1), 0 4px 11px hsla(0, 0%, 0%, 0.1)'), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__.default)(_ref3, "marginBottom", spacing.menuGutter), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__.default)(_ref3, "marginTop", spacing.menuGutter), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__.default)(_ref3, "position", 'absolute'), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__.default)(_ref3, "width", '100%'), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__.default)(_ref3, "zIndex", 1), _ref3;
+  }, (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(_ref3, alignToControl(placement), '100%'), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(_ref3, "backgroundColor", colors.neutral0), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(_ref3, "borderRadius", borderRadius), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(_ref3, "boxShadow", '0 0 0 1px hsla(0, 0%, 0%, 0.1), 0 4px 11px hsla(0, 0%, 0%, 0.1)'), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(_ref3, "marginBottom", spacing.menuGutter), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(_ref3, "marginTop", spacing.menuGutter), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(_ref3, "position", 'absolute'), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(_ref3, "width", '100%'), (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(_ref3, "zIndex", 1), _ref3;
 };
 var PortalPlacementContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_9__.createContext)({
   getPortalPlacement: null
 }); // NOTE: internal only
 
 var MenuPlacer = /*#__PURE__*/function (_Component) {
-  (0,_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_7__.default)(MenuPlacer, _Component);
+  (0,_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_7__["default"])(MenuPlacer, _Component);
 
   var _super = _createSuper(MenuPlacer);
 
   function MenuPlacer() {
     var _this;
 
-    (0,_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_5__.default)(this, MenuPlacer);
+    (0,_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_5__["default"])(this, MenuPlacer);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -6434,7 +6433,7 @@ var MenuPlacer = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  (0,_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_6__.default)(MenuPlacer, [{
+  (0,_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_6__["default"])(MenuPlacer, [{
     key: "render",
     value: function render() {
       var children = this.props.children;
@@ -6456,7 +6455,7 @@ var Menu = function Menu(props) {
       getStyles = props.getStyles,
       innerRef = props.innerRef,
       innerProps = props.innerProps;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: getStyles('menu', props),
     className: cx({
       menu: true
@@ -6488,7 +6487,7 @@ var MenuList = function MenuList(props) {
       innerProps = props.innerProps,
       innerRef = props.innerRef,
       isMulti = props.isMulti;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: getStyles('menuList', props),
     className: cx({
       'menu-list': true,
@@ -6519,7 +6518,7 @@ var NoOptionsMessage = function NoOptionsMessage(props) {
       cx = props.cx,
       getStyles = props.getStyles,
       innerProps = props.innerProps;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: getStyles('noOptionsMessage', props),
     className: cx({
       'menu-notice': true,
@@ -6536,7 +6535,7 @@ var LoadingMessage = function LoadingMessage(props) {
       cx = props.cx,
       getStyles = props.getStyles,
       innerProps = props.innerProps;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: getStyles('loadingMessage', props),
     className: cx({
       'menu-notice': true,
@@ -6563,14 +6562,14 @@ var menuPortalCSS = function menuPortalCSS(_ref6) {
   };
 };
 var MenuPortal = /*#__PURE__*/function (_Component2) {
-  (0,_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_7__.default)(MenuPortal, _Component2);
+  (0,_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_7__["default"])(MenuPortal, _Component2);
 
   var _super2 = _createSuper(MenuPortal);
 
   function MenuPortal() {
     var _this2;
 
-    (0,_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_5__.default)(this, MenuPortal);
+    (0,_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_5__["default"])(this, MenuPortal);
 
     for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
       args[_key2] = arguments[_key2];
@@ -6595,7 +6594,7 @@ var MenuPortal = /*#__PURE__*/function (_Component2) {
     return _this2;
   }
 
-  (0,_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_6__.default)(MenuPortal, [{
+  (0,_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_6__["default"])(MenuPortal, [{
     key: "render",
     value: function render() {
       var _this$props2 = this.props,
@@ -6624,7 +6623,7 @@ var MenuPortal = /*#__PURE__*/function (_Component2) {
         rect: rect
       }; // same wrapper element whether fixed or portalled
 
-      var menuWrapper = (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+      var menuWrapper = (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
         css: getStyles('menuPortal', state),
         className: cx({
           'menu-portal': true
@@ -6660,7 +6659,7 @@ var SelectContainer = function SelectContainer(props) {
       innerProps = props.innerProps,
       isDisabled = props.isDisabled,
       isRtl = props.isRtl;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: getStyles('container', props),
     className: cx({
       '--is-disabled': isDisabled,
@@ -6692,7 +6691,7 @@ var ValueContainer = function ValueContainer(props) {
       isMulti = props.isMulti,
       getStyles = props.getStyles,
       hasValue = props.hasValue;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: getStyles('valueContainer', props),
     className: cx({
       'value-container': true,
@@ -6718,7 +6717,7 @@ var IndicatorsContainer = function IndicatorsContainer(props) {
       cx = props.cx,
       innerProps = props.innerProps,
       getStyles = props.getStyles;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: getStyles('indicatorsContainer', props),
     className: cx({
       indicators: true
@@ -6742,9 +6741,9 @@ var _ref2 =  false ? 0 : {
 // ==============================
 var Svg = function Svg(_ref) {
   var size = _ref.size,
-      props = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__.default)(_ref, ["size"]);
+      props = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__["default"])(_ref, ["size"]);
 
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("svg", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("svg", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     height: size,
     width: size,
     viewBox: "0 0 20 20",
@@ -6755,14 +6754,14 @@ var Svg = function Svg(_ref) {
 };
 
 var CrossIcon = function CrossIcon(props) {
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)(Svg, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)(Svg, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     size: 20
   }, props), (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("path", {
     d: "M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
   }));
 };
 var DownChevron = function DownChevron(props) {
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)(Svg, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)(Svg, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     size: 20
   }, props), (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("path", {
     d: "M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
@@ -6795,7 +6794,7 @@ var DropdownIndicator = function DropdownIndicator(props) {
       cx = props.cx,
       getStyles = props.getStyles,
       innerProps = props.innerProps;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: getStyles('dropdownIndicator', props),
     className: cx({
       indicator: true,
@@ -6810,7 +6809,7 @@ var ClearIndicator = function ClearIndicator(props) {
       cx = props.cx,
       getStyles = props.getStyles,
       innerProps = props.innerProps;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: getStyles('clearIndicator', props),
     className: cx({
       indicator: true,
@@ -6840,7 +6839,7 @@ var IndicatorSeparator = function IndicatorSeparator(props) {
       cx = props.cx,
       getStyles = props.getStyles,
       innerProps = props.innerProps;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, innerProps, {
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, innerProps, {
     css: getStyles('indicatorSeparator', props),
     className: cx({
       'indicator-separator': true
@@ -6850,7 +6849,7 @@ var IndicatorSeparator = function IndicatorSeparator(props) {
 // Loading
 // ==============================
 
-var loadingDotAnimations = (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.keyframes)(_templateObject || (_templateObject = (0,_babel_runtime_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__.default)(["\n  0%, 80%, 100% { opacity: 0; }\n  40% { opacity: 1; }\n"])));
+var loadingDotAnimations = (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.keyframes)(_templateObject || (_templateObject = (0,_babel_runtime_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["\n  0%, 80%, 100% { opacity: 0; }\n  40% { opacity: 1; }\n"])));
 var loadingIndicatorCSS = function loadingIndicatorCSS(_ref5) {
   var isFocused = _ref5.isFocused,
       size = _ref5.size,
@@ -6895,7 +6894,7 @@ var LoadingIndicator = function LoadingIndicator(props) {
       getStyles = props.getStyles,
       innerProps = props.innerProps,
       isRtl = props.isRtl;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: getStyles('loadingIndicator', props),
     className: cx({
       indicator: true,
@@ -6956,7 +6955,7 @@ var Control = function Control(props) {
       innerRef = props.innerRef,
       innerProps = props.innerProps,
       menuIsOpen = props.menuIsOpen;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     ref: innerRef,
     css: getStyles('control', props),
     className: cx({
@@ -6987,12 +6986,12 @@ var Group = function Group(props) {
       label = props.label,
       theme = props.theme,
       selectProps = props.selectProps;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: getStyles('group', props),
     className: cx({
       group: true
     }, className)
-  }, innerProps), (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)(Heading, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, headingProps, {
+  }, innerProps), (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)(Heading, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, headingProps, {
     selectProps: selectProps,
     theme: theme,
     getStyles: getStyles,
@@ -7022,9 +7021,9 @@ var GroupHeading = function GroupHeading(props) {
 
   var _cleanCommonProps = cleanCommonProps(props);
       _cleanCommonProps.data;
-      var innerProps = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__.default)(_cleanCommonProps, ["data"]);
+      var innerProps = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__["default"])(_cleanCommonProps, ["data"]);
 
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: getStyles('groupHeading', props),
     className: cx({
       'group-heading': true
@@ -7068,11 +7067,11 @@ var Input = function Input(props) {
       innerRef = _cleanCommonProps.innerRef,
       isDisabled = _cleanCommonProps.isDisabled,
       isHidden = _cleanCommonProps.isHidden,
-      innerProps = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__.default)(_cleanCommonProps, ["innerRef", "isDisabled", "isHidden"]);
+      innerProps = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__["default"])(_cleanCommonProps, ["innerRef", "isDisabled", "isHidden"]);
 
   return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
     css: getStyles('input', props)
-  }, (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_input_autosize__WEBPACK_IMPORTED_MODULE_4__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  }, (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_input_autosize__WEBPACK_IMPORTED_MODULE_4__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: cx({
       input: true
     }, className),
@@ -7232,7 +7231,7 @@ var Option = function Option(props) {
       isSelected = props.isSelected,
       innerRef = props.innerRef,
       innerProps = props.innerProps;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: getStyles('option', props),
     className: cx({
       option: true,
@@ -7265,7 +7264,7 @@ var Placeholder = function Placeholder(props) {
       cx = props.cx,
       getStyles = props.getStyles,
       innerProps = props.innerProps;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: getStyles('placeholder', props),
     className: cx({
       placeholder: true
@@ -7300,7 +7299,7 @@ var SingleValue = function SingleValue(props) {
       getStyles = props.getStyles,
       isDisabled = props.isDisabled,
       innerProps = props.innerProps;
-  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return (0,_emotion_react__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     css: getStyles('singleValue', props),
     className: cx({
       'single-value': true,
@@ -7400,29 +7399,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var NonceProvider = /*#__PURE__*/function (_Component) {
-  (0,_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_3__.default)(NonceProvider, _Component);
+  (0,_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_3__["default"])(NonceProvider, _Component);
 
   var _super = (0,_index_4bd03571_esm_js__WEBPACK_IMPORTED_MODULE_4__._)(NonceProvider);
 
   function NonceProvider(props) {
     var _this;
 
-    (0,_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__.default)(this, NonceProvider);
+    (0,_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, NonceProvider);
 
     _this = _super.call(this, props);
 
     _this.createEmotionCache = function (nonce, key) {
-      return (0,_emotion_cache__WEBPACK_IMPORTED_MODULE_6__.default)({
+      return (0,_emotion_cache__WEBPACK_IMPORTED_MODULE_6__["default"])({
         nonce: nonce,
         key: key
       });
     };
 
-    _this.createEmotionCache = (0,memoize_one__WEBPACK_IMPORTED_MODULE_15__.default)(_this.createEmotionCache);
+    _this.createEmotionCache = (0,memoize_one__WEBPACK_IMPORTED_MODULE_15__["default"])(_this.createEmotionCache);
     return _this;
   }
 
-  (0,_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__.default)(NonceProvider, [{
+  (0,_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(NonceProvider, [{
     key: "render",
     value: function render() {
       var emotionCache = this.createEmotionCache(this.props.nonce, this.props.cacheKey);
@@ -7478,14 +7477,14 @@ var manageState = function manageState(SelectComponent) {
   var _class, _temp;
 
   return _temp = _class = /*#__PURE__*/function (_Component) {
-    (0,_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_4__.default)(StateManager, _Component);
+    (0,_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(StateManager, _Component);
 
     var _super = (0,_index_4bd03571_esm_js__WEBPACK_IMPORTED_MODULE_6__._)(StateManager);
 
     function StateManager() {
       var _this;
 
-      (0,_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__.default)(this, StateManager);
+      (0,_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__["default"])(this, StateManager);
 
       for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
         args[_key] = arguments[_key];
@@ -7536,7 +7535,7 @@ var manageState = function manageState(SelectComponent) {
       return _this;
     }
 
-    (0,_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__.default)(StateManager, [{
+    (0,_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__["default"])(StateManager, [{
       key: "focus",
       value: function focus() {
         this.select.focus();
@@ -7575,9 +7574,9 @@ var manageState = function manageState(SelectComponent) {
             _this$props2.defaultInputValue;
             _this$props2.defaultMenuIsOpen;
             _this$props2.defaultValue;
-            var props = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__.default)(_this$props2, ["defaultInputValue", "defaultMenuIsOpen", "defaultValue"]);
+            var props = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__["default"])(_this$props2, ["defaultInputValue", "defaultMenuIsOpen", "defaultValue"]);
 
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(SelectComponent, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5__.createElement(SelectComponent, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
           ref: function ref(_ref) {
             _this2.select = _ref;
           },
@@ -7636,7 +7635,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrayLikeToArray.js */ "./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js");
 
 function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return (0,_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__.default)(arr);
+  if (Array.isArray(arr)) return (0,_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__["default"])(arr);
 }
 
 /***/ }),
@@ -7711,7 +7710,7 @@ function _inherits(subClass, superClass) {
       configurable: true
     }
   });
-  if (superClass) (0,_setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__.default)(subClass, superClass);
+  if (superClass) (0,_setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__["default"])(subClass, superClass);
 }
 
 /***/ }),
@@ -7762,7 +7761,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
-  var target = (0,_objectWithoutPropertiesLoose_js__WEBPACK_IMPORTED_MODULE_0__.default)(source, excluded);
+  var target = (0,_objectWithoutPropertiesLoose_js__WEBPACK_IMPORTED_MODULE_0__["default"])(source, excluded);
   var key, i;
 
   if (Object.getOwnPropertySymbols) {
@@ -7824,7 +7823,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function _toConsumableArray(arr) {
-  return (0,_arrayWithoutHoles_js__WEBPACK_IMPORTED_MODULE_0__.default)(arr) || (0,_iterableToArray_js__WEBPACK_IMPORTED_MODULE_1__.default)(arr) || (0,_unsupportedIterableToArray_js__WEBPACK_IMPORTED_MODULE_2__.default)(arr) || (0,_nonIterableSpread_js__WEBPACK_IMPORTED_MODULE_3__.default)();
+  return (0,_arrayWithoutHoles_js__WEBPACK_IMPORTED_MODULE_0__["default"])(arr) || (0,_iterableToArray_js__WEBPACK_IMPORTED_MODULE_1__["default"])(arr) || (0,_unsupportedIterableToArray_js__WEBPACK_IMPORTED_MODULE_2__["default"])(arr) || (0,_nonIterableSpread_js__WEBPACK_IMPORTED_MODULE_3__["default"])();
 }
 
 /***/ }),
@@ -7871,11 +7870,11 @@ __webpack_require__.r(__webpack_exports__);
 
 function _unsupportedIterableToArray(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return (0,_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__.default)(o, minLen);
+  if (typeof o === "string") return (0,_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__["default"])(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor) n = o.constructor.name;
   if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return (0,_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__.default)(o, minLen);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return (0,_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__["default"])(o, minLen);
 }
 
 /***/ }),

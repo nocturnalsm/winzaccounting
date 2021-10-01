@@ -13,6 +13,7 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
     const [data, setData] = useState(formData)
     const [validated, setValidated] = useState(false)
     const [submitError, setSubmitError] = useState({})
+    const [submitted, setSubmitted] = useState(0)
 
     const dispatch = useDispatch()
     const loading = useSelector(state => state.appLoading)
@@ -28,8 +29,10 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
     }
 
     useEffect(() => {
-        console.log(formData)
-    }, [formData])
+        if (!id){
+            setData(formData)
+        }
+    }, [submitted])
 
     const inputRefs = useRef({});
 
@@ -46,7 +49,17 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
         event.stopPropagation()
         setValidated(true)
 
-        let request = props.formatData ? props.formatData(data) : data
+        let newData = {}
+        console.log('That', formData)
+        Object.keys(formData).filter(function(x){
+            if (data[x] !== undefined) {
+                newData[x] = data[x]
+            }
+            else {
+                newData[x] = formData[x]
+            }
+        });
+        let request = props.formatData ? props.formatData(newData) : newData
         setData(request)
 
         if (form.checkValidity() === true) {
@@ -87,14 +100,10 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
                     if (props.onSubmitError){
                         props.onSubmitError(data, response)
                     }
-
                 }
-                else {
+                else {                    
                     MyAlert.success({text: 'Data saved successfully'})
-                    setSubmitError({})
-                    if (!id){
-                        setData(formData)
-                    }
+                    setSubmitError({})                    
                     if (props.onSubmitSuccess){
                         props.onSubmitSuccess(request, response)
                     }
@@ -102,6 +111,7 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
                     if (inputRefs.current[firstKey].current){
                         inputRefs.current[firstKey].current.focus()
                     }
+                    setSubmitted(submitted+1)
                 }
                 setValidated(false);
             });
@@ -120,19 +130,11 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
             axios.get(props.apiUrl + "/" + id)
             .then(response => {
                 dispatch(setAppLoading(false))
-                let newData = {}
-                Object.keys(formData).filter(function(x){
-                    if (response.data[x] !== undefined) {
-                        newData[x] = response.data[x]
-                    }
-                    else {
-                        newData[x] = formData[x]
-                    }
-                });
+                let newData = {...formData, ...response.data}                               
                 if (formData.id){
                     newData.id = id
                 }
-                setData(newData)
+                setData(newData)                
                 if (props.onOpen){
                     props.onOpen(response.data)
                 }
@@ -145,7 +147,7 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
                 }
             })
         }
-        else {
+        else {            
             if (props.onOpen){
                 props.onOpen()
             }

@@ -9,7 +9,7 @@ const AccountEdit = (props) => {
 
     const [accountType, setAccountType] = useState('')
     const [parent, setParent] = useState('')
-    const [initialData, setInitialData] = useState({account_type: '', parent: ''})
+    const [formData, setFormData] = useState({id: '', account_type: '', company_id: activeCompany.id, name: '', number: '', parent: ''})
     const activeCompany = useSelector(state => state.activeCompany)
     const [urlParams, setUrlParams] = useState()
     const [prefix, setPrefix] = useState()
@@ -48,21 +48,12 @@ const AccountEdit = (props) => {
             }}
             onSubmitSuccess={(data, response) => {
                 let {account_type, parent} = data;
-                if (!data.id){
-                    setInitialData({
-                        account_type: account_type,
-                        parent: parent
-                    })
+                if (data.id == ''){
+                    setFormData({account_type: account_type, parent: parent})
                 }
                 setParentKey(parentKey+1)
             }}
-            formatData={data => {
-                let {account_type, parent } = data
-                return {...data,
-                        parent: parent ?? initialData.parent,
-                        account_type: account_type ?? initialData.account_type,
-                        company_id: activeCompany.id}
-            }}            
+            formData={formData}            
         >
         {props => (
             <>
@@ -79,7 +70,7 @@ const AccountEdit = (props) => {
                         optionValue={e => e.id}
                         optionLabel={e => e.name}
                         disabled={props.loading}
-                        defaultValue={accountType}
+                        value={accountType}
                         ref={props.inputRefs('account_type')}
                         placeholder="Choose Account Type"
                         onChange={value => {
@@ -121,7 +112,7 @@ const AccountEdit = (props) => {
                         disabled={props.loading}
                         ref={props.inputRefs('parent')}
                         url="/api/setup/accounts/parents"
-                        defaultValue={parent}
+                        value={parent}
                         urlParams={urlParams}
                         defaultOptions={defaultOptions}
                         onChange={value => {

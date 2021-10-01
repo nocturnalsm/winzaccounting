@@ -1,17 +1,17 @@
 import MasterEdit from '../../../containers/MasterEdit'
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useSelector } from "react-redux";
 import { CInput, CCol, CFormGroup, CLabel} from '@coreui/react'
 import SearchSelect from '../../../components/SearchSelect'
 
 const ProductCategoryEdit = (props) => {
 
-    const [initialData, setInitialData] = useState({account_type: '', parent: ''})
     const activeCompany = useSelector(state => state.activeCompany)
     const [parentCategory, setParentCategory] = useState(null)
     const [urlParams, setUrlParams] = useState()
     const [defaultOptions, setDefaultOptions] = useState(false)
     const [parentKey, setParentKey] = useState(0)
+    const [formData, setFormData] = useState({id: '', company_id: activeCompany.id, name: '', code: '', parent: ''})
 
     return (
         <MasterEdit title="Product Category"
@@ -28,21 +28,14 @@ const ProductCategoryEdit = (props) => {
                 }
                 setDefaultOptions(true)
             }}
-            onSubmitSuccess={(data, response) => {
-                let {parent} = data;
-                if (!data.id){
-                    setInitialData({
-                        parent: parent
-                    })
+            onSubmitSuccess={(request, response) => {
+                let {parent} = request;
+                if (request.id == ''){
+                    setFormData({...formData, parent: parent})
                 }
                 setParentKey(parentKey+1)
             }}
-            formatData={data => {
-                let {parent } = data
-                return {...data,
-                        parent: parent ?? initialData.parent,
-                        company_id: activeCompany.id}
-            }}
+            formData={formData}
         >
         {props => (
             <>
@@ -59,7 +52,7 @@ const ProductCategoryEdit = (props) => {
                     type="text"
                     disabled={props.loading}
                     onChange={e => props.handleChange({name: e.target.value})}
-                    value={props.data.name ?? ''}
+                    value={props.data.name}
                     invalid={props.isInvalid('name')}
                     required
                     />
@@ -78,7 +71,7 @@ const ProductCategoryEdit = (props) => {
                         innerRef={props.inputRefs('code')}
                         disabled={props.loading}
                         onChange={e =>props.handleChange({code: e.target.value})}
-                        value={props.data.code ?? ''}
+                        value={props.data.code}
                         invalid={props.isInvalid('code')}
                     />
                     {props.feedback('code')}
@@ -98,7 +91,7 @@ const ProductCategoryEdit = (props) => {
                         optionLabel={e => e.name}
                         optionValue={e => e.id}
                         disabled={props.loading}
-                        defaultValue={parentCategory}
+                        value={parentCategory}
                         ref={props.inputRefs('parent')}
                         onChange={value => {
                             setParentCategory(value)

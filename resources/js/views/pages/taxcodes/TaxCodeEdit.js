@@ -12,9 +12,7 @@ const TaxCodeEdit = (props) => {
     return (
         <MasterEdit title="Tax Code"
             apiUrl="/api/setup/taxcodes"
-            formatData={data => {
-                return {...data, company_id: activeCompany.id}
-            }}                                
+            formData={{ id: '', name: '', code: '', percentage: '', account_id: '', company_id: activeCompany.id}}                                
             onOpen={data => {
                 if (data && data.account_id){
                     setDefaultAccount({
@@ -24,6 +22,11 @@ const TaxCodeEdit = (props) => {
                     })
                 }                
             }}  
+            obSubmitSuccess={request => {
+                if (request.id == ""){
+                    setDefaultAccount(null)
+                }
+            }}
             >
             {props => (
                 <>
@@ -40,7 +43,7 @@ const TaxCodeEdit = (props) => {
                             innerRef={props.inputRefs('name')}
                             disabled={props.loading}
                             onChange={e => props.handleChange({name: e.target.value})}
-                            value={props.data.name ?? ''}
+                            value={props.data.name}
                             invalid={props.isInvalid('name')}
                             required
                             />
@@ -57,7 +60,7 @@ const TaxCodeEdit = (props) => {
                             placeholder="Enter tax code"
                             autoComplete="off"
                             disabled={props.loading}
-                            value={props.data.code ?? ''}
+                            value={props.data.code}
                             innerRef={props.inputRefs('code')}
                             onChange={e => props.handleChange({code: e.target.value})}
                             invalid={props.isInvalid('code')}
@@ -76,7 +79,7 @@ const TaxCodeEdit = (props) => {
                             autoComplete="off"
                             disabled={props.loading}
                             innerRef={props.inputRefs('percentage')}
-                            value={props.data.percentage ?? ''}
+                            value={props.data.percentage}
                             onChange={e => props.handleChange({percentage: e.target.value})}
                             invalid={props.isInvalid('percentage')}
                             />
@@ -93,7 +96,7 @@ const TaxCodeEdit = (props) => {
                               autoComplete="off"
                               disabled={props.loading}             
                               placeholder="Choose account"
-                              defaultValue={defaultAccount}
+                              value={defaultAccount}
                               url="/api/setup/taxcodes/search-account"
                               urlParams={{company_id: activeCompany.id}}
                               ref={props.inputRefs('account_id')}

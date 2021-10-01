@@ -155,11 +155,10 @@ const DTable = React.forwardRef(({
         }
   	};
 
-    const handleSort = (newSort) => {        
+    const handleSort = (newSort) => {             
         let sort = newSort.column;
         let order = newSort.asc == true ? 'asc' : 'desc'
-        if ((params.sort && sort != params.sort) 
-          && (params.order && order != params.order)){
+        if (sort != params.sort || order != params.order){
             changeParams({sort: sort, order: order});
         }
   	}

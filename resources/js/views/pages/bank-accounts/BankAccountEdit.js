@@ -6,7 +6,6 @@ import SearchSelect from '../../../components/SearchSelect'
 
 const BankAccountEdit = (props) => {
 
-    const [initialData, setInitialData] = useState({bank_id: '', account_id: ''})
     const [bank, setBank] = useState(null)
     const [account, setAccount] = useState(null)
     const activeCompany = useSelector(state => state.activeCompany)
@@ -27,6 +26,7 @@ const BankAccountEdit = (props) => {
             onSubmitSuccess={(request, response) => {
                 let {account_id, bank_id} = request;
                 if (request.id == ""){
+                    console.log('set form')
                     setFormData({...formData, account_id: account_id, bank_id: bank_id})
                 }
             }}
@@ -66,7 +66,7 @@ const BankAccountEdit = (props) => {
                               type="text"
                               disabled={props.loading}
                               onChange={e => props.handleChange({number: e.target.value})}
-                              value={props.data.number ?? ''}
+                              value={props.data.number}
                               invalid={props.isInvalid('number')}
                               innerRef={props.inputRefs('number')}
                               required
@@ -85,7 +85,7 @@ const BankAccountEdit = (props) => {
                             type="text"
                             disabled={props.loading}
                             onChange={e => props.handleChange({holder: e.target.value})}
-                            value={props.data.holder ?? ''}
+                            value={props.data.holder}
                             invalid={props.isInvalid('holder')}
                             innerRef={props.inputRefs('name')}
                             required

@@ -85,6 +85,11 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
       submitError = _useState6[0],
       setSubmitError = _useState6[1];
 
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState8 = _slicedToArray(_useState7, 2),
+      submitted = _useState8[0],
+      setSubmitted = _useState8[1];
+
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var loading = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.appLoading;
@@ -104,8 +109,10 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    console.log(formData);
-  }, [formData]);
+    if (!id) {
+      setData(formData);
+    }
+  }, [submitted]);
   var inputRefs = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)({});
 
   var refs = function refs(index) {
@@ -121,7 +128,16 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
     event.preventDefault();
     event.stopPropagation();
     setValidated(true);
-    var request = props.formatData ? props.formatData(data) : data;
+    var newData = {};
+    console.log('That', formData);
+    Object.keys(formData).filter(function (x) {
+      if (data[x] !== undefined) {
+        newData[x] = data[x];
+      } else {
+        newData[x] = formData[x];
+      }
+    });
+    var request = props.formatData ? props.formatData(newData) : newData;
     setData(request);
 
     if (form.checkValidity() === true) {
@@ -183,7 +199,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
             var _response$error$messa;
 
             var message = (_response$error$messa = response.error.message) !== null && _response$error$messa !== void 0 ? _response$error$messa : 'Something went wrong';
-            _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+            _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
               text: message
             });
           }
@@ -192,14 +208,10 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
             props.onSubmitError(data, response);
           }
         } else {
-          _alert__WEBPACK_IMPORTED_MODULE_5__.default.success({
+          _alert__WEBPACK_IMPORTED_MODULE_5__["default"].success({
             text: 'Data saved successfully'
           });
           setSubmitError({});
-
-          if (!id) {
-            setData(formData);
-          }
 
           if (props.onSubmitSuccess) {
             props.onSubmitSuccess(request, response);
@@ -210,6 +222,8 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
           if (inputRefs.current[firstKey].current) {
             inputRefs.current[firstKey].current.focus();
           }
+
+          setSubmitted(submitted + 1);
         }
 
         setValidated(false);
@@ -228,14 +242,8 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
       dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(true));
       axios__WEBPACK_IMPORTED_MODULE_7___default().get(props.apiUrl + "/" + id).then(function (response) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
-        var newData = {};
-        Object.keys(formData).filter(function (x) {
-          if (response.data[x] !== undefined) {
-            newData[x] = response.data[x];
-          } else {
-            newData[x] = formData[x];
-          }
-        });
+
+        var newData = _objectSpread(_objectSpread({}, formData), response.data);
 
         if (formData.id) {
           newData.id = id;
@@ -248,7 +256,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
         }
       })["catch"](function (error) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
-        _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+        _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
           text: error.message
         });
 
@@ -302,7 +310,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
           onClick: function onClick(e) {
             return history.goBack();
           },
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
             size: "2xl",
             name: "cilArrowCircleLeft"
           })
@@ -325,7 +333,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
         },
         size: "md",
         color: "primary",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
           name: "cil-scrubber"
         }), " Submit"]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CButton, {
@@ -334,7 +342,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
         onClick: resetForm,
         size: "md",
         color: "danger",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
           name: "cil-ban"
         }), " Reset"]
       })]
@@ -356,9 +364,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../containers/MasterEdit */ "./resources/js/containers/MasterEdit.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -367,10 +377,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var BankEdit = function BankEdit(props) {
-  var activeCompany = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+  var activeCompany = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.activeCompany;
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__.default, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__["default"], {
     title: "Bank",
     apiUrl: "/api/setup/banks",
     formData: {
@@ -380,19 +390,19 @@ var BankEdit = function BankEdit(props) {
       branch: ''
     },
     children: function children(props) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CFormGroup, {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
           row: true,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCol, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "4",
             lg: "2",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CLabel, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
               children: "Bank Name"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCol, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
             lg: "3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CInput, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
               placeholder: "Enter bank name",
               autoFocus: true,
               autoComplete: "off",
@@ -409,18 +419,18 @@ var BankEdit = function BankEdit(props) {
               required: true
             }), props.feedback('name', 'Please enter a name')]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CFormGroup, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
           row: true,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCol, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "4",
             lg: "2",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CLabel, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
               children: "Branch Name"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCol, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
             lg: "3",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CInput, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
               type: "text",
               placeholder: "Enter branch name",
               autoComplete: "off",

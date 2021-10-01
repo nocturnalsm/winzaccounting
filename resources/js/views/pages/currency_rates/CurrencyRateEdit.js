@@ -9,22 +9,18 @@ const CurrencyRateEdit = (props) => {
     const [initialData, setInitialData] = useState({currency_id: ''})
     const activeCompany = useSelector(state => state.activeCompany)
     const [currency, setCurrency] = useState(null)
+    const [formData, setFormData] = useState({id: '', company_id: activeCompany.id, currency_id: '', start: '', end: '', buy: '', sell: ''})
     const ref = useRef(null)
 
     return (
         <MasterEdit title="Currency Rate"
+            formData={formData}
             ref={ref}
-            apiUrl="/api/setup/currency-rates"
-            formatData={data => {
-                let { currency_id } = data
-                return {...data,
-                        currency_id: currency_id ?? initialData.currency_id,
-                        company_id: activeCompany.id}
-            }}
+            apiUrl="/api/setup/currency-rates"            
             onSubmitSuccess={(request, response) => {
                 let {currency_id} = request;
-                if (!request.id){
-                    setInitialData({currency_id: currency_id})
+                if (request.id == ''){
+                    setFormData({...formData, currency_id: currency_id})
                 }
             }}
             onOpen={data => {
@@ -47,7 +43,7 @@ const CurrencyRateEdit = (props) => {
                                 urlParams={{company_id: activeCompany.id}}
                                 disabled={props.loading}
                                 required
-                                defaultValue={currency}
+                                value={currency}
                                 optionLabel={e => e.name}
                                 optionValue={e => e.id}
                                 url="/api/setup/currencies/search"
@@ -69,7 +65,7 @@ const CurrencyRateEdit = (props) => {
                               type="date"
                               disabled={props.loading}
                               onChange={e => props.handleChange({start: e.target.value})}
-                              value={props.data.start ?? ''}
+                              value={props.data.start}
                               invalid={props.isInvalid('start')}
                             />
                             {props.feedback('start', 'Choose start date')}
@@ -87,7 +83,7 @@ const CurrencyRateEdit = (props) => {
                               type="date"
                               disabled={props.loading}
                               onChange={e => props.handleChange({end: e.target.value})}
-                              value={props.data.end ?? ''}
+                              value={props.data.end}
                               invalid={props.isInvalid('end')}
                             />
                             {props.feedback('end', 'Please choose end date')}
@@ -104,7 +100,7 @@ const CurrencyRateEdit = (props) => {
                             type="number"
                             disabled={props.loading}
                             onChange={e => props.handleChange({buy: e.target.value})}
-                            value={props.data.buy ?? ''}
+                            value={props.data.buy}
                             invalid={props.isInvalid('buy')}
                             innerRef={props.inputRefs("buy")}
                             />
@@ -122,7 +118,7 @@ const CurrencyRateEdit = (props) => {
                             type="number"
                             disabled={props.loading}
                             onChange={e => props.handleChange({sell: e.target.value})}
-                            value={props.data.sell ?? ''}
+                            value={props.data.sell}
                             invalid={props.isInvalid('sell')}
                             innerRef={props.inputRefs("sell")}
                             />

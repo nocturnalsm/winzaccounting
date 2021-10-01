@@ -85,6 +85,11 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
       submitError = _useState6[0],
       setSubmitError = _useState6[1];
 
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState8 = _slicedToArray(_useState7, 2),
+      submitted = _useState8[0],
+      setSubmitted = _useState8[1];
+
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var loading = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.appLoading;
@@ -104,8 +109,10 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    console.log(formData);
-  }, [formData]);
+    if (!id) {
+      setData(formData);
+    }
+  }, [submitted]);
   var inputRefs = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)({});
 
   var refs = function refs(index) {
@@ -121,7 +128,16 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
     event.preventDefault();
     event.stopPropagation();
     setValidated(true);
-    var request = props.formatData ? props.formatData(data) : data;
+    var newData = {};
+    console.log('That', formData);
+    Object.keys(formData).filter(function (x) {
+      if (data[x] !== undefined) {
+        newData[x] = data[x];
+      } else {
+        newData[x] = formData[x];
+      }
+    });
+    var request = props.formatData ? props.formatData(newData) : newData;
     setData(request);
 
     if (form.checkValidity() === true) {
@@ -183,7 +199,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
             var _response$error$messa;
 
             var message = (_response$error$messa = response.error.message) !== null && _response$error$messa !== void 0 ? _response$error$messa : 'Something went wrong';
-            _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+            _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
               text: message
             });
           }
@@ -192,14 +208,10 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
             props.onSubmitError(data, response);
           }
         } else {
-          _alert__WEBPACK_IMPORTED_MODULE_5__.default.success({
+          _alert__WEBPACK_IMPORTED_MODULE_5__["default"].success({
             text: 'Data saved successfully'
           });
           setSubmitError({});
-
-          if (!id) {
-            setData(formData);
-          }
 
           if (props.onSubmitSuccess) {
             props.onSubmitSuccess(request, response);
@@ -210,6 +222,8 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
           if (inputRefs.current[firstKey].current) {
             inputRefs.current[firstKey].current.focus();
           }
+
+          setSubmitted(submitted + 1);
         }
 
         setValidated(false);
@@ -228,14 +242,8 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
       dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(true));
       axios__WEBPACK_IMPORTED_MODULE_7___default().get(props.apiUrl + "/" + id).then(function (response) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
-        var newData = {};
-        Object.keys(formData).filter(function (x) {
-          if (response.data[x] !== undefined) {
-            newData[x] = response.data[x];
-          } else {
-            newData[x] = formData[x];
-          }
-        });
+
+        var newData = _objectSpread(_objectSpread({}, formData), response.data);
 
         if (formData.id) {
           newData.id = id;
@@ -248,7 +256,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
         }
       })["catch"](function (error) {
         dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.setAppLoading)(false));
-        _alert__WEBPACK_IMPORTED_MODULE_5__.default.error({
+        _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
           text: error.message
         });
 
@@ -302,7 +310,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
           onClick: function onClick(e) {
             return history.goBack();
           },
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
             size: "2xl",
             name: "cilArrowCircleLeft"
           })
@@ -325,7 +333,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
         },
         size: "md",
         color: "primary",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
           name: "cil-scrubber"
         }), " Submit"]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CButton, {
@@ -334,7 +342,7 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
         onClick: resetForm,
         size: "md",
         color: "danger",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
           name: "cil-ban"
         }), " Reset"]
       })]
@@ -370,7 +378,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
   var activeCompany = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.activeCompany;
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__.default, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_containers_MasterEdit__WEBPACK_IMPORTED_MODULE_0__["default"], {
     title: "Currency",
     apiUrl: "/api/setup/currencies",
     formData: {
@@ -381,8 +389,6 @@ var CurrencyEdit = function CurrencyEdit(props) {
       company_id: activeCompany.id
     },
     children: function children(props) {
-      var _props$data$name, _props$data$code, _props$data$sign;
-
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CFormGroup, {
           row: true,
@@ -407,7 +413,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
                   name: e.target.value
                 });
               },
-              value: (_props$data$name = props.data.name) !== null && _props$data$name !== void 0 ? _props$data$name : '',
+              value: props.data.name,
               invalid: props.isInvalid('name'),
               required: true
             }), props.feedback('name', 'Please enter a name')]
@@ -429,7 +435,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
               autoComplete: "off",
               innerRef: props.inputRefs('code'),
               disabled: props.loading,
-              value: (_props$data$code = props.data.code) !== null && _props$data$code !== void 0 ? _props$data$code : '',
+              value: props.data.code,
               onChange: function onChange(e) {
                 return props.handleChange({
                   code: e.target.value
@@ -455,7 +461,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
               autoComplete: "off",
               disabled: props.loading,
               innerRef: props.inputRefs('sign'),
-              value: (_props$data$sign = props.data.sign) !== null && _props$data$sign !== void 0 ? _props$data$sign : '',
+              value: props.data.sign,
               onChange: function onChange(e) {
                 return props.handleChange({
                   sign: e.target.value
