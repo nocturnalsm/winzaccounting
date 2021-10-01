@@ -10,7 +10,7 @@ const SearchSelect = React.forwardRef(({
       defaultOptions,
       optionLabel,
       optionValue,
-      defaultValue,
+      value,
       url,
       filter,
       onChange,
@@ -18,15 +18,15 @@ const SearchSelect = React.forwardRef(({
       innerRef, ...restProps}, ref) => {
 
     const selectRef = useRef(null)
-    const [selectedValue, setSelectedValue] = useState({})    
+    const [selectedValue, setSelectedValue] = useState({})
     const [options, setOptions] = useState([])
-    
-    useEffect(() => {
-       setSelectedValue(defaultValue)
-    }, [defaultValue])
 
-    useEffect(() => {               
-        if (typeof defaultOptions == 'undefined' || defaultOptions === true){                 
+    useEffect(() => {
+       setSelectedValue(value)
+    }, [value])
+
+    useEffect(() => {
+        if (typeof defaultOptions == 'undefined' || defaultOptions === true){
             loadOptions("")
         }
     }, [defaultOptions])
@@ -45,7 +45,7 @@ const SearchSelect = React.forwardRef(({
                 return;
         }
     }
-    
+
     const customStyles = {
         control: (provided, state) => {
             if (invalid){
@@ -79,18 +79,18 @@ const SearchSelect = React.forwardRef(({
     }));
 
     // load options using API call
-    const loadOptions = (inputValue, callback) => {        
+    const loadOptions = (inputValue, callback) => {
         axios.get(url, {
             params: {q: inputValue, ...urlParams}
         })
-        .then((response) => {                           
-            let data = response.data.data;        
-            if (callback){                         
+        .then((response) => {
+            let data = response.data.data;
+            if (callback){
                 setTimeout(() => {
                     callback(data)
-                }, 1000)         
+                }, 1000)
             }
-            else {                                
+            else {
                 setOptions(data)
             }
         })
@@ -111,7 +111,7 @@ const SearchSelect = React.forwardRef(({
                 value={selectedValue}
                 getOptionLabel={optionLabel}
                 getOptionValue={optionValue}
-                loadOptions={loadOptions}               
+                loadOptions={loadOptions}
                 onChange={handleChange}
                 styles={customStyles}
                 defaultOptions={defaultOptions ?? true}
@@ -127,11 +127,11 @@ const SearchSelect = React.forwardRef(({
                 classNamePrefix="react-select"
                 ref={selectRef}
                 value={selectedValue}
-                options={options}                
+                options={options}
                 getOptionLabel={optionLabel}
-                getOptionValue={optionValue}                
+                getOptionValue={optionValue}
                 onChange={handleChange}
-                styles={customStyles}                             
+                styles={customStyles}
             />
         );
     }

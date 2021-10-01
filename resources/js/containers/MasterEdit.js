@@ -27,6 +27,10 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
         }
     }
 
+    useEffect(() => {
+        console.log(formData)
+    }, [formData])
+
     const inputRefs = useRef({});
 
     const refs = (index) => {
@@ -116,14 +120,19 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
             axios.get(props.apiUrl + "/" + id)
             .then(response => {
                 dispatch(setAppLoading(false))
-                let dataId = id ? {id: id} : {}
                 let newData = {}
                 Object.keys(formData).filter(function(x){
                     if (response.data[x] !== undefined) {
                         newData[x] = response.data[x]
                     }
+                    else {
+                        newData[x] = formData[x]
+                    }
                 });
-                setData(newData)      
+                if (formData.id){
+                    newData.id = id
+                }
+                setData(newData)
                 if (props.onOpen){
                     props.onOpen(response.data)
                 }

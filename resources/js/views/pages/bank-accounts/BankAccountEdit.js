@@ -10,19 +10,13 @@ const BankAccountEdit = (props) => {
     const [bank, setBank] = useState(null)
     const [account, setAccount] = useState(null)
     const activeCompany = useSelector(state => state.activeCompany)
+    const [formData, setFormData] = useState({id: '', bank_id: '', account_id: '', number: '', holder: '', company_id: activeCompany.id})
 
     return (
         <MasterEdit title="Bank Account"
             apiUrl="/api/setup/bank-accounts"
-            formatData={data => {
-                let {bank_id, account_id} = data
-                return {...data,
-                        bank_id: bank_id ?? initialData.bank_id,
-                        account_id: account_id ?? initialData.account_id,
-                        company_id: activeCompany.id}
-            }}
+            formData={formData}
             onOpen={data => {
-                console.log(activeCompany)
                 if (data){
                     setBank({id: data.bank_id, name: data.bank_name})
                     if (data.account_id){
@@ -32,11 +26,8 @@ const BankAccountEdit = (props) => {
             }}
             onSubmitSuccess={(request, response) => {
                 let {account_id, bank_id} = request;
-                if (!request.id){
-                    setInitialData({
-                        account_id: account_id,
-                        bank_id: bank_id
-                    })
+                if (request.id == ""){
+                    setFormData({...formData, account_id: account_id, bank_id: bank_id})
                 }
             }}
             >
@@ -52,7 +43,7 @@ const BankAccountEdit = (props) => {
                               autoFocus={true}
                               optionValue={e => e.id}
                               optionLabel={e => e.name}
-                              defaultValue={bank}
+                              value={bank}
                               disabled={props.loading}
                               placeholder="Choose Bank"
                               url="/api/setup/banks/search"
@@ -110,9 +101,8 @@ const BankAccountEdit = (props) => {
                             <SearchSelect
                               placeholder="Choose account"
                               autoComplete="off"
-                              defaultValue={account}
+                              value={account}
                               disabled={props.loading}
-                              value={props.data.account_id ?? initialData.account_id}
                               onChange={value => props.handleChange({account_id: (value ? value.id : "")})}
                               url="/api/setup/bank-accounts/search-account"
                               urlParams={{company_id: activeCompany.id}}
