@@ -50,7 +50,6 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
         setValidated(true)
 
         let newData = {}
-        console.log('That', formData)
         Object.keys(formData).filter(function(x){
             if (data[x] !== undefined) {
                 newData[x] = data[x]
@@ -101,9 +100,9 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
                         props.onSubmitError(data, response)
                     }
                 }
-                else {                    
+                else {
                     MyAlert.success({text: 'Data saved successfully'})
-                    setSubmitError({})                    
+                    setSubmitError({})
                     if (props.onSubmitSuccess){
                         props.onSubmitSuccess(request, response)
                     }
@@ -130,11 +129,11 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
             axios.get(props.apiUrl + "/" + id)
             .then(response => {
                 dispatch(setAppLoading(false))
-                let newData = {...formData, ...response.data}                               
+                let newData = {...formData, ...response.data}
                 if (formData.id){
                     newData.id = id
                 }
-                setData(newData)                
+                setData(newData)
                 if (props.onOpen){
                     props.onOpen(response.data)
                 }
@@ -147,7 +146,7 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
                 }
             })
         }
-        else {            
+        else {
             if (props.onOpen){
                 props.onOpen()
             }
