@@ -36,7 +36,7 @@ const CompanySelect = (props) => {
         <div>
             {
                 companies ? (
-                    <CDropdown className="mt-2">
+                    <CDropdown>
                         <CDropdownToggle disabled={appEditing} caret color="info">
                         {company ? company.name : ''}
                         </CDropdownToggle>

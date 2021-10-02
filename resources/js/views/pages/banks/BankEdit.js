@@ -10,7 +10,7 @@ const BankEdit = (props) => {
     return (
         <MasterEdit title="Bank"
             apiUrl="/api/setup/banks"
-            formData={{id:'', company_id: activeCompany.id, name:'', branch: ''}}            
+            formData={{id:'', company_id: activeCompany.id, name:'', branch: ''}}                      
             >
             {props => (
                 <>

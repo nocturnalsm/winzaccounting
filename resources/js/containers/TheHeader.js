@@ -80,7 +80,7 @@ const TheHeader = () => {
           className="border-0 c-subheader-nav m-0 px-0 px-md-3"
           routes={routes}
         />
-        <div className="d-xs-down-none py-0 px-0">            
+        <div className="d-xs-down-none py-0 px-0 my-2">            
           <CompanySelect />
         </div>
       </CSubheader>

@@ -21,7 +21,7 @@ const SearchSelect = React.forwardRef(({
     const [selectedValue, setSelectedValue] = useState({})
     const [options, setOptions] = useState([])
 
-    useEffect(() => {
+    useEffect(() => {       
        setSelectedValue(value)
     }, [value])
 
@@ -38,9 +38,10 @@ const SearchSelect = React.forwardRef(({
                 setSelectedValue(inputValue)
                 onChange(inputValue)
                 return;
-            case 'clear':
+            case 'clear':                
                 setSelectedValue(null)
-                onChange(inputValue)
+                onChange(null)
+                return;
             default:
                 return;
         }

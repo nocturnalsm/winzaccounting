@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector } from "react-redux";
 import SearchSelect from '../../../components/SearchSelect'
 import { CInput, CInputGroup, CInputGroupText, CCol, CFormGroup, CLabel} from '@coreui/react'
-import MyAlert from "../../../alert";
 
 const AccountEdit = (props) => {
 
@@ -11,8 +10,7 @@ const AccountEdit = (props) => {
     const [parent, setParent] = useState('')
     const activeCompany = useSelector(state => state.activeCompany)
     const [urlParams, setUrlParams] = useState()
-    const [prefix, setPrefix] = useState()
-    const [parentKey, setParentKey] = useState(0)
+    const [parentKey, setParentKey] = useState(0)    
     const [defaultOptions, setDefaultOptions] = useState(false)
     const [formData, setFormData] = useState({id: '', account_type: '', company_id: activeCompany.id, name: '', number: '', parent: ''})
 
@@ -21,8 +19,7 @@ const AccountEdit = (props) => {
             apiUrl="/api/setup/accounts"
             onOpen={data => {
                 if (data){
-                    setAccountType({id: data.account_type, name: data.account_type_name})
-                    setPrefix(data.prefix)
+                    setAccountType({id: data.account_type, name: data.account_type_name, prefix: data.prefix})
                     if (data.parent){
                         setParent({id: data.parent, number: data.parent_number, name: data.parent_name, account_type: data.account_type})
                     }
@@ -55,7 +52,7 @@ const AccountEdit = (props) => {
                 <CCol sm="8" lg="3">
                     <SearchSelect
                         required
-                        autoFocus={true}
+                        autoFocus={true}                        
                         url="/api/setup/accounts/types"
                         optionValue={e => e.id}
                         optionLabel={e => e.name}
@@ -65,24 +62,20 @@ const AccountEdit = (props) => {
                         placeholder="Choose Account Type"
                         onChange={value => {
                             let oldData = props.data.account_type
+                            let changed = {account_type: value ? value.id : ""}
                             if (!value || oldData != value.id){
                                 let newParams = {company_id: activeCompany.id}
                                 if (props.data.id){
                                     newParams = {...newParams, id: props.data.id}
                                 }
-                                if (!value){
-                                    setAccountType(null)
-                                    setPrefix()
-                                }
-                                else {
-                                    newParams = {...newParams, account_type: value.id}
-                                    setPrefix(value.prefix)
-                                }
+                                setAccountType(value)                                
+                                newParams = value ? {...newParams, account_type: value.id} : newParams
                                 setParent(null)
+                                changed['parent'] = ''
                                 setUrlParams(newParams)
                                 setParentKey(parentKey+1)
                             }
-                            props.handleChange({account_type: value ? value.id : ""})
+                            props.handleChange(changed)
                         }}
                         invalid={props.isInvalid('account_type')}
                     />
@@ -105,10 +98,10 @@ const AccountEdit = (props) => {
                         defaultOptions={defaultOptions}
                         onChange={value => {
                             setParent(value)
-                            if (props.data.account_type == ''){
-                                console.log('This', value)
-                                setAccountType({id: value.account_type, name: value.accountType})
-                                setPrefix(value.prefix)
+                            let changed = {parent: value ? value.id : ""}
+                            if (props.data.account_type == ''){                                
+                                changed['account_type'] = value.account_type
+                                setAccountType({id: value.account_type, name: value.accountType, prefix: value.prefix})
                                 let newParams = {company_id: activeCompany.id, account_type: value.account_type}
                                 if (props.data.id){
                                     newParams = {...newParams, id: props.data.id}
@@ -116,7 +109,7 @@ const AccountEdit = (props) => {
                                 setUrlParams(newParams)
                                 setParentKey(parentKey+1)
                             }
-                            props.handleChange({parent: value ? value.id : ""})
+                            props.handleChange(changed)
                         }}
                         invalid={props.isInvalid('parent')}
                         optionLabel={e => e.number + " " +e.name}
@@ -133,7 +126,7 @@ const AccountEdit = (props) => {
                 <CCol sm="8" lg="3">
                     <CInputGroup className="has-validation">
                     <CInputGroupText>
-                    {prefix}
+                    {accountType ? accountType.prefix : ''}
                     </CInputGroupText>
                     <CInput
                         placeholder="Enter account number"
