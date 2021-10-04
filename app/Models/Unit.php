@@ -12,4 +12,9 @@ class Unit extends Model
     protected $fillable = [
         'company_id', 'name', 'code', 'qty_per_unit', 'qty_unit'
     ];
+
+    public function childUnits()
+    {
+        return $this->hasMany(Unit::class, "id", "qty_unit");
+    }
 }

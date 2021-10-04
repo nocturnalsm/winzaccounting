@@ -11,6 +11,7 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
 
     const {id} = useParams()
     const [data, setData] = useState(formData)
+    const [initialData, setInitialData] = useState(formData)
     const [validated, setValidated] = useState(false)
     const [submitError, setSubmitError] = useState({})
     const [submitted, setSubmitted] = useState(0)
@@ -117,7 +118,7 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
         }
     }
 
-    const resetForm = () => {
+    const resetForm = () => {        
         handleChange(initialData)
     }
 
@@ -134,6 +135,7 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
                     newData.id = id
                 }
                 setData(newData)
+                setInitialData(newData)
                 if (props.onOpen){
                     props.onOpen(response.data)
                 }
@@ -187,29 +189,29 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
         )
     }
     return (
-        <CCard>
-            <CCardHeader className="py-0">
-                <h4 className="mb-0">
-                  <CButton className="btn-ghost pl-0" onClick={e => history.goBack()}>
-                    <CIcon size="2xl" name="cilArrowCircleLeft" />
-                  </CButton>
-                  {id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title}
-                </h4>
-            </CCardHeader>
-            <CCardBody>
-                <CForm className="form-horizontal needs-validation" noValidate wasValidated={validated} onSubmit={handleSubmit}>
-                    {children(childProps)}
-                </CForm>
-            </CCardBody>
-            <CCardFooter>
-                <CButton className="mr-2" type="submit" onClick={event => handleSubmit(event)} size="md" color="primary">
-                    <CIcon name="cil-scrubber" /> Submit
-                </CButton>
-                <CButton className="mr-2" type="reset" onClick={resetForm} size="md" color="danger">
-                    <CIcon name="cil-ban" /> Reset
-                </CButton>
-            </CCardFooter>
-        </CCard>
+        <CForm className="form-horizontal needs-validation" noValidate wasValidated={validated} onSubmit={handleSubmit}>
+            <CCard>
+                <CCardHeader className="py-0">
+                    <h4 className="mb-0">
+                    <CButton className="btn-ghost pl-0" onClick={e => history.goBack()}>
+                        <CIcon size="2xl" name="cilArrowCircleLeft" />
+                    </CButton>
+                    {id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title}
+                    </h4>
+                </CCardHeader>
+                <CCardBody>                
+                        {children(childProps)}                
+                </CCardBody>
+                <CCardFooter>
+                    <CButton className="mr-2" type="submit" size="md" color="primary">
+                        <CIcon name="cil-scrubber" /> Submit
+                    </CButton>
+                    <CButton className="mr-2" type="reset" onClick={resetForm} size="md" color="danger">
+                        <CIcon name="cil-ban" /> Reset
+                    </CButton>
+                </CCardFooter>
+            </CCard>
+        </CForm>
     )
 })
 

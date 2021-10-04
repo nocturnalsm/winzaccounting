@@ -94,6 +94,7 @@ class ProductCategoryRepository extends BaseRepository
             if ($findPath->exists()){
               $this->data->where("path", "NOT LIKE", "{$findPath->first()->path}%");
             }
+            $this->data->orderBy("name");
         }
         return $this->search($request);
     }

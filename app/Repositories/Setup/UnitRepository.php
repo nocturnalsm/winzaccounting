@@ -86,8 +86,14 @@ class UnitRepository extends BaseRepository
     public function getPerUnit(Request $request)
     {
         if (isset($request->exclude_id)){
-            $this->data = $this->data->where("id", "<>", $request->exclude_id);
+            $this->data = $this->data
+                               ->where("id", "<>", $request->exclude_id)
+                               ->where(function($query) use ($request){
+                                   $query->where("qty_unit", "<>", $request->exclude_id)
+                                         ->orWhereNull("qty_unit");
+                               });
         }
+        $this->data->orderBy("name");
         return $this->search($request);
     }
     public function getById($id)
