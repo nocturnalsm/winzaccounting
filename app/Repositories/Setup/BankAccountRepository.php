@@ -115,12 +115,12 @@ class BankAccountRepository extends BaseRepository
         return $data->first();
     }
     public function searchAccount($request)
-    {                       
-        $accountRepository = new AccountRepository;        
+    {
+        $accountRepository = new AccountRepository;
         $accountRepository->setData(
-            Account::whereAccountType(Account::ASSETS)                   
+            Account::whereAccountType(Account::ASSETS)
                    ->detail()                   
-        );       
+        );
         return $accountRepository->search($request);
     }
 }

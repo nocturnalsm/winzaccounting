@@ -10,7 +10,7 @@ const AccountEdit = (props) => {
     const [parent, setParent] = useState('')
     const activeCompany = useSelector(state => state.activeCompany)
     const [urlParams, setUrlParams] = useState()
-    const [parentKey, setParentKey] = useState(0)    
+    const [parentKey, setParentKey] = useState(0)
     const [defaultOptions, setDefaultOptions] = useState(false)
     const [formData, setFormData] = useState({id: '', account_type: '', company_id: activeCompany.id, name: '', number: '', parent: ''})
 
@@ -52,7 +52,7 @@ const AccountEdit = (props) => {
                 <CCol sm="8" lg="3">
                     <SearchSelect
                         required
-                        autoFocus={true}                        
+                        autoFocus={true}
                         url="/api/setup/accounts/types"
                         optionValue={e => e.id}
                         optionLabel={e => e.name}
@@ -68,7 +68,7 @@ const AccountEdit = (props) => {
                                 if (props.data.id){
                                     newParams = {...newParams, id: props.data.id}
                                 }
-                                setAccountType(value)                                
+                                setAccountType(value)
                                 newParams = value ? {...newParams, account_type: value.id} : newParams
                                 setParent(null)
                                 changed['parent'] = ''
@@ -99,7 +99,7 @@ const AccountEdit = (props) => {
                         onChange={value => {
                             setParent(value)
                             let changed = {parent: value ? value.id : ""}
-                            if (props.data.account_type == ''){                                
+                            if (props.data.account_type == ''){
                                 changed['account_type'] = value.account_type
                                 setAccountType({id: value.account_type, name: value.accountType, prefix: value.prefix})
                                 let newParams = {company_id: activeCompany.id, account_type: value.account_type}

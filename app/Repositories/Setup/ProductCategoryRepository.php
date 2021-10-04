@@ -82,14 +82,18 @@ class ProductCategoryRepository extends BaseRepository
     {
         if ($qRules == []){
             $qRules = ["name" => ["operator" => "like"]];
-        }        
-        $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);                            
+        }
+        $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);
         return parent::search($request, $qRules);
     }
     public function searchParents(Request $request)
     {
         if (isset($request->exclude_id)){
+            $findPath = ProductCategory::tree()->where("laravel_cte.id", $request->exclude_id);
             $this->data = $this->data->where("id", "<>", $request->exclude_id);
+            if ($findPath->exists()){
+              $this->data->where("path", "NOT LIKE", "{$findPath->first()->path}%");
+            }
         }
         return $this->search($request);
     }
@@ -100,7 +104,7 @@ class ProductCategoryRepository extends BaseRepository
                                DB::table(DB::raw("product_categories as pc"))
                                  ->select("name")
                                  ->whereColumn("pc.id", "product_categories.parent"),
-                               'parent_name'                                 
+                               'parent_name'
                            )
                            ->whereId($id);
         if (!$data){

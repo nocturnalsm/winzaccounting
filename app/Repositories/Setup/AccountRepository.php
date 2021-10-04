@@ -82,7 +82,7 @@ class AccountRepository extends BaseRepository
         };
 
         $data = $data->treeOf($constraint)
-                    ->select("laravel_cte.id", "laravel_cte.name", "accountType", "depth",                             
+                    ->select("laravel_cte.id", "laravel_cte.name", "accountType", "depth","path",
                              DB::raw("CONCAT(at.prefix, laravel_cte.number) AS number"),
                              "laravel_cte.parent", "laravel_cte.account_type", "at.prefix",
                              DB::raw("IFNULL(balance.amount,0) AS balance")
@@ -100,14 +100,14 @@ class AccountRepository extends BaseRepository
                             ->orderBy("date"),
                           "balance", function($join){
                               $join->on("laravel_cte.id", "=", "balance.account_id");
-                      });                     
+                      });
         return $data;
 
     }
     public function listSort($data, $sortBy, $order)
     {
-        $data->orderBy(DB::raw('laravel_cte.account_type'), 'asc')             
-             ->depthFirst();           
+        $data->orderBy(DB::raw('laravel_cte.account_type'), 'asc')
+             ->depthFirst();
         return $data;
     }
     public function getTypes()
@@ -115,7 +115,7 @@ class AccountRepository extends BaseRepository
         return [
             "data" => AccountType::select('id','name','prefix')->get()
         ];
-    }    
+    }
     public function search(Request $request, $qRules = [])
     {
         if ($qRules == []){
@@ -126,7 +126,7 @@ class AccountRepository extends BaseRepository
                 ],
                 "name"   => ["operator" => "like"]
             ];
-        }        
+        }
         if (isset($request->detail)){
             $this->data = $this->data->detail();
         }
@@ -144,8 +144,13 @@ class AccountRepository extends BaseRepository
     }
     public function searchParents(Request $request)
     {
+        $findPath = Account::tree()->where("laravel_cte.id", $request->id);
         $this->data = $this->data
                            ->where("laravel_cte.id", "<>", $request->id);
+        if ($findPath->exists()){
+            $findPath = $findPath->first();
+            $this->data->where("path", "NOT LIKE", "{$findPath->path}%");
+        }
         return $this->search($request);
     }
     public function getById(String $id)
@@ -155,14 +160,14 @@ class AccountRepository extends BaseRepository
                                     "account_types.prefix",
                                     DB::raw("account_types.name as account_type_name"))
                            ->joinSub(
-                                AccountType::select("id","prefix","name"),                                            
+                                AccountType::select("id","prefix","name"),
                                 'account_types',
                                 function($join){
                                     $join->on("accounts.account_type","=", "account_types.id");
                                 }
                             )
                             ->leftJoinSub(
-                                Account::select("accounts.id",                                    
+                                Account::select("accounts.id",
                                     DB::raw("CONCAT(types.prefix, accounts.number) AS parent_number"),
                                     DB::raw("accounts.name AS parent_name")
                                 )
