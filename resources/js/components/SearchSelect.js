@@ -15,6 +15,7 @@ const SearchSelect = React.forwardRef(({
       filter,
       onChange,
       urlParams,
+      disabled,
       innerRef, ...restProps}, ref) => {
 
     const selectRef = useRef(null)
@@ -54,6 +55,11 @@ const SearchSelect = React.forwardRef(({
                 const backgroundRepeat = 'no-repeat';
                 const backgroundSize = 'calc(0.75em + 0.375rem) calc(0.75em + 0.375rem)';
                 return { ...provided, borderColor, backgroundRepeat, backgroundSize };
+            }
+            else if (disabled){
+                const backgroundColor = '#d8dbe0';
+                const opacity = 1;
+                return { ...provided, backgroundColor, opacity };
             }
             else {
                 return provided
@@ -122,6 +128,7 @@ const SearchSelect = React.forwardRef(({
     else {
         return (
             <Select {...restProps}
+                isDisabled={disabled}
                 defaultOptions={defaultOptions ?? true}
                 isClearable
                 className={"react-select" +(invalid ? ' is-invalid' : '')}

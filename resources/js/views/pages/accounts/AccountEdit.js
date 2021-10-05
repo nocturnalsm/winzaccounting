@@ -89,7 +89,7 @@ const AccountEdit = (props) => {
                 <CCol sm="8" lg="5">
                     <SearchSelect
                         id="parent"
-                        placeholder="Choose parent account"
+                        placeholder="---Top Level---"
                         disabled={props.loading}
                         ref={props.inputRefs('parent')}
                         url="/api/setup/accounts/parents"

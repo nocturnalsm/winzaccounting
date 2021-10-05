@@ -6,9 +6,15 @@ import { useSelector } from 'react-redux'
 const AccountList = () => {
 
     const [accountTypes, setAccountTypes] = useState([])
-    const [customFilter, setCustomFilter] = useState({})
-    const [filterType, setFilterType] = useState("")
     const activeCompany = useSelector(state => state.activeCompany)
+
+    let tableData = JSON.parse(localStorage.getItem('datatable.accountslist')) || {}    
+
+    const [customFilter, setCustomFilter] = useState({
+        type: (tableData.filter && tableData.filter.type) ? tableData.filter.type : '',
+        company_id: activeCompany.id
+    })
+    const [filterType, setFilterType] = useState((tableData.filter && tableData.filter.type) ? tableData.filter.type : '')
     let badges = ['primary', 'warning', 'light', 'success', 'danger']
 
     const fields = [
@@ -54,11 +60,11 @@ const AccountList = () => {
         }
     ];
 
-    const filterTypeChange = (event) => {
+    const filterTypeChange = (event) => {                
         setFilterType(event.target.value)
     }
 
-    useEffect(() => {
+    useEffect(() => {        
         if (Object.keys(activeCompany).length > 0){
             setCustomFilter({company_id: activeCompany.id, type: filterType})
         }
@@ -79,17 +85,12 @@ const AccountList = () => {
           }
       }
       fetchTypes()
-      let tableData = JSON.parse(localStorage.getItem('datatable.accountslist')) || {}
-      setCustomFilter({
-          type: (tableData.filter && tableData.filter.type) ? tableData.filter.type : '',
-          company_id: activeCompany.id
-      })
 
     }, [])
 
     const customFilterInput = {
         type: (
-            <CSelect value={customFilter.type} aria-label="column name: 'accountType' filter input" onChange={filterTypeChange} size="sm">
+            <CSelect value={filterType} aria-label="column name: 'accountType' filter input" onChange={filterTypeChange} size="sm">
                 <option value="">All</option>
                 {
                     accountTypes.map((item, index) => (

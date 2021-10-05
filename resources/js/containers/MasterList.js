@@ -20,7 +20,7 @@ const MasterList = React.forwardRef((
     const [tableCustomFilter, setTableCustomFilter] = useState({})
     const [tableKey, setTableKey] = useState(0)
 
-    useEffect(() => {        
+    useEffect(() => {               
         if (!isEqual(tableCustomFilter, customFilter)){                   
             setTableCustomFilter(customFilter)
         }

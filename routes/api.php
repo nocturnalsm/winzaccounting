@@ -48,4 +48,5 @@ Route::prefix('setup')->group(function(){
     Route::get('product-categories/search', [App\Http\Controllers\Setup\ProductCategoryController::class, 'search']);
     Route::get('product-categories/parents', [App\Http\Controllers\Setup\ProductCategoryController::class, 'category_parents']);
     Route::resource('product-categories', App\Http\Controllers\Setup\ProductCategoryController::class);
+    Route::resource('products', App\Http\Controllers\Setup\ProductController::class);
 });

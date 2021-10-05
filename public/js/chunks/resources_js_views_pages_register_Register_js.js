@@ -147,7 +147,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _CIcon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CIcon */ "./node_modules/@coreui/icons-react/es/CIcon.js");
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_CIcon__WEBPACK_IMPORTED_MODULE_0__.default);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_CIcon__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
 /***/ }),
@@ -210,13 +210,13 @@ var CAlert = function CAlert(props) {
       color = props.color,
       fade = props.fade,
       show = props.show,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["children", "className", "innerRef", "onShowChange", "closeButton", "color", "fade", "show"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["children", "className", "innerRef", "onShowChange", "closeButton", "color", "fade", "show"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'alert', (_classNames = {}, _classNames["alert-" + color] = color, _classNames['alert-dismissible'] = closeButton, _classNames));
   var alertTransition = {
-    baseClass: fade ? _fade_CFade__WEBPACK_IMPORTED_MODULE_5__.default.baseClass : '',
-    timeout: fade ? _fade_CFade__WEBPACK_IMPORTED_MODULE_5__.default.timeout : 0,
+    baseClass: fade ? _fade_CFade__WEBPACK_IMPORTED_MODULE_5__["default"].baseClass : '',
+    timeout: fade ? _fade_CFade__WEBPACK_IMPORTED_MODULE_5__["default"].timeout : 0,
     unmountOnExit: true
   };
 
@@ -242,14 +242,14 @@ var CAlert = function CAlert(props) {
       return clearTimeout(timeout.current);
     };
   }, [isOpen]);
-  var attrs = (0,_coreui_utils_src__WEBPACK_IMPORTED_MODULE_8__.default)(attributes, _utils_helper_js__WEBPACK_IMPORTED_MODULE_6__.CFadeProps);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_fade_CFade__WEBPACK_IMPORTED_MODULE_5__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, alertTransition, {
+  var attrs = (0,_coreui_utils_src__WEBPACK_IMPORTED_MODULE_8__["default"])(attributes, _utils_helper_js__WEBPACK_IMPORTED_MODULE_6__.CFadeProps);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_fade_CFade__WEBPACK_IMPORTED_MODULE_5__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, alertTransition, {
     className: classes,
     in: Boolean(isOpen),
     role: "alert"
   }, attrs, {
     innerRef: innerRef
-  }), children, closeButton && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_button_CButtonClose__WEBPACK_IMPORTED_MODULE_7__.default, {
+  }), children, closeButton && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_button_CButtonClose__WEBPACK_IMPORTED_MODULE_7__["default"], {
     onClick: function onClick() {
       return setIsOpen(false);
     }
@@ -310,13 +310,13 @@ var CBadge = function CBadge(props) {
       innerRef = props.innerRef,
       color = props.color,
       shape = props.shape,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "color", "shape"]); // render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "color", "shape"]); // render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'badge', (_classNames = {}, _classNames["badge-" + color] = color, _classNames["badge-" + shape] = shape, _classNames));
-  var Tag = attributes.to || attributes.href ? _link_CLink__WEBPACK_IMPORTED_MODULE_6__.default : tag;
+  var Tag = attributes.to || attributes.href ? _link_CLink__WEBPACK_IMPORTED_MODULE_6__["default"] : tag;
   var ref = (_ref = {}, _ref["" + (typeof Tag === 'string' ? 'ref' : 'innerRef')] = innerRef, _ref);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, ref));
 };
@@ -363,11 +363,11 @@ __webpack_require__.r(__webpack_exports__);
 var CBreadcrumb = function CBreadcrumb(props) {
   var className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef"]);
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'breadcrumb'); //render
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("ol", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("ol", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -412,11 +412,11 @@ var CBreadcrumbItem = function CBreadcrumbItem(props) {
   var className = props.className,
       innerRef = props.innerRef,
       active = props.active,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "active"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "active"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, active ? 'active' : false, 'breadcrumb-item');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("li", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("li", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes,
     role: "presentation",
     "aria-current": active ? 'page' : undefined
@@ -463,7 +463,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -504,7 +504,7 @@ var CBreadcrumbRouter = function CBreadcrumbRouter(props) {
   var className = props.className,
       innerRef = props.innerRef,
       routes = props.routes,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["className", "innerRef", "routes"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["className", "innerRef", "routes"]);
 
   var items = null;
 
@@ -531,7 +531,7 @@ var CBreadcrumbRouter = function CBreadcrumbRouter(props) {
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_5___default()(className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_index__WEBPACK_IMPORTED_MODULE_6__.CBreadcrumb, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_index__WEBPACK_IMPORTED_MODULE_6__.CBreadcrumb, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -588,7 +588,7 @@ var CButton = function CButton(props) {
       pressed = props.pressed,
       shape = props.shape,
       variant = props.variant,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "onClick", "disabled", "active", "block", "color", "size", "pressed", "shape", "variant"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "onClick", "disabled", "active", "block", "color", "size", "pressed", "shape", "variant"]);
 
   var click = function click(e) {
     return !disabled && onClick && onClick(e);
@@ -602,7 +602,7 @@ var CButton = function CButton(props) {
   });
 
   if (isLink) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_6__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, attributes, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_6__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, attributes, {
       active: active,
       disabled: disabled,
       className: classes,
@@ -610,7 +610,7 @@ var CButton = function CButton(props) {
       innerRef: innerRef
     }));
   } else {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
       className: classes,
       type: "button",
       disabled: disabled
@@ -673,11 +673,11 @@ var CButtonClose = function CButtonClose(props) {
       className = props.className,
       buttonClass = props.buttonClass,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["children", "className", "buttonClass", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["children", "className", "buttonClass", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(buttonClass, className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("button", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("button", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes,
     "aria-label": "Close"
   }, attributes, {
@@ -728,11 +728,11 @@ var CButtonGroup = function CButtonGroup(props) {
       innerRef = props.innerRef,
       size = props.size,
       vertical = props.vertical,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "size", "vertical"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "size", "vertical"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, size ? 'btn-group-' + size : false, vertical ? 'btn-group-vertical' : 'btn-group');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes,
     role: "group"
   }, attributes, {
@@ -781,11 +781,11 @@ var CButtonToolbar = function CButtonToolbar(props) {
   var className = props.className,
       innerRef = props.innerRef,
       justify = props.justify,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "justify"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "justify"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'btn-toolbar', (_classNames = {}, _classNames["justify-content-" + justify] = justify, _classNames));
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes,
     role: "toolbar",
     "aria-label": "toolbar"
@@ -833,11 +833,11 @@ var CCallout = function CCallout(props) {
   var className = props.className,
       innerRef = props.innerRef,
       color = props.color,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "color"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "color"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('c-callout', color ? 'c-callout-' + color : null, className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -881,7 +881,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -897,11 +897,11 @@ var CCard = function CCard(props) {
       borderColor = props.borderColor,
       align = props.align,
       accentColor = props.accentColor,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["tag", "className", "innerRef", "color", "textColor", "borderColor", "align", "accentColor"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["tag", "className", "innerRef", "color", "textColor", "borderColor", "align", "accentColor"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_5___default()(className, 'card', align ? "text-" + align : false, textColor ? "text-" + textColor : false, color ? "bg-" + color : false, borderColor ? "border-" + borderColor : false, accentColor ? "card-accent-" + accentColor : false);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -955,7 +955,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -971,11 +971,11 @@ var CCardBody = function CCardBody(props) {
       textColor = props.textColor,
       borderColor = props.borderColor,
       align = props.align,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["tag", "className", "innerRef", "color", "textColor", "borderColor", "align"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["tag", "className", "innerRef", "color", "textColor", "borderColor", "align"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_5___default()(className, 'card-body', align ? "text-" + align : false, textColor ? "text-" + textColor : false, color ? "bg-" + color : false, borderColor ? "border-" + borderColor : false);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -1022,7 +1022,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -1038,11 +1038,11 @@ var CCardFooter = function CCardFooter(props) {
       textColor = props.textColor,
       borderColor = props.borderColor,
       align = props.align,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["tag", "className", "innerRef", "color", "textColor", "borderColor", "align"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["tag", "className", "innerRef", "color", "textColor", "borderColor", "align"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_5___default()(className, 'card-footer', align ? "text-" + align : false, textColor ? "text-" + textColor : false, color ? "bg-" + color : false, borderColor ? "border-" + borderColor : false);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -1094,11 +1094,11 @@ var CCardGroup = function CCardGroup(props) {
       innerRef = props.innerRef,
       deck = props.deck,
       columns = props.columns,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "deck", "columns"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "deck", "columns"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()("card-" + (columns ? 'columns' : deck ? 'deck' : 'group'), className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -1147,7 +1147,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -1163,11 +1163,11 @@ var CCardHeader = function CCardHeader(props) {
       textColor = props.textColor,
       borderColor = props.borderColor,
       align = props.align,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["tag", "className", "innerRef", "color", "textColor", "borderColor", "align"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["tag", "className", "innerRef", "color", "textColor", "borderColor", "align"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_5___default()(className, 'card-header', align ? "text-" + align : false, textColor ? "text-" + textColor : false, color ? "bg-" + color : false, borderColor ? "border-" + borderColor : false);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -1212,10 +1212,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var CCardImg = function CCardImg(props) {
   var variant = props.variant,
-      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["variant"]);
+      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["variant"]);
 
   var classSuffix = variant !== 'full' ? "-" + variant : '';
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_image_CImg__WEBPACK_IMPORTED_MODULE_4__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, rest, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_image_CImg__WEBPACK_IMPORTED_MODULE_4__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, rest, {
     className: ["card-img" + classSuffix, rest.className]
   }));
 };
@@ -1260,11 +1260,11 @@ var CCardImgOverlay = function CCardImgOverlay(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'card-img-overlay');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, attributes, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, attributes, {
     className: classes,
     ref: innerRef
   }));
@@ -1304,7 +1304,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var CCardLink = function CCardLink(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_2__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_2__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
     className: ['card-link', props.className]
   }));
 };
@@ -1343,11 +1343,11 @@ var CCardSubtitle = function CCardSubtitle(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'card-subtitle');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, attributes, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, attributes, {
     className: classes,
     ref: innerRef
   }));
@@ -1396,11 +1396,11 @@ var CCardText = function CCardText(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'card-text');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, attributes, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, attributes, {
     className: classes,
     ref: innerRef
   }));
@@ -1449,11 +1449,11 @@ var CCardTitle = function CCardTitle(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'card-title');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, attributes, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, attributes, {
     className: classes,
     ref: innerRef
   }));
@@ -1505,7 +1505,7 @@ var CCarousel = function CCarousel(props) {
       activeIndex = props.activeIndex,
       animate = props.animate,
       onSlideChange = props.onSlideChange,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "autoSlide", "activeIndex", "animate", "onSlideChange"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "autoSlide", "activeIndex", "animate", "onSlideChange"]);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([null, activeIndex]),
       state = _useState[0],
@@ -1550,7 +1550,7 @@ var CCarousel = function CCarousel(props) {
     };
   }, [state]);
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('carousel', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes,
     onMouseEnter: reset,
     onMouseLeave: setNext
@@ -1613,11 +1613,11 @@ __webpack_require__.r(__webpack_exports__);
 var CCarouselCaption = function CCarouselCaption(props) {
   var className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('carousel-caption', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -1664,7 +1664,7 @@ var CCarouselControl = function CCarouselControl(props) {
       children = props.children,
       innerRef = props.innerRef,
       direction = props.direction,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "children", "innerRef", "direction"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "children", "innerRef", "direction"]);
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_CCarousel__WEBPACK_IMPORTED_MODULE_5__.Context),
       state = _useContext.state,
@@ -1690,7 +1690,7 @@ var CCarouselControl = function CCarouselControl(props) {
 
 
   var anchorClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()("carousel-control-" + direction, className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("a", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("a", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: anchorClasses
   }, attributes, {
     onClick: onClick,
@@ -1742,7 +1742,7 @@ var CCarouselIndicators = function CCarouselIndicators(props) {
   var className = props.className,
       innerRef = props.innerRef,
       indicatorsClass = props.indicatorsClass,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "indicatorsClass"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "indicatorsClass"]);
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_CCarousel__WEBPACK_IMPORTED_MODULE_5__.Context),
       itemNumber = _useContext.itemNumber,
@@ -1765,7 +1765,7 @@ var CCarouselIndicators = function CCarouselIndicators(props) {
       className: state[1] === key ? 'active' : ''
     });
   });
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("ol", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("ol", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: listClasses
   }, attributes, {
     ref: innerRef
@@ -1812,11 +1812,11 @@ __webpack_require__.r(__webpack_exports__);
 var CCarouselInner = function CCarouselInner(props) {
   var className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('carousel-inner', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -1876,7 +1876,7 @@ var CCarouselItem = function CCarouselItem(props) {
   var children = props.children,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["children", "className", "innerRef"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["children", "className", "innerRef"]);
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_CCarousel__WEBPACK_IMPORTED_MODULE_5__.Context),
       animate = _useContext.animate,
@@ -1928,13 +1928,13 @@ var CCarouselItem = function CCarouselItem(props) {
 
   if (!animate || state[0] === null) {
     var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('carousel-item', isIn && 'active', className);
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
       className: itemClasses,
       ref: ref
     }, attributes), children);
   }
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_6__.default, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_6__["default"], {
     timeout: 600,
     in: isIn,
     onEnter: onEnter,
@@ -1949,7 +1949,7 @@ var CCarouselItem = function CCarouselItem(props) {
     var directionClassName = (status === 'entering' || status === 'exiting') && animating && (direction === 'right' ? 'carousel-item-left' : 'carousel-item-right');
     var orderClassName = status === 'entering' && (direction === 'right' ? 'carousel-item-next' : 'carousel-item-prev');
     var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('carousel-item', isActive && 'active', directionClassName, orderClassName, className);
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
       className: itemClasses,
       ref: ref
     }, attributes), children);
@@ -1991,7 +1991,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -2009,7 +2009,7 @@ var CCollapse = function CCollapse(props) {
       innerRef = props.innerRef,
       show = props.show,
       navbar = props.navbar,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["children", "className", "innerRef", "show", "navbar"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["children", "className", "innerRef", "show", "navbar"]);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(),
       height = _useState[0],
@@ -2041,7 +2041,7 @@ var CCollapse = function CCollapse(props) {
   }; //render
 
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_6__.default, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_6__["default"], {
     in: show,
     timeout: 350,
     appear: false,
@@ -2059,7 +2059,7 @@ var CCollapse = function CCollapse(props) {
     var style = height === null ? null : {
       height: height
     };
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, attributes, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, attributes, {
       style: _objectSpread(_objectSpread({}, attributes.style), style),
       className: classes,
       ref: ref
@@ -2108,13 +2108,13 @@ var CCreateElement = function CCreateElement(_ref) {
   var renderItem = function renderItem(item, i) {
     var _tag = item._tag,
         _children = item._children,
-        rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(item, ["_tag", "_children"]);
+        rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(item, ["_tag", "_children"]);
 
     var Tag = components[_tag] || _tag;
     var children = _children ? _children.map(function (child, i) {
       return typeof child === 'object' ? renderItem(child, i) : child;
     }) : '';
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
       key: Tag + i
     }, rest), children);
   };
@@ -2168,7 +2168,7 @@ var CDropdown = function CDropdown(props) {
       tag = props.tag,
       innerRef = props.innerRef,
       inNav = props.inNav,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "tag", "innerRef", "inNav"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "tag", "innerRef", "inNav"]);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(),
       reference = _useState[0],
@@ -2203,7 +2203,7 @@ var CDropdown = function CDropdown(props) {
       setSplit: setSplit,
       setPlacement: setPlacement
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -2241,7 +2241,7 @@ __webpack_require__.r(__webpack_exports__);
  //component - CoreUI / CDropdownDivider
 
 var CDropdownDivider = function CDropdownDivider(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_CDropdownItem__WEBPACK_IMPORTED_MODULE_2__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_CDropdownItem__WEBPACK_IMPORTED_MODULE_2__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
     divider: true
   }));
 };
@@ -2269,7 +2269,7 @@ __webpack_require__.r(__webpack_exports__);
  //component - CoreUI / CDropdownHeader
 
 var CDropdownHeader = function CDropdownHeader(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_CDropdownItem__WEBPACK_IMPORTED_MODULE_2__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_CDropdownItem__WEBPACK_IMPORTED_MODULE_2__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
     header: true
   }));
 };
@@ -2320,7 +2320,7 @@ var CDropdownItem = function CDropdownItem(props) {
       header = props.header,
       active = props.active,
       disabled = props.disabled,
-      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "onClick", "color", "divider", "header", "active", "disabled"]);
+      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "onClick", "color", "divider", "header", "active", "disabled"]);
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_CDropdown__WEBPACK_IMPORTED_MODULE_6__.Context),
       setIsOpen = _useContext.setIsOpen;
@@ -2339,12 +2339,12 @@ var CDropdownItem = function CDropdownItem(props) {
 
   var tabIndex = isItem && !disabled ? null : -1;
   var role = tabIndex === null ? 'menuitem' : undefined;
-  var Tag = tag || (!isItem ? 'div' : _link_CLink__WEBPACK_IMPORTED_MODULE_7__.default);
+  var Tag = tag || (!isItem ? 'div' : _link_CLink__WEBPACK_IMPORTED_MODULE_7__["default"]);
   var ref = (_ref = {}, _ref["" + (typeof Tag === 'string' ? 'ref' : 'innerRef')] = innerRef, _ref);
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'dropdown-' + (header ? 'header' : divider ? 'divider' : 'item'), {
     active: active
-  }, color && 'bg-' + color, disabled && Tag !== _link_CLink__WEBPACK_IMPORTED_MODULE_7__.default && 'disabled');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  }, color && 'bg-' + color, disabled && Tag !== _link_CLink__WEBPACK_IMPORTED_MODULE_7__["default"] && 'disabled');
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes,
     tabIndex: tabIndex,
     role: role,
@@ -2404,7 +2404,7 @@ var CDropdownMenu = function CDropdownMenu(props) {
       placement = props.placement,
       modifiers = props.modifiers,
       innerRef = props.innerRef,
-      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "show", "placement", "modifiers", "innerRef"]);
+      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "show", "placement", "modifiers", "innerRef"]);
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_CDropdown__WEBPACK_IMPORTED_MODULE_5__.Context),
       reference = _useContext.reference,
@@ -2467,7 +2467,7 @@ var CDropdownMenu = function CDropdownMenu(props) {
       document.removeEventListener('keydown', onKeypress);
     };
   }, [isOpen]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes,
     ref: setPopperElement,
     role: "menu",
@@ -2532,7 +2532,7 @@ var CDropdownToggle = function CDropdownToggle(props) {
       caret = props.caret,
       split = props.split,
       tag = props.tag,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "onClick", "caret", "split", "tag"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "onClick", "caret", "split", "tag"]);
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_CDropdown__WEBPACK_IMPORTED_MODULE_8__.Context),
       reference = _useContext.reference,
@@ -2556,7 +2556,7 @@ var CDropdownToggle = function CDropdownToggle(props) {
     setIsOpen(!isOpen);
   };
 
-  var Tag = tag || (inNav ? _link_CLink__WEBPACK_IMPORTED_MODULE_7__.default : _button_CButton__WEBPACK_IMPORTED_MODULE_6__.default);
+  var Tag = tag || (inNav ? _link_CLink__WEBPACK_IMPORTED_MODULE_7__["default"] : _button_CButton__WEBPACK_IMPORTED_MODULE_6__["default"]);
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, {
     'dropdown-toggle': caret && !split,
     'nav-link': inNav
@@ -2566,14 +2566,14 @@ var CDropdownToggle = function CDropdownToggle(props) {
     'aria-expanded': isOpen ? 'true' : 'false',
     'aria-haspopup': 'true',
     'aria-label': 'Dropdown toggle'
-  }, _togglerAttrs["" + (tag && typeof tag === 'string' ? 'ref' : 'innerRef')] = setReference, _togglerAttrs['role'] = Tag === _button_CButton__WEBPACK_IMPORTED_MODULE_6__.default ? null : 'button', _togglerAttrs);
+  }, _togglerAttrs["" + (tag && typeof tag === 'string' ? 'ref' : 'innerRef')] = setReference, _togglerAttrs['role'] = Tag === _button_CButton__WEBPACK_IMPORTED_MODULE_6__["default"] ? null : 'button', _togglerAttrs);
 
   if (split) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react__WEBPACK_IMPORTED_MODULE_2__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_button_CButton__WEBPACK_IMPORTED_MODULE_6__.default, attributes, props.children), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_button_CButton__WEBPACK_IMPORTED_MODULE_6__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react__WEBPACK_IMPORTED_MODULE_2__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_button_CButton__WEBPACK_IMPORTED_MODULE_6__["default"], attributes, props.children), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_button_CButton__WEBPACK_IMPORTED_MODULE_6__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
       className: "dropdown-toggle dropdown-toggle-split"
     }, togglerAttrs, attributes), ''));
   } else {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
       className: classes
     }, togglerAttrs, attributes));
   }
@@ -2623,7 +2623,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -2636,7 +2636,7 @@ var CElementCover = function CElementCover(props) {
       innerRef = props.innerRef,
       boundaries = props.boundaries,
       opacity = props.opacity,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["className", "children", "innerRef", "boundaries", "opacity"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["className", "children", "innerRef", "boundaries", "opacity"]);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)({}),
       customBoundaries = _useState[0],
@@ -2689,7 +2689,7 @@ var CElementCover = function CElementCover(props) {
     backgroundColor: "rgb(255,255,255," + opacity + ")"
   });
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes,
     style: coverStyles
   }, attributes, {
@@ -2701,7 +2701,7 @@ var CElementCover = function CElementCover(props) {
       left: '50%',
       transform: 'translateX(-50%) translateY(-50%)'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_spinner_CSpinner__WEBPACK_IMPORTED_MODULE_6__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_spinner_CSpinner__WEBPACK_IMPORTED_MODULE_6__["default"], {
     grow: true,
     size: "lg",
     color: "primary"
@@ -2754,11 +2754,11 @@ var CEmbed = function CEmbed(props) {
       className = props.className,
       innerRef = props.innerRef,
       ratio = props.ratio,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "ratio"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "ratio"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'embed-responsive', "embed-responsive-" + ratio);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -2810,11 +2810,11 @@ var CEmbedItem = function CEmbedItem(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'embed-responsive-item');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -2873,19 +2873,19 @@ var CFade = function CFade(props) {
       innerRef = props.innerRef,
       baseClass = props.baseClass,
       baseClassActive = props.baseClassActive,
-      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "children", "innerRef", "baseClass", "baseClassActive"]); //render
+      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "children", "innerRef", "baseClass", "baseClassActive"]); //render
 
 
-  var transitionProps = (0,_coreui_utils_src__WEBPACK_IMPORTED_MODULE_6__.default)(rest, _utils_helper_js__WEBPACK_IMPORTED_MODULE_5__.TransitionPropTypeKeys);
-  var childProps = (0,_coreui_utils_src__WEBPACK_IMPORTED_MODULE_7__.default)(rest, _utils_helper_js__WEBPACK_IMPORTED_MODULE_5__.TransitionPropTypeKeys);
+  var transitionProps = (0,_coreui_utils_src__WEBPACK_IMPORTED_MODULE_6__["default"])(rest, _utils_helper_js__WEBPACK_IMPORTED_MODULE_5__.TransitionPropTypeKeys);
+  var childProps = (0,_coreui_utils_src__WEBPACK_IMPORTED_MODULE_7__["default"])(rest, _utils_helper_js__WEBPACK_IMPORTED_MODULE_5__.TransitionPropTypeKeys);
   var ref = typeof innerRef === 'object' ? innerRef : (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)();
   typeof innerRef === 'function' && innerRef(ref);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_8__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, transitionProps, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_8__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, transitionProps, {
     nodeRef: ref
   }), function (status) {
     var isActive = status === 'entered';
     var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, baseClass, isActive && baseClassActive);
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
       className: classes
     }, childProps, {
       ref: ref
@@ -2949,11 +2949,11 @@ var CForm = function CForm(props) {
       innerRef = props.innerRef,
       inline = props.inline,
       wasValidated = props.wasValidated,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "inline", "wasValidated"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "inline", "wasValidated"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, inline ? 'form-inline' : false, wasValidated ? 'was-validated' : false);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, attributes, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, attributes, {
     className: classes,
     ref: innerRef
   }));
@@ -3005,12 +3005,12 @@ var CFormFeedback = function CFormFeedback(props) {
       innerRef = props.innerRef,
       valid = props.valid,
       tooltip = props.tooltip,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "valid", "tooltip"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "valid", "tooltip"]); //render
 
 
   var validMode = tooltip ? 'tooltip' : 'feedback';
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(valid ? "valid-" + validMode : "invalid-" + validMode, className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -3026,12 +3026,12 @@ CFormFeedback.propTypes = {
   tooltip: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool)
 };
 var CValidFeedback = function CValidFeedback(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(CFormFeedback, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(CFormFeedback, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
     valid: true
   }));
 };
 var CInvalidFeedback = function CInvalidFeedback(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(CFormFeedback, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(CFormFeedback, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
     valid: false
   }));
 };
@@ -3069,12 +3069,12 @@ var CFormGroup = function CFormGroup(props) {
       disabled = props.disabled,
       variant = props.variant,
       inline = props.inline,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "row", "disabled", "variant", "inline"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "row", "disabled", "variant", "inline"]); //render
 
 
   var checkClass = variant && variant.includes('custom') ? 'custom-control' : 'form-check';
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(row && 'row', !variant && 'form-group', variant && checkClass, variant === 'custom-radio' && 'custom-radio', variant === 'custom-checkbox' && 'custom-checkbox', variant && inline && checkClass + "-inline", variant && disabled && 'disabled', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -3126,11 +3126,11 @@ var CFormText = function CFormText(props) {
       className = props.className,
       innerRef = props.innerRef,
       color = props.color,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "color"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "color"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('form-text', color && "text-" + color, className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -3183,7 +3183,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -3205,11 +3205,11 @@ var CInput = function CInput(props) {
       plaintext = props.plaintext,
       size = props.size,
       sizeHtml = props.sizeHtml,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["className", "innerRef", "type", "valid", "invalid", "plaintext", "size", "sizeHtml"]); // render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["className", "innerRef", "type", "valid", "invalid", "plaintext", "size", "sizeHtml"]); // render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_5___default()(plaintext ? 'form-control-plaintext' : 'form-control', size && "form-control-" + size, invalid && 'is-invalid', valid && 'is-valid', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("input", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("input", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
     className: classes,
     type: type
   }, attributes, {
@@ -3235,11 +3235,11 @@ var CTextarea = function CTextarea(props) {
       invalid = props.invalid,
       plaintext = props.plaintext,
       size = props.size,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["className", "innerRef", "valid", "invalid", "plaintext", "size"]); // render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["className", "innerRef", "valid", "invalid", "plaintext", "size"]); // render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_5___default()(plaintext ? 'form-control-plaintext' : 'form-control', size && "form-control-" + size, invalid && 'is-invalid', valid && 'is-valid', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("textarea", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("textarea", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -3257,11 +3257,11 @@ var CInputFile = function CInputFile(props) {
       valid = props.valid,
       invalid = props.invalid,
       custom = props.custom,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["className", "innerRef", "valid", "invalid", "custom"]); // render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["className", "innerRef", "valid", "invalid", "custom"]); // render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_5___default()(custom ? 'custom-file-input' : 'form-control-file', invalid && 'is-invalid', valid && 'is-valid', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("input", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("input", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
     className: classes
   }, attributes, {
     type: "file",
@@ -3279,11 +3279,11 @@ var CInputCheckbox = function CInputCheckbox(props) {
       valid = props.valid,
       invalid = props.invalid,
       custom = props.custom,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["className", "innerRef", "valid", "invalid", "custom"]); // render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["className", "innerRef", "valid", "invalid", "custom"]); // render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_5___default()(custom ? 'custom-control-input' : 'form-check-input', invalid && 'is-invalid', valid && 'is-valid', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("input", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("input", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
     className: classes,
     type: "checkbox"
   }, attributes, {
@@ -3296,7 +3296,7 @@ CInputCheckbox.propTypes = _objectSpread(_objectSpread({}, commonPropTypes), {},
 });
 
 var CInputRadio = function CInputRadio(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(CInputCheckbox, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({}, props, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(CInputCheckbox, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, props, {
     type: "radio"
   }));
 };
@@ -3309,12 +3309,12 @@ var CSelect = function CSelect(props) {
       size = props.size,
       sizeHtml = props.sizeHtml,
       custom = props.custom,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["className", "innerRef", "valid", "invalid", "size", "sizeHtml", "custom"]); // render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["className", "innerRef", "valid", "invalid", "size", "sizeHtml", "custom"]); // render
 
 
   var baseClass = custom ? 'custom-select' : 'form-control';
   var classes = classnames__WEBPACK_IMPORTED_MODULE_5___default()(baseClass, size && baseClass + "-" + size, invalid && 'is-invalid', valid && 'is-valid', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("select", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("select", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
     className: classes
   }, attributes, {
     size: sizeHtml,
@@ -3358,11 +3358,11 @@ var CInputGroup = function CInputGroup(props) {
   var className = props.className,
       innerRef = props.innerRef,
       size = props.size,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "size"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "size"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('input-group', size && "input-group-" + size, className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -3409,11 +3409,11 @@ var CInputGroupAddon = function CInputGroupAddon(props) {
       className = props.className,
       innerRef = props.innerRef,
       prepend = props.prepend,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["children", "className", "innerRef", "prepend"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["children", "className", "innerRef", "prepend"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('input-group-' + (prepend ? 'prepend' : 'append'), className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -3428,12 +3428,12 @@ CInputGroupAddon.propTypes = {
   prepend: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool)
 };
 var CInputGroupAppend = function CInputGroupAppend(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(CInputGroupAddon, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(CInputGroupAddon, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
     prepend: false
   }));
 };
 var CInputGroupPrepend = function CInputGroupPrepend(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(CInputGroupAddon, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(CInputGroupAddon, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
     prepend: true
   }));
 };
@@ -3470,11 +3470,11 @@ var CInputGroupText = function CInputGroupText(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('input-group-text', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -3529,15 +3529,15 @@ var CLabel = function CLabel(props) {
       hidden = props.hidden,
       variant = props.variant,
       col = props.col,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "hidden", "variant", "col"]); // render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "hidden", "variant", "col"]); // render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(hidden && 'sr-only', variant === 'custom-checkbox' && 'custom-control-label', variant === 'checkbox' && 'form-check-label', variant === 'custom-file' && 'custom-file-label', col && 'col-form-label', col && typeof col === 'string' && "col-form-label-" + col, className);
-  var Tag = col ? _grid_CCol__WEBPACK_IMPORTED_MODULE_6__.default : tag;
+  var Tag = col ? _grid_CCol__WEBPACK_IMPORTED_MODULE_6__["default"] : tag;
   var addLabelTag = col && {
     tag: tag
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, addLabelTag, attributes, {
     ref: innerRef
@@ -3609,7 +3609,7 @@ var CCol = function CCol(props) {
       className = props.className,
       innerRef = props.innerRef,
       widths = props.widths,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "widths"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "widths"]); //render
 
 
   var colClasses = [];
@@ -3641,7 +3641,7 @@ var CCol = function CCol(props) {
   }
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, colClasses);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, attributes, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, attributes, {
     className: classes,
     ref: innerRef
   }));
@@ -3699,11 +3699,11 @@ var CContainer = function CContainer(props) {
       className = props.className,
       innerRef = props.innerRef,
       fluid = props.fluid,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "fluid"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "fluid"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, fluid ? 'container-fluid' : 'container');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, attributes, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, attributes, {
     className: classes,
     ref: innerRef
   }));
@@ -3757,11 +3757,11 @@ var CRow = function CRow(props) {
       form = props.form,
       alignHorizontal = props.alignHorizontal,
       alignVertical = props.alignVertical,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "gutters", "form", "alignHorizontal", "alignVertical"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "gutters", "form", "alignHorizontal", "alignVertical"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, !gutters ? 'no-gutters' : null, alignHorizontal ? "justify-content-" + alignHorizontal : null, alignVertical ? "align-" + alignVertical : null, form ? 'form-row' : 'row');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -3825,19 +3825,19 @@ var CImg = function CImg(props) {
       height = props.height,
       placeholderColor = props.placeholderColor,
       fluidGrow = props.fluidGrow,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "fluid", "block", "thumbnail", "shape", "align", "src", "width", "height", "placeholderColor", "fluidGrow"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "fluid", "block", "thumbnail", "shape", "align", "src", "width", "height", "placeholderColor", "fluidGrow"]);
 
   var alignClass = align === 'center' ? 'mx-auto' : align === 'right' ? 'float-right' : align === 'left' ? 'float-left' : ''; // render
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, alignClass, thumbnail && 'img-thumbnail', fluid || fluidGrow && 'img-fluid', fluidGrow && 'w-100', block && 'd-block', shape);
-  return src ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("img", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return src ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("img", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes,
     src: src,
     width: width,
     height: height
   }, attributes, {
     ref: innerRef
-  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("svg", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("svg", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes,
     width: width,
     height: height,
@@ -3882,126 +3882,126 @@ CImg.defaultProps = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CAlert": () => (/* reexport safe */ _alert_CAlert__WEBPACK_IMPORTED_MODULE_0__.default),
-/* harmony export */   "CBadge": () => (/* reexport safe */ _badge_CBadge__WEBPACK_IMPORTED_MODULE_1__.default),
-/* harmony export */   "CButton": () => (/* reexport safe */ _button_CButton__WEBPACK_IMPORTED_MODULE_2__.default),
-/* harmony export */   "CButtonClose": () => (/* reexport safe */ _button_CButtonClose__WEBPACK_IMPORTED_MODULE_3__.default),
-/* harmony export */   "CButtonGroup": () => (/* reexport safe */ _button_CButtonGroup__WEBPACK_IMPORTED_MODULE_4__.default),
-/* harmony export */   "CButtonToolbar": () => (/* reexport safe */ _button_CButtonToolbar__WEBPACK_IMPORTED_MODULE_5__.default),
-/* harmony export */   "CBreadcrumb": () => (/* reexport safe */ _breadcrumb_CBreadcrumb__WEBPACK_IMPORTED_MODULE_6__.default),
-/* harmony export */   "CBreadcrumbRouter": () => (/* reexport safe */ _breadcrumb_CBreadcrumbRouter__WEBPACK_IMPORTED_MODULE_7__.default),
-/* harmony export */   "CBreadcrumbItem": () => (/* reexport safe */ _breadcrumb_CBreadcrumbItem__WEBPACK_IMPORTED_MODULE_8__.default),
-/* harmony export */   "CCallout": () => (/* reexport safe */ _callout_CCallout__WEBPACK_IMPORTED_MODULE_9__.default),
-/* harmony export */   "CCard": () => (/* reexport safe */ _card_CCard__WEBPACK_IMPORTED_MODULE_10__.default),
-/* harmony export */   "CCardBody": () => (/* reexport safe */ _card_CCardBody__WEBPACK_IMPORTED_MODULE_11__.default),
-/* harmony export */   "CCardHeader": () => (/* reexport safe */ _card_CCardHeader__WEBPACK_IMPORTED_MODULE_12__.default),
-/* harmony export */   "CCardFooter": () => (/* reexport safe */ _card_CCardFooter__WEBPACK_IMPORTED_MODULE_13__.default),
-/* harmony export */   "CCardGroup": () => (/* reexport safe */ _card_CCardGroup__WEBPACK_IMPORTED_MODULE_14__.default),
-/* harmony export */   "CCardImg": () => (/* reexport safe */ _card_CCardImg__WEBPACK_IMPORTED_MODULE_15__.default),
-/* harmony export */   "CCardImgOverlay": () => (/* reexport safe */ _card_CCardImgOverlay__WEBPACK_IMPORTED_MODULE_16__.default),
-/* harmony export */   "CCardLink": () => (/* reexport safe */ _card_CCardLink__WEBPACK_IMPORTED_MODULE_17__.default),
-/* harmony export */   "CCardTitle": () => (/* reexport safe */ _card_CCardTitle__WEBPACK_IMPORTED_MODULE_18__.default),
-/* harmony export */   "CCardSubtitle": () => (/* reexport safe */ _card_CCardSubtitle__WEBPACK_IMPORTED_MODULE_19__.default),
-/* harmony export */   "CCardText": () => (/* reexport safe */ _card_CCardText__WEBPACK_IMPORTED_MODULE_20__.default),
-/* harmony export */   "CCarousel": () => (/* reexport safe */ _carousel_CCarousel__WEBPACK_IMPORTED_MODULE_21__.default),
-/* harmony export */   "CCarouselItem": () => (/* reexport safe */ _carousel_CCarouselItem__WEBPACK_IMPORTED_MODULE_22__.default),
-/* harmony export */   "CCarouselControl": () => (/* reexport safe */ _carousel_CCarouselControl__WEBPACK_IMPORTED_MODULE_23__.default),
-/* harmony export */   "CCarouselIndicators": () => (/* reexport safe */ _carousel_CCarouselIndicators__WEBPACK_IMPORTED_MODULE_24__.default),
-/* harmony export */   "CCarouselCaption": () => (/* reexport safe */ _carousel_CCarouselCaption__WEBPACK_IMPORTED_MODULE_25__.default),
-/* harmony export */   "CCarouselInner": () => (/* reexport safe */ _carousel_CCarouselInner__WEBPACK_IMPORTED_MODULE_26__.default),
-/* harmony export */   "CCollapse": () => (/* reexport safe */ _collapse_CCollapse__WEBPACK_IMPORTED_MODULE_27__.default),
-/* harmony export */   "CCreateElement": () => (/* reexport safe */ _create_element_CCreateElement__WEBPACK_IMPORTED_MODULE_28__.default),
-/* harmony export */   "CDropdown": () => (/* reexport safe */ _dropdown_CDropdown__WEBPACK_IMPORTED_MODULE_29__.default),
-/* harmony export */   "CDropdownDivider": () => (/* reexport safe */ _dropdown_CDropdownDivider__WEBPACK_IMPORTED_MODULE_30__.default),
-/* harmony export */   "CDropdownHeader": () => (/* reexport safe */ _dropdown_CDropdownHeader__WEBPACK_IMPORTED_MODULE_31__.default),
-/* harmony export */   "CDropdownItem": () => (/* reexport safe */ _dropdown_CDropdownItem__WEBPACK_IMPORTED_MODULE_32__.default),
-/* harmony export */   "CDropdownMenu": () => (/* reexport safe */ _dropdown_CDropdownMenu__WEBPACK_IMPORTED_MODULE_33__.default),
-/* harmony export */   "CDropdownToggle": () => (/* reexport safe */ _dropdown_CDropdownToggle__WEBPACK_IMPORTED_MODULE_34__.default),
-/* harmony export */   "CElementCover": () => (/* reexport safe */ _element_cover_CElementCover__WEBPACK_IMPORTED_MODULE_35__.default),
-/* harmony export */   "CEmbed": () => (/* reexport safe */ _embed_CEmbed__WEBPACK_IMPORTED_MODULE_36__.default),
-/* harmony export */   "CEmbedItem": () => (/* reexport safe */ _embed_CEmbedItem__WEBPACK_IMPORTED_MODULE_37__.default),
-/* harmony export */   "CFade": () => (/* reexport safe */ _fade_CFade__WEBPACK_IMPORTED_MODULE_38__.default),
-/* harmony export */   "CForm": () => (/* reexport safe */ _form_CForm__WEBPACK_IMPORTED_MODULE_39__.default),
+/* harmony export */   "CAlert": () => (/* reexport safe */ _alert_CAlert__WEBPACK_IMPORTED_MODULE_0__["default"]),
+/* harmony export */   "CBadge": () => (/* reexport safe */ _badge_CBadge__WEBPACK_IMPORTED_MODULE_1__["default"]),
+/* harmony export */   "CButton": () => (/* reexport safe */ _button_CButton__WEBPACK_IMPORTED_MODULE_2__["default"]),
+/* harmony export */   "CButtonClose": () => (/* reexport safe */ _button_CButtonClose__WEBPACK_IMPORTED_MODULE_3__["default"]),
+/* harmony export */   "CButtonGroup": () => (/* reexport safe */ _button_CButtonGroup__WEBPACK_IMPORTED_MODULE_4__["default"]),
+/* harmony export */   "CButtonToolbar": () => (/* reexport safe */ _button_CButtonToolbar__WEBPACK_IMPORTED_MODULE_5__["default"]),
+/* harmony export */   "CBreadcrumb": () => (/* reexport safe */ _breadcrumb_CBreadcrumb__WEBPACK_IMPORTED_MODULE_6__["default"]),
+/* harmony export */   "CBreadcrumbRouter": () => (/* reexport safe */ _breadcrumb_CBreadcrumbRouter__WEBPACK_IMPORTED_MODULE_7__["default"]),
+/* harmony export */   "CBreadcrumbItem": () => (/* reexport safe */ _breadcrumb_CBreadcrumbItem__WEBPACK_IMPORTED_MODULE_8__["default"]),
+/* harmony export */   "CCallout": () => (/* reexport safe */ _callout_CCallout__WEBPACK_IMPORTED_MODULE_9__["default"]),
+/* harmony export */   "CCard": () => (/* reexport safe */ _card_CCard__WEBPACK_IMPORTED_MODULE_10__["default"]),
+/* harmony export */   "CCardBody": () => (/* reexport safe */ _card_CCardBody__WEBPACK_IMPORTED_MODULE_11__["default"]),
+/* harmony export */   "CCardHeader": () => (/* reexport safe */ _card_CCardHeader__WEBPACK_IMPORTED_MODULE_12__["default"]),
+/* harmony export */   "CCardFooter": () => (/* reexport safe */ _card_CCardFooter__WEBPACK_IMPORTED_MODULE_13__["default"]),
+/* harmony export */   "CCardGroup": () => (/* reexport safe */ _card_CCardGroup__WEBPACK_IMPORTED_MODULE_14__["default"]),
+/* harmony export */   "CCardImg": () => (/* reexport safe */ _card_CCardImg__WEBPACK_IMPORTED_MODULE_15__["default"]),
+/* harmony export */   "CCardImgOverlay": () => (/* reexport safe */ _card_CCardImgOverlay__WEBPACK_IMPORTED_MODULE_16__["default"]),
+/* harmony export */   "CCardLink": () => (/* reexport safe */ _card_CCardLink__WEBPACK_IMPORTED_MODULE_17__["default"]),
+/* harmony export */   "CCardTitle": () => (/* reexport safe */ _card_CCardTitle__WEBPACK_IMPORTED_MODULE_18__["default"]),
+/* harmony export */   "CCardSubtitle": () => (/* reexport safe */ _card_CCardSubtitle__WEBPACK_IMPORTED_MODULE_19__["default"]),
+/* harmony export */   "CCardText": () => (/* reexport safe */ _card_CCardText__WEBPACK_IMPORTED_MODULE_20__["default"]),
+/* harmony export */   "CCarousel": () => (/* reexport safe */ _carousel_CCarousel__WEBPACK_IMPORTED_MODULE_21__["default"]),
+/* harmony export */   "CCarouselItem": () => (/* reexport safe */ _carousel_CCarouselItem__WEBPACK_IMPORTED_MODULE_22__["default"]),
+/* harmony export */   "CCarouselControl": () => (/* reexport safe */ _carousel_CCarouselControl__WEBPACK_IMPORTED_MODULE_23__["default"]),
+/* harmony export */   "CCarouselIndicators": () => (/* reexport safe */ _carousel_CCarouselIndicators__WEBPACK_IMPORTED_MODULE_24__["default"]),
+/* harmony export */   "CCarouselCaption": () => (/* reexport safe */ _carousel_CCarouselCaption__WEBPACK_IMPORTED_MODULE_25__["default"]),
+/* harmony export */   "CCarouselInner": () => (/* reexport safe */ _carousel_CCarouselInner__WEBPACK_IMPORTED_MODULE_26__["default"]),
+/* harmony export */   "CCollapse": () => (/* reexport safe */ _collapse_CCollapse__WEBPACK_IMPORTED_MODULE_27__["default"]),
+/* harmony export */   "CCreateElement": () => (/* reexport safe */ _create_element_CCreateElement__WEBPACK_IMPORTED_MODULE_28__["default"]),
+/* harmony export */   "CDropdown": () => (/* reexport safe */ _dropdown_CDropdown__WEBPACK_IMPORTED_MODULE_29__["default"]),
+/* harmony export */   "CDropdownDivider": () => (/* reexport safe */ _dropdown_CDropdownDivider__WEBPACK_IMPORTED_MODULE_30__["default"]),
+/* harmony export */   "CDropdownHeader": () => (/* reexport safe */ _dropdown_CDropdownHeader__WEBPACK_IMPORTED_MODULE_31__["default"]),
+/* harmony export */   "CDropdownItem": () => (/* reexport safe */ _dropdown_CDropdownItem__WEBPACK_IMPORTED_MODULE_32__["default"]),
+/* harmony export */   "CDropdownMenu": () => (/* reexport safe */ _dropdown_CDropdownMenu__WEBPACK_IMPORTED_MODULE_33__["default"]),
+/* harmony export */   "CDropdownToggle": () => (/* reexport safe */ _dropdown_CDropdownToggle__WEBPACK_IMPORTED_MODULE_34__["default"]),
+/* harmony export */   "CElementCover": () => (/* reexport safe */ _element_cover_CElementCover__WEBPACK_IMPORTED_MODULE_35__["default"]),
+/* harmony export */   "CEmbed": () => (/* reexport safe */ _embed_CEmbed__WEBPACK_IMPORTED_MODULE_36__["default"]),
+/* harmony export */   "CEmbedItem": () => (/* reexport safe */ _embed_CEmbedItem__WEBPACK_IMPORTED_MODULE_37__["default"]),
+/* harmony export */   "CFade": () => (/* reexport safe */ _fade_CFade__WEBPACK_IMPORTED_MODULE_38__["default"]),
+/* harmony export */   "CForm": () => (/* reexport safe */ _form_CForm__WEBPACK_IMPORTED_MODULE_39__["default"]),
 /* harmony export */   "CValidFeedback": () => (/* reexport safe */ _form_CFormFeedback__WEBPACK_IMPORTED_MODULE_40__.CValidFeedback),
 /* harmony export */   "CInvalidFeedback": () => (/* reexport safe */ _form_CFormFeedback__WEBPACK_IMPORTED_MODULE_40__.CInvalidFeedback),
-/* harmony export */   "CLabel": () => (/* reexport safe */ _form_CLabel__WEBPACK_IMPORTED_MODULE_41__.default),
-/* harmony export */   "CFormGroup": () => (/* reexport safe */ _form_CFormGroup__WEBPACK_IMPORTED_MODULE_42__.default),
-/* harmony export */   "CFormText": () => (/* reexport safe */ _form_CFormText__WEBPACK_IMPORTED_MODULE_43__.default),
+/* harmony export */   "CLabel": () => (/* reexport safe */ _form_CLabel__WEBPACK_IMPORTED_MODULE_41__["default"]),
+/* harmony export */   "CFormGroup": () => (/* reexport safe */ _form_CFormGroup__WEBPACK_IMPORTED_MODULE_42__["default"]),
+/* harmony export */   "CFormText": () => (/* reexport safe */ _form_CFormText__WEBPACK_IMPORTED_MODULE_43__["default"]),
 /* harmony export */   "CTextarea": () => (/* reexport safe */ _form_CInput__WEBPACK_IMPORTED_MODULE_44__.CTextarea),
 /* harmony export */   "CInput": () => (/* reexport safe */ _form_CInput__WEBPACK_IMPORTED_MODULE_44__.CInput),
 /* harmony export */   "CInputFile": () => (/* reexport safe */ _form_CInput__WEBPACK_IMPORTED_MODULE_44__.CInputFile),
 /* harmony export */   "CInputCheckbox": () => (/* reexport safe */ _form_CInput__WEBPACK_IMPORTED_MODULE_44__.CInputCheckbox),
 /* harmony export */   "CInputRadio": () => (/* reexport safe */ _form_CInput__WEBPACK_IMPORTED_MODULE_44__.CInputRadio),
 /* harmony export */   "CSelect": () => (/* reexport safe */ _form_CInput__WEBPACK_IMPORTED_MODULE_44__.CSelect),
-/* harmony export */   "CInputGroup": () => (/* reexport safe */ _form_CInputGroup__WEBPACK_IMPORTED_MODULE_45__.default),
+/* harmony export */   "CInputGroup": () => (/* reexport safe */ _form_CInputGroup__WEBPACK_IMPORTED_MODULE_45__["default"]),
 /* harmony export */   "CInputGroupPrepend": () => (/* reexport safe */ _form_CInputGroupAddon__WEBPACK_IMPORTED_MODULE_46__.CInputGroupPrepend),
 /* harmony export */   "CInputGroupAppend": () => (/* reexport safe */ _form_CInputGroupAddon__WEBPACK_IMPORTED_MODULE_46__.CInputGroupAppend),
-/* harmony export */   "CInputGroupText": () => (/* reexport safe */ _form_CInputGroupText__WEBPACK_IMPORTED_MODULE_47__.default),
-/* harmony export */   "CRow": () => (/* reexport safe */ _grid_CRow__WEBPACK_IMPORTED_MODULE_48__.default),
-/* harmony export */   "CCol": () => (/* reexport safe */ _grid_CCol__WEBPACK_IMPORTED_MODULE_49__.default),
-/* harmony export */   "CContainer": () => (/* reexport safe */ _grid_CContainer__WEBPACK_IMPORTED_MODULE_50__.default),
-/* harmony export */   "CImg": () => (/* reexport safe */ _image_CImg__WEBPACK_IMPORTED_MODULE_51__.default),
-/* harmony export */   "CJumbotron": () => (/* reexport safe */ _jumbotron_CJumbotron__WEBPACK_IMPORTED_MODULE_52__.default),
-/* harmony export */   "CLink": () => (/* reexport safe */ _link_CLink__WEBPACK_IMPORTED_MODULE_53__.default),
-/* harmony export */   "CListGroup": () => (/* reexport safe */ _list_group_CListGroup__WEBPACK_IMPORTED_MODULE_54__.default),
-/* harmony export */   "CListGroupItem": () => (/* reexport safe */ _list_group_CListGroupItem__WEBPACK_IMPORTED_MODULE_55__.default),
+/* harmony export */   "CInputGroupText": () => (/* reexport safe */ _form_CInputGroupText__WEBPACK_IMPORTED_MODULE_47__["default"]),
+/* harmony export */   "CRow": () => (/* reexport safe */ _grid_CRow__WEBPACK_IMPORTED_MODULE_48__["default"]),
+/* harmony export */   "CCol": () => (/* reexport safe */ _grid_CCol__WEBPACK_IMPORTED_MODULE_49__["default"]),
+/* harmony export */   "CContainer": () => (/* reexport safe */ _grid_CContainer__WEBPACK_IMPORTED_MODULE_50__["default"]),
+/* harmony export */   "CImg": () => (/* reexport safe */ _image_CImg__WEBPACK_IMPORTED_MODULE_51__["default"]),
+/* harmony export */   "CJumbotron": () => (/* reexport safe */ _jumbotron_CJumbotron__WEBPACK_IMPORTED_MODULE_52__["default"]),
+/* harmony export */   "CLink": () => (/* reexport safe */ _link_CLink__WEBPACK_IMPORTED_MODULE_53__["default"]),
+/* harmony export */   "CListGroup": () => (/* reexport safe */ _list_group_CListGroup__WEBPACK_IMPORTED_MODULE_54__["default"]),
+/* harmony export */   "CListGroupItem": () => (/* reexport safe */ _list_group_CListGroupItem__WEBPACK_IMPORTED_MODULE_55__["default"]),
 /* harmony export */   "CListGroupItemText": () => (/* binding */ wrapper),
 /* harmony export */   "CListGroupItemHeading": () => (/* binding */ heading),
-/* harmony export */   "CMedia": () => (/* reexport safe */ _media_CMedia__WEBPACK_IMPORTED_MODULE_57__.default),
-/* harmony export */   "CMediaBody": () => (/* reexport safe */ _media_CMediaBody__WEBPACK_IMPORTED_MODULE_58__.default),
-/* harmony export */   "CModal": () => (/* reexport safe */ _modal_CModal__WEBPACK_IMPORTED_MODULE_59__.default),
-/* harmony export */   "CModalBody": () => (/* reexport safe */ _modal_CModalBody__WEBPACK_IMPORTED_MODULE_60__.default),
-/* harmony export */   "CModalHeader": () => (/* reexport safe */ _modal_CModalHeader__WEBPACK_IMPORTED_MODULE_61__.default),
-/* harmony export */   "CModalFooter": () => (/* reexport safe */ _modal_CModalFooter__WEBPACK_IMPORTED_MODULE_62__.default),
-/* harmony export */   "CModalTitle": () => (/* reexport safe */ _modal_CModalTitle__WEBPACK_IMPORTED_MODULE_63__.default),
-/* harmony export */   "CNav": () => (/* reexport safe */ _nav_CNav__WEBPACK_IMPORTED_MODULE_64__.default),
-/* harmony export */   "CNavItem": () => (/* reexport safe */ _nav_CNavItem__WEBPACK_IMPORTED_MODULE_65__.default),
-/* harmony export */   "CNavLink": () => (/* reexport safe */ _nav_CNavLink__WEBPACK_IMPORTED_MODULE_66__.default),
-/* harmony export */   "CNavbarBrand": () => (/* reexport safe */ _navbar_CNavbarBrand__WEBPACK_IMPORTED_MODULE_67__.default),
-/* harmony export */   "CNavbar": () => (/* reexport safe */ _navbar_CNavbar__WEBPACK_IMPORTED_MODULE_68__.default),
-/* harmony export */   "CNavbarNav": () => (/* reexport safe */ _navbar_CNavbarNav__WEBPACK_IMPORTED_MODULE_69__.default),
-/* harmony export */   "CNavbarText": () => (/* reexport safe */ _navbar_CNavbarText__WEBPACK_IMPORTED_MODULE_70__.default),
-/* harmony export */   "CPagination": () => (/* reexport safe */ _pagination_CPagination__WEBPACK_IMPORTED_MODULE_71__.default),
-/* harmony export */   "CProgress": () => (/* reexport safe */ _progress_CProgress__WEBPACK_IMPORTED_MODULE_72__.default),
-/* harmony export */   "CProgressBar": () => (/* reexport safe */ _progress_CProgressBar__WEBPACK_IMPORTED_MODULE_73__.default),
-/* harmony export */   "CSpinner": () => (/* reexport safe */ _spinner_CSpinner__WEBPACK_IMPORTED_MODULE_74__.default),
-/* harmony export */   "CSwitch": () => (/* reexport safe */ _switch_CSwitch__WEBPACK_IMPORTED_MODULE_75__.default),
-/* harmony export */   "CDataTable": () => (/* reexport safe */ _table_CDataTable__WEBPACK_IMPORTED_MODULE_76__.default),
-/* harmony export */   "CTabs": () => (/* reexport safe */ _tabs_CTabs__WEBPACK_IMPORTED_MODULE_77__.default),
-/* harmony export */   "CTabPane": () => (/* reexport safe */ _tabs_CTabPane__WEBPACK_IMPORTED_MODULE_78__.default),
-/* harmony export */   "CTabContent": () => (/* reexport safe */ _tabs_CTabContent__WEBPACK_IMPORTED_MODULE_79__.default),
-/* harmony export */   "CFooter": () => (/* reexport safe */ _template_CFooter__WEBPACK_IMPORTED_MODULE_80__.default),
-/* harmony export */   "CHeader": () => (/* reexport safe */ _template_CHeader__WEBPACK_IMPORTED_MODULE_81__.default),
-/* harmony export */   "CHeaderNav": () => (/* reexport safe */ _template_CHeaderNav__WEBPACK_IMPORTED_MODULE_82__.default),
-/* harmony export */   "CHeaderNavItem": () => (/* reexport safe */ _template_CHeaderNavItem__WEBPACK_IMPORTED_MODULE_83__.default),
-/* harmony export */   "CHeaderNavLink": () => (/* reexport safe */ _template_CHeaderNavLink__WEBPACK_IMPORTED_MODULE_84__.default),
-/* harmony export */   "CHeaderBrand": () => (/* reexport safe */ _template_CHeaderBrand__WEBPACK_IMPORTED_MODULE_85__.default),
-/* harmony export */   "CSubheader": () => (/* reexport safe */ _template_CSubheader__WEBPACK_IMPORTED_MODULE_86__.default),
-/* harmony export */   "CSidebar": () => (/* reexport safe */ _template_CSidebar__WEBPACK_IMPORTED_MODULE_87__.default),
-/* harmony export */   "CSidebarBrand": () => (/* reexport safe */ _template_CSidebarBrand__WEBPACK_IMPORTED_MODULE_88__.default),
-/* harmony export */   "CSidebarNavDivider": () => (/* reexport safe */ _template_CSidebarNavDivider__WEBPACK_IMPORTED_MODULE_89__.default),
-/* harmony export */   "CSidebarNavTitle": () => (/* reexport safe */ _template_CSidebarNavTitle__WEBPACK_IMPORTED_MODULE_90__.default),
-/* harmony export */   "CSidebarNavItem": () => (/* reexport safe */ _template_CSidebarNavItem__WEBPACK_IMPORTED_MODULE_91__.default),
-/* harmony export */   "CSidebarNavDropdown": () => (/* reexport safe */ _template_CSidebarNavDropdown__WEBPACK_IMPORTED_MODULE_92__.default),
-/* harmony export */   "CSidebarFooter": () => (/* reexport safe */ _template_CSidebarFooter__WEBPACK_IMPORTED_MODULE_93__.default),
-/* harmony export */   "CSidebarForm": () => (/* reexport safe */ _template_CSidebarForm__WEBPACK_IMPORTED_MODULE_94__.default),
-/* harmony export */   "CSidebarHeader": () => (/* reexport safe */ _template_CSidebarHeader__WEBPACK_IMPORTED_MODULE_95__.default),
-/* harmony export */   "CSidebarMinimizer": () => (/* reexport safe */ _template_CSidebarMinimizer__WEBPACK_IMPORTED_MODULE_96__.default),
-/* harmony export */   "CSidebarNav": () => (/* reexport safe */ _template_CSidebarNav__WEBPACK_IMPORTED_MODULE_97__.default),
-/* harmony export */   "CSidebarClose": () => (/* reexport safe */ _template_CSidebarClose__WEBPACK_IMPORTED_MODULE_98__.default),
-/* harmony export */   "CToast": () => (/* reexport safe */ _toast_CToast__WEBPACK_IMPORTED_MODULE_99__.default),
-/* harmony export */   "CToastHeader": () => (/* reexport safe */ _toast_CToastHeader__WEBPACK_IMPORTED_MODULE_100__.default),
-/* harmony export */   "CToastBody": () => (/* reexport safe */ _toast_CToastBody__WEBPACK_IMPORTED_MODULE_101__.default),
-/* harmony export */   "CToaster": () => (/* reexport safe */ _toast_CToaster__WEBPACK_IMPORTED_MODULE_102__.default),
-/* harmony export */   "CToggler": () => (/* reexport safe */ _toggler_CToggler__WEBPACK_IMPORTED_MODULE_103__.default),
-/* harmony export */   "CTooltip": () => (/* reexport safe */ _tooltip_CTooltip__WEBPACK_IMPORTED_MODULE_104__.default),
-/* harmony export */   "CPopover": () => (/* reexport safe */ _tooltip_CPopover__WEBPACK_IMPORTED_MODULE_105__.default),
-/* harmony export */   "CWidgetProgress": () => (/* reexport safe */ _widgets_CWidgetProgress__WEBPACK_IMPORTED_MODULE_106__.default),
-/* harmony export */   "CWidgetIcon": () => (/* reexport safe */ _widgets_CWidgetIcon__WEBPACK_IMPORTED_MODULE_107__.default),
-/* harmony export */   "CWidgetBrand": () => (/* reexport safe */ _widgets_CWidgetBrand__WEBPACK_IMPORTED_MODULE_108__.default),
-/* harmony export */   "CWidgetProgressIcon": () => (/* reexport safe */ _widgets_CWidgetProgressIcon__WEBPACK_IMPORTED_MODULE_109__.default),
-/* harmony export */   "CWidgetDropdown": () => (/* reexport safe */ _widgets_CWidgetDropdown__WEBPACK_IMPORTED_MODULE_110__.default),
-/* harmony export */   "CWidgetSimple": () => (/* reexport safe */ _widgets_CWidgetSimple__WEBPACK_IMPORTED_MODULE_111__.default)
+/* harmony export */   "CMedia": () => (/* reexport safe */ _media_CMedia__WEBPACK_IMPORTED_MODULE_57__["default"]),
+/* harmony export */   "CMediaBody": () => (/* reexport safe */ _media_CMediaBody__WEBPACK_IMPORTED_MODULE_58__["default"]),
+/* harmony export */   "CModal": () => (/* reexport safe */ _modal_CModal__WEBPACK_IMPORTED_MODULE_59__["default"]),
+/* harmony export */   "CModalBody": () => (/* reexport safe */ _modal_CModalBody__WEBPACK_IMPORTED_MODULE_60__["default"]),
+/* harmony export */   "CModalHeader": () => (/* reexport safe */ _modal_CModalHeader__WEBPACK_IMPORTED_MODULE_61__["default"]),
+/* harmony export */   "CModalFooter": () => (/* reexport safe */ _modal_CModalFooter__WEBPACK_IMPORTED_MODULE_62__["default"]),
+/* harmony export */   "CModalTitle": () => (/* reexport safe */ _modal_CModalTitle__WEBPACK_IMPORTED_MODULE_63__["default"]),
+/* harmony export */   "CNav": () => (/* reexport safe */ _nav_CNav__WEBPACK_IMPORTED_MODULE_64__["default"]),
+/* harmony export */   "CNavItem": () => (/* reexport safe */ _nav_CNavItem__WEBPACK_IMPORTED_MODULE_65__["default"]),
+/* harmony export */   "CNavLink": () => (/* reexport safe */ _nav_CNavLink__WEBPACK_IMPORTED_MODULE_66__["default"]),
+/* harmony export */   "CNavbarBrand": () => (/* reexport safe */ _navbar_CNavbarBrand__WEBPACK_IMPORTED_MODULE_67__["default"]),
+/* harmony export */   "CNavbar": () => (/* reexport safe */ _navbar_CNavbar__WEBPACK_IMPORTED_MODULE_68__["default"]),
+/* harmony export */   "CNavbarNav": () => (/* reexport safe */ _navbar_CNavbarNav__WEBPACK_IMPORTED_MODULE_69__["default"]),
+/* harmony export */   "CNavbarText": () => (/* reexport safe */ _navbar_CNavbarText__WEBPACK_IMPORTED_MODULE_70__["default"]),
+/* harmony export */   "CPagination": () => (/* reexport safe */ _pagination_CPagination__WEBPACK_IMPORTED_MODULE_71__["default"]),
+/* harmony export */   "CProgress": () => (/* reexport safe */ _progress_CProgress__WEBPACK_IMPORTED_MODULE_72__["default"]),
+/* harmony export */   "CProgressBar": () => (/* reexport safe */ _progress_CProgressBar__WEBPACK_IMPORTED_MODULE_73__["default"]),
+/* harmony export */   "CSpinner": () => (/* reexport safe */ _spinner_CSpinner__WEBPACK_IMPORTED_MODULE_74__["default"]),
+/* harmony export */   "CSwitch": () => (/* reexport safe */ _switch_CSwitch__WEBPACK_IMPORTED_MODULE_75__["default"]),
+/* harmony export */   "CDataTable": () => (/* reexport safe */ _table_CDataTable__WEBPACK_IMPORTED_MODULE_76__["default"]),
+/* harmony export */   "CTabs": () => (/* reexport safe */ _tabs_CTabs__WEBPACK_IMPORTED_MODULE_77__["default"]),
+/* harmony export */   "CTabPane": () => (/* reexport safe */ _tabs_CTabPane__WEBPACK_IMPORTED_MODULE_78__["default"]),
+/* harmony export */   "CTabContent": () => (/* reexport safe */ _tabs_CTabContent__WEBPACK_IMPORTED_MODULE_79__["default"]),
+/* harmony export */   "CFooter": () => (/* reexport safe */ _template_CFooter__WEBPACK_IMPORTED_MODULE_80__["default"]),
+/* harmony export */   "CHeader": () => (/* reexport safe */ _template_CHeader__WEBPACK_IMPORTED_MODULE_81__["default"]),
+/* harmony export */   "CHeaderNav": () => (/* reexport safe */ _template_CHeaderNav__WEBPACK_IMPORTED_MODULE_82__["default"]),
+/* harmony export */   "CHeaderNavItem": () => (/* reexport safe */ _template_CHeaderNavItem__WEBPACK_IMPORTED_MODULE_83__["default"]),
+/* harmony export */   "CHeaderNavLink": () => (/* reexport safe */ _template_CHeaderNavLink__WEBPACK_IMPORTED_MODULE_84__["default"]),
+/* harmony export */   "CHeaderBrand": () => (/* reexport safe */ _template_CHeaderBrand__WEBPACK_IMPORTED_MODULE_85__["default"]),
+/* harmony export */   "CSubheader": () => (/* reexport safe */ _template_CSubheader__WEBPACK_IMPORTED_MODULE_86__["default"]),
+/* harmony export */   "CSidebar": () => (/* reexport safe */ _template_CSidebar__WEBPACK_IMPORTED_MODULE_87__["default"]),
+/* harmony export */   "CSidebarBrand": () => (/* reexport safe */ _template_CSidebarBrand__WEBPACK_IMPORTED_MODULE_88__["default"]),
+/* harmony export */   "CSidebarNavDivider": () => (/* reexport safe */ _template_CSidebarNavDivider__WEBPACK_IMPORTED_MODULE_89__["default"]),
+/* harmony export */   "CSidebarNavTitle": () => (/* reexport safe */ _template_CSidebarNavTitle__WEBPACK_IMPORTED_MODULE_90__["default"]),
+/* harmony export */   "CSidebarNavItem": () => (/* reexport safe */ _template_CSidebarNavItem__WEBPACK_IMPORTED_MODULE_91__["default"]),
+/* harmony export */   "CSidebarNavDropdown": () => (/* reexport safe */ _template_CSidebarNavDropdown__WEBPACK_IMPORTED_MODULE_92__["default"]),
+/* harmony export */   "CSidebarFooter": () => (/* reexport safe */ _template_CSidebarFooter__WEBPACK_IMPORTED_MODULE_93__["default"]),
+/* harmony export */   "CSidebarForm": () => (/* reexport safe */ _template_CSidebarForm__WEBPACK_IMPORTED_MODULE_94__["default"]),
+/* harmony export */   "CSidebarHeader": () => (/* reexport safe */ _template_CSidebarHeader__WEBPACK_IMPORTED_MODULE_95__["default"]),
+/* harmony export */   "CSidebarMinimizer": () => (/* reexport safe */ _template_CSidebarMinimizer__WEBPACK_IMPORTED_MODULE_96__["default"]),
+/* harmony export */   "CSidebarNav": () => (/* reexport safe */ _template_CSidebarNav__WEBPACK_IMPORTED_MODULE_97__["default"]),
+/* harmony export */   "CSidebarClose": () => (/* reexport safe */ _template_CSidebarClose__WEBPACK_IMPORTED_MODULE_98__["default"]),
+/* harmony export */   "CToast": () => (/* reexport safe */ _toast_CToast__WEBPACK_IMPORTED_MODULE_99__["default"]),
+/* harmony export */   "CToastHeader": () => (/* reexport safe */ _toast_CToastHeader__WEBPACK_IMPORTED_MODULE_100__["default"]),
+/* harmony export */   "CToastBody": () => (/* reexport safe */ _toast_CToastBody__WEBPACK_IMPORTED_MODULE_101__["default"]),
+/* harmony export */   "CToaster": () => (/* reexport safe */ _toast_CToaster__WEBPACK_IMPORTED_MODULE_102__["default"]),
+/* harmony export */   "CToggler": () => (/* reexport safe */ _toggler_CToggler__WEBPACK_IMPORTED_MODULE_103__["default"]),
+/* harmony export */   "CTooltip": () => (/* reexport safe */ _tooltip_CTooltip__WEBPACK_IMPORTED_MODULE_104__["default"]),
+/* harmony export */   "CPopover": () => (/* reexport safe */ _tooltip_CPopover__WEBPACK_IMPORTED_MODULE_105__["default"]),
+/* harmony export */   "CWidgetProgress": () => (/* reexport safe */ _widgets_CWidgetProgress__WEBPACK_IMPORTED_MODULE_106__["default"]),
+/* harmony export */   "CWidgetIcon": () => (/* reexport safe */ _widgets_CWidgetIcon__WEBPACK_IMPORTED_MODULE_107__["default"]),
+/* harmony export */   "CWidgetBrand": () => (/* reexport safe */ _widgets_CWidgetBrand__WEBPACK_IMPORTED_MODULE_108__["default"]),
+/* harmony export */   "CWidgetProgressIcon": () => (/* reexport safe */ _widgets_CWidgetProgressIcon__WEBPACK_IMPORTED_MODULE_109__["default"]),
+/* harmony export */   "CWidgetDropdown": () => (/* reexport safe */ _widgets_CWidgetDropdown__WEBPACK_IMPORTED_MODULE_110__["default"]),
+/* harmony export */   "CWidgetSimple": () => (/* reexport safe */ _widgets_CWidgetSimple__WEBPACK_IMPORTED_MODULE_111__["default"])
 /* harmony export */ });
 /* harmony import */ var _alert_CAlert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./alert/CAlert */ "./node_modules/@coreui/react/es/alert/CAlert.js");
 /* harmony import */ var _badge_CBadge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./badge/CBadge */ "./node_modules/@coreui/react/es/badge/CBadge.js");
@@ -4276,11 +4276,11 @@ var CJumbotron = function CJumbotron(props) {
       className = props.className,
       innerRef = props.innerRef,
       fluid = props.fluid,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "fluid"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "fluid"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'jumbotron', fluid ? 'jumbotron-fluid' : false);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, attributes, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, attributes, {
     className: classes,
     ref: innerRef
   }));
@@ -4326,7 +4326,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -4340,7 +4340,7 @@ var CLink = function CLink(props) {
       href = props.href,
       onClick = props.onClick,
       disabled = props.disabled,
-      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["className", "innerRef", "active", "href", "onClick", "disabled"]);
+      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["className", "innerRef", "active", "href", "onClick", "disabled"]);
 
   var to = rest ? rest.to : null;
 
@@ -4354,11 +4354,11 @@ var CLink = function CLink(props) {
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_5___default()(active && 'active', disabled && 'disabled', className);
-  return to ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({}, rest, {
+  return to ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, rest, {
     className: classes,
     onClick: click,
     ref: innerRef
-  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("a", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({
+  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("a", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
     href: href || '#',
     className: classes,
     rel: rest.target === '_blank' ? 'noopener norefferer' : null
@@ -4430,11 +4430,11 @@ var CListGroup = function CListGroup(props) {
       horizontal = props.horizontal,
       flush = props.flush,
       accent = props.accent,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "horizontal", "flush", "accent"]); // render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "horizontal", "flush", "accent"]); // render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'list-group', (_classNames = {}, _classNames["list-group-horizontal-" + horizontal] = horizontal, _classNames['list-group-flush'] = flush, _classNames['list-group-accent'] = accent, _classNames));
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes,
     role: "list-items"
   }, attributes, {
@@ -4497,7 +4497,7 @@ var CListGroupItem = function CListGroupItem(props) {
       action = props.action,
       color = props.color,
       accent = props.accent,
-      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "active", "disabled", "action", "color", "accent"]); //render
+      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "active", "disabled", "action", "color", "accent"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'list-group-item', (_classNames = {
@@ -4507,12 +4507,12 @@ var CListGroupItem = function CListGroupItem(props) {
   }, _classNames["list-group-item-" + color] = color, _classNames["list-group-item-accent-" + accent] = accent, _classNames));
 
   if (props.href || props.to) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_6__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, rest, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_6__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, rest, {
       className: classes,
       innerRef: innerRef
     }));
   } else {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, rest, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, rest, {
       className: classes,
       ref: innerRef
     }));
@@ -4564,11 +4564,11 @@ __webpack_require__.r(__webpack_exports__);
 var CMedia = function CMedia(props) {
   var className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('media', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -4611,11 +4611,11 @@ __webpack_require__.r(__webpack_exports__);
 var CMediaBody = function CMediaBody(props) {
   var className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('media-body', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -4683,7 +4683,7 @@ var CModal = function CModal(props) {
       onClose = props.onClose,
       className = props.className,
       scrollable = props.scrollable,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["innerRef", "show", "centered", "size", "color", "borderColor", "fade", "backdrop", "closeOnBackdrop", "onOpened", "onClosed", "addContentClass", "onClose", "className", "scrollable"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["innerRef", "show", "centered", "size", "color", "borderColor", "fade", "backdrop", "closeOnBackdrop", "onOpened", "onClosed", "addContentClass", "onClose", "className", "scrollable"]);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
       isOpen = _useState[0],
@@ -4742,7 +4742,7 @@ var CModal = function CModal(props) {
   var nodeRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     onClick: modalClick
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_5__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_5__["default"], {
     in: Boolean(isOpen),
     onEntered: onEntered,
     onExited: onExited,
@@ -4760,7 +4760,7 @@ var CModal = function CModal(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
       className: dialogClasses,
       role: "document"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, attributes, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, attributes, {
       className: contentClasses,
       ref: innerRef
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Context.Provider, {
@@ -4830,11 +4830,11 @@ var CModalBody = function CModalBody(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'modal-body');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -4884,11 +4884,11 @@ var CModalFooter = function CModalFooter(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'modal-footer');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -4943,18 +4943,18 @@ var CModalHeader = function CModalHeader(props) {
       className = props.className,
       innerRef = props.innerRef,
       closeButton = props.closeButton,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "closeButton"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "closeButton"]);
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_CModal__WEBPACK_IMPORTED_MODULE_6__.Context),
       close = _useContext.close; //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'modal-header');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
-  }), props.children, closeButton && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_button_CButtonClose__WEBPACK_IMPORTED_MODULE_7__.default, {
+  }), props.children, closeButton && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_button_CButtonClose__WEBPACK_IMPORTED_MODULE_7__["default"], {
     onClick: close
   }));
 };
@@ -5004,11 +5004,11 @@ var CModalTitle = function CModalTitle(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('modal-title', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -5065,12 +5065,12 @@ var CNav = function CNav(props) {
       justified = props.justified,
       fill = props.fill,
       inCard = props.inCard,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "variant", "vertical", "justified", "fill", "inCard"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "variant", "vertical", "justified", "fill", "inCard"]);
 
   var verticalClass = "flex" + (vertical === true ? '' : "-" + vertical) + "-column"; //render
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('nav', vertical && verticalClass, (_classNames = {}, _classNames["nav-" + variant] = variant, _classNames['nav-justified'] = justified, _classNames['nav-fill'] = fill, _classNames["card-header-" + variant] = inCard && variant, _classNames), className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -5125,11 +5125,11 @@ var CNavItem = function CNavItem(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('nav-item', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -5188,7 +5188,7 @@ var CNavLink = function CNavLink(props) {
   var innerRef = props.innerRef,
       className = props.className,
       onClick = props.onClick,
-      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["innerRef", "className", "onClick"]);
+      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["innerRef", "className", "onClick"]);
 
   var tabState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_tabs_CTabs__WEBPACK_IMPORTED_MODULE_5__.Context);
   var actTab = (tabState || {}).active;
@@ -5208,7 +5208,7 @@ var CNavLink = function CNavLink(props) {
     tabState && tabState.setActiveTab(getState(ref));
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_4__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_4__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     active: active
   }, rest, {
     innerRef: ref,
@@ -5264,11 +5264,11 @@ var CNavbar = function CNavbar(props) {
       fixed = props.fixed,
       sticky = props.sticky,
       color = props.color,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "expandable", "light", "fixed", "sticky", "color"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "expandable", "light", "fixed", "sticky", "color"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('navbar', className, light ? 'navbar-light' : 'navbar-dark', (_classNames = {}, _classNames["navbar-expand" + (expandable === true ? '' : "-" + expandable)] = expandable, _classNames["bg-" + color] = color, _classNames["fixed-" + fixed] = fixed, _classNames['sticky-top'] = sticky, _classNames));
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -5314,7 +5314,7 @@ __webpack_require__.r(__webpack_exports__);
  //component - CoreUI / CNavbarBrand
 
 var CNavbarBrand = function CNavbarBrand(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_utils_CBrand__WEBPACK_IMPORTED_MODULE_2__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_utils_CBrand__WEBPACK_IMPORTED_MODULE_2__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
     className: ['navbar-brand', props.className]
   }));
 };
@@ -5353,11 +5353,11 @@ var CNavbarNav = function CNavbarNav(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('navbar-nav', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -5407,11 +5407,11 @@ var CNavbarText = function CNavbarText(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('navbar-text', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -5475,7 +5475,7 @@ var CPagination = function CPagination(props) {
       pages = props.pages,
       align = props.align,
       onActivePageChange = props.onActivePageChange,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "addListClass", "activePage", "size", "firstButton", "previousButton", "nextButton", "lastButton", "dots", "arrows", "doubleArrows", "limit", "pages", "align", "onActivePageChange"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "addListClass", "activePage", "size", "firstButton", "previousButton", "nextButton", "lastButton", "dots", "arrows", "doubleArrows", "limit", "pages", "align", "onActivePageChange"]);
 
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     pages < activePage && onActivePageChange(pages, true);
@@ -5543,7 +5543,7 @@ var CPagination = function CPagination(props) {
     }
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("nav", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("nav", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: className,
     "aria-label": "pagination"
   }, attributes, {
@@ -5552,7 +5552,7 @@ var CPagination = function CPagination(props) {
     className: listClasses
   }, doubleArrows && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("li", {
     className: backArrowsClasses
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_5__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_5__["default"], {
     className: "page-link",
     onClick: function onClick() {
       return setPage(1);
@@ -5562,7 +5562,7 @@ var CPagination = function CPagination(props) {
     disabled: activePage === 1
   }, firstButton)), arrows && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("li", {
     className: backArrowsClasses
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_5__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_5__["default"], {
     className: "page-link",
     onClick: function onClick() {
       return setPage(activePage - 1);
@@ -5579,7 +5579,7 @@ var CPagination = function CPagination(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("li", {
       className: (activePage === i ? 'active' : '') + " page-item",
       key: i
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_5__.default, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_5__["default"], {
       className: "page-link",
       onClick: function onClick(e) {
         return setPage(i, e);
@@ -5593,7 +5593,7 @@ var CPagination = function CPagination(props) {
     className: "page-link"
   }, "\u2026")), arrows && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("li", {
     className: nextArrowsClasses
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_5__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_5__["default"], {
     className: "page-link",
     onClick: function onClick() {
       return setPage(activePage + 1);
@@ -5603,7 +5603,7 @@ var CPagination = function CPagination(props) {
     disabled: activePage === pages
   }, nextButton)), doubleArrows && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("li", {
     className: nextArrowsClasses
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_5__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_5__["default"], {
     className: "page-link",
     onClick: function onClick() {
       return setPage(pages);
@@ -5691,7 +5691,7 @@ var CProgress = function CProgress(props) {
       showValue = props.showValue,
       max = props.max,
       value = props.value,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["children", "className", "innerRef", "size", "color", "striped", "animated", "precision", "showPercentage", "showValue", "max", "value"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["children", "className", "innerRef", "size", "color", "striped", "animated", "precision", "showPercentage", "showValue", "max", "value"]);
 
   var inheritedProps = {
     color: color,
@@ -5705,7 +5705,7 @@ var CProgress = function CProgress(props) {
   };
   var progressClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('progress', size && 'progress-' + size, className); // render
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: progressClasses
   }, attributes, {
     ref: innerRef
@@ -5713,7 +5713,7 @@ var CProgress = function CProgress(props) {
     value: {
       inheritedProps: inheritedProps
     }
-  }, children || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_CProgressBar__WEBPACK_IMPORTED_MODULE_5__.default, null)));
+  }, children || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_CProgressBar__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
 };
 
 CProgress.propTypes = {
@@ -5766,7 +5766,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -5790,13 +5790,13 @@ var CProgressBar = function CProgressBar(directProps) {
       showValue = props.showValue,
       max = props.max,
       value = props.value,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["children", "className", "innerRef", "color", "striped", "animated", "precision", "showPercentage", "showValue", "max", "value"]); // render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["children", "className", "innerRef", "color", "striped", "animated", "precision", "showPercentage", "showValue", "max", "value"]); // render
 
 
   var progressBarClasses = classnames__WEBPACK_IMPORTED_MODULE_5___default()('progress-bar', animated && 'progress-bar-animated', (striped || animated) && 'progress-bar-striped', color && "bg-" + color, className);
   var valLabel = Number(value).toFixed(precision);
   var percentLabel = Number(value / max * 100).toFixed(precision) + '%';
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: progressBarClasses,
     style: {
       width: value / max * 100 + "%"
@@ -5861,12 +5861,12 @@ var CSpinner = function CSpinner(props) {
       grow = props.grow,
       size = props.size,
       color = props.color,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "grow", "size", "color"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "grow", "size", "color"]); //render
 
 
   var type = grow ? 'grow' : 'border';
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()("spinner-" + type, size && "spinner-" + type + "-" + size, color && "text-" + color, className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes,
     "aria-hidden": "false",
     "aria-label": "Loading",
@@ -5925,14 +5925,14 @@ var CSwitch = function CSwitch(props) {
       labelOff = props.labelOff,
       variant = props.variant,
       shape = props.shape,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "size", "color", "labelOn", "labelOff", "variant", "shape"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "size", "color", "labelOn", "labelOff", "variant", "shape"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('c-switch form-check-label', (labelOn || labelOff) && 'c-switch-label', size && "c-switch-" + size, shape && "c-switch-" + shape, color && "c-switch" + (variant ? "-" + variant : '') + "-" + color, className);
   var inputClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('c-switch-input', 'c-form-check-input');
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("label", {
     className: classes
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("input", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("input", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: inputClasses,
     type: "checkbox"
   }, attributes, {
@@ -5990,7 +5990,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -6135,7 +6135,7 @@ var CDataTable = function CDataTable(props) {
 
   var iconClasses = function iconClasses(index) {
     var state = getIconState(index);
-    return ['position-absolute', _CDataTable_module_css__WEBPACK_IMPORTED_MODULE_8__.default["icon-transition"], _CDataTable_module_css__WEBPACK_IMPORTED_MODULE_8__.default["arrow-position"], !state && _CDataTable_module_css__WEBPACK_IMPORTED_MODULE_8__.default.transparent, state === 'desc' && _CDataTable_module_css__WEBPACK_IMPORTED_MODULE_8__.default["rotate-icon"]];
+    return ['position-absolute', _CDataTable_module_css__WEBPACK_IMPORTED_MODULE_8__["default"]["icon-transition"], _CDataTable_module_css__WEBPACK_IMPORTED_MODULE_8__["default"]["arrow-position"], !state && _CDataTable_module_css__WEBPACK_IMPORTED_MODULE_8__["default"].transparent, state === 'desc' && _CDataTable_module_css__WEBPACK_IMPORTED_MODULE_8__["default"]["rotate-icon"]];
   };
 
   var rowClicked = function rowClicked(item, index, e, detailsClick) {
@@ -6386,7 +6386,7 @@ var CDataTable = function CDataTable(props) {
       key: index
     }, columnHeaderSlot["" + rawColumnNames[index]] || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
       className: "d-inline"
-    }, name), isSortable(index) && (sortingIconSlot && sortingIconSlot(getIconState(index), iconClasses(index)) || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_7__.default, {
+    }, name), isSortable(index) && (sortingIconSlot && sortingIconSlot(getIconState(index), iconClasses(index)) || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
       customClasses: classnames__WEBPACK_IMPORTED_MODULE_4___default()(iconClasses(index)),
       width: 18,
       content: _coreui_icons__WEBPACK_IMPORTED_MODULE_11__.cilArrowTop
@@ -6412,7 +6412,7 @@ var CDataTable = function CDataTable(props) {
     },
     value: tableFilterState || '',
     "aria-label": "table filter input"
-  })), cleaner && (typeof cleaner === 'function' ? cleaner(clean, isFiltered, cleanerProps) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_7__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, cleanerProps, {
+  })), cleaner && (typeof cleaner === 'function' ? cleaner(clean, isFiltered, cleanerProps) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_7__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, cleanerProps, {
     onClick: clean,
     onKeyUp: function onKeyUp(event) {
       if (event.key === 'Enter') clean();
@@ -6494,12 +6494,12 @@ var CDataTable = function CDataTable(props) {
     colSpan: colspan
   }, noItemsViewSlot || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "text-center my-5"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("h2", null, noItemsText + ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_7__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("h2", null, noItemsText + ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
     width: "30",
     name: "cilBan",
     content: _coreui_icons__WEBPACK_IMPORTED_MODULE_12__.cilBan,
     className: "text-danger mb-2"
-  })))))), footer && currentItems.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("tfoot", null, headerContent), footerSlot, captionSlot), loading && (loadingSlot || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_element_cover_CElementCover__WEBPACK_IMPORTED_MODULE_6__.default, {
+  })))))), footer && currentItems.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("tfoot", null, headerContent), footerSlot, captionSlot), loading && (loadingSlot || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_element_cover_CElementCover__WEBPACK_IMPORTED_MODULE_6__["default"], {
     boundaries: [{
       sides: ['top'],
       query: 'td'
@@ -6507,7 +6507,7 @@ var CDataTable = function CDataTable(props) {
       sides: ['bottom'],
       query: 'tbody'
     }]
-  }))), underTableSlot, pagination && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_pagination_CPagination__WEBPACK_IMPORTED_MODULE_5__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  }))), underTableSlot, pagination && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_pagination_CPagination__WEBPACK_IMPORTED_MODULE_5__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     style: {
       display: totalPages > 1 ? 'inline' : 'none'
     },
@@ -6612,13 +6612,13 @@ var CTabContent = function CTabContent(props) {
   var className = props.className,
       innerRef = props.innerRef,
       fade = props.fade,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "fade"]); // render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "fade"]); // render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('tab-content', className);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Context.Provider, {
     value: fade
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -6684,7 +6684,7 @@ var CTabPane = function CTabPane(props) {
   var className = props.className,
       innerRef = props.innerRef,
       active = props.active,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "active"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "active"]);
 
   var _ref = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_CTabs_js__WEBPACK_IMPORTED_MODULE_7__.Context) || {},
       activeTab = _ref.active,
@@ -6710,8 +6710,8 @@ var CTabPane = function CTabPane(props) {
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('tab-pane', {
     'active': isActive
   }, className);
-  var attrs = (0,_coreui_utils_src__WEBPACK_IMPORTED_MODULE_9__.default)(attributes, _utils_helper_js__WEBPACK_IMPORTED_MODULE_6__.CFadeProps);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_fade_CFade__WEBPACK_IMPORTED_MODULE_5__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  var attrs = (0,_coreui_utils_src__WEBPACK_IMPORTED_MODULE_9__["default"])(attributes, _utils_helper_js__WEBPACK_IMPORTED_MODULE_6__.CFadeProps);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_fade_CFade__WEBPACK_IMPORTED_MODULE_5__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     in: isActive,
     baseClass: fade ? 'fade' : '',
     className: classes
@@ -6813,11 +6813,11 @@ var CFooter = function CFooter(props) {
       className = props.className,
       innerRef = props.innerRef,
       fixed = props.fixed,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "fixed"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "fixed"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('c-footer', fixed ? 'c-footer-fixed' : null, className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -6871,11 +6871,11 @@ var CHeader = function CHeader(props) {
       fixed = props.fixed,
       colorScheme = props.colorScheme,
       withSubheader = props.withSubheader,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "fixed", "colorScheme", "withSubheader"]); // render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "fixed", "colorScheme", "withSubheader"]); // render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'c-header', colorScheme ? 'c-header-' + colorScheme : null, fixed ? 'c-header-fixed' : null, withSubheader ? 'c-header-with-subheader' : null);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -6922,7 +6922,7 @@ __webpack_require__.r(__webpack_exports__);
  //component - CoreUI / CHeaderBrand
 
 var CHeaderBrand = function CHeaderBrand(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_utils_CBrand__WEBPACK_IMPORTED_MODULE_2__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_utils_CBrand__WEBPACK_IMPORTED_MODULE_2__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
     className: ['c-header-brand', props.className]
   }));
 };
@@ -6958,11 +6958,11 @@ __webpack_require__.r(__webpack_exports__);
 var CHeaderNav = function CHeaderNav(props) {
   var className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'c-header-nav');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("ul", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("ul", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -7005,11 +7005,11 @@ __webpack_require__.r(__webpack_exports__);
 var CHeaderNavItem = function CHeaderNavItem(props) {
   var className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'c-header-nav-item');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("li", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("li", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -7054,11 +7054,11 @@ __webpack_require__.r(__webpack_exports__);
 var CHeaderNavLink = function CHeaderNavLink(props) {
   var className = props.className,
       innerRef = props.innerRef,
-      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef"]); //render
+      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'c-header-nav-link');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_5__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_link_CLink__WEBPACK_IMPORTED_MODULE_5__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, rest, {
     innerRef: innerRef
@@ -7110,7 +7110,7 @@ var CScrollbar = function CScrollbar(props) {
       innerRef = props.innerRef,
       settings = props.settings,
       switcher = props.switcher,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef", "settings", "switcher"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef", "settings", "switcher"]);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(),
       instance = _useState[0],
@@ -7132,7 +7132,7 @@ var CScrollbar = function CScrollbar(props) {
   };
 
   var createPerfectScrollbar = function createPerfectScrollbar() {
-    setInstance(new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_5__.default(ref.current, settings));
+    setInstance(new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_5__["default"](ref.current, settings));
   };
 
   var uninit = function uninit() {
@@ -7143,7 +7143,7 @@ var CScrollbar = function CScrollbar(props) {
   }; // render
 
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classnames__WEBPACK_IMPORTED_MODULE_4___default()(className),
     style: {
       position: 'relative'
@@ -7211,7 +7211,7 @@ var CSidebar = function CSidebar(props) {
       dropdownMode = props.dropdownMode,
       onShowChange = props.onShowChange,
       onMinimizeChange = props.onMinimizeChange,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["children", "className", "innerRef", "breakpoint", "show", "fixed", "unfoldable", "minimize", "size", "hideOnMobileClick", "aside", "colorScheme", "overlaid", "dropdownMode", "onShowChange", "onMinimizeChange"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["children", "className", "innerRef", "breakpoint", "show", "fixed", "unfoldable", "minimize", "size", "hideOnMobileClick", "aside", "colorScheme", "overlaid", "dropdownMode", "onShowChange", "onMinimizeChange"]);
 
   var key = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(Math.random().toString(36).substr(2))[0];
 
@@ -7324,7 +7324,7 @@ var CSidebar = function CSidebar(props) {
       openDropdown: openDropdown,
       setOpenDropdown: setOpenDropdown
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: reference,
@@ -7382,7 +7382,7 @@ __webpack_require__.r(__webpack_exports__);
  //component - CoreUI / CSidebarBrand
 
 var CSidebarBrand = function CSidebarBrand(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_utils_CBrand__WEBPACK_IMPORTED_MODULE_2__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_utils_CBrand__WEBPACK_IMPORTED_MODULE_2__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
     className: ['c-sidebar-brand', props.className]
   }));
 };
@@ -7410,7 +7410,7 @@ __webpack_require__.r(__webpack_exports__);
  //component - CoreUI / CSidebarClose
 
 var CSidebarClose = function CSidebarClose(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_button_CButtonClose__WEBPACK_IMPORTED_MODULE_2__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_button_CButtonClose__WEBPACK_IMPORTED_MODULE_2__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
     buttonClass: 'c-sidebar-close'
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("svg", {
     className: "c-icon",
@@ -7454,11 +7454,11 @@ var CSidebarFooter = function CSidebarFooter(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); // render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); // render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('c-sidebar-footer', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -7506,11 +7506,11 @@ var CSidebarForm = function CSidebarForm(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('c-sidebar-form', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -7558,11 +7558,11 @@ var CSidebarHeader = function CSidebarHeader(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('c-sidebar-header', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -7611,14 +7611,14 @@ __webpack_require__.r(__webpack_exports__);
 var CSidebarMinimizer = function CSidebarMinimizer(props) {
   var className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef"]);
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_CSidebar__WEBPACK_IMPORTED_MODULE_5__.Context),
       toggleMinimize = _useContext.toggleMinimize; //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('c-sidebar-minimizer', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("button", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("button", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes,
     type: "button"
   }, attributes, {
@@ -7667,7 +7667,7 @@ __webpack_require__.r(__webpack_exports__);
 var CSidebarNav = function CSidebarNav(props) {
   var className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef"]);
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_CSidebar__WEBPACK_IMPORTED_MODULE_6__.Context),
       scrollbarExist = _useContext.scrollbarExist;
@@ -7675,7 +7675,7 @@ var CSidebarNav = function CSidebarNav(props) {
   var navClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('c-sidebar-nav', 'h-100', className); //state
 
   var isRtl = getComputedStyle(document.querySelector('html')).direction === 'rtl';
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_CScrollbar__WEBPACK_IMPORTED_MODULE_5__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_CScrollbar__WEBPACK_IMPORTED_MODULE_5__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     settings: {
       suppressScrollX: !isRtl
     },
@@ -7723,11 +7723,11 @@ __webpack_require__.r(__webpack_exports__);
 var CSidebarNavDivider = function CSidebarNavDivider(props) {
   var className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('c-sidebar-nav-divider', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("li", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("li", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -7773,7 +7773,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -7805,7 +7805,7 @@ var CSidebarNavDropdown = function CSidebarNavDropdown(props) {
       name = props.name,
       show = props.show,
       route = props.route,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["children", "className", "innerRef", "icon", "fontIcon", "name", "show", "route"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["children", "className", "innerRef", "icon", "fontIcon", "name", "show", "route"]);
 
   var ref = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_3__.createRef)();
   innerRef && innerRef(ref);
@@ -7851,7 +7851,7 @@ var CSidebarNavDropdown = function CSidebarNavDropdown(props) {
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_5___default()('c-sidebar-nav-dropdown', isOpen && 'c-show', className);
   var iconClasses = classnames__WEBPACK_IMPORTED_MODULE_5___default()('c-sidebar-nav-icon', fontIcon);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("li", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("li", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: ref
@@ -7860,7 +7860,7 @@ var CSidebarNavDropdown = function CSidebarNavDropdown(props) {
     tabIndex: "0",
     onClick: toggle,
     "aria-label": "menu dropdown"
-  }, icon && ( /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_3__.isValidElement)(icon) ? icon : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__.default, iconProps(icon))), fontIcon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("i", {
+  }, icon && ( /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_3__.isValidElement)(icon) ? icon : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], iconProps(icon))), fontIcon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("i", {
     className: iconClasses
   }), name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("ul", {
     className: "c-sidebar-nav-dropdown-items"
@@ -7914,7 +7914,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -7935,7 +7935,7 @@ var CSidebarNavItem = function CSidebarNavItem(props) {
       addLinkClass = props.addLinkClass,
       label = props.label,
       color = props.color,
-      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["children", "className", "innerRef", "name", "icon", "fontIcon", "badge", "addLinkClass", "label", "color"]);
+      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["children", "className", "innerRef", "name", "icon", "fontIcon", "badge", "addLinkClass", "label", "color"]);
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_3__.useContext)(_CSidebarNavDropdown__WEBPACK_IMPORTED_MODULE_8__.DropdownContext),
       isOpen = _useContext.isOpen;
@@ -7949,11 +7949,11 @@ var CSidebarNavItem = function CSidebarNavItem(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("li", {
     className: classes,
     ref: innerRef
-  }, children || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_index__WEBPACK_IMPORTED_MODULE_6__.CLink, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  }, children || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_index__WEBPACK_IMPORTED_MODULE_6__.CLink, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: linkClasses
   }, routerLinkProps, rest, {
     tabIndex: isOpen === false ? -1 : 0
-  }), icon && ( /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_3__.isValidElement)(icon) ? icon : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_7__.default, (0,_CSidebarNavDropdown__WEBPACK_IMPORTED_MODULE_8__.iconProps)(icon))), fontIcon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("i", {
+  }), icon && ( /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_3__.isValidElement)(icon) ? icon : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_7__["default"], (0,_CSidebarNavDropdown__WEBPACK_IMPORTED_MODULE_8__.iconProps)(icon))), fontIcon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("i", {
     className: "c-sidebar-nav-icon " + fontIcon
   }), name, badge && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_index__WEBPACK_IMPORTED_MODULE_6__.CBadge, _objectSpread(_objectSpread({}, badge), {}, {
     text: null
@@ -8003,11 +8003,11 @@ __webpack_require__.r(__webpack_exports__);
 var CSidebarNavTitle = function CSidebarNavTitle(props) {
   var className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('c-sidebar-nav-title', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("li", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("li", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -8053,11 +8053,11 @@ var CSubheader = function CSubheader(props) {
   var Tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('c-subheader', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -8122,7 +8122,7 @@ var CToast = function CToast(props) {
       fade = props.fade,
       color = props.color,
       onStateChange = props.onStateChange,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "children", "innerRef", "show", "autohide", "fade", "color", "onStateChange"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "children", "innerRef", "show", "autohide", "fade", "color", "onStateChange"]);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(show),
       state = _useState[0],
@@ -8195,12 +8195,12 @@ var CToast = function CToast(props) {
     toast: true
   }, _classNames["toast-" + color] = !!color, _classNames), className);
   var fadeClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()(fade && (state === 'hiding' ? 'toast-fade-slow' : 'toast-fade'));
-  var attrs = (0,_coreui_utils_src__WEBPACK_IMPORTED_MODULE_8__.default)(attributes, _utils_helper_js__WEBPACK_IMPORTED_MODULE_6__.CFadeProps);
+  var attrs = (0,_coreui_utils_src__WEBPACK_IMPORTED_MODULE_8__["default"])(attributes, _utils_helper_js__WEBPACK_IMPORTED_MODULE_6__.CFadeProps);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Context.Provider, {
     value: {
       close: close
     }
-  }, state && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_fade_CFade__WEBPACK_IMPORTED_MODULE_5__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  }, state && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_fade_CFade__WEBPACK_IMPORTED_MODULE_5__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes,
     role: "alert",
     "aria-live": "assertive",
@@ -8258,11 +8258,11 @@ __webpack_require__.r(__webpack_exports__);
 var CToastBody = function CToastBody(props) {
   var className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('toast-body', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -8311,18 +8311,18 @@ var CToastHeader = function CToastHeader(props) {
       children = props.children,
       innerRef = props.innerRef,
       closeButton = props.closeButton,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "children", "innerRef", "closeButton"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "children", "innerRef", "closeButton"]);
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_CToast__WEBPACK_IMPORTED_MODULE_6__.Context),
       close = _useContext.close; //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('toast-header', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
-  }), children, closeButton && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_button_CButtonClose__WEBPACK_IMPORTED_MODULE_5__.default, {
+  }), children, closeButton && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_button_CButtonClose__WEBPACK_IMPORTED_MODULE_5__["default"], {
     className: "mfs-auto",
     onClick: close
   }));
@@ -8370,12 +8370,12 @@ var CToaster = function CToaster(props) {
   var className = props.className,
       innerRef = props.innerRef,
       position = props.position,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "innerRef", "position"]); // inherit closeButton, autohide, fade??
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "innerRef", "position"]); // inherit closeButton, autohide, fade??
   // render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('toaster', position && position !== 'static' && 'toaster-' + position, className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, {
     ref: innerRef
@@ -8428,7 +8428,7 @@ var CToggler = function CToggler(props) {
       innerRef = props.innerRef,
       inHeader = props.inHeader,
       inNavbar = props.inNavbar,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "children", "className", "innerRef", "inHeader", "inNavbar"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "children", "className", "innerRef", "inHeader", "inNavbar"]);
 
   var typeAttr = Tag === 'button' ? {
     type: 'button'
@@ -8438,7 +8438,7 @@ var CToggler = function CToggler(props) {
   var iconClass = type ? togglerClass + "-icon" : ''; //render
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(togglerClass, className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, typeAttr, attributes, {
     ref: innerRef
@@ -8488,7 +8488,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -8505,7 +8505,7 @@ var CPopover = function CPopover(props) {
   var header = props.header,
       children = props.children,
       content = props.content,
-      config = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__.default)(props, ["header", "children", "content"]);
+      config = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["header", "children", "content"]);
 
   var computedContent = (0,react__WEBPACK_IMPORTED_MODULE_3__.useCallback)(generateContent(content, header), [content, header]);
 
@@ -8517,7 +8517,7 @@ var CPopover = function CPopover(props) {
     advancedOptions: advancedOptions
   });
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_CTooltip_js__WEBPACK_IMPORTED_MODULE_5__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_CTooltip_js__WEBPACK_IMPORTED_MODULE_5__["default"], (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     content: computedContent
   }, computedConfig), children);
 };
@@ -8553,7 +8553,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -8589,7 +8589,7 @@ var CTooltip = function CTooltip(props) {
   });
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var node = document.querySelector("[data-tooltip=\"" + key + "\"]");
-    instance.current = (0,tippy_js__WEBPACK_IMPORTED_MODULE_5__.default)(node, config);
+    instance.current = (0,tippy_js__WEBPACK_IMPORTED_MODULE_5__["default"])(node, config);
     return function () {
       return instance.current.destroy();
     };
@@ -8652,13 +8652,13 @@ var CBrand = function CBrand(props) {
   var tag = props.tag,
       className = props.className,
       innerRef = props.innerRef,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["tag", "className", "innerRef"]); //render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["tag", "className", "innerRef"]); //render
 
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className);
-  var Tag = attributes.to || attributes.href ? _link_CLink__WEBPACK_IMPORTED_MODULE_6__.default : tag;
+  var Tag = attributes.to || attributes.href ? _link_CLink__WEBPACK_IMPORTED_MODULE_6__["default"] : tag;
   var ref = (_ref = {}, _ref["" + (typeof Tag === 'string' ? 'ref' : 'innerRef')] = innerRef, _ref);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Tag, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes, ref));
 };
@@ -8768,11 +8768,11 @@ var CWidgetBrand = function CWidgetBrand(props) {
       leftFooter = props.leftFooter,
       addHeaderClasses = props.addHeaderClasses,
       bodySlot = props.bodySlot,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["children", "className", "color", "rightHeader", "rightFooter", "leftHeader", "leftFooter", "addHeaderClasses", "bodySlot"]); // render
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["children", "className", "color", "rightHeader", "rightFooter", "leftHeader", "leftFooter", "addHeaderClasses", "bodySlot"]); // render
 
 
   var headerClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('card-header content-center text-white p-0', color && "bg-" + color, addHeaderClasses);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: "card " + className
   }, attributes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: headerClasses
@@ -8843,10 +8843,10 @@ var CWidgetDropdown = function CWidgetDropdown(props) {
       color = props.color,
       footerSlot = props.footerSlot,
       text = props.text,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["children", "className", "header", "color", "footerSlot", "text"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["children", "className", "header", "color", "footerSlot", "text"]);
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('card text-white', color && "bg-" + color, className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "card-body pb-0 d-flex justify-content-between"
@@ -8901,10 +8901,10 @@ var CWidgetIcon = function CWidgetIcon(props) {
       iconPadding = props.iconPadding,
       color = props.color,
       footerSlot = props.footerSlot,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["className", "children", "header", "text", "iconPadding", "color", "footerSlot"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["className", "children", "header", "text", "iconPadding", "color", "footerSlot"]);
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('card', color, className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "card-body d-flex align-items-center " + (iconPadding ? 'p-3' : 'p-0')
@@ -8970,16 +8970,16 @@ var CWidgetProgress = function CWidgetProgress(props) {
       color = props.color,
       value = props.value,
       inverse = props.inverse,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["children", "className", "header", "text", "footer", "color", "value", "inverse"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["children", "className", "header", "text", "footer", "color", "value", "inverse"]);
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('card', inverse ? [color && "bg-" + color, 'text-white'] : '', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "card-body"
   }, header && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "h4 m-0"
-  }, header), text && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", null, text), children || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_progress_CProgress__WEBPACK_IMPORTED_MODULE_5__.default, {
+  }, header), text && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", null, text), children || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_progress_CProgress__WEBPACK_IMPORTED_MODULE_5__["default"], {
     color: !inverse ? color : '',
     value: value,
     className: "progress-xs my-3 mb-0 " + (inverse ? 'progress-white' : '')
@@ -9042,10 +9042,10 @@ var CWidgetProgressIcon = function CWidgetProgressIcon(props) {
       color = props.color,
       inverse = props.inverse,
       progressSlot = props.progressSlot,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["children", "className", "header", "text", "value", "color", "inverse", "progressSlot"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["children", "className", "header", "text", "value", "color", "inverse", "progressSlot"]);
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('card', inverse ? [color && "bg-" + color, 'text-white'] : '', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "card-body"
@@ -9055,7 +9055,7 @@ var CWidgetProgressIcon = function CWidgetProgressIcon(props) {
     className: "h4 m-0"
   }, header), text && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("small", {
     className: "text-muted text-uppercase font-weight-bold"
-  }, text), progressSlot || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_progress_CProgress__WEBPACK_IMPORTED_MODULE_5__.default, {
+  }, text), progressSlot || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_progress_CProgress__WEBPACK_IMPORTED_MODULE_5__["default"], {
     color: !inverse ? color : '',
     value: value,
     className: "progress-xs my-3 mb-0 " + (inverse ? 'progress-white' : '')
@@ -9110,10 +9110,10 @@ var CWidgetSimple = function CWidgetSimple(props) {
       className = props.className,
       header = props.header,
       text = props.text,
-      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["children", "className", "header", "text"]);
+      attributes = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["children", "className", "header", "text"]);
 
   var classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()('card', className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     className: classes
   }, attributes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "card-body text-center"
@@ -9255,7 +9255,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "popperGenerator": () => (/* binding */ popperGenerator),
 /* harmony export */   "createPopper": () => (/* binding */ createPopper),
-/* harmony export */   "detectOverflow": () => (/* reexport safe */ _utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_13__.default)
+/* harmony export */   "detectOverflow": () => (/* reexport safe */ _utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_13__["default"])
 /* harmony export */ });
 /* harmony import */ var _dom_utils_getCompositeRect_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./dom-utils/getCompositeRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getCompositeRect.js");
 /* harmony import */ var _dom_utils_getLayoutRect_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./dom-utils/getLayoutRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getLayoutRect.js");
@@ -9334,16 +9334,17 @@ function popperGenerator(generatorOptions) {
     var isDestroyed = false;
     var instance = {
       state: state,
-      setOptions: function setOptions(options) {
+      setOptions: function setOptions(setOptionsAction) {
+        var options = typeof setOptionsAction === 'function' ? setOptionsAction(state.options) : setOptionsAction;
         cleanupModifierEffects();
         state.options = Object.assign({}, defaultOptions, state.options, options);
         state.scrollParents = {
-          reference: (0,_dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__.isElement)(reference) ? (0,_dom_utils_listScrollParents_js__WEBPACK_IMPORTED_MODULE_1__.default)(reference) : reference.contextElement ? (0,_dom_utils_listScrollParents_js__WEBPACK_IMPORTED_MODULE_1__.default)(reference.contextElement) : [],
-          popper: (0,_dom_utils_listScrollParents_js__WEBPACK_IMPORTED_MODULE_1__.default)(popper)
+          reference: (0,_dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__.isElement)(reference) ? (0,_dom_utils_listScrollParents_js__WEBPACK_IMPORTED_MODULE_1__["default"])(reference) : reference.contextElement ? (0,_dom_utils_listScrollParents_js__WEBPACK_IMPORTED_MODULE_1__["default"])(reference.contextElement) : [],
+          popper: (0,_dom_utils_listScrollParents_js__WEBPACK_IMPORTED_MODULE_1__["default"])(popper)
         }; // Orders the modifiers based on their dependencies and `phase`
         // properties
 
-        var orderedModifiers = (0,_utils_orderModifiers_js__WEBPACK_IMPORTED_MODULE_2__.default)((0,_utils_mergeByName_js__WEBPACK_IMPORTED_MODULE_3__.default)([].concat(defaultModifiers, state.options.modifiers))); // Strip out disabled modifiers
+        var orderedModifiers = (0,_utils_orderModifiers_js__WEBPACK_IMPORTED_MODULE_2__["default"])((0,_utils_mergeByName_js__WEBPACK_IMPORTED_MODULE_3__["default"])([].concat(defaultModifiers, state.options.modifiers))); // Strip out disabled modifiers
 
         state.orderedModifiers = orderedModifiers.filter(function (m) {
           return m.enabled;
@@ -9351,13 +9352,13 @@ function popperGenerator(generatorOptions) {
         // if one of the modifiers is invalid for any reason
 
         if (true) {
-          var modifiers = (0,_utils_uniqueBy_js__WEBPACK_IMPORTED_MODULE_4__.default)([].concat(orderedModifiers, state.options.modifiers), function (_ref) {
+          var modifiers = (0,_utils_uniqueBy_js__WEBPACK_IMPORTED_MODULE_4__["default"])([].concat(orderedModifiers, state.options.modifiers), function (_ref) {
             var name = _ref.name;
             return name;
           });
-          (0,_utils_validateModifiers_js__WEBPACK_IMPORTED_MODULE_5__.default)(modifiers);
+          (0,_utils_validateModifiers_js__WEBPACK_IMPORTED_MODULE_5__["default"])(modifiers);
 
-          if ((0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_6__.default)(state.options.placement) === _enums_js__WEBPACK_IMPORTED_MODULE_7__.auto) {
+          if ((0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_6__["default"])(state.options.placement) === _enums_js__WEBPACK_IMPORTED_MODULE_7__.auto) {
             var flipModifier = state.orderedModifiers.find(function (_ref2) {
               var name = _ref2.name;
               return name === 'flip';
@@ -9368,7 +9369,7 @@ function popperGenerator(generatorOptions) {
             }
           }
 
-          var _getComputedStyle = (0,_dom_utils_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_8__.default)(popper),
+          var _getComputedStyle = (0,_dom_utils_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_8__["default"])(popper),
               marginTop = _getComputedStyle.marginTop,
               marginRight = _getComputedStyle.marginRight,
               marginBottom = _getComputedStyle.marginBottom,
@@ -9411,8 +9412,8 @@ function popperGenerator(generatorOptions) {
 
 
         state.rects = {
-          reference: (0,_dom_utils_getCompositeRect_js__WEBPACK_IMPORTED_MODULE_9__.default)(reference, (0,_dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_10__.default)(popper), state.options.strategy === 'fixed'),
-          popper: (0,_dom_utils_getLayoutRect_js__WEBPACK_IMPORTED_MODULE_11__.default)(popper)
+          reference: (0,_dom_utils_getCompositeRect_js__WEBPACK_IMPORTED_MODULE_9__["default"])(reference, (0,_dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_10__["default"])(popper), state.options.strategy === 'fixed'),
+          popper: (0,_dom_utils_getLayoutRect_js__WEBPACK_IMPORTED_MODULE_11__["default"])(popper)
         }; // Modifiers have the ability to reset the current update cycle. The
         // most common use case for this is the `flip` modifier changing the
         // placement, which then needs to re-run all the modifiers, because the
@@ -9464,7 +9465,7 @@ function popperGenerator(generatorOptions) {
       },
       // Async and optimistically optimized update – it will not be executed if
       // not necessary (debounced to run at most once-per-tick)
-      update: (0,_utils_debounce_js__WEBPACK_IMPORTED_MODULE_12__.default)(function () {
+      update: (0,_utils_debounce_js__WEBPACK_IMPORTED_MODULE_12__["default"])(function () {
         return new Promise(function (resolve) {
           instance.forceUpdate();
           resolve(state);
@@ -9594,9 +9595,17 @@ function getBoundingClientRect(element, includeScale) {
   var scaleY = 1;
 
   if ((0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__.isHTMLElement)(element) && includeScale) {
+    var offsetHeight = element.offsetHeight;
+    var offsetWidth = element.offsetWidth; // Do not attempt to divide by 0, otherwise we get `Infinity` as scale
     // Fallback to 1 in case both values are `0`
-    scaleX = rect.width / element.offsetWidth || 1;
-    scaleY = rect.height / element.offsetHeight || 1;
+
+    if (offsetWidth > 0) {
+      scaleX = rect.width / offsetWidth || 1;
+    }
+
+    if (offsetHeight > 0) {
+      scaleY = rect.height / offsetHeight || 1;
+    }
   }
 
   return {
@@ -9654,7 +9663,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function getInnerBoundingClientRect(element) {
-  var rect = (0,_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_0__.default)(element);
+  var rect = (0,_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element);
   rect.top = rect.top + element.clientTop;
   rect.left = rect.left + element.clientLeft;
   rect.bottom = rect.top + element.clientHeight;
@@ -9667,16 +9676,16 @@ function getInnerBoundingClientRect(element) {
 }
 
 function getClientRectFromMixedType(element, clippingParent) {
-  return clippingParent === _enums_js__WEBPACK_IMPORTED_MODULE_1__.viewport ? (0,_utils_rectToClientRect_js__WEBPACK_IMPORTED_MODULE_2__.default)((0,_getViewportRect_js__WEBPACK_IMPORTED_MODULE_3__.default)(element)) : (0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_4__.isHTMLElement)(clippingParent) ? getInnerBoundingClientRect(clippingParent) : (0,_utils_rectToClientRect_js__WEBPACK_IMPORTED_MODULE_2__.default)((0,_getDocumentRect_js__WEBPACK_IMPORTED_MODULE_5__.default)((0,_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_6__.default)(element)));
+  return clippingParent === _enums_js__WEBPACK_IMPORTED_MODULE_1__.viewport ? (0,_utils_rectToClientRect_js__WEBPACK_IMPORTED_MODULE_2__["default"])((0,_getViewportRect_js__WEBPACK_IMPORTED_MODULE_3__["default"])(element)) : (0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_4__.isHTMLElement)(clippingParent) ? getInnerBoundingClientRect(clippingParent) : (0,_utils_rectToClientRect_js__WEBPACK_IMPORTED_MODULE_2__["default"])((0,_getDocumentRect_js__WEBPACK_IMPORTED_MODULE_5__["default"])((0,_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_6__["default"])(element)));
 } // A "clipping parent" is an overflowable container with the characteristic of
 // clipping (or hiding) overflowing elements with a position different from
 // `initial`
 
 
 function getClippingParents(element) {
-  var clippingParents = (0,_listScrollParents_js__WEBPACK_IMPORTED_MODULE_7__.default)((0,_getParentNode_js__WEBPACK_IMPORTED_MODULE_8__.default)(element));
-  var canEscapeClipping = ['absolute', 'fixed'].indexOf((0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_9__.default)(element).position) >= 0;
-  var clipperElement = canEscapeClipping && (0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_4__.isHTMLElement)(element) ? (0,_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_10__.default)(element) : element;
+  var clippingParents = (0,_listScrollParents_js__WEBPACK_IMPORTED_MODULE_7__["default"])((0,_getParentNode_js__WEBPACK_IMPORTED_MODULE_8__["default"])(element));
+  var canEscapeClipping = ['absolute', 'fixed'].indexOf((0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_9__["default"])(element).position) >= 0;
+  var clipperElement = canEscapeClipping && (0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_4__.isHTMLElement)(element) ? (0,_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_10__["default"])(element) : element;
 
   if (!(0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_4__.isElement)(clipperElement)) {
     return [];
@@ -9684,7 +9693,7 @@ function getClippingParents(element) {
 
 
   return clippingParents.filter(function (clippingParent) {
-    return (0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_4__.isElement)(clippingParent) && (0,_contains_js__WEBPACK_IMPORTED_MODULE_11__.default)(clippingParent, clipperElement) && (0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_12__.default)(clippingParent) !== 'body';
+    return (0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_4__.isElement)(clippingParent) && (0,_contains_js__WEBPACK_IMPORTED_MODULE_11__["default"])(clippingParent, clipperElement) && (0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_12__["default"])(clippingParent) !== 'body';
   });
 } // Gets the maximum area that the element is visible in due to any number of
 // clipping parents
@@ -9753,8 +9762,8 @@ function getCompositeRect(elementOrVirtualElement, offsetParent, isFixed) {
 
   var isOffsetParentAnElement = (0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__.isHTMLElement)(offsetParent);
   var offsetParentIsScaled = (0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__.isHTMLElement)(offsetParent) && isElementScaled(offsetParent);
-  var documentElement = (0,_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_1__.default)(offsetParent);
-  var rect = (0,_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_2__.default)(elementOrVirtualElement, offsetParentIsScaled);
+  var documentElement = (0,_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(offsetParent);
+  var rect = (0,_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_2__["default"])(elementOrVirtualElement, offsetParentIsScaled);
   var scroll = {
     scrollLeft: 0,
     scrollTop: 0
@@ -9765,17 +9774,17 @@ function getCompositeRect(elementOrVirtualElement, offsetParent, isFixed) {
   };
 
   if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
-    if ((0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_3__.default)(offsetParent) !== 'body' || // https://github.com/popperjs/popper-core/issues/1078
-    (0,_isScrollParent_js__WEBPACK_IMPORTED_MODULE_4__.default)(documentElement)) {
-      scroll = (0,_getNodeScroll_js__WEBPACK_IMPORTED_MODULE_5__.default)(offsetParent);
+    if ((0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_3__["default"])(offsetParent) !== 'body' || // https://github.com/popperjs/popper-core/issues/1078
+    (0,_isScrollParent_js__WEBPACK_IMPORTED_MODULE_4__["default"])(documentElement)) {
+      scroll = (0,_getNodeScroll_js__WEBPACK_IMPORTED_MODULE_5__["default"])(offsetParent);
     }
 
     if ((0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__.isHTMLElement)(offsetParent)) {
-      offsets = (0,_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_2__.default)(offsetParent, true);
+      offsets = (0,_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_2__["default"])(offsetParent, true);
       offsets.x += offsetParent.clientLeft;
       offsets.y += offsetParent.clientTop;
     } else if (documentElement) {
-      offsets.x = (0,_getWindowScrollBarX_js__WEBPACK_IMPORTED_MODULE_6__.default)(documentElement);
+      offsets.x = (0,_getWindowScrollBarX_js__WEBPACK_IMPORTED_MODULE_6__["default"])(documentElement);
     }
   }
 
@@ -9803,7 +9812,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _getWindow_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getWindow.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindow.js");
 
 function getComputedStyle(element) {
-  return (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_0__.default)(element).getComputedStyle(element);
+  return (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element).getComputedStyle(element);
 }
 
 /***/ }),
@@ -9855,15 +9864,15 @@ __webpack_require__.r(__webpack_exports__);
 function getDocumentRect(element) {
   var _element$ownerDocumen;
 
-  var html = (0,_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_0__.default)(element);
-  var winScroll = (0,_getWindowScroll_js__WEBPACK_IMPORTED_MODULE_1__.default)(element);
+  var html = (0,_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element);
+  var winScroll = (0,_getWindowScroll_js__WEBPACK_IMPORTED_MODULE_1__["default"])(element);
   var body = (_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body;
   var width = (0,_utils_math_js__WEBPACK_IMPORTED_MODULE_2__.max)(html.scrollWidth, html.clientWidth, body ? body.scrollWidth : 0, body ? body.clientWidth : 0);
   var height = (0,_utils_math_js__WEBPACK_IMPORTED_MODULE_2__.max)(html.scrollHeight, html.clientHeight, body ? body.scrollHeight : 0, body ? body.clientHeight : 0);
-  var x = -winScroll.scrollLeft + (0,_getWindowScrollBarX_js__WEBPACK_IMPORTED_MODULE_3__.default)(element);
+  var x = -winScroll.scrollLeft + (0,_getWindowScrollBarX_js__WEBPACK_IMPORTED_MODULE_3__["default"])(element);
   var y = -winScroll.scrollTop;
 
-  if ((0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_4__.default)(body || html).direction === 'rtl') {
+  if ((0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_4__["default"])(body || html).direction === 'rtl') {
     x += (0,_utils_math_js__WEBPACK_IMPORTED_MODULE_2__.max)(html.clientWidth, body ? body.clientWidth : 0) - width;
   }
 
@@ -9913,7 +9922,7 @@ __webpack_require__.r(__webpack_exports__);
 // means it doesn't take into account transforms.
 
 function getLayoutRect(element) {
-  var clientRect = (0,_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_0__.default)(element); // Use the clientRect sizes if it's not been transformed.
+  var clientRect = (0,_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element); // Use the clientRect sizes if it's not been transformed.
   // Fixes https://github.com/popperjs/popper-core/issues/1223
 
   var width = element.offsetWidth;
@@ -9974,10 +9983,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function getNodeScroll(node) {
-  if (node === (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_0__.default)(node) || !(0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_1__.isHTMLElement)(node)) {
-    return (0,_getWindowScroll_js__WEBPACK_IMPORTED_MODULE_2__.default)(node);
+  if (node === (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(node) || !(0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_1__.isHTMLElement)(node)) {
+    return (0,_getWindowScroll_js__WEBPACK_IMPORTED_MODULE_2__["default"])(node);
   } else {
-    return (0,_getHTMLElementScroll_js__WEBPACK_IMPORTED_MODULE_3__.default)(node);
+    return (0,_getHTMLElementScroll_js__WEBPACK_IMPORTED_MODULE_3__["default"])(node);
   }
 }
 
@@ -10009,7 +10018,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function getTrueOffsetParent(element) {
   if (!(0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__.isHTMLElement)(element) || // https://github.com/popperjs/popper-core/issues/837
-  (0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_1__.default)(element).position === 'fixed') {
+  (0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_1__["default"])(element).position === 'fixed') {
     return null;
   }
 
@@ -10024,17 +10033,17 @@ function getContainingBlock(element) {
 
   if (isIE && (0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__.isHTMLElement)(element)) {
     // In IE 9, 10 and 11 fixed elements containing block is always established by the viewport
-    var elementCss = (0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_1__.default)(element);
+    var elementCss = (0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_1__["default"])(element);
 
     if (elementCss.position === 'fixed') {
       return null;
     }
   }
 
-  var currentNode = (0,_getParentNode_js__WEBPACK_IMPORTED_MODULE_2__.default)(element);
+  var currentNode = (0,_getParentNode_js__WEBPACK_IMPORTED_MODULE_2__["default"])(element);
 
-  while ((0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__.isHTMLElement)(currentNode) && ['html', 'body'].indexOf((0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_3__.default)(currentNode)) < 0) {
-    var css = (0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_1__.default)(currentNode); // This is non-exhaustive but covers the most common CSS properties that
+  while ((0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__.isHTMLElement)(currentNode) && ['html', 'body'].indexOf((0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_3__["default"])(currentNode)) < 0) {
+    var css = (0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_1__["default"])(currentNode); // This is non-exhaustive but covers the most common CSS properties that
     // create a containing block.
     // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
 
@@ -10051,14 +10060,14 @@ function getContainingBlock(element) {
 
 
 function getOffsetParent(element) {
-  var window = (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_4__.default)(element);
+  var window = (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_4__["default"])(element);
   var offsetParent = getTrueOffsetParent(element);
 
-  while (offsetParent && (0,_isTableElement_js__WEBPACK_IMPORTED_MODULE_5__.default)(offsetParent) && (0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_1__.default)(offsetParent).position === 'static') {
+  while (offsetParent && (0,_isTableElement_js__WEBPACK_IMPORTED_MODULE_5__["default"])(offsetParent) && (0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_1__["default"])(offsetParent).position === 'static') {
     offsetParent = getTrueOffsetParent(offsetParent);
   }
 
-  if (offsetParent && ((0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_3__.default)(offsetParent) === 'html' || (0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_3__.default)(offsetParent) === 'body' && (0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_1__.default)(offsetParent).position === 'static')) {
+  if (offsetParent && ((0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_3__["default"])(offsetParent) === 'html' || (0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_3__["default"])(offsetParent) === 'body' && (0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_1__["default"])(offsetParent).position === 'static')) {
     return window;
   }
 
@@ -10085,7 +10094,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function getParentNode(element) {
-  if ((0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_0__.default)(element) === 'html') {
+  if ((0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element) === 'html') {
     return element;
   }
 
@@ -10096,7 +10105,7 @@ function getParentNode(element) {
     element.parentNode || ( // DOM Element detected
     (0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_1__.isShadowRoot)(element) ? element.host : null) || // ShadowRoot detected
     // $FlowFixMe[incompatible-call]: HTMLElement is a Node
-    (0,_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_2__.default)(element) // fallback
+    (0,_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_2__["default"])(element) // fallback
 
   );
 }
@@ -10123,16 +10132,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function getScrollParent(node) {
-  if (['html', 'body', '#document'].indexOf((0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_0__.default)(node)) >= 0) {
+  if (['html', 'body', '#document'].indexOf((0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_0__["default"])(node)) >= 0) {
     // $FlowFixMe[incompatible-return]: assume body is always available
     return node.ownerDocument.body;
   }
 
-  if ((0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_1__.isHTMLElement)(node) && (0,_isScrollParent_js__WEBPACK_IMPORTED_MODULE_2__.default)(node)) {
+  if ((0,_instanceOf_js__WEBPACK_IMPORTED_MODULE_1__.isHTMLElement)(node) && (0,_isScrollParent_js__WEBPACK_IMPORTED_MODULE_2__["default"])(node)) {
     return node;
   }
 
-  return getScrollParent((0,_getParentNode_js__WEBPACK_IMPORTED_MODULE_3__.default)(node));
+  return getScrollParent((0,_getParentNode_js__WEBPACK_IMPORTED_MODULE_3__["default"])(node));
 }
 
 /***/ }),
@@ -10155,8 +10164,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function getViewportRect(element) {
-  var win = (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_0__.default)(element);
-  var html = (0,_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_1__.default)(element);
+  var win = (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element);
+  var html = (0,_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(element);
   var visualViewport = win.visualViewport;
   var width = html.clientWidth;
   var height = html.clientHeight;
@@ -10187,7 +10196,7 @@ function getViewportRect(element) {
   return {
     width: width,
     height: height,
-    x: x + (0,_getWindowScrollBarX_js__WEBPACK_IMPORTED_MODULE_2__.default)(element),
+    x: x + (0,_getWindowScrollBarX_js__WEBPACK_IMPORTED_MODULE_2__["default"])(element),
     y: y
   };
 }
@@ -10234,7 +10243,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _getWindow_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getWindow.js */ "./node_modules/@popperjs/core/lib/dom-utils/getWindow.js");
 
 function getWindowScroll(node) {
-  var win = (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_0__.default)(node);
+  var win = (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(node);
   var scrollLeft = win.pageXOffset;
   var scrollTop = win.pageYOffset;
   return {
@@ -10270,7 +10279,7 @@ function getWindowScrollBarX(element) {
   // anyway.
   // Browsers where the left scrollbar doesn't cause an issue report `0` for
   // this (e.g. Edge 2019, IE11, Safari)
-  return (0,_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_0__.default)((0,_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_1__.default)(element)).left + (0,_getWindowScroll_js__WEBPACK_IMPORTED_MODULE_2__.default)(element).scrollLeft;
+  return (0,_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_0__["default"])((0,_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(element)).left + (0,_getWindowScroll_js__WEBPACK_IMPORTED_MODULE_2__["default"])(element).scrollLeft;
 }
 
 /***/ }),
@@ -10292,12 +10301,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function isElement(node) {
-  var OwnElement = (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_0__.default)(node).Element;
+  var OwnElement = (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(node).Element;
   return node instanceof OwnElement || node instanceof Element;
 }
 
 function isHTMLElement(node) {
-  var OwnElement = (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_0__.default)(node).HTMLElement;
+  var OwnElement = (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(node).HTMLElement;
   return node instanceof OwnElement || node instanceof HTMLElement;
 }
 
@@ -10307,7 +10316,7 @@ function isShadowRoot(node) {
     return false;
   }
 
-  var OwnElement = (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_0__.default)(node).ShadowRoot;
+  var OwnElement = (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(node).ShadowRoot;
   return node instanceof OwnElement || node instanceof ShadowRoot;
 }
 
@@ -10330,7 +10339,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function isScrollParent(element) {
   // Firefox wants us to check `-x` and `-y` variations as well
-  var _getComputedStyle = (0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_0__.default)(element),
+  var _getComputedStyle = (0,_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element),
       overflow = _getComputedStyle.overflow,
       overflowX = _getComputedStyle.overflowX,
       overflowY = _getComputedStyle.overflowY;
@@ -10354,7 +10363,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _getNodeName_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getNodeName.js */ "./node_modules/@popperjs/core/lib/dom-utils/getNodeName.js");
 
 function isTableElement(element) {
-  return ['table', 'td', 'th'].indexOf((0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_0__.default)(element)) >= 0;
+  return ['table', 'td', 'th'].indexOf((0,_getNodeName_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element)) >= 0;
 }
 
 /***/ }),
@@ -10392,13 +10401,13 @@ function listScrollParents(element, list) {
     list = [];
   }
 
-  var scrollParent = (0,_getScrollParent_js__WEBPACK_IMPORTED_MODULE_0__.default)(element);
+  var scrollParent = (0,_getScrollParent_js__WEBPACK_IMPORTED_MODULE_0__["default"])(element);
   var isBody = scrollParent === ((_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body);
-  var win = (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_1__.default)(scrollParent);
-  var target = isBody ? [win].concat(win.visualViewport || [], (0,_isScrollParent_js__WEBPACK_IMPORTED_MODULE_2__.default)(scrollParent) ? scrollParent : []) : scrollParent;
+  var win = (0,_getWindow_js__WEBPACK_IMPORTED_MODULE_1__["default"])(scrollParent);
+  var target = isBody ? [win].concat(win.visualViewport || [], (0,_isScrollParent_js__WEBPACK_IMPORTED_MODULE_2__["default"])(scrollParent) ? scrollParent : []) : scrollParent;
   var updatedList = list.concat(target);
   return isBody ? updatedList : // $FlowFixMe[incompatible-call]: isBody tells us target will be an HTMLElement here
-  updatedList.concat(listScrollParents((0,_getParentNode_js__WEBPACK_IMPORTED_MODULE_3__.default)(target)));
+  updatedList.concat(listScrollParents((0,_getParentNode_js__WEBPACK_IMPORTED_MODULE_3__["default"])(target)));
 }
 
 /***/ }),
@@ -10495,7 +10504,7 @@ function applyStyles(_ref) {
     var attributes = state.attributes[name] || {};
     var element = state.elements[name]; // arrow is optional + virtual elements
 
-    if (!(0,_dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__.isHTMLElement)(element) || !(0,_dom_utils_getNodeName_js__WEBPACK_IMPORTED_MODULE_1__.default)(element)) {
+    if (!(0,_dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__.isHTMLElement)(element) || !(0,_dom_utils_getNodeName_js__WEBPACK_IMPORTED_MODULE_1__["default"])(element)) {
       return;
     } // Flow doesn't support to extend this property, but it's the most
     // effective way to apply styles to an HTMLElement
@@ -10547,7 +10556,7 @@ function effect(_ref2) {
         return style;
       }, {}); // arrow is optional + virtual elements
 
-      if (!(0,_dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__.isHTMLElement)(element) || !(0,_dom_utils_getNodeName_js__WEBPACK_IMPORTED_MODULE_1__.default)(element)) {
+      if (!(0,_dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_0__.isHTMLElement)(element) || !(0,_dom_utils_getNodeName_js__WEBPACK_IMPORTED_MODULE_1__["default"])(element)) {
         return;
       }
 
@@ -10607,7 +10616,7 @@ var toPaddingObject = function toPaddingObject(padding, state) {
   padding = typeof padding === 'function' ? padding(Object.assign({}, state.rects, {
     placement: state.placement
   })) : padding;
-  return (0,_utils_mergePaddingObject_js__WEBPACK_IMPORTED_MODULE_0__.default)(typeof padding !== 'number' ? padding : (0,_utils_expandToHashMap_js__WEBPACK_IMPORTED_MODULE_1__.default)(padding, _enums_js__WEBPACK_IMPORTED_MODULE_2__.basePlacements));
+  return (0,_utils_mergePaddingObject_js__WEBPACK_IMPORTED_MODULE_0__["default"])(typeof padding !== 'number' ? padding : (0,_utils_expandToHashMap_js__WEBPACK_IMPORTED_MODULE_1__["default"])(padding, _enums_js__WEBPACK_IMPORTED_MODULE_2__.basePlacements));
 };
 
 function arrow(_ref) {
@@ -10618,8 +10627,8 @@ function arrow(_ref) {
       options = _ref.options;
   var arrowElement = state.elements.arrow;
   var popperOffsets = state.modifiersData.popperOffsets;
-  var basePlacement = (0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_3__.default)(state.placement);
-  var axis = (0,_utils_getMainAxisFromPlacement_js__WEBPACK_IMPORTED_MODULE_4__.default)(basePlacement);
+  var basePlacement = (0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_3__["default"])(state.placement);
+  var axis = (0,_utils_getMainAxisFromPlacement_js__WEBPACK_IMPORTED_MODULE_4__["default"])(basePlacement);
   var isVertical = [_enums_js__WEBPACK_IMPORTED_MODULE_2__.left, _enums_js__WEBPACK_IMPORTED_MODULE_2__.right].indexOf(basePlacement) >= 0;
   var len = isVertical ? 'height' : 'width';
 
@@ -10628,12 +10637,12 @@ function arrow(_ref) {
   }
 
   var paddingObject = toPaddingObject(options.padding, state);
-  var arrowRect = (0,_dom_utils_getLayoutRect_js__WEBPACK_IMPORTED_MODULE_5__.default)(arrowElement);
+  var arrowRect = (0,_dom_utils_getLayoutRect_js__WEBPACK_IMPORTED_MODULE_5__["default"])(arrowElement);
   var minProp = axis === 'y' ? _enums_js__WEBPACK_IMPORTED_MODULE_2__.top : _enums_js__WEBPACK_IMPORTED_MODULE_2__.left;
   var maxProp = axis === 'y' ? _enums_js__WEBPACK_IMPORTED_MODULE_2__.bottom : _enums_js__WEBPACK_IMPORTED_MODULE_2__.right;
   var endDiff = state.rects.reference[len] + state.rects.reference[axis] - popperOffsets[axis] - state.rects.popper[len];
   var startDiff = popperOffsets[axis] - state.rects.reference[axis];
-  var arrowOffsetParent = (0,_dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_6__.default)(arrowElement);
+  var arrowOffsetParent = (0,_dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_6__["default"])(arrowElement);
   var clientSize = arrowOffsetParent ? axis === 'y' ? arrowOffsetParent.clientHeight || 0 : arrowOffsetParent.clientWidth || 0 : 0;
   var centerToReference = endDiff / 2 - startDiff / 2; // Make sure the arrow doesn't overflow the popper if the center point is
   // outside of the popper bounds
@@ -10641,7 +10650,7 @@ function arrow(_ref) {
   var min = paddingObject[minProp];
   var max = clientSize - arrowRect[len] - paddingObject[maxProp];
   var center = clientSize / 2 - arrowRect[len] / 2 + centerToReference;
-  var offset = (0,_utils_within_js__WEBPACK_IMPORTED_MODULE_7__.default)(min, center, max); // Prevents breaking syntax highlighting...
+  var offset = (0,_utils_within_js__WEBPACK_IMPORTED_MODULE_7__["default"])(min, center, max); // Prevents breaking syntax highlighting...
 
   var axisProp = axis;
   state.modifiersData[name] = (_state$modifiersData$ = {}, _state$modifiersData$[axisProp] = offset, _state$modifiersData$.centerOffset = offset - center, _state$modifiersData$);
@@ -10672,7 +10681,7 @@ function effect(_ref2) {
     }
   }
 
-  if (!(0,_dom_utils_contains_js__WEBPACK_IMPORTED_MODULE_9__.default)(state.elements.popper, arrowElement)) {
+  if (!(0,_dom_utils_contains_js__WEBPACK_IMPORTED_MODULE_9__["default"])(state.elements.popper, arrowElement)) {
     if (true) {
       console.error(['Popper: "arrow" modifier\'s `element` must be a child of the popper', 'element.'].join(' '));
     }
@@ -10714,7 +10723,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dom_utils_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../dom-utils/getDocumentElement.js */ "./node_modules/@popperjs/core/lib/dom-utils/getDocumentElement.js");
 /* harmony import */ var _dom_utils_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../dom-utils/getComputedStyle.js */ "./node_modules/@popperjs/core/lib/dom-utils/getComputedStyle.js");
 /* harmony import */ var _utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/getBasePlacement.js */ "./node_modules/@popperjs/core/lib/utils/getBasePlacement.js");
+/* harmony import */ var _utils_getVariation_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/getVariation.js */ "./node_modules/@popperjs/core/lib/utils/getVariation.js");
 /* harmony import */ var _utils_math_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/math.js */ "./node_modules/@popperjs/core/lib/utils/math.js");
+
 
 
 
@@ -10749,6 +10760,7 @@ function mapToStyles(_ref2) {
   var popper = _ref2.popper,
       popperRect = _ref2.popperRect,
       placement = _ref2.placement,
+      variation = _ref2.variation,
       offsets = _ref2.offsets,
       position = _ref2.position,
       gpuAcceleration = _ref2.gpuAcceleration,
@@ -10768,14 +10780,14 @@ function mapToStyles(_ref2) {
   var win = window;
 
   if (adaptive) {
-    var offsetParent = (0,_dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_2__.default)(popper);
+    var offsetParent = (0,_dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_2__["default"])(popper);
     var heightProp = 'clientHeight';
     var widthProp = 'clientWidth';
 
-    if (offsetParent === (0,_dom_utils_getWindow_js__WEBPACK_IMPORTED_MODULE_3__.default)(popper)) {
-      offsetParent = (0,_dom_utils_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_4__.default)(popper);
+    if (offsetParent === (0,_dom_utils_getWindow_js__WEBPACK_IMPORTED_MODULE_3__["default"])(popper)) {
+      offsetParent = (0,_dom_utils_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_4__["default"])(popper);
 
-      if ((0,_dom_utils_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_5__.default)(offsetParent).position !== 'static') {
+      if ((0,_dom_utils_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_5__["default"])(offsetParent).position !== 'static' && position === 'absolute') {
         heightProp = 'scrollHeight';
         widthProp = 'scrollWidth';
       }
@@ -10784,14 +10796,14 @@ function mapToStyles(_ref2) {
 
     offsetParent = offsetParent;
 
-    if (placement === _enums_js__WEBPACK_IMPORTED_MODULE_1__.top) {
+    if (placement === _enums_js__WEBPACK_IMPORTED_MODULE_1__.top || (placement === _enums_js__WEBPACK_IMPORTED_MODULE_1__.left || placement === _enums_js__WEBPACK_IMPORTED_MODULE_1__.right) && variation === _enums_js__WEBPACK_IMPORTED_MODULE_1__.end) {
       sideY = _enums_js__WEBPACK_IMPORTED_MODULE_1__.bottom; // $FlowFixMe[prop-missing]
 
       y -= offsetParent[heightProp] - popperRect.height;
       y *= gpuAcceleration ? 1 : -1;
     }
 
-    if (placement === _enums_js__WEBPACK_IMPORTED_MODULE_1__.left) {
+    if (placement === _enums_js__WEBPACK_IMPORTED_MODULE_1__.left || (placement === _enums_js__WEBPACK_IMPORTED_MODULE_1__.top || placement === _enums_js__WEBPACK_IMPORTED_MODULE_1__.bottom) && variation === _enums_js__WEBPACK_IMPORTED_MODULE_1__.end) {
       sideX = _enums_js__WEBPACK_IMPORTED_MODULE_1__.right; // $FlowFixMe[prop-missing]
 
       x -= offsetParent[widthProp] - popperRect.width;
@@ -10806,7 +10818,7 @@ function mapToStyles(_ref2) {
   if (gpuAcceleration) {
     var _Object$assign;
 
-    return Object.assign({}, commonStyles, (_Object$assign = {}, _Object$assign[sideY] = hasY ? '0' : '', _Object$assign[sideX] = hasX ? '0' : '', _Object$assign.transform = (win.devicePixelRatio || 1) < 2 ? "translate(" + x + "px, " + y + "px)" : "translate3d(" + x + "px, " + y + "px, 0)", _Object$assign));
+    return Object.assign({}, commonStyles, (_Object$assign = {}, _Object$assign[sideY] = hasY ? '0' : '', _Object$assign[sideX] = hasX ? '0' : '', _Object$assign.transform = (win.devicePixelRatio || 1) <= 1 ? "translate(" + x + "px, " + y + "px)" : "translate3d(" + x + "px, " + y + "px, 0)", _Object$assign));
   }
 
   return Object.assign({}, commonStyles, (_Object$assign2 = {}, _Object$assign2[sideY] = hasY ? y + "px" : '', _Object$assign2[sideX] = hasX ? x + "px" : '', _Object$assign2.transform = '', _Object$assign2));
@@ -10823,7 +10835,7 @@ function computeStyles(_ref4) {
       roundOffsets = _options$roundOffsets === void 0 ? true : _options$roundOffsets;
 
   if (true) {
-    var transitionProperty = (0,_dom_utils_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_5__.default)(state.elements.popper).transitionProperty || '';
+    var transitionProperty = (0,_dom_utils_getComputedStyle_js__WEBPACK_IMPORTED_MODULE_5__["default"])(state.elements.popper).transitionProperty || '';
 
     if (adaptive && ['transform', 'top', 'right', 'bottom', 'left'].some(function (property) {
       return transitionProperty.indexOf(property) >= 0;
@@ -10833,7 +10845,8 @@ function computeStyles(_ref4) {
   }
 
   var commonStyles = {
-    placement: (0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_6__.default)(state.placement),
+    placement: (0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_6__["default"])(state.placement),
+    variation: (0,_utils_getVariation_js__WEBPACK_IMPORTED_MODULE_7__["default"])(state.placement),
     popper: state.elements.popper,
     popperRect: state.rects.popper,
     gpuAcceleration: gpuAcceleration
@@ -10899,7 +10912,7 @@ function effect(_ref) {
       scroll = _options$scroll === void 0 ? true : _options$scroll,
       _options$resize = options.resize,
       resize = _options$resize === void 0 ? true : _options$resize;
-  var window = (0,_dom_utils_getWindow_js__WEBPACK_IMPORTED_MODULE_0__.default)(state.elements.popper);
+  var window = (0,_dom_utils_getWindow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(state.elements.popper);
   var scrollParents = [].concat(state.scrollParents.reference, state.scrollParents.popper);
 
   if (scroll) {
@@ -10964,12 +10977,12 @@ __webpack_require__.r(__webpack_exports__);
  // eslint-disable-next-line import/no-unused-modules
 
 function getExpandedFallbackPlacements(placement) {
-  if ((0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__.default)(placement) === _enums_js__WEBPACK_IMPORTED_MODULE_1__.auto) {
+  if ((0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(placement) === _enums_js__WEBPACK_IMPORTED_MODULE_1__.auto) {
     return [];
   }
 
-  var oppositePlacement = (0,_utils_getOppositePlacement_js__WEBPACK_IMPORTED_MODULE_2__.default)(placement);
-  return [(0,_utils_getOppositeVariationPlacement_js__WEBPACK_IMPORTED_MODULE_3__.default)(placement), oppositePlacement, (0,_utils_getOppositeVariationPlacement_js__WEBPACK_IMPORTED_MODULE_3__.default)(oppositePlacement)];
+  var oppositePlacement = (0,_utils_getOppositePlacement_js__WEBPACK_IMPORTED_MODULE_2__["default"])(placement);
+  return [(0,_utils_getOppositeVariationPlacement_js__WEBPACK_IMPORTED_MODULE_3__["default"])(placement), oppositePlacement, (0,_utils_getOppositeVariationPlacement_js__WEBPACK_IMPORTED_MODULE_3__["default"])(oppositePlacement)];
 }
 
 function flip(_ref) {
@@ -10994,11 +11007,11 @@ function flip(_ref) {
       flipVariations = _options$flipVariatio === void 0 ? true : _options$flipVariatio,
       allowedAutoPlacements = options.allowedAutoPlacements;
   var preferredPlacement = state.options.placement;
-  var basePlacement = (0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__.default)(preferredPlacement);
+  var basePlacement = (0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(preferredPlacement);
   var isBasePlacement = basePlacement === preferredPlacement;
-  var fallbackPlacements = specifiedFallbackPlacements || (isBasePlacement || !flipVariations ? [(0,_utils_getOppositePlacement_js__WEBPACK_IMPORTED_MODULE_2__.default)(preferredPlacement)] : getExpandedFallbackPlacements(preferredPlacement));
+  var fallbackPlacements = specifiedFallbackPlacements || (isBasePlacement || !flipVariations ? [(0,_utils_getOppositePlacement_js__WEBPACK_IMPORTED_MODULE_2__["default"])(preferredPlacement)] : getExpandedFallbackPlacements(preferredPlacement));
   var placements = [preferredPlacement].concat(fallbackPlacements).reduce(function (acc, placement) {
-    return acc.concat((0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__.default)(placement) === _enums_js__WEBPACK_IMPORTED_MODULE_1__.auto ? (0,_utils_computeAutoPlacement_js__WEBPACK_IMPORTED_MODULE_4__.default)(state, {
+    return acc.concat((0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(placement) === _enums_js__WEBPACK_IMPORTED_MODULE_1__.auto ? (0,_utils_computeAutoPlacement_js__WEBPACK_IMPORTED_MODULE_4__["default"])(state, {
       placement: placement,
       boundary: boundary,
       rootBoundary: rootBoundary,
@@ -11016,12 +11029,12 @@ function flip(_ref) {
   for (var i = 0; i < placements.length; i++) {
     var placement = placements[i];
 
-    var _basePlacement = (0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__.default)(placement);
+    var _basePlacement = (0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(placement);
 
-    var isStartVariation = (0,_utils_getVariation_js__WEBPACK_IMPORTED_MODULE_5__.default)(placement) === _enums_js__WEBPACK_IMPORTED_MODULE_1__.start;
+    var isStartVariation = (0,_utils_getVariation_js__WEBPACK_IMPORTED_MODULE_5__["default"])(placement) === _enums_js__WEBPACK_IMPORTED_MODULE_1__.start;
     var isVertical = [_enums_js__WEBPACK_IMPORTED_MODULE_1__.top, _enums_js__WEBPACK_IMPORTED_MODULE_1__.bottom].indexOf(_basePlacement) >= 0;
     var len = isVertical ? 'width' : 'height';
-    var overflow = (0,_utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_6__.default)(state, {
+    var overflow = (0,_utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_6__["default"])(state, {
       placement: placement,
       boundary: boundary,
       rootBoundary: rootBoundary,
@@ -11031,10 +11044,10 @@ function flip(_ref) {
     var mainVariationSide = isVertical ? isStartVariation ? _enums_js__WEBPACK_IMPORTED_MODULE_1__.right : _enums_js__WEBPACK_IMPORTED_MODULE_1__.left : isStartVariation ? _enums_js__WEBPACK_IMPORTED_MODULE_1__.bottom : _enums_js__WEBPACK_IMPORTED_MODULE_1__.top;
 
     if (referenceRect[len] > popperRect[len]) {
-      mainVariationSide = (0,_utils_getOppositePlacement_js__WEBPACK_IMPORTED_MODULE_2__.default)(mainVariationSide);
+      mainVariationSide = (0,_utils_getOppositePlacement_js__WEBPACK_IMPORTED_MODULE_2__["default"])(mainVariationSide);
     }
 
-    var altVariationSide = (0,_utils_getOppositePlacement_js__WEBPACK_IMPORTED_MODULE_2__.default)(mainVariationSide);
+    var altVariationSide = (0,_utils_getOppositePlacement_js__WEBPACK_IMPORTED_MODULE_2__["default"])(mainVariationSide);
     var checks = [];
 
     if (checkMainAxis) {
@@ -11149,10 +11162,10 @@ function hide(_ref) {
   var referenceRect = state.rects.reference;
   var popperRect = state.rects.popper;
   var preventedOffsets = state.modifiersData.preventOverflow;
-  var referenceOverflow = (0,_utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_1__.default)(state, {
+  var referenceOverflow = (0,_utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_1__["default"])(state, {
     elementContext: 'reference'
   });
-  var popperAltOverflow = (0,_utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_1__.default)(state, {
+  var popperAltOverflow = (0,_utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_1__["default"])(state, {
     altBoundary: true
   });
   var referenceClippingOffsets = getSideOffsets(referenceOverflow, referenceRect);
@@ -11191,15 +11204,15 @@ function hide(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "applyStyles": () => (/* reexport safe */ _applyStyles_js__WEBPACK_IMPORTED_MODULE_0__.default),
-/* harmony export */   "arrow": () => (/* reexport safe */ _arrow_js__WEBPACK_IMPORTED_MODULE_1__.default),
-/* harmony export */   "computeStyles": () => (/* reexport safe */ _computeStyles_js__WEBPACK_IMPORTED_MODULE_2__.default),
-/* harmony export */   "eventListeners": () => (/* reexport safe */ _eventListeners_js__WEBPACK_IMPORTED_MODULE_3__.default),
-/* harmony export */   "flip": () => (/* reexport safe */ _flip_js__WEBPACK_IMPORTED_MODULE_4__.default),
-/* harmony export */   "hide": () => (/* reexport safe */ _hide_js__WEBPACK_IMPORTED_MODULE_5__.default),
-/* harmony export */   "offset": () => (/* reexport safe */ _offset_js__WEBPACK_IMPORTED_MODULE_6__.default),
-/* harmony export */   "popperOffsets": () => (/* reexport safe */ _popperOffsets_js__WEBPACK_IMPORTED_MODULE_7__.default),
-/* harmony export */   "preventOverflow": () => (/* reexport safe */ _preventOverflow_js__WEBPACK_IMPORTED_MODULE_8__.default)
+/* harmony export */   "applyStyles": () => (/* reexport safe */ _applyStyles_js__WEBPACK_IMPORTED_MODULE_0__["default"]),
+/* harmony export */   "arrow": () => (/* reexport safe */ _arrow_js__WEBPACK_IMPORTED_MODULE_1__["default"]),
+/* harmony export */   "computeStyles": () => (/* reexport safe */ _computeStyles_js__WEBPACK_IMPORTED_MODULE_2__["default"]),
+/* harmony export */   "eventListeners": () => (/* reexport safe */ _eventListeners_js__WEBPACK_IMPORTED_MODULE_3__["default"]),
+/* harmony export */   "flip": () => (/* reexport safe */ _flip_js__WEBPACK_IMPORTED_MODULE_4__["default"]),
+/* harmony export */   "hide": () => (/* reexport safe */ _hide_js__WEBPACK_IMPORTED_MODULE_5__["default"]),
+/* harmony export */   "offset": () => (/* reexport safe */ _offset_js__WEBPACK_IMPORTED_MODULE_6__["default"]),
+/* harmony export */   "popperOffsets": () => (/* reexport safe */ _popperOffsets_js__WEBPACK_IMPORTED_MODULE_7__["default"]),
+/* harmony export */   "preventOverflow": () => (/* reexport safe */ _preventOverflow_js__WEBPACK_IMPORTED_MODULE_8__["default"])
 /* harmony export */ });
 /* harmony import */ var _applyStyles_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./applyStyles.js */ "./node_modules/@popperjs/core/lib/modifiers/applyStyles.js");
 /* harmony import */ var _arrow_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./arrow.js */ "./node_modules/@popperjs/core/lib/modifiers/arrow.js");
@@ -11239,7 +11252,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function distanceAndSkiddingToXY(placement, rects, offset) {
-  var basePlacement = (0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__.default)(placement);
+  var basePlacement = (0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(placement);
   var invertDistance = [_enums_js__WEBPACK_IMPORTED_MODULE_1__.left, _enums_js__WEBPACK_IMPORTED_MODULE_1__.top].indexOf(basePlacement) >= 0 ? -1 : 1;
 
   var _ref = typeof offset === 'function' ? offset(Object.assign({}, rects, {
@@ -11313,7 +11326,7 @@ function popperOffsets(_ref) {
   // properly positioned near its reference element
   // This is the most basic placement, and will be adjusted by
   // the modifiers in the next step
-  state.modifiersData[name] = (0,_utils_computeOffsets_js__WEBPACK_IMPORTED_MODULE_0__.default)({
+  state.modifiersData[name] = (0,_utils_computeOffsets_js__WEBPACK_IMPORTED_MODULE_0__["default"])({
     reference: state.rects.reference,
     element: state.rects.popper,
     strategy: 'absolute',
@@ -11382,17 +11395,17 @@ function preventOverflow(_ref) {
       tether = _options$tether === void 0 ? true : _options$tether,
       _options$tetherOffset = options.tetherOffset,
       tetherOffset = _options$tetherOffset === void 0 ? 0 : _options$tetherOffset;
-  var overflow = (0,_utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_0__.default)(state, {
+  var overflow = (0,_utils_detectOverflow_js__WEBPACK_IMPORTED_MODULE_0__["default"])(state, {
     boundary: boundary,
     rootBoundary: rootBoundary,
     padding: padding,
     altBoundary: altBoundary
   });
-  var basePlacement = (0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_1__.default)(state.placement);
-  var variation = (0,_utils_getVariation_js__WEBPACK_IMPORTED_MODULE_2__.default)(state.placement);
+  var basePlacement = (0,_utils_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(state.placement);
+  var variation = (0,_utils_getVariation_js__WEBPACK_IMPORTED_MODULE_2__["default"])(state.placement);
   var isBasePlacement = !variation;
-  var mainAxis = (0,_utils_getMainAxisFromPlacement_js__WEBPACK_IMPORTED_MODULE_3__.default)(basePlacement);
-  var altAxis = (0,_utils_getAltAxis_js__WEBPACK_IMPORTED_MODULE_4__.default)(mainAxis);
+  var mainAxis = (0,_utils_getMainAxisFromPlacement_js__WEBPACK_IMPORTED_MODULE_3__["default"])(basePlacement);
+  var altAxis = (0,_utils_getAltAxis_js__WEBPACK_IMPORTED_MODULE_4__["default"])(mainAxis);
   var popperOffsets = state.modifiersData.popperOffsets;
   var referenceRect = state.rects.reference;
   var popperRect = state.rects.popper;
@@ -11421,11 +11434,11 @@ function preventOverflow(_ref) {
     // outside the reference bounds
 
     var arrowElement = state.elements.arrow;
-    var arrowRect = tether && arrowElement ? (0,_dom_utils_getLayoutRect_js__WEBPACK_IMPORTED_MODULE_6__.default)(arrowElement) : {
+    var arrowRect = tether && arrowElement ? (0,_dom_utils_getLayoutRect_js__WEBPACK_IMPORTED_MODULE_6__["default"])(arrowElement) : {
       width: 0,
       height: 0
     };
-    var arrowPaddingObject = state.modifiersData['arrow#persistent'] ? state.modifiersData['arrow#persistent'].padding : (0,_utils_getFreshSideObject_js__WEBPACK_IMPORTED_MODULE_7__.default)();
+    var arrowPaddingObject = state.modifiersData['arrow#persistent'] ? state.modifiersData['arrow#persistent'].padding : (0,_utils_getFreshSideObject_js__WEBPACK_IMPORTED_MODULE_7__["default"])();
     var arrowPaddingMin = arrowPaddingObject[mainSide];
     var arrowPaddingMax = arrowPaddingObject[altSide]; // If the reference length is smaller than the arrow length, we don't want
     // to include its full size in the calculation. If the reference is small
@@ -11433,17 +11446,17 @@ function preventOverflow(_ref) {
     // reference is not overflowing as well (e.g. virtual elements with no
     // width or height)
 
-    var arrowLen = (0,_utils_within_js__WEBPACK_IMPORTED_MODULE_8__.default)(0, referenceRect[len], arrowRect[len]);
+    var arrowLen = (0,_utils_within_js__WEBPACK_IMPORTED_MODULE_8__["default"])(0, referenceRect[len], arrowRect[len]);
     var minOffset = isBasePlacement ? referenceRect[len] / 2 - additive - arrowLen - arrowPaddingMin - tetherOffsetValue : minLen - arrowLen - arrowPaddingMin - tetherOffsetValue;
     var maxOffset = isBasePlacement ? -referenceRect[len] / 2 + additive + arrowLen + arrowPaddingMax + tetherOffsetValue : maxLen + arrowLen + arrowPaddingMax + tetherOffsetValue;
-    var arrowOffsetParent = state.elements.arrow && (0,_dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_9__.default)(state.elements.arrow);
+    var arrowOffsetParent = state.elements.arrow && (0,_dom_utils_getOffsetParent_js__WEBPACK_IMPORTED_MODULE_9__["default"])(state.elements.arrow);
     var clientOffset = arrowOffsetParent ? mainAxis === 'y' ? arrowOffsetParent.clientTop || 0 : arrowOffsetParent.clientLeft || 0 : 0;
     var offsetModifierValue = state.modifiersData.offset ? state.modifiersData.offset[state.placement][mainAxis] : 0;
     var tetherMin = popperOffsets[mainAxis] + minOffset - offsetModifierValue - clientOffset;
     var tetherMax = popperOffsets[mainAxis] + maxOffset - offsetModifierValue;
 
     if (checkMainAxis) {
-      var preventedOffset = (0,_utils_within_js__WEBPACK_IMPORTED_MODULE_8__.default)(tether ? (0,_utils_math_js__WEBPACK_IMPORTED_MODULE_10__.min)(min, tetherMin) : min, offset, tether ? (0,_utils_math_js__WEBPACK_IMPORTED_MODULE_10__.max)(max, tetherMax) : max);
+      var preventedOffset = (0,_utils_within_js__WEBPACK_IMPORTED_MODULE_8__["default"])(tether ? (0,_utils_math_js__WEBPACK_IMPORTED_MODULE_10__.min)(min, tetherMin) : min, offset, tether ? (0,_utils_math_js__WEBPACK_IMPORTED_MODULE_10__.max)(max, tetherMax) : max);
       popperOffsets[mainAxis] = preventedOffset;
       data[mainAxis] = preventedOffset - offset;
     }
@@ -11459,7 +11472,7 @@ function preventOverflow(_ref) {
 
       var _max = _offset - overflow[_altSide];
 
-      var _preventedOffset = (0,_utils_within_js__WEBPACK_IMPORTED_MODULE_8__.default)(tether ? (0,_utils_math_js__WEBPACK_IMPORTED_MODULE_10__.min)(_min, tetherMin) : _min, _offset, tether ? (0,_utils_math_js__WEBPACK_IMPORTED_MODULE_10__.max)(_max, tetherMax) : _max);
+      var _preventedOffset = (0,_utils_within_js__WEBPACK_IMPORTED_MODULE_8__["default"])(tether ? (0,_utils_math_js__WEBPACK_IMPORTED_MODULE_10__.min)(_min, tetherMin) : _min, _offset, tether ? (0,_utils_math_js__WEBPACK_IMPORTED_MODULE_10__.max)(_max, tetherMax) : _max);
 
       popperOffsets[altAxis] = _preventedOffset;
       data[altAxis] = _preventedOffset - _offset;
@@ -11492,7 +11505,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "createPopper": () => (/* binding */ createPopper),
 /* harmony export */   "popperGenerator": () => (/* reexport safe */ _createPopper_js__WEBPACK_IMPORTED_MODULE_4__.popperGenerator),
 /* harmony export */   "defaultModifiers": () => (/* binding */ defaultModifiers),
-/* harmony export */   "detectOverflow": () => (/* reexport safe */ _createPopper_js__WEBPACK_IMPORTED_MODULE_5__.default)
+/* harmony export */   "detectOverflow": () => (/* reexport safe */ _createPopper_js__WEBPACK_IMPORTED_MODULE_5__["default"])
 /* harmony export */ });
 /* harmony import */ var _createPopper_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./createPopper.js */ "./node_modules/@popperjs/core/lib/createPopper.js");
 /* harmony import */ var _createPopper_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./createPopper.js */ "./node_modules/@popperjs/core/lib/utils/detectOverflow.js");
@@ -11505,7 +11518,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var defaultModifiers = [_modifiers_eventListeners_js__WEBPACK_IMPORTED_MODULE_0__.default, _modifiers_popperOffsets_js__WEBPACK_IMPORTED_MODULE_1__.default, _modifiers_computeStyles_js__WEBPACK_IMPORTED_MODULE_2__.default, _modifiers_applyStyles_js__WEBPACK_IMPORTED_MODULE_3__.default];
+var defaultModifiers = [_modifiers_eventListeners_js__WEBPACK_IMPORTED_MODULE_0__["default"], _modifiers_popperOffsets_js__WEBPACK_IMPORTED_MODULE_1__["default"], _modifiers_computeStyles_js__WEBPACK_IMPORTED_MODULE_2__["default"], _modifiers_applyStyles_js__WEBPACK_IMPORTED_MODULE_3__["default"]];
 var createPopper = /*#__PURE__*/(0,_createPopper_js__WEBPACK_IMPORTED_MODULE_4__.popperGenerator)({
   defaultModifiers: defaultModifiers
 }); // eslint-disable-next-line import/no-unused-modules
@@ -11526,7 +11539,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "createPopper": () => (/* binding */ createPopper),
 /* harmony export */   "popperGenerator": () => (/* reexport safe */ _createPopper_js__WEBPACK_IMPORTED_MODULE_9__.popperGenerator),
 /* harmony export */   "defaultModifiers": () => (/* binding */ defaultModifiers),
-/* harmony export */   "detectOverflow": () => (/* reexport safe */ _createPopper_js__WEBPACK_IMPORTED_MODULE_10__.default),
+/* harmony export */   "detectOverflow": () => (/* reexport safe */ _createPopper_js__WEBPACK_IMPORTED_MODULE_10__["default"]),
 /* harmony export */   "createPopperLite": () => (/* reexport safe */ _popper_lite_js__WEBPACK_IMPORTED_MODULE_11__.createPopper),
 /* harmony export */   "applyStyles": () => (/* reexport safe */ _modifiers_index_js__WEBPACK_IMPORTED_MODULE_12__.applyStyles),
 /* harmony export */   "arrow": () => (/* reexport safe */ _modifiers_index_js__WEBPACK_IMPORTED_MODULE_12__.arrow),
@@ -11561,7 +11574,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var defaultModifiers = [_modifiers_eventListeners_js__WEBPACK_IMPORTED_MODULE_0__.default, _modifiers_popperOffsets_js__WEBPACK_IMPORTED_MODULE_1__.default, _modifiers_computeStyles_js__WEBPACK_IMPORTED_MODULE_2__.default, _modifiers_applyStyles_js__WEBPACK_IMPORTED_MODULE_3__.default, _modifiers_offset_js__WEBPACK_IMPORTED_MODULE_4__.default, _modifiers_flip_js__WEBPACK_IMPORTED_MODULE_5__.default, _modifiers_preventOverflow_js__WEBPACK_IMPORTED_MODULE_6__.default, _modifiers_arrow_js__WEBPACK_IMPORTED_MODULE_7__.default, _modifiers_hide_js__WEBPACK_IMPORTED_MODULE_8__.default];
+var defaultModifiers = [_modifiers_eventListeners_js__WEBPACK_IMPORTED_MODULE_0__["default"], _modifiers_popperOffsets_js__WEBPACK_IMPORTED_MODULE_1__["default"], _modifiers_computeStyles_js__WEBPACK_IMPORTED_MODULE_2__["default"], _modifiers_applyStyles_js__WEBPACK_IMPORTED_MODULE_3__["default"], _modifiers_offset_js__WEBPACK_IMPORTED_MODULE_4__["default"], _modifiers_flip_js__WEBPACK_IMPORTED_MODULE_5__["default"], _modifiers_preventOverflow_js__WEBPACK_IMPORTED_MODULE_6__["default"], _modifiers_arrow_js__WEBPACK_IMPORTED_MODULE_7__["default"], _modifiers_hide_js__WEBPACK_IMPORTED_MODULE_8__["default"]];
 var createPopper = /*#__PURE__*/(0,_createPopper_js__WEBPACK_IMPORTED_MODULE_9__.popperGenerator)({
   defaultModifiers: defaultModifiers
 }); // eslint-disable-next-line import/no-unused-modules
@@ -11606,9 +11619,9 @@ function computeAutoPlacement(state, options) {
       flipVariations = _options.flipVariations,
       _options$allowedAutoP = _options.allowedAutoPlacements,
       allowedAutoPlacements = _options$allowedAutoP === void 0 ? _enums_js__WEBPACK_IMPORTED_MODULE_0__.placements : _options$allowedAutoP;
-  var variation = (0,_getVariation_js__WEBPACK_IMPORTED_MODULE_1__.default)(placement);
+  var variation = (0,_getVariation_js__WEBPACK_IMPORTED_MODULE_1__["default"])(placement);
   var placements = variation ? flipVariations ? _enums_js__WEBPACK_IMPORTED_MODULE_0__.variationPlacements : _enums_js__WEBPACK_IMPORTED_MODULE_0__.variationPlacements.filter(function (placement) {
-    return (0,_getVariation_js__WEBPACK_IMPORTED_MODULE_1__.default)(placement) === variation;
+    return (0,_getVariation_js__WEBPACK_IMPORTED_MODULE_1__["default"])(placement) === variation;
   }) : _enums_js__WEBPACK_IMPORTED_MODULE_0__.basePlacements;
   var allowedPlacements = placements.filter(function (placement) {
     return allowedAutoPlacements.indexOf(placement) >= 0;
@@ -11624,12 +11637,12 @@ function computeAutoPlacement(state, options) {
 
 
   var overflows = allowedPlacements.reduce(function (acc, placement) {
-    acc[placement] = (0,_detectOverflow_js__WEBPACK_IMPORTED_MODULE_2__.default)(state, {
+    acc[placement] = (0,_detectOverflow_js__WEBPACK_IMPORTED_MODULE_2__["default"])(state, {
       placement: placement,
       boundary: boundary,
       rootBoundary: rootBoundary,
       padding: padding
-    })[(0,_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_3__.default)(placement)];
+    })[(0,_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_3__["default"])(placement)];
     return acc;
   }, {});
   return Object.keys(overflows).sort(function (a, b) {
@@ -11662,8 +11675,8 @@ function computeOffsets(_ref) {
   var reference = _ref.reference,
       element = _ref.element,
       placement = _ref.placement;
-  var basePlacement = placement ? (0,_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__.default)(placement) : null;
-  var variation = placement ? (0,_getVariation_js__WEBPACK_IMPORTED_MODULE_1__.default)(placement) : null;
+  var basePlacement = placement ? (0,_getBasePlacement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(placement) : null;
+  var variation = placement ? (0,_getVariation_js__WEBPACK_IMPORTED_MODULE_1__["default"])(placement) : null;
   var commonX = reference.x + reference.width / 2 - element.width / 2;
   var commonY = reference.y + reference.height / 2 - element.height / 2;
   var offsets;
@@ -11704,7 +11717,7 @@ function computeOffsets(_ref) {
       };
   }
 
-  var mainAxis = basePlacement ? (0,_getMainAxisFromPlacement_js__WEBPACK_IMPORTED_MODULE_3__.default)(basePlacement) : null;
+  var mainAxis = basePlacement ? (0,_getMainAxisFromPlacement_js__WEBPACK_IMPORTED_MODULE_3__["default"])(basePlacement) : null;
 
   if (mainAxis != null) {
     var len = mainAxis === 'y' ? 'height' : 'width';
@@ -11767,9 +11780,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ detectOverflow)
 /* harmony export */ });
-/* harmony import */ var _dom_utils_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../dom-utils/getBoundingClientRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getBoundingClientRect.js");
 /* harmony import */ var _dom_utils_getClippingRect_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../dom-utils/getClippingRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getClippingRect.js");
 /* harmony import */ var _dom_utils_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../dom-utils/getDocumentElement.js */ "./node_modules/@popperjs/core/lib/dom-utils/getDocumentElement.js");
+/* harmony import */ var _dom_utils_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../dom-utils/getBoundingClientRect.js */ "./node_modules/@popperjs/core/lib/dom-utils/getBoundingClientRect.js");
 /* harmony import */ var _computeOffsets_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./computeOffsets.js */ "./node_modules/@popperjs/core/lib/utils/computeOffsets.js");
 /* harmony import */ var _rectToClientRect_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./rectToClientRect.js */ "./node_modules/@popperjs/core/lib/utils/rectToClientRect.js");
 /* harmony import */ var _enums_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../enums.js */ "./node_modules/@popperjs/core/lib/enums.js");
@@ -11804,20 +11817,19 @@ function detectOverflow(state, options) {
       altBoundary = _options$altBoundary === void 0 ? false : _options$altBoundary,
       _options$padding = _options.padding,
       padding = _options$padding === void 0 ? 0 : _options$padding;
-  var paddingObject = (0,_mergePaddingObject_js__WEBPACK_IMPORTED_MODULE_1__.default)(typeof padding !== 'number' ? padding : (0,_expandToHashMap_js__WEBPACK_IMPORTED_MODULE_2__.default)(padding, _enums_js__WEBPACK_IMPORTED_MODULE_0__.basePlacements));
+  var paddingObject = (0,_mergePaddingObject_js__WEBPACK_IMPORTED_MODULE_1__["default"])(typeof padding !== 'number' ? padding : (0,_expandToHashMap_js__WEBPACK_IMPORTED_MODULE_2__["default"])(padding, _enums_js__WEBPACK_IMPORTED_MODULE_0__.basePlacements));
   var altContext = elementContext === _enums_js__WEBPACK_IMPORTED_MODULE_0__.popper ? _enums_js__WEBPACK_IMPORTED_MODULE_0__.reference : _enums_js__WEBPACK_IMPORTED_MODULE_0__.popper;
-  var referenceElement = state.elements.reference;
   var popperRect = state.rects.popper;
   var element = state.elements[altBoundary ? altContext : elementContext];
-  var clippingClientRect = (0,_dom_utils_getClippingRect_js__WEBPACK_IMPORTED_MODULE_3__.default)((0,_dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_4__.isElement)(element) ? element : element.contextElement || (0,_dom_utils_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_5__.default)(state.elements.popper), boundary, rootBoundary);
-  var referenceClientRect = (0,_dom_utils_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_6__.default)(referenceElement);
-  var popperOffsets = (0,_computeOffsets_js__WEBPACK_IMPORTED_MODULE_7__.default)({
+  var clippingClientRect = (0,_dom_utils_getClippingRect_js__WEBPACK_IMPORTED_MODULE_3__["default"])((0,_dom_utils_instanceOf_js__WEBPACK_IMPORTED_MODULE_4__.isElement)(element) ? element : element.contextElement || (0,_dom_utils_getDocumentElement_js__WEBPACK_IMPORTED_MODULE_5__["default"])(state.elements.popper), boundary, rootBoundary);
+  var referenceClientRect = (0,_dom_utils_getBoundingClientRect_js__WEBPACK_IMPORTED_MODULE_6__["default"])(state.elements.reference);
+  var popperOffsets = (0,_computeOffsets_js__WEBPACK_IMPORTED_MODULE_7__["default"])({
     reference: referenceClientRect,
     element: popperRect,
     strategy: 'absolute',
     placement: placement
   });
-  var popperClientRect = (0,_rectToClientRect_js__WEBPACK_IMPORTED_MODULE_8__.default)(Object.assign({}, popperRect, popperOffsets));
+  var popperClientRect = (0,_rectToClientRect_js__WEBPACK_IMPORTED_MODULE_8__["default"])(Object.assign({}, popperRect, popperOffsets));
   var elementClientRect = elementContext === _enums_js__WEBPACK_IMPORTED_MODULE_0__.popper ? popperClientRect : referenceClientRect; // positive = overflowing the clipping rect
   // 0 or negative = within the clipping rect
 
@@ -12086,7 +12098,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _getFreshSideObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getFreshSideObject.js */ "./node_modules/@popperjs/core/lib/utils/getFreshSideObject.js");
 
 function mergePaddingObject(paddingObject) {
-  return Object.assign({}, (0,_getFreshSideObject_js__WEBPACK_IMPORTED_MODULE_0__.default)(), paddingObject);
+  return Object.assign({}, (0,_getFreshSideObject_js__WEBPACK_IMPORTED_MODULE_0__["default"])(), paddingObject);
 }
 
 /***/ }),
@@ -12217,51 +12229,56 @@ var MISSING_DEPENDENCY_ERROR = 'Popper: modifier "%s" requires "%s", but "%s" mo
 var VALID_PROPERTIES = ['name', 'enabled', 'phase', 'fn', 'effect', 'requires', 'options'];
 function validateModifiers(modifiers) {
   modifiers.forEach(function (modifier) {
-    Object.keys(modifier).forEach(function (key) {
+    [].concat(Object.keys(modifier), VALID_PROPERTIES) // IE11-compatible replacement for `new Set(iterable)`
+    .filter(function (value, index, self) {
+      return self.indexOf(value) === index;
+    }).forEach(function (key) {
       switch (key) {
         case 'name':
           if (typeof modifier.name !== 'string') {
-            console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__.default)(INVALID_MODIFIER_ERROR, String(modifier.name), '"name"', '"string"', "\"" + String(modifier.name) + "\""));
+            console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(INVALID_MODIFIER_ERROR, String(modifier.name), '"name"', '"string"', "\"" + String(modifier.name) + "\""));
           }
 
           break;
 
         case 'enabled':
           if (typeof modifier.enabled !== 'boolean') {
-            console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__.default)(INVALID_MODIFIER_ERROR, modifier.name, '"enabled"', '"boolean"', "\"" + String(modifier.enabled) + "\""));
+            console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(INVALID_MODIFIER_ERROR, modifier.name, '"enabled"', '"boolean"', "\"" + String(modifier.enabled) + "\""));
           }
+
+          break;
 
         case 'phase':
           if (_enums_js__WEBPACK_IMPORTED_MODULE_1__.modifierPhases.indexOf(modifier.phase) < 0) {
-            console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__.default)(INVALID_MODIFIER_ERROR, modifier.name, '"phase"', "either " + _enums_js__WEBPACK_IMPORTED_MODULE_1__.modifierPhases.join(', '), "\"" + String(modifier.phase) + "\""));
+            console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(INVALID_MODIFIER_ERROR, modifier.name, '"phase"', "either " + _enums_js__WEBPACK_IMPORTED_MODULE_1__.modifierPhases.join(', '), "\"" + String(modifier.phase) + "\""));
           }
 
           break;
 
         case 'fn':
           if (typeof modifier.fn !== 'function') {
-            console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__.default)(INVALID_MODIFIER_ERROR, modifier.name, '"fn"', '"function"', "\"" + String(modifier.fn) + "\""));
+            console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(INVALID_MODIFIER_ERROR, modifier.name, '"fn"', '"function"', "\"" + String(modifier.fn) + "\""));
           }
 
           break;
 
         case 'effect':
-          if (typeof modifier.effect !== 'function') {
-            console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__.default)(INVALID_MODIFIER_ERROR, modifier.name, '"effect"', '"function"', "\"" + String(modifier.fn) + "\""));
+          if (modifier.effect != null && typeof modifier.effect !== 'function') {
+            console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(INVALID_MODIFIER_ERROR, modifier.name, '"effect"', '"function"', "\"" + String(modifier.fn) + "\""));
           }
 
           break;
 
         case 'requires':
-          if (!Array.isArray(modifier.requires)) {
-            console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__.default)(INVALID_MODIFIER_ERROR, modifier.name, '"requires"', '"array"', "\"" + String(modifier.requires) + "\""));
+          if (modifier.requires != null && !Array.isArray(modifier.requires)) {
+            console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(INVALID_MODIFIER_ERROR, modifier.name, '"requires"', '"array"', "\"" + String(modifier.requires) + "\""));
           }
 
           break;
 
         case 'requiresIfExists':
           if (!Array.isArray(modifier.requiresIfExists)) {
-            console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__.default)(INVALID_MODIFIER_ERROR, modifier.name, '"requiresIfExists"', '"array"', "\"" + String(modifier.requiresIfExists) + "\""));
+            console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(INVALID_MODIFIER_ERROR, modifier.name, '"requiresIfExists"', '"array"', "\"" + String(modifier.requiresIfExists) + "\""));
           }
 
           break;
@@ -12280,7 +12297,7 @@ function validateModifiers(modifiers) {
         if (modifiers.find(function (mod) {
           return mod.name === requirement;
         }) == null) {
-          console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__.default)(MISSING_DEPENDENCY_ERROR, String(modifier.name), requirement, requirement));
+          console.error((0,_format_js__WEBPACK_IMPORTED_MODULE_0__["default"])(MISSING_DEPENDENCY_ERROR, String(modifier.name), requirement, requirement));
         }
       });
     });
@@ -12353,7 +12370,7 @@ var Register = function Register() {
                   className: "mb-3",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CInputGroupPrepend, {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CInputGroupText, {
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_2__.default, {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_2__["default"], {
                         name: "cil-user"
                       })
                     })
@@ -12377,7 +12394,7 @@ var Register = function Register() {
                   className: "mb-3",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CInputGroupPrepend, {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CInputGroupText, {
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_2__.default, {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_2__["default"], {
                         name: "cil-lock-locked"
                       })
                     })
@@ -12390,7 +12407,7 @@ var Register = function Register() {
                   className: "mb-4",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CInputGroupPrepend, {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_1__.CInputGroupText, {
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_2__.default, {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_2__["default"], {
                         name: "cil-lock-locked"
                       })
                     })
@@ -18739,7 +18756,7 @@ var EXITING = 'exiting';
  */
 
 var Transition = /*#__PURE__*/function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__.default)(Transition, _React$Component);
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(Transition, _React$Component);
 
   function Transition(props, context) {
     var _this;
@@ -18885,7 +18902,7 @@ var Transition = /*#__PURE__*/function (_React$Component) {
     var enterTimeout = appearing ? timeouts.appear : timeouts.enter; // no enter animation skip right to ENTERED
     // if we are mounting and running this it means appear _must_ be set
 
-    if (!mounting && !enter || _config__WEBPACK_IMPORTED_MODULE_5__.default.disabled) {
+    if (!mounting && !enter || _config__WEBPACK_IMPORTED_MODULE_5__["default"].disabled) {
       this.safeSetState({
         status: ENTERED
       }, function () {
@@ -18917,7 +18934,7 @@ var Transition = /*#__PURE__*/function (_React$Component) {
     var timeouts = this.getTimeouts();
     var maybeNode = this.props.nodeRef ? undefined : react_dom__WEBPACK_IMPORTED_MODULE_4__.findDOMNode(this); // no exit animation skip right to EXITED
 
-    if (!exit || _config__WEBPACK_IMPORTED_MODULE_5__.default.disabled) {
+    if (!exit || _config__WEBPACK_IMPORTED_MODULE_5__["default"].disabled) {
       this.safeSetState({
         status: EXITED
       }, function () {
@@ -19024,12 +19041,12 @@ var Transition = /*#__PURE__*/function (_React$Component) {
         _onExiting = _this$props.onExiting,
         _onExited = _this$props.onExited,
         _nodeRef = _this$props.nodeRef,
-        childProps = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__.default)(_this$props, ["children", "in", "mountOnEnter", "unmountOnExit", "appear", "enter", "exit", "timeout", "addEndListener", "onEnter", "onEntering", "onEntered", "onExit", "onExiting", "onExited", "nodeRef"]);
+        childProps = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(_this$props, ["children", "in", "mountOnEnter", "unmountOnExit", "appear", "enter", "exit", "timeout", "addEndListener", "onEnter", "onEntering", "onEntered", "onExit", "onExiting", "onExited", "nodeRef"]);
 
     return (
       /*#__PURE__*/
       // allows for nested Transitions
-      react__WEBPACK_IMPORTED_MODULE_3__.createElement(_TransitionGroupContext__WEBPACK_IMPORTED_MODULE_6__.default.Provider, {
+      react__WEBPACK_IMPORTED_MODULE_3__.createElement(_TransitionGroupContext__WEBPACK_IMPORTED_MODULE_6__["default"].Provider, {
         value: null
       }, typeof children === 'function' ? children(status, childProps) : react__WEBPACK_IMPORTED_MODULE_3__.cloneElement(react__WEBPACK_IMPORTED_MODULE_3__.Children.only(children), childProps))
     );
@@ -19038,7 +19055,7 @@ var Transition = /*#__PURE__*/function (_React$Component) {
   return Transition;
 }(react__WEBPACK_IMPORTED_MODULE_3__.Component);
 
-Transition.contextType = _TransitionGroupContext__WEBPACK_IMPORTED_MODULE_6__.default;
+Transition.contextType = _TransitionGroupContext__WEBPACK_IMPORTED_MODULE_6__["default"];
 Transition.propTypes =  true ? {
   /**
    * A React reference to DOM element that need to transition:
@@ -19343,11 +19360,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CIcon_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CIcon_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CIcon_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CIcon_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -19373,11 +19390,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CDataTable_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CDataTable_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CDataTable_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CDataTable_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -19403,11 +19420,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CDataTable_module_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CDataTable_module_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CDataTable_module_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CDataTable_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -19433,11 +19450,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_scrollbar_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_scrollbar_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_scrollbar_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_scrollbar_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -19463,11 +19480,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CToast_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CToast_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CToast_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_CToast_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -19493,11 +19510,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_perfect_scrollbar_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_perfect_scrollbar_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_perfect_scrollbar_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_perfect_scrollbar_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -19523,11 +19540,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_tippy_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_tippy_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_tippy_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_tippy_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -21169,7 +21186,7 @@ var hideAll = function hideAll(_temp) {
 // and causing transitions to break for singletons when the console is open, but
 // most notably for non-transform styles being used, `gpuAcceleration: false`.
 
-var applyStylesModifier = Object.assign({}, _popperjs_core__WEBPACK_IMPORTED_MODULE_1__.default, {
+var applyStylesModifier = Object.assign({}, _popperjs_core__WEBPACK_IMPORTED_MODULE_1__["default"], {
   effect: function effect(_ref) {
     var state = _ref.state;
     var initialStyles = {

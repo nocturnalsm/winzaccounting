@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Setup;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ProductCategoryController extends Controller
+class ProductController extends Controller
 {
-    private $category;
+    private $product;
 
-    public function __construct(\App\Repositories\Setup\ProductCategoryRepository $category)
+    public function __construct(\App\Repositories\Setup\ProductRepository $product)
     {
-        $this->category = $category;
+        $this->product = $product;
     }
 
     /**
@@ -21,7 +21,7 @@ class ProductCategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->category->getList($request);
+        $data = $this->product->getList($request);
         return response()->json($data);
     }
 
@@ -43,7 +43,7 @@ class ProductCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->category->create($request);
+        $data = $this->product->create($request);
         return response()->json($data);
     }
 
@@ -55,7 +55,7 @@ class ProductCategoryController extends Controller
      */
     public function show($id)
     {
-        $data = $this->category->getById($id);
+        $data = $this->product->getById($id);
         return response()->json($data);
     }
 
@@ -67,7 +67,7 @@ class ProductCategoryController extends Controller
      */
     public function edit($id)
     {
-        $data = $this->category->getById($id);
+        $data = $this->product->getById($id);
         return response()->json($data);
     }
 
@@ -80,7 +80,7 @@ class ProductCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $this->category->update($id, $request);
+        $data = $this->product->update($id, $request);
         return response()->json($data);
     }
 
@@ -92,19 +92,14 @@ class ProductCategoryController extends Controller
      */
     public function destroy($id)
     {
-        $result = $this->category->delete($id);
+        $result = $this->product->delete($id);
         return $result;
-    }
-
-    public function category_parents(Request $request)
-    {        
-        $data = $this->category->searchParents($request);
-        return response()->json($data);
     }
 
     public function search(Request $request)
     {
-        $data = $this->category->search($request);
+        $data = $this->product->search($request);
         return response()->json($data);
     }
+    
 }

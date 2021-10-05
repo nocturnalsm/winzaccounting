@@ -58,11 +58,30 @@ class UnitRepository extends BaseRepository
                                         $query = Unit::where("id", $value)
                                                     ->where("company_id", $params["company_id"]);
                                         if (!$query->exists()){
-                                            $fail("Child Unit does not exist");
+                                            $fail("Child unit does not exist");
                                         }
                                     }
                                 }
-                            }]
+                            },                            
+                            function($attribute, $value, $fail) use ($params){
+                                if (isset($params["id"]) && $params["id"] != ""){
+                                    $data = DB::table("units")
+                                            ->where("qty_unit", $params["id"])
+                                            ->unionAll(
+                                                DB::table("units")
+                                                    ->select("units.*")
+                                                    ->join("tree", "tree.id", "=", "units.qty_unit")
+                                            );
+                                    $tree = DB::table('tree')
+                                            ->withRecursiveExpression('tree', $data)
+                                            ->pluck("id");                                                
+                                    
+                                    if (in_array($value, $tree->toArray())){
+                                        $fail("This will results circular link. Choose another unit.");
+                                    }
+                                }
+                            }                            
+                        ]
         ];
     }
 
@@ -70,9 +89,10 @@ class UnitRepository extends BaseRepository
     {
         return $data->select("*")
                     ->selectSub(
-                         Unit::select("name")
-                              ->whereColumn("id", "units.qty_unit"),
-                         'qty_unit_name'
+                        DB::table(DB::raw("units as child_units"))
+                              ->select("name")
+                              ->whereColumn("child_units.id", "units.qty_unit"),
+                        'qty_unit_name'
                     );
     }
     public function search(Request $request, $qRules = [])
@@ -80,18 +100,25 @@ class UnitRepository extends BaseRepository
         if ($qRules == []){
             $qRules = ["name" => ["operator" => "like"]];
         }
-        $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);
+        $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);        
         return parent::search($request, $qRules);
     }
     public function getPerUnit(Request $request)
     {
         if (isset($request->exclude_id)){
             $this->data = $this->data
-                               ->where("id", "<>", $request->exclude_id)
-                               ->where(function($query) use ($request){
-                                   $query->where("qty_unit", "<>", $request->exclude_id)
-                                         ->orWhereNull("qty_unit");
-                               });
+                               ->where("id", "<>", $request->exclude_id);                                    
+            $findCircular = DB::table("units")
+                                ->where("qty_unit", $request->exclude_id)
+                                ->unionAll(
+                                    DB::table("units")
+                                    ->select("units.*")
+                                    ->join("tree", "tree.id", "=", "units.qty_unit")
+                                );
+            $tree = DB::table('tree')
+                        ->withRecursiveExpression('tree', $findCircular)
+                        ->pluck("id");                                                            
+            $this->data->whereNotIn("id", $tree->toArray());            
         }
         $this->data->orderBy("name");
         return $this->search($request);

@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a14bce20d2a08ce2a9ed4e948c01dc00",
+    "content-hash": "ce0688dac2334a4118f18ab0f6836393",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4779,6 +4779,76 @@
             "time": "2020-07-13T06:12:54+00:00"
         },
         {
+            "name": "tormjens/eventy",
+            "version": "0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tormjens/eventy.git",
+                "reference": "b1d87d03875314b5b9ebb2d6d9b6cd876b9c2b38"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tormjens/eventy/zipball/b1d87d03875314b5b9ebb2d6d9b6cd876b9c2b38",
+                "reference": "b1d87d03875314b5b9ebb2d6d9b6cd876b9c2b38",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=5.3",
+                "opis/closure": "^3.5",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TorMorten\\Eventy\\EventServiceProvider",
+                        "TorMorten\\Eventy\\EventBladeServiceProvider"
+                    ],
+                    "aliases": {
+                        "Eventy": "TorMorten\\Eventy\\Facades\\Events"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TorMorten\\Eventy\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tor Morten Jensen",
+                    "homepage": "https://tormorten.no"
+                }
+            ],
+            "description": "The WordPress filter/action system in Laravel",
+            "homepage": "https://github.com/tormjens/eventy",
+            "keywords": [
+                "HOOK",
+                "action",
+                "actions",
+                "event",
+                "events",
+                "filter",
+                "filters",
+                "hooks",
+                "laravel",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/tormjens/eventy/issues",
+                "source": "https://github.com/tormjens/eventy/tree/0.7"
+            },
+            "time": "2020-11-17T14:53:22+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.3.0",
             "source": {
@@ -7108,5 +7178,6 @@
     "platform": {
         "php": "^7.3|^8.0"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.1.0"
 }

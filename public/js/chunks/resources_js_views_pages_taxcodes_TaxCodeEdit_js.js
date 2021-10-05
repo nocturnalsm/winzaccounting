@@ -1705,7 +1705,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var _excluded = ["async", "invalid", "defaultOptions", "optionLabel", "optionValue", "value", "url", "filter", "onChange", "urlParams", "innerRef"];
+var _excluded = ["async", "invalid", "defaultOptions", "optionLabel", "optionValue", "value", "url", "filter", "onChange", "urlParams", "disabled", "innerRef"];
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -1746,6 +1746,7 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
       filter = _ref.filter,
       onChange = _ref.onChange,
       urlParams = _ref.urlParams,
+      disabled = _ref.disabled,
       innerRef = _ref.innerRef,
       restProps = _objectWithoutProperties(_ref, _excluded);
 
@@ -1797,6 +1798,13 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
           borderColor: borderColor,
           backgroundRepeat: backgroundRepeat,
           backgroundSize: backgroundSize
+        });
+      } else if (disabled) {
+        var backgroundColor = '#d8dbe0';
+        var opacity = 1;
+        return _objectSpread(_objectSpread({}, provided), {}, {
+          backgroundColor: backgroundColor,
+          opacity: opacity
         });
       } else {
         return provided;
@@ -1863,6 +1871,7 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
     }));
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], _objectSpread(_objectSpread({}, restProps), {}, {
+      isDisabled: disabled,
       defaultOptions: defaultOptions !== null && defaultOptions !== void 0 ? defaultOptions : true,
       isClearable: true,
       className: "react-select" + (invalid ? ' is-invalid' : ''),
