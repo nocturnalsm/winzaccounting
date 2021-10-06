@@ -10,13 +10,13 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'company_id', 'code', 'name', 'description', 
+        'company_id', 'code', 'name', 'description',
         'can_sell', 'can_buy', 'can_inventory', 'account_id'
     ];
 
     public function categories()
     {
-        return $this->belongsToMany(ProductCategory::class, 'product_has_category', 'product_id', 'category_id');
+        return $this->belongsToMany(ProductCategory::class, 'product_has_categories', 'product_id', 'category_id');
     }
     public function units()
     {

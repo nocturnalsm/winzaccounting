@@ -14,8 +14,25 @@ class ProductRepository extends BaseRepository
     public function __construct()
     {
         $this->data = new Product;
-    }
+        $this->listFilters = [
+            "category" => function($query, $key, $value){
+                return
+                    $query->whereHas('categories', function($query) use ($value){
+                        $query->where('product_categories.id', $value);
+                    });
+            },
+            "name" => ["operator" => "like"],
+            "code" => ["operator" => "like"]
+        ];
 
+    }
+    public function listQuery($data)
+    {
+        return $this->data->with(["categories" => function($query){
+                    $query->take(3);
+                }])
+                ->withCount('categories');
+    }
     public function validateUsing($params, $id = "")
     {
         return [

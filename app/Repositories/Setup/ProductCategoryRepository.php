@@ -83,7 +83,9 @@ class ProductCategoryRepository extends BaseRepository
         if ($qRules == []){
             $qRules = ["name" => ["operator" => "like"]];
         }
-        $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);
+        $this->data = $this->data
+                           ->whereCompanyId($request->company_id ?? NULL)
+                           ->orderBy("name","asc");
         return parent::search($request, $qRules);
     }
     public function searchParents(Request $request)

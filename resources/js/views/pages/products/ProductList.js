@@ -1,5 +1,5 @@
 import MasterList from '../../../containers/MasterList'
-import {CBadge, CSelect} from '@coreui/react'
+import {CBadge, CButton, CSelect} from '@coreui/react'
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 
@@ -8,11 +8,16 @@ const ProductList = () => {
     const [categories, setCategories] = useState([])
     const activeCompany = useSelector(state => state.activeCompany)
 
-    let tableData = JSON.parse(localStorage.getItem('datatable.productslist')) || {}    
+    let tableData = JSON.parse(localStorage.getItem('datatable.productslist')) || {}
 
     const [customFilter, setCustomFilter] = useState({
         category: (tableData.filter && tableData.filter.category) ? tableData.filter.category : '',
         company_id: activeCompany.id
+    })
+    const [activeType, setActiveType] = useState({
+        isPurchased: true,
+        isSold: true,
+        isInventory: true
     })
     const [filterCategory, setFilterCategory] = useState((tableData.filter && tableData.filter.category) ? tableData.filter.category : '')
     let badges = ['primary', 'success', 'light']
@@ -20,17 +25,16 @@ const ProductList = () => {
     const fields = [
         {
             label: 'Name',
-            key: 'name'
-        },
-        {
-            label: 'Code',
-            key: 'code'
+            key: 'name',
+            _style: {
+                width: '29%'
+            }
         },
         {
             label: 'Categories',
             key: 'categoriesName',
-            type: 'custom',     
-            sorter: false,       
+            type: 'custom',
+            sorter: false,
             onRender: (item, index) => (
               <td>
                 {
@@ -50,7 +54,7 @@ const ProductList = () => {
               </td>
             ),
             _style: {
-                width: '25%'
+                width: '17%'
             }
 
         },
@@ -59,7 +63,7 @@ const ProductList = () => {
             key: 'type',
             type: 'custom',
             sorter: false,
-            onRender: (item, index) => 
+            onRender: (item, index) =>
             (
                 <td>
                     {
@@ -78,31 +82,43 @@ const ProductList = () => {
                         ) : ''
                     }
                 </td>
-            )
-        },        
+            ),
+            _style: {
+                width: '10%'
+            }
+        },
         {
             label: 'Current Stock',
             key: 'stock',
             filter: false,
-            className: 'text-right'
+            className: 'text-right',
+            _style: {
+                width: '12%'
+            }
         },
         {
             label: 'Current Price',
             key: 'price',
             filter: false,
-            className: 'text-right'
+            className: 'text-right',
+            _style: {
+                width: '12%'
+            }
         },
         {
             label: 'Action',
             type: 'toolbar',
+            _style: {
+                width: '20%'
+            }
         }
     ];
 
-    const filterChange = (event) => {                
+    const filterChange = (event) => {
         setFilterCategory(event.target.value)
     }
 
-    useEffect(() => {        
+    useEffect(() => {
         if (Object.keys(activeCompany).length > 0){
             setCustomFilter({company_id: activeCompany.id, category: filterCategory})
         }
@@ -136,6 +152,13 @@ const ProductList = () => {
                     ))
                 }
             </CSelect>
+        ),
+        type: (
+          <>
+            <CButton className="mr-2" onClick={e => setActiveType({...activeType, isPurchased: !activeType.isPurchased})} size="sm" color="primary" variant="outline" shape="pill" active={activeType.isPurchased}>P</CButton>
+            <CButton className="mr-2" onClick={e => setActiveType({...activeType, isSold: !activeType.isSold})} size="sm" color="success" variant="outline" shape="pill" active={activeType.isSold}>S</CButton>
+            <CButton onClick={e => setActiveType({...activeType, isInventory: !activeType.isInventory})} size="sm" color="warning" variant="outline" shape="pill" active={activeType.isInventory}>&nbsp;I&nbsp;</CButton>
+          </>
         )
     }
 
