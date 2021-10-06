@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { CInput, CCol, CFormGroup, CLabel} from '@coreui/react'
 import SearchSelect from '../../../components/SearchSelect'
 
-const BankAccountEdit = (props) => {
+const BankAccountEdit = () => {
 
     const [bank, setBank] = useState(null)
     const [account, setAccount] = useState(null)

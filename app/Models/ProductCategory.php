@@ -27,4 +27,12 @@ class ProductCategory extends Model
         return $this->belongsToMany(Product::class, 'product_has_category', 'category_id', 'product_id');
     }
 
+    public function scopeDetail($query)
+    {
+        return $query->whereNotExists(function($query){
+                        $query->from("product_categories")
+                              ->whereColumn("parent", "laravel_cte.id");
+                    });
+    }
+
 }

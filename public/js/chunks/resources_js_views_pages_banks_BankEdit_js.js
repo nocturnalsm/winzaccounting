@@ -378,7 +378,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var BankEdit = function BankEdit(props) {
+var BankEdit = function BankEdit() {
   var activeCompany = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.activeCompany;
   });

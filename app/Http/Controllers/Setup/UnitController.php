@@ -102,4 +102,10 @@ class UnitController extends Controller
         $units = $this->unit->getPerUnit($request);
         return response()->json($units);
     }
+
+    public function search(Request $request)
+    {
+        $data = $this->unit->search($request);
+        return response()->json($data);
+    }
 }

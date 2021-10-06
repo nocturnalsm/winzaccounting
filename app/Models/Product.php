@@ -13,7 +13,13 @@ class Product extends Model
         'company_id', 'code', 'name', 'description',
         'can_sell', 'can_buy', 'can_inventory', 'account_id'
     ];
-
+    /**
+     * Get all of the product's tags.
+     */
+    public function tags()
+    {
+        return $this->morphMany(Tag::class, 'model');
+    }
     public function categories()
     {
         return $this->belongsToMany(ProductCategory::class, 'product_has_categories', 'product_id', 'category_id');

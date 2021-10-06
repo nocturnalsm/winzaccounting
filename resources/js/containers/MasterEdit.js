@@ -20,7 +20,7 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
     const loading = useSelector(state => state.appLoading)
     let history = useHistory()
 
-    const handleChange = (values) => {        
+    const handleChange = (values) => {             
         let oldData = data
         let newData = {...data, ...values}    
         setData(newData)

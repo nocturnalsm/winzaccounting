@@ -102,4 +102,15 @@ class ProductController extends Controller
         return response()->json($data);
     }
     
+    public function search_account(Request $request)
+    {
+        $data = $this->product->searchAccount($request);
+        return response()->json($data);
+    }
+
+    public function search_tags(Request $request)
+    {
+        $data = $this->product->searchTags($request);
+        return response()->json($data);
+    }
 }

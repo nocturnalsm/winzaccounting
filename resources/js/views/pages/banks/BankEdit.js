@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useSelector } from "react-redux";
 import { CInput, CCol, CFormGroup, CLabel } from '@coreui/react'
 
-const BankEdit = (props) => {
+const BankEdit = () => {
 
     const activeCompany = useSelector(state => state.activeCompany)    
 

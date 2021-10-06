@@ -22,6 +22,7 @@ const UnitEdit = React.lazy(() => import('./views/pages/units/UnitEdit'))
 const UnitList = React.lazy(() => import('./views/pages/units/UnitList'))
 const ProductCategoryEdit = React.lazy(() => import('./views/pages/product-categories/ProductCategoryEdit'))
 const ProductCategoryList = React.lazy(() => import('./views/pages/product-categories/ProductCategoryList'))
+const ProductEdit = React.lazy(() => import('./views/pages/products/ProductEdit'))
 const ProductList = React.lazy(() => import('./views/pages/products/ProductList'))
 
 const routes = [
@@ -61,6 +62,8 @@ const routes = [
   { path: '/product-categories/create', name: 'Create Product Category', component: ProductCategoryEdit},
   { path: '/product-categories/:id', name: 'Edit Product Category', component: ProductCategoryEdit},
   { path: '/product-categories', name: 'Product Category', component: ProductCategoryList},
+  { path: '/products/create', name: 'Create Product', component: ProductEdit},
+  { path: '/products/:id', name: 'Edit Product', component: ProductEdit},
   { path: '/products', name: 'Products', component: ProductList}
 
 

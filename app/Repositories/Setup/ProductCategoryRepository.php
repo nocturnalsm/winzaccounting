@@ -83,6 +83,9 @@ class ProductCategoryRepository extends BaseRepository
         if ($qRules == []){
             $qRules = ["name" => ["operator" => "like"]];
         }
+        if (isset($request->detail)){
+            $this->data = $this->data->detail();
+        }
         $this->data = $this->data
                            ->whereCompanyId($request->company_id ?? NULL)
                            ->orderBy("name","asc");

@@ -1,10 +1,10 @@
 import MasterEdit from '../../../containers/MasterEdit'
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { useSelector } from "react-redux";
 import SearchSelect from '../../../components/SearchSelect'
 import { CInput, CInputGroup, CInputGroupText, CCol, CFormGroup, CLabel} from '@coreui/react'
 
-const AccountEdit = (props) => {
+const AccountEdit = () => {
 
     const [accountType, setAccountType] = useState('')
     const [parent, setParent] = useState('')
@@ -154,7 +154,7 @@ const AccountEdit = (props) => {
                         type="text"
                         disabled={props.loading}
                         onChange={e => props.handleChange({name: e.target.value})}
-                        value={props.data.name ?? ''}
+                        value={props.data.name}
                         invalid={props.isInvalid('name')}
                         innerRef={props.inputRefs('name')}
                         required

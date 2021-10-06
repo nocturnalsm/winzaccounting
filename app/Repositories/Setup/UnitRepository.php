@@ -137,5 +137,5 @@ class UnitRepository extends BaseRepository
             throw new \Exception("Data not found");
         }
         return $data->first();
-    }
+    }    
 }

@@ -22,8 +22,7 @@ class CreateProductsTable extends Migration
             $table->boolean('can_buy')->nullable();
             $table->boolean('can_sell')->nullable();
             $table->boolean('can_inventory')->nullable();
-            $table->unsignedInteger('account_id')->nullable();            
-            $table->text('tags')->nullable();
+            $table->unsignedInteger('account_id')->nullable();  
             $table->smallInteger('status')->nullable();
             $table->timestamps();
         });

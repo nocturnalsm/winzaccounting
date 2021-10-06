@@ -155,8 +155,8 @@ const ProductList = () => {
         ),
         type: (
           <>
-            <CButton className="mr-2" onClick={e => setActiveType({...activeType, isPurchased: !activeType.isPurchased})} size="sm" color="primary" variant="outline" shape="pill" active={activeType.isPurchased}>P</CButton>
-            <CButton className="mr-2" onClick={e => setActiveType({...activeType, isSold: !activeType.isSold})} size="sm" color="success" variant="outline" shape="pill" active={activeType.isSold}>S</CButton>
+            <CButton className="mr-2" onClick={e => setActiveType({...activeType, isPurchased: !activeType.isPurchased})} size="sm" color="primary" variant="outline" shape="pill" active={activeType.isPurchased}>&nbsp;P&nbsp;</CButton>
+            <CButton className="mr-2" onClick={e => setActiveType({...activeType, isSold: !activeType.isSold})} size="sm" color="success" variant="outline" shape="pill" active={activeType.isSold}>&nbsp;S&nbsp;</CButton>
             <CButton onClick={e => setActiveType({...activeType, isInventory: !activeType.isInventory})} size="sm" color="warning" variant="outline" shape="pill" active={activeType.isInventory}>&nbsp;I&nbsp;</CButton>
           </>
         )

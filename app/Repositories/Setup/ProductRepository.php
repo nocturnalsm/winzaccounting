@@ -5,6 +5,8 @@ namespace App\Repositories\Setup;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Models\Account;
+use App\Models\Tag;
 use App\Models\Product;
 use DB;
 
@@ -74,20 +76,8 @@ class ProductRepository extends BaseRepository
                             }
                         }
         ];
-    }
-
+    }    
     /*
-    public function listQuery($data)
-    {
-        $constraint = function($query){
-            $query->whereNull("parent")
-                  ->orWhere("parent", "0");
-        };
-        $data = $data->treeOf($constraint)
-                    ->select("id", "name", "code", "depth", "parent", "company_id");
-        return $data;
-
-    }
     public function listSort($data, $sortBy, $order)
     {
         $data->depthFirst();
@@ -120,16 +110,41 @@ class ProductRepository extends BaseRepository
     public function getById($id)
     {
         $data = $this->data->select("*")
+                           ->with("categories")
+                           ->with("units")   
+                           ->with('tags')
                            ->selectSub(
-                               DB::table(DB::raw("product_categories as pc"))
-                                 ->select("name")
-                                 ->whereColumn("pc.id", "product_categories.parent"),
-                               'parent_name'
-                           )
+                               Account::whereColumn("id", "products.account_id"),
+                               'account_name'
+                           )                            
                            ->whereId($id);
         if (!$data){
             throw new \Exception("Data not found");
         }
         return $data->first();
+    }
+    public function searchAccount($request)
+    {
+        $accountRepository = new AccountRepository;
+        $accountRepository->setData(
+            Account::whereAccountType(Account::ASSETS)
+                   ->detail()                                      
+        );
+        return $accountRepository->search($request);
+    }
+    public function searchTags($request)
+    {
+        $data = Tag::whereModelType('App/Product')
+                   ->orderBy("name", "asc");
+        if ($request->q){
+            $data->where("name", "LIKE", "%{$request->q}%");
+        }
+        if ($request->company_id){
+            $data->where("company_id", $request->company_id);
+        }
+        return [
+            'count' => $data->count(),
+            'data'  => $data->get()
+        ];
     }
 }

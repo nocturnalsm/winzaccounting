@@ -1,6 +1,8 @@
 import React, { useState, useImperativeHandle, useRef, useEffect } from 'react';
 import Select from 'react-select';
+import CreatableSelect from 'react-select/creatable';
 import AsyncSelect from 'react-select/async';
+import AsyncCreatableSelect from 'react-select/async-creatable';
 import MyAlert from '../alert.js';
 import axios from 'axios';
 
@@ -16,6 +18,8 @@ const SearchSelect = React.forwardRef(({
       onChange,
       urlParams,
       disabled,
+      creatable,
+      isMulti,
       innerRef, ...restProps}, ref) => {
 
     const selectRef = useRef(null)
@@ -42,6 +46,10 @@ const SearchSelect = React.forwardRef(({
             case 'clear':                
                 setSelectedValue(null)
                 onChange(null)
+                return;
+            case 'create-option':
+                setSelectedValue({...selectedValue, inputValue})
+                onChange(inputValue)
                 return;
             default:
                 return;
@@ -106,43 +114,89 @@ const SearchSelect = React.forwardRef(({
             MyAlert.error({text: error.response})
         })
     };
+    
 
-    if (async){
-        return (
-            <AsyncSelect {...restProps}
-                cacheOptions
-                isClearable
-                className={"react-select" +(invalid ? ' is-invalid' : '')}
-                classNamePrefix="react-select"
-                ref={selectRef}
-                value={selectedValue}
-                getOptionLabel={optionLabel}
-                getOptionValue={optionValue}
-                loadOptions={loadOptions}
-                onChange={handleChange}
-                styles={customStyles}
-                defaultOptions={defaultOptions ?? true}
-            />
-        );
+    if (creatable){                
+        if (async){
+            return (
+                <AsyncCreatableSelect {...restProps}
+                    cacheOptions
+                    isClearable
+                    isMulti={isMulti ?? false}
+                    className={"react-select" +(invalid ? ' is-invalid' : '')}
+                    classNamePrefix="react-select"
+                    ref={selectRef}
+                    value={selectedValue}
+                    getOptionLabel={optionLabel}
+                    getOptionValue={optionValue}
+                    loadOptions={loadOptions}
+                    onChange={handleChange}
+                    styles={customStyles}
+                    defaultOptions={defaultOptions ?? true}
+                />
+            );
+        }
+        else {            
+            return (
+                <CreatableSelect {...restProps}
+                    isDisabled={disabled}
+                    defaultOptions={defaultOptions ?? true}
+                    isClearable
+                    isMulti={isMulti ?? false}
+                    className={"react-select" +(invalid ? ' is-invalid' : '')}
+                    classNamePrefix="react-select"
+                    ref={selectRef}
+                    value={selectedValue}
+                    options={options}
+                    getOptionLabel={optionLabel}
+                    getOptionValue={optionValue}
+                    onChange={handleChange}
+                    styles={customStyles}
+                />
+            );
+        }
     }
     else {
-        return (
-            <Select {...restProps}
-                isDisabled={disabled}
-                defaultOptions={defaultOptions ?? true}
-                isClearable
-                className={"react-select" +(invalid ? ' is-invalid' : '')}
-                classNamePrefix="react-select"
-                ref={selectRef}
-                value={selectedValue}
-                options={options}
-                getOptionLabel={optionLabel}
-                getOptionValue={optionValue}
-                onChange={handleChange}
-                styles={customStyles}
-            />
-        );
+        if (async){
+            return (
+                <AsyncSelect {...restProps}
+                    cacheOptions
+                    isClearable
+                    isMulti={isMulti ?? false}
+                    className={"react-select" +(invalid ? ' is-invalid' : '')}
+                    classNamePrefix="react-select"
+                    ref={selectRef}
+                    value={selectedValue}
+                    getOptionLabel={optionLabel}
+                    getOptionValue={optionValue}
+                    loadOptions={loadOptions}
+                    onChange={handleChange}
+                    styles={customStyles}
+                    defaultOptions={defaultOptions ?? true}
+                />
+            );
+        }
+        else {
+            return (
+                <Select {...restProps}
+                    isDisabled={disabled}
+                    defaultOptions={defaultOptions ?? true}
+                    isClearable
+                    isMulti={isMulti ?? false}
+                    className={"react-select" +(invalid ? ' is-invalid' : '')}
+                    classNamePrefix="react-select"
+                    ref={selectRef}
+                    value={selectedValue}
+                    options={options}
+                    getOptionLabel={optionLabel}
+                    getOptionValue={optionValue}
+                    onChange={handleChange}
+                    styles={customStyles}
+                />
+            );
+        }
     }
+    
 
 })
 
