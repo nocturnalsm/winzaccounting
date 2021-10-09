@@ -871,6 +871,21 @@ const cilCode = ["512 512","<polygon fill='var(--ci-primary-color, currentColor)
 
 /***/ }),
 
+/***/ "./node_modules/@coreui/icons/js/free/cil-color-palette.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@coreui/icons/js/free/cil-color-palette.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "cilColorPalette": () => (/* binding */ cilColorPalette)
+/* harmony export */ });
+const cilColorPalette = ["512 512","<path fill='var(--ci-primary-color, currentColor)' d='M425.514,82.055C380.778,39.458,320.673,16,256.271,16,196.248,16,136.415,36.073,92.115,71.071,43.032,109.85,16,164.161,16,224c0,60.1,15.531,98.87,48.876,122.019,28,19.438,68.412,27.731,135.124,27.731h29.75A26.28,26.28,0,0,1,256,400v47.984a32,32,0,0,0,32,32h.032l90.755-.088a32.094,32.094,0,0,0,19.686-6.8c9.725-7.622,34.727-29.4,56.8-66.9C482.3,360.262,496,307.037,496,248,496,184.268,470.968,125.334,425.514,82.055Zm2.173,307.915c-19.3,32.792-40.663,51.447-48.932,57.926L288,447.984V400a58.316,58.316,0,0,0-58.25-58.25H200c-59.69,0-94.644-6.585-116.876-22.019C58.833,302.869,48,273.344,48,224,48,113.833,153.9,48,256.271,48,372.755,48,464,135.851,464,248,464,301.253,451.782,349.019,427.687,389.97Z' class='ci-primary'/><path fill='var(--ci-primary-color, currentColor)' d='M128,144a56,56,0,1,0,56,56A56.064,56.064,0,0,0,128,144Zm0,80a24,24,0,1,1,24-24A24.027,24.027,0,0,1,128,224Z' class='ci-primary'/><path fill='var(--ci-primary-color, currentColor)' d='M240,72a56,56,0,1,0,56,56A56.064,56.064,0,0,0,240,72Zm0,80a24,24,0,1,1,24-24A24.027,24.027,0,0,1,240,152Z' class='ci-primary'/><path fill='var(--ci-primary-color, currentColor)' d='M360,128a56,56,0,1,0,56,56A56.064,56.064,0,0,0,360,128Zm0,80a24,24,0,1,1,24-24A24.027,24.027,0,0,1,360,208Z' class='ci-primary'/><path fill='var(--ci-primary-color, currentColor)' d='M376,264a56,56,0,1,0,56,56A56.064,56.064,0,0,0,376,264Zm0,80a24,24,0,1,1,24-24A24.027,24.027,0,0,1,376,344Z' class='ci-primary'/>"]
+
+/***/ }),
+
 /***/ "./node_modules/@coreui/icons/js/free/cil-comment-square.js":
 /*!******************************************************************!*\
   !*** ./node_modules/@coreui/icons/js/free/cil-comment-square.js ***!
@@ -1126,6 +1141,21 @@ const cilHome = ["512 512","<path fill='var(--ci-primary-color, currentColor)' d
 
 /***/ }),
 
+/***/ "./node_modules/@coreui/icons/js/free/cil-image.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@coreui/icons/js/free/cil-image.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "cilImage": () => (/* binding */ cilImage)
+/* harmony export */ });
+const cilImage = ["512 512","<path fill='var(--ci-primary-color, currentColor)' d='M40,472H472V40H40ZM440,348.142,328.628,236.769l46.6-46.6L440,254.935ZM72,72H440V209.68l-64.769-64.77L306,214.142l-100-100-134,134Zm0,221.4,134-134,234,234V440H72Z' class='ci-primary'/>"]
+
+/***/ }),
+
 /***/ "./node_modules/@coreui/icons/js/free/cil-inbox.js":
 /*!*********************************************************!*\
   !*** ./node_modules/@coreui/icons/js/free/cil-inbox.js ***!
@@ -1378,6 +1408,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "cilMap": () => (/* binding */ cilMap)
 /* harmony export */ });
 const cilMap = ["512 512","<path fill='var(--ci-primary-color, currentColor)' d='M478.465,89.022,329.6,47.382,180.3,89.438,41.459,50.052h0A20,20,0,0,0,16,69.293v340.6a24.093,24.093,0,0,0,17.449,23.089l146.817,41.65,149.365-42.074,140.983,39.436A20,20,0,0,0,496,452.728V112.135A24.08,24.08,0,0,0,478.465,89.022ZM163,436.466,48,403.842V85.17l115,32.624Zm150.615-32.647L195,437.231V118.542L313.615,85.13ZM464,436.91,345.615,403.8V85.089L464,118.2Z' class='ci-primary'/>"]
+
+/***/ }),
+
+/***/ "./node_modules/@coreui/icons/js/free/cil-money.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@coreui/icons/js/free/cil-money.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "cilMoney": () => (/* binding */ cilMoney)
+/* harmony export */ });
+const cilMoney = ["512 512","<path fill='var(--ci-primary-color, currentColor)' d='M432,64H16V384H432ZM400,352H48V96H400Z' class='ci-primary'/><polygon fill='var(--ci-primary-color, currentColor)' points='464 144 464 416 96 416 96 448 496 448 496 144 464 144' class='ci-primary'/><path fill='var(--ci-primary-color, currentColor)' d='M224,302.46c39.7,0,72-35.137,72-78.326s-32.3-78.326-72-78.326-72,35.136-72,78.326S184.3,302.46,224,302.46Zm0-124.652c22.056,0,40,20.782,40,46.326s-17.944,46.326-40,46.326-40-20.782-40-46.326S201.944,177.808,224,177.808Z' class='ci-primary'/><rect width='32' height='176' x='80' y='136' fill='var(--ci-primary-color, currentColor)' class='ci-primary'/><rect width='32' height='176' x='336' y='136' fill='var(--ci-primary-color, currentColor)' class='ci-primary'/>"]
 
 /***/ }),
 
@@ -2017,36 +2062,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sygnet__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sygnet */ "./resources/js/assets/icons/sygnet.js");
 /* harmony import */ var _logo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./logo */ "./resources/js/assets/icons/logo.js");
 /* harmony import */ var _logo_negative__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./logo-negative */ "./resources/js/assets/icons/logo-negative.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_105__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-skype.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_106__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-facebook.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_107__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-twitter.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_108__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-linkedin.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_109__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-flickr.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_110__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-tumblr.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_111__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-xing.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_112__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-github.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_113__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-stackoverflow.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_114__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-youtube.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_115__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-dribbble.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_116__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-instagram.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_117__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-pinterest.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_118__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-vk.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_119__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-yahoo.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_120__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-behance.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_121__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-reddit.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_122__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-vimeo.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_123__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-cc-mastercard.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_124__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-cc-visa.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_125__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-stripe.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_126__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-paypal.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_127__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-google-pay.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_128__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-cc-amex.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_99__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/flag/cif-us.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_100__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/flag/cif-br.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_101__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/flag/cif-in.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_102__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/flag/cif-fr.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_103__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/flag/cif-es.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_104__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/flag/cif-pl.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_108__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-skype.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_109__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-facebook.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_110__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-twitter.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_111__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-linkedin.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_112__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-flickr.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_113__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-tumblr.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_114__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-xing.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_115__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-github.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_116__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-stackoverflow.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_117__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-youtube.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_118__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-dribbble.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_119__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-instagram.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_120__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-pinterest.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_121__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-vk.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_122__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-yahoo.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_123__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-behance.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_124__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-reddit.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_125__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-vimeo.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_126__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-cc-mastercard.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_127__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-cc-visa.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_128__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-stripe.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_129__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-paypal.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_130__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-google-pay.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_131__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/brand/cib-cc-amex.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_102__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/flag/cif-us.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_103__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/flag/cif-br.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_104__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/flag/cif-in.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_105__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/flag/cif-fr.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_106__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/flag/cif-es.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_107__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/flag/cif-pl.js");
 /* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-align-center.js");
 /* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-align-left.js");
 /* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-align-right.js");
@@ -2075,74 +2120,77 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-circle.js");
 /* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-check-circle.js");
 /* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-code.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-comment-square.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-credit-card.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-cursor.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-cursor-move.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-drop.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-dollar.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-envelope-closed.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-envelope-letter.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-envelope-open.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-euro.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-globe-alt.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-grid.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-file.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-fullscreen.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-fullscreen-exit.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-graph.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-home.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-inbox.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-indent-decrease.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-indent-increase.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-input-power.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-italic.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-justify-center.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-justify-left.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-laptop.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-layers.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-lightbulb.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-list.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-list-numbered.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-list-rich.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-location-pin.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-lock-locked.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-magnifying-glass.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-map.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-moon.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-notes.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-options.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-paperclip.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-paper-plane.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-pencil.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-plus.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-people.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-phone.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-print.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-puzzle.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-save.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-scrubber.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-settings.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-share.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-share-all.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-share-boxed.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-shield-alt.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-speech.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-speedometer.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-spreadsheet.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-star.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-sun.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-tags.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-task.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-trash.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-underline.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-user.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-user-female.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-user-follow.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-user-unfollow.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_96__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-x.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_97__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-x-circle.js");
-/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_98__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-warning.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-color-palette.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-comment-square.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-credit-card.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-cursor.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-cursor-move.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-drop.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-dollar.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-envelope-closed.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-envelope-letter.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-envelope-open.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-euro.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-globe-alt.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-grid.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-file.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-fullscreen.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-fullscreen-exit.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-graph.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-home.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-image.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-inbox.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-indent-decrease.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-indent-increase.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-input-power.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-italic.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-justify-center.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-justify-left.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-laptop.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-layers.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-lightbulb.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-list.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-list-numbered.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-list-rich.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-location-pin.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-lock-locked.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-magnifying-glass.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-map.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-money.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-moon.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-notes.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-options.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-paperclip.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-paper-plane.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-pencil.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-plus.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-people.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-phone.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-print.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-puzzle.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-save.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-scrubber.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-settings.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-share.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-share-all.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-share-boxed.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-shield-alt.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-speech.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-speedometer.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-spreadsheet.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-star.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-sun.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-tags.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-task.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-trash.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-underline.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-user.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_96__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-user-female.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_97__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-user-follow.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_98__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-user-unfollow.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_99__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-x.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_100__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-x-circle.js");
+/* harmony import */ var _coreui_icons__WEBPACK_IMPORTED_MODULE_101__ = __webpack_require__(/*! @coreui/icons */ "./node_modules/@coreui/icons/js/free/cil-warning.js");
 
 
 
@@ -2182,106 +2230,109 @@ var icons = Object.assign({}, {
   cilCircle: _coreui_icons__WEBPACK_IMPORTED_MODULE_28__.cilCircle,
   cilCheckCircle: _coreui_icons__WEBPACK_IMPORTED_MODULE_29__.cilCheckCircle,
   cilCode: _coreui_icons__WEBPACK_IMPORTED_MODULE_30__.cilCode,
-  cilCommentSquare: _coreui_icons__WEBPACK_IMPORTED_MODULE_31__.cilCommentSquare,
-  cilCreditCard: _coreui_icons__WEBPACK_IMPORTED_MODULE_32__.cilCreditCard,
-  cilCursor: _coreui_icons__WEBPACK_IMPORTED_MODULE_33__.cilCursor,
-  cilCursorMove: _coreui_icons__WEBPACK_IMPORTED_MODULE_34__.cilCursorMove,
-  cilDrop: _coreui_icons__WEBPACK_IMPORTED_MODULE_35__.cilDrop,
-  cilDollar: _coreui_icons__WEBPACK_IMPORTED_MODULE_36__.cilDollar,
-  cilEnvelopeClosed: _coreui_icons__WEBPACK_IMPORTED_MODULE_37__.cilEnvelopeClosed,
-  cilEnvelopeLetter: _coreui_icons__WEBPACK_IMPORTED_MODULE_38__.cilEnvelopeLetter,
-  cilEnvelopeOpen: _coreui_icons__WEBPACK_IMPORTED_MODULE_39__.cilEnvelopeOpen,
-  cilEuro: _coreui_icons__WEBPACK_IMPORTED_MODULE_40__.cilEuro,
-  cilGlobeAlt: _coreui_icons__WEBPACK_IMPORTED_MODULE_41__.cilGlobeAlt,
-  cilGrid: _coreui_icons__WEBPACK_IMPORTED_MODULE_42__.cilGrid,
-  cilFile: _coreui_icons__WEBPACK_IMPORTED_MODULE_43__.cilFile,
-  cilFullscreen: _coreui_icons__WEBPACK_IMPORTED_MODULE_44__.cilFullscreen,
-  cilFullscreenExit: _coreui_icons__WEBPACK_IMPORTED_MODULE_45__.cilFullscreenExit,
-  cilGraph: _coreui_icons__WEBPACK_IMPORTED_MODULE_46__.cilGraph,
-  cilHome: _coreui_icons__WEBPACK_IMPORTED_MODULE_47__.cilHome,
-  cilInbox: _coreui_icons__WEBPACK_IMPORTED_MODULE_48__.cilInbox,
-  cilIndentDecrease: _coreui_icons__WEBPACK_IMPORTED_MODULE_49__.cilIndentDecrease,
-  cilIndentIncrease: _coreui_icons__WEBPACK_IMPORTED_MODULE_50__.cilIndentIncrease,
-  cilInputPower: _coreui_icons__WEBPACK_IMPORTED_MODULE_51__.cilInputPower,
-  cilItalic: _coreui_icons__WEBPACK_IMPORTED_MODULE_52__.cilItalic,
-  cilJustifyCenter: _coreui_icons__WEBPACK_IMPORTED_MODULE_53__.cilJustifyCenter,
-  cilJustifyLeft: _coreui_icons__WEBPACK_IMPORTED_MODULE_54__.cilJustifyLeft,
-  cilLaptop: _coreui_icons__WEBPACK_IMPORTED_MODULE_55__.cilLaptop,
-  cilLayers: _coreui_icons__WEBPACK_IMPORTED_MODULE_56__.cilLayers,
-  cilLightbulb: _coreui_icons__WEBPACK_IMPORTED_MODULE_57__.cilLightbulb,
-  cilList: _coreui_icons__WEBPACK_IMPORTED_MODULE_58__.cilList,
-  cilListNumbered: _coreui_icons__WEBPACK_IMPORTED_MODULE_59__.cilListNumbered,
-  cilListRich: _coreui_icons__WEBPACK_IMPORTED_MODULE_60__.cilListRich,
-  cilLocationPin: _coreui_icons__WEBPACK_IMPORTED_MODULE_61__.cilLocationPin,
-  cilLockLocked: _coreui_icons__WEBPACK_IMPORTED_MODULE_62__.cilLockLocked,
-  cilMagnifyingGlass: _coreui_icons__WEBPACK_IMPORTED_MODULE_63__.cilMagnifyingGlass,
-  cilMap: _coreui_icons__WEBPACK_IMPORTED_MODULE_64__.cilMap,
-  cilMoon: _coreui_icons__WEBPACK_IMPORTED_MODULE_65__.cilMoon,
-  cilNotes: _coreui_icons__WEBPACK_IMPORTED_MODULE_66__.cilNotes,
-  cilOptions: _coreui_icons__WEBPACK_IMPORTED_MODULE_67__.cilOptions,
-  cilPaperclip: _coreui_icons__WEBPACK_IMPORTED_MODULE_68__.cilPaperclip,
-  cilPaperPlane: _coreui_icons__WEBPACK_IMPORTED_MODULE_69__.cilPaperPlane,
-  cilPencil: _coreui_icons__WEBPACK_IMPORTED_MODULE_70__.cilPencil,
-  cilPlus: _coreui_icons__WEBPACK_IMPORTED_MODULE_71__.cilPlus,
-  cilPeople: _coreui_icons__WEBPACK_IMPORTED_MODULE_72__.cilPeople,
-  cilPhone: _coreui_icons__WEBPACK_IMPORTED_MODULE_73__.cilPhone,
-  cilPrint: _coreui_icons__WEBPACK_IMPORTED_MODULE_74__.cilPrint,
-  cilPuzzle: _coreui_icons__WEBPACK_IMPORTED_MODULE_75__.cilPuzzle,
-  cilSave: _coreui_icons__WEBPACK_IMPORTED_MODULE_76__.cilSave,
-  cilScrubber: _coreui_icons__WEBPACK_IMPORTED_MODULE_77__.cilScrubber,
-  cilSettings: _coreui_icons__WEBPACK_IMPORTED_MODULE_78__.cilSettings,
-  cilShare: _coreui_icons__WEBPACK_IMPORTED_MODULE_79__.cilShare,
-  cilShareAll: _coreui_icons__WEBPACK_IMPORTED_MODULE_80__.cilShareAll,
-  cilShareBoxed: _coreui_icons__WEBPACK_IMPORTED_MODULE_81__.cilShareBoxed,
-  cilShieldAlt: _coreui_icons__WEBPACK_IMPORTED_MODULE_82__.cilShieldAlt,
-  cilSpeech: _coreui_icons__WEBPACK_IMPORTED_MODULE_83__.cilSpeech,
-  cilSpeedometer: _coreui_icons__WEBPACK_IMPORTED_MODULE_84__.cilSpeedometer,
-  cilSpreadsheet: _coreui_icons__WEBPACK_IMPORTED_MODULE_85__.cilSpreadsheet,
-  cilStar: _coreui_icons__WEBPACK_IMPORTED_MODULE_86__.cilStar,
-  cilSun: _coreui_icons__WEBPACK_IMPORTED_MODULE_87__.cilSun,
-  cilTags: _coreui_icons__WEBPACK_IMPORTED_MODULE_88__.cilTags,
-  cilTask: _coreui_icons__WEBPACK_IMPORTED_MODULE_89__.cilTask,
-  cilTrash: _coreui_icons__WEBPACK_IMPORTED_MODULE_90__.cilTrash,
-  cilUnderline: _coreui_icons__WEBPACK_IMPORTED_MODULE_91__.cilUnderline,
-  cilUser: _coreui_icons__WEBPACK_IMPORTED_MODULE_92__.cilUser,
-  cilUserFemale: _coreui_icons__WEBPACK_IMPORTED_MODULE_93__.cilUserFemale,
-  cilUserFollow: _coreui_icons__WEBPACK_IMPORTED_MODULE_94__.cilUserFollow,
-  cilUserUnfollow: _coreui_icons__WEBPACK_IMPORTED_MODULE_95__.cilUserUnfollow,
-  cilX: _coreui_icons__WEBPACK_IMPORTED_MODULE_96__.cilX,
-  cilXCircle: _coreui_icons__WEBPACK_IMPORTED_MODULE_97__.cilXCircle,
-  cilWarning: _coreui_icons__WEBPACK_IMPORTED_MODULE_98__.cilWarning
+  cilColorPalette: _coreui_icons__WEBPACK_IMPORTED_MODULE_31__.cilColorPalette,
+  cilCommentSquare: _coreui_icons__WEBPACK_IMPORTED_MODULE_32__.cilCommentSquare,
+  cilCreditCard: _coreui_icons__WEBPACK_IMPORTED_MODULE_33__.cilCreditCard,
+  cilCursor: _coreui_icons__WEBPACK_IMPORTED_MODULE_34__.cilCursor,
+  cilCursorMove: _coreui_icons__WEBPACK_IMPORTED_MODULE_35__.cilCursorMove,
+  cilDrop: _coreui_icons__WEBPACK_IMPORTED_MODULE_36__.cilDrop,
+  cilDollar: _coreui_icons__WEBPACK_IMPORTED_MODULE_37__.cilDollar,
+  cilEnvelopeClosed: _coreui_icons__WEBPACK_IMPORTED_MODULE_38__.cilEnvelopeClosed,
+  cilEnvelopeLetter: _coreui_icons__WEBPACK_IMPORTED_MODULE_39__.cilEnvelopeLetter,
+  cilEnvelopeOpen: _coreui_icons__WEBPACK_IMPORTED_MODULE_40__.cilEnvelopeOpen,
+  cilEuro: _coreui_icons__WEBPACK_IMPORTED_MODULE_41__.cilEuro,
+  cilGlobeAlt: _coreui_icons__WEBPACK_IMPORTED_MODULE_42__.cilGlobeAlt,
+  cilGrid: _coreui_icons__WEBPACK_IMPORTED_MODULE_43__.cilGrid,
+  cilFile: _coreui_icons__WEBPACK_IMPORTED_MODULE_44__.cilFile,
+  cilFullscreen: _coreui_icons__WEBPACK_IMPORTED_MODULE_45__.cilFullscreen,
+  cilFullscreenExit: _coreui_icons__WEBPACK_IMPORTED_MODULE_46__.cilFullscreenExit,
+  cilGraph: _coreui_icons__WEBPACK_IMPORTED_MODULE_47__.cilGraph,
+  cilHome: _coreui_icons__WEBPACK_IMPORTED_MODULE_48__.cilHome,
+  cilImage: _coreui_icons__WEBPACK_IMPORTED_MODULE_49__.cilImage,
+  cilInbox: _coreui_icons__WEBPACK_IMPORTED_MODULE_50__.cilInbox,
+  cilIndentDecrease: _coreui_icons__WEBPACK_IMPORTED_MODULE_51__.cilIndentDecrease,
+  cilIndentIncrease: _coreui_icons__WEBPACK_IMPORTED_MODULE_52__.cilIndentIncrease,
+  cilInputPower: _coreui_icons__WEBPACK_IMPORTED_MODULE_53__.cilInputPower,
+  cilItalic: _coreui_icons__WEBPACK_IMPORTED_MODULE_54__.cilItalic,
+  cilJustifyCenter: _coreui_icons__WEBPACK_IMPORTED_MODULE_55__.cilJustifyCenter,
+  cilJustifyLeft: _coreui_icons__WEBPACK_IMPORTED_MODULE_56__.cilJustifyLeft,
+  cilLaptop: _coreui_icons__WEBPACK_IMPORTED_MODULE_57__.cilLaptop,
+  cilLayers: _coreui_icons__WEBPACK_IMPORTED_MODULE_58__.cilLayers,
+  cilLightbulb: _coreui_icons__WEBPACK_IMPORTED_MODULE_59__.cilLightbulb,
+  cilList: _coreui_icons__WEBPACK_IMPORTED_MODULE_60__.cilList,
+  cilListNumbered: _coreui_icons__WEBPACK_IMPORTED_MODULE_61__.cilListNumbered,
+  cilListRich: _coreui_icons__WEBPACK_IMPORTED_MODULE_62__.cilListRich,
+  cilLocationPin: _coreui_icons__WEBPACK_IMPORTED_MODULE_63__.cilLocationPin,
+  cilLockLocked: _coreui_icons__WEBPACK_IMPORTED_MODULE_64__.cilLockLocked,
+  cilMagnifyingGlass: _coreui_icons__WEBPACK_IMPORTED_MODULE_65__.cilMagnifyingGlass,
+  cilMap: _coreui_icons__WEBPACK_IMPORTED_MODULE_66__.cilMap,
+  cilMoney: _coreui_icons__WEBPACK_IMPORTED_MODULE_67__.cilMoney,
+  cilMoon: _coreui_icons__WEBPACK_IMPORTED_MODULE_68__.cilMoon,
+  cilNotes: _coreui_icons__WEBPACK_IMPORTED_MODULE_69__.cilNotes,
+  cilOptions: _coreui_icons__WEBPACK_IMPORTED_MODULE_70__.cilOptions,
+  cilPaperclip: _coreui_icons__WEBPACK_IMPORTED_MODULE_71__.cilPaperclip,
+  cilPaperPlane: _coreui_icons__WEBPACK_IMPORTED_MODULE_72__.cilPaperPlane,
+  cilPencil: _coreui_icons__WEBPACK_IMPORTED_MODULE_73__.cilPencil,
+  cilPlus: _coreui_icons__WEBPACK_IMPORTED_MODULE_74__.cilPlus,
+  cilPeople: _coreui_icons__WEBPACK_IMPORTED_MODULE_75__.cilPeople,
+  cilPhone: _coreui_icons__WEBPACK_IMPORTED_MODULE_76__.cilPhone,
+  cilPrint: _coreui_icons__WEBPACK_IMPORTED_MODULE_77__.cilPrint,
+  cilPuzzle: _coreui_icons__WEBPACK_IMPORTED_MODULE_78__.cilPuzzle,
+  cilSave: _coreui_icons__WEBPACK_IMPORTED_MODULE_79__.cilSave,
+  cilScrubber: _coreui_icons__WEBPACK_IMPORTED_MODULE_80__.cilScrubber,
+  cilSettings: _coreui_icons__WEBPACK_IMPORTED_MODULE_81__.cilSettings,
+  cilShare: _coreui_icons__WEBPACK_IMPORTED_MODULE_82__.cilShare,
+  cilShareAll: _coreui_icons__WEBPACK_IMPORTED_MODULE_83__.cilShareAll,
+  cilShareBoxed: _coreui_icons__WEBPACK_IMPORTED_MODULE_84__.cilShareBoxed,
+  cilShieldAlt: _coreui_icons__WEBPACK_IMPORTED_MODULE_85__.cilShieldAlt,
+  cilSpeech: _coreui_icons__WEBPACK_IMPORTED_MODULE_86__.cilSpeech,
+  cilSpeedometer: _coreui_icons__WEBPACK_IMPORTED_MODULE_87__.cilSpeedometer,
+  cilSpreadsheet: _coreui_icons__WEBPACK_IMPORTED_MODULE_88__.cilSpreadsheet,
+  cilStar: _coreui_icons__WEBPACK_IMPORTED_MODULE_89__.cilStar,
+  cilSun: _coreui_icons__WEBPACK_IMPORTED_MODULE_90__.cilSun,
+  cilTags: _coreui_icons__WEBPACK_IMPORTED_MODULE_91__.cilTags,
+  cilTask: _coreui_icons__WEBPACK_IMPORTED_MODULE_92__.cilTask,
+  cilTrash: _coreui_icons__WEBPACK_IMPORTED_MODULE_93__.cilTrash,
+  cilUnderline: _coreui_icons__WEBPACK_IMPORTED_MODULE_94__.cilUnderline,
+  cilUser: _coreui_icons__WEBPACK_IMPORTED_MODULE_95__.cilUser,
+  cilUserFemale: _coreui_icons__WEBPACK_IMPORTED_MODULE_96__.cilUserFemale,
+  cilUserFollow: _coreui_icons__WEBPACK_IMPORTED_MODULE_97__.cilUserFollow,
+  cilUserUnfollow: _coreui_icons__WEBPACK_IMPORTED_MODULE_98__.cilUserUnfollow,
+  cilX: _coreui_icons__WEBPACK_IMPORTED_MODULE_99__.cilX,
+  cilXCircle: _coreui_icons__WEBPACK_IMPORTED_MODULE_100__.cilXCircle,
+  cilWarning: _coreui_icons__WEBPACK_IMPORTED_MODULE_101__.cilWarning
 }, {
-  cifUs: _coreui_icons__WEBPACK_IMPORTED_MODULE_99__.cifUs,
-  cifBr: _coreui_icons__WEBPACK_IMPORTED_MODULE_100__.cifBr,
-  cifIn: _coreui_icons__WEBPACK_IMPORTED_MODULE_101__.cifIn,
-  cifFr: _coreui_icons__WEBPACK_IMPORTED_MODULE_102__.cifFr,
-  cifEs: _coreui_icons__WEBPACK_IMPORTED_MODULE_103__.cifEs,
-  cifPl: _coreui_icons__WEBPACK_IMPORTED_MODULE_104__.cifPl
+  cifUs: _coreui_icons__WEBPACK_IMPORTED_MODULE_102__.cifUs,
+  cifBr: _coreui_icons__WEBPACK_IMPORTED_MODULE_103__.cifBr,
+  cifIn: _coreui_icons__WEBPACK_IMPORTED_MODULE_104__.cifIn,
+  cifFr: _coreui_icons__WEBPACK_IMPORTED_MODULE_105__.cifFr,
+  cifEs: _coreui_icons__WEBPACK_IMPORTED_MODULE_106__.cifEs,
+  cifPl: _coreui_icons__WEBPACK_IMPORTED_MODULE_107__.cifPl
 }, {
-  cibSkype: _coreui_icons__WEBPACK_IMPORTED_MODULE_105__.cibSkype,
-  cibFacebook: _coreui_icons__WEBPACK_IMPORTED_MODULE_106__.cibFacebook,
-  cibTwitter: _coreui_icons__WEBPACK_IMPORTED_MODULE_107__.cibTwitter,
-  cibLinkedin: _coreui_icons__WEBPACK_IMPORTED_MODULE_108__.cibLinkedin,
-  cibFlickr: _coreui_icons__WEBPACK_IMPORTED_MODULE_109__.cibFlickr,
-  cibTumblr: _coreui_icons__WEBPACK_IMPORTED_MODULE_110__.cibTumblr,
-  cibXing: _coreui_icons__WEBPACK_IMPORTED_MODULE_111__.cibXing,
-  cibGithub: _coreui_icons__WEBPACK_IMPORTED_MODULE_112__.cibGithub,
-  cibStackoverflow: _coreui_icons__WEBPACK_IMPORTED_MODULE_113__.cibStackoverflow,
-  cibYoutube: _coreui_icons__WEBPACK_IMPORTED_MODULE_114__.cibYoutube,
-  cibDribbble: _coreui_icons__WEBPACK_IMPORTED_MODULE_115__.cibDribbble,
-  cibInstagram: _coreui_icons__WEBPACK_IMPORTED_MODULE_116__.cibInstagram,
-  cibPinterest: _coreui_icons__WEBPACK_IMPORTED_MODULE_117__.cibPinterest,
-  cibVk: _coreui_icons__WEBPACK_IMPORTED_MODULE_118__.cibVk,
-  cibYahoo: _coreui_icons__WEBPACK_IMPORTED_MODULE_119__.cibYahoo,
-  cibBehance: _coreui_icons__WEBPACK_IMPORTED_MODULE_120__.cibBehance,
-  cibReddit: _coreui_icons__WEBPACK_IMPORTED_MODULE_121__.cibReddit,
-  cibVimeo: _coreui_icons__WEBPACK_IMPORTED_MODULE_122__.cibVimeo,
-  cibCcMastercard: _coreui_icons__WEBPACK_IMPORTED_MODULE_123__.cibCcMastercard,
-  cibCcVisa: _coreui_icons__WEBPACK_IMPORTED_MODULE_124__.cibCcVisa,
-  cibStripe: _coreui_icons__WEBPACK_IMPORTED_MODULE_125__.cibStripe,
-  cibPaypal: _coreui_icons__WEBPACK_IMPORTED_MODULE_126__.cibPaypal,
-  cibGooglePay: _coreui_icons__WEBPACK_IMPORTED_MODULE_127__.cibGooglePay,
-  cibCcAmex: _coreui_icons__WEBPACK_IMPORTED_MODULE_128__.cibCcAmex
+  cibSkype: _coreui_icons__WEBPACK_IMPORTED_MODULE_108__.cibSkype,
+  cibFacebook: _coreui_icons__WEBPACK_IMPORTED_MODULE_109__.cibFacebook,
+  cibTwitter: _coreui_icons__WEBPACK_IMPORTED_MODULE_110__.cibTwitter,
+  cibLinkedin: _coreui_icons__WEBPACK_IMPORTED_MODULE_111__.cibLinkedin,
+  cibFlickr: _coreui_icons__WEBPACK_IMPORTED_MODULE_112__.cibFlickr,
+  cibTumblr: _coreui_icons__WEBPACK_IMPORTED_MODULE_113__.cibTumblr,
+  cibXing: _coreui_icons__WEBPACK_IMPORTED_MODULE_114__.cibXing,
+  cibGithub: _coreui_icons__WEBPACK_IMPORTED_MODULE_115__.cibGithub,
+  cibStackoverflow: _coreui_icons__WEBPACK_IMPORTED_MODULE_116__.cibStackoverflow,
+  cibYoutube: _coreui_icons__WEBPACK_IMPORTED_MODULE_117__.cibYoutube,
+  cibDribbble: _coreui_icons__WEBPACK_IMPORTED_MODULE_118__.cibDribbble,
+  cibInstagram: _coreui_icons__WEBPACK_IMPORTED_MODULE_119__.cibInstagram,
+  cibPinterest: _coreui_icons__WEBPACK_IMPORTED_MODULE_120__.cibPinterest,
+  cibVk: _coreui_icons__WEBPACK_IMPORTED_MODULE_121__.cibVk,
+  cibYahoo: _coreui_icons__WEBPACK_IMPORTED_MODULE_122__.cibYahoo,
+  cibBehance: _coreui_icons__WEBPACK_IMPORTED_MODULE_123__.cibBehance,
+  cibReddit: _coreui_icons__WEBPACK_IMPORTED_MODULE_124__.cibReddit,
+  cibVimeo: _coreui_icons__WEBPACK_IMPORTED_MODULE_125__.cibVimeo,
+  cibCcMastercard: _coreui_icons__WEBPACK_IMPORTED_MODULE_126__.cibCcMastercard,
+  cibCcVisa: _coreui_icons__WEBPACK_IMPORTED_MODULE_127__.cibCcVisa,
+  cibStripe: _coreui_icons__WEBPACK_IMPORTED_MODULE_128__.cibStripe,
+  cibPaypal: _coreui_icons__WEBPACK_IMPORTED_MODULE_129__.cibPaypal,
+  cibGooglePay: _coreui_icons__WEBPACK_IMPORTED_MODULE_130__.cibGooglePay,
+  cibCcAmex: _coreui_icons__WEBPACK_IMPORTED_MODULE_131__.cibCcAmex
 });
 
 /***/ }),

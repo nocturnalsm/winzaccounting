@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef, useImperativeHandle } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { CCard, CCardBody, CCardFooter, CCardHeader, CForm, CButton, CInvalidFeedback } from '@coreui/react'
+import { CCard, CNav, CNavItem, CNavLink, CCardBody, CCardFooter, CRow, CCol,
+         CCardHeader, CForm, CButton, CInvalidFeedback } from '@coreui/react'
 import { setAppEditing, setAppLoading} from "../store";
 import MyAlert from "../alert";
 import CIcon from '@coreui/icons-react'
 import axios from 'axios'
+import Sticky from '../components/StickyComponent'
+import useScrollSpy from '../hooks/useScrollspy'
+
 
 const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
 
@@ -15,12 +19,13 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
     const [validated, setValidated] = useState(false)
     const [submitError, setSubmitError] = useState({})
     const [submitted, setSubmitted] = useState(0)
+    const [navElements, setNavElements] = useState([])
 
     const dispatch = useDispatch()
     const loading = useSelector(state => state.appLoading)
     let history = useHistory()
-
-    const handleChange = (values) => {             
+    
+    const handleChange = (values) => {            
         let oldData = data
         let newData = {...data, ...values}    
         setData(newData)
@@ -36,6 +41,17 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
     }, [submitted])
 
     const inputRefs = useRef({});
+    
+    useEffect(() => {
+        setNavElements(props.navigation.map(item => {
+            return document.querySelector(item.target)
+        }))
+    }, [])
+        
+    const activeNavigation = useScrollSpy({
+        sectionElements: navElements,
+        offsetPx: 20,
+    });
 
     const refs = (index) => {
         if (!inputRefs.current.hasOwnProperty(index)){
@@ -189,18 +205,43 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
         )
     }
     return (
-        <CForm className="form-horizontal needs-validation" noValidate wasValidated={validated} onSubmit={handleSubmit}>
-            <CCard>
-                <CCardHeader className="py-0">
-                    <h4 className="mb-0">
-                    <CButton className="btn-ghost pl-0" onClick={e => history.goBack()}>
-                        <CIcon size="2xl" name="cilArrowCircleLeft" />
-                    </CButton>
-                    {id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title}
-                    </h4>
-                </CCardHeader>
+        <CForm className="form-horizontal needs-validation editForm" noValidate wasValidated={validated} onSubmit={handleSubmit}>            
+            <CCard>                
+                <CCardHeader className="p-0">
+                    <Sticky>
+                        <CRow>
+                            <CCol sm="auto">
+                                <h4 className="mb-0">
+                                <CButton className="btn-ghost pl-0" onClick={e => history.goBack()}>
+                                    <CIcon size="2xl" name="cilArrowCircleLeft" />
+                                </CButton>
+                                {id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title}
+                                </h4>                    
+                            </CCol>                        
+                            {props.navigation ? (
+                                <CCol className="mt-2">
+                                    <CNav variant="pills">
+                                        {
+                                            props.navigation.map((item, index) => (
+                                                <CNavItem to={item.target} key={index}>
+                                                    <CNavLink onClick={() => document.querySelector(item.target).scrollIntoView() } key={"link-" +index} active={activeNavigation == index}>
+                                                        {item.icon ? (
+                                                            <CIcon className="mr-2" name={item.icon} />
+                                                        ) : ''
+                                                        }
+                                                        {item.title}
+                                                    </CNavLink>
+                                                </CNavItem>
+                                            ))
+                                        }                                                                            
+                                    </CNav>
+                                </CCol>
+                            ) : ''}                            
+                        </CRow>
+                    </Sticky>
+                </CCardHeader>                
                 <CCardBody>                
-                        {children(childProps)}                
+                    {children(childProps)}                
                 </CCardBody>
                 <CCardFooter>
                     <CButton className="mr-2" type="submit" size="md" color="primary">
@@ -209,7 +250,7 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
                     <CButton className="mr-2" type="reset" onClick={resetForm} size="md" color="danger">
                         <CIcon name="cil-ban" /> Reset
                     </CButton>
-                </CCardFooter>
+                </CCardFooter>                
             </CCard>
         </CForm>
     )

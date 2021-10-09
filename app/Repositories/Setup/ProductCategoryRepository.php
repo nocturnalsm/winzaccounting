@@ -105,17 +105,11 @@ class ProductCategoryRepository extends BaseRepository
     }
     public function getById($id)
     {
-        $data = $this->data->select("*")
-                           ->selectSub(
-                               DB::table(DB::raw("product_categories as pc"))
-                                 ->select("name")
-                                 ->whereColumn("pc.id", "product_categories.parent"),
-                               'parent_name'
-                           )
-                           ->whereId($id);
-        if (!$data){
-            throw new \Exception("Data not found");
-        }
-        return $data->first();
+        $data = parent::getById($id);
+        if ($data){
+            $parent = ProductCategory::find($data->parent);
+            $data->parent_name = $parent ? $parent->name : '';
+            return $data;
+        }        
     }
 }

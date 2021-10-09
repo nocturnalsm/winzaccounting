@@ -1,6 +1,6 @@
 import MasterList from '../../../containers/MasterList'
 import { useSelector } from 'react-redux'
-import { CButton } from '@coreui/react'
+import { CBadge, CButton } from '@coreui/react'
 import { useHistory } from 'react-router-dom'
 import CIcon from '@coreui/icons-react';
 
@@ -8,7 +8,16 @@ const CurrencyList = () => {
     const fields = [
         {
             label: 'Name',
-            key: 'name'
+            key: 'name',
+            type: 'custom',
+            onRender: (item, index) => (
+                <td>
+                    {item.name}{item.isDefault ? (
+                        <CBadge className="ml-2" color="success">DEFAULT</CBadge>) 
+                    : ''
+                    }
+                </td>
+            )
         },
         {
             label: 'Code',

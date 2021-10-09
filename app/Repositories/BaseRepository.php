@@ -89,7 +89,7 @@ class BaseRepository implements RepositoryInterface
         $data = Eventy::filter('record.create.after', $data, $request);
         Eventy::action('record.create.after', $data, $request);
 
-        return $validator->validated();
+        return $data;
     }
     public function update(String $id, Request $request)
     {
@@ -105,7 +105,7 @@ class BaseRepository implements RepositoryInterface
         $data = Eventy::filter('record.update.before', $data, $request);
         Eventy::action('record.update.before', $data, $request);
 
-        return $validator->validated();
+        return $data;
     }
     public function delete(String $id)
     {        

@@ -1,6 +1,6 @@
 import MasterEdit from '../../../containers/MasterEdit'
 import { useSelector } from "react-redux";
-import { CInput, CCol, CFormGroup, CLabel } from '@coreui/react'
+import { CInput, CCol, CFormGroup, CLabel, CSwitch } from '@coreui/react'
 
 const CurrencyEdit = (props) => {
 
@@ -9,7 +9,7 @@ const CurrencyEdit = (props) => {
     return (
         <MasterEdit title="Currency"
             apiUrl="/api/setup/currencies"
-            formData={{id: '', name: '', code: '', sign: '', company_id: activeCompany.id}}
+            formData={{id: '', name: '', code: '', sign: '', company_id: activeCompany.id, isDefault: false}}
             >
             {props => (
                     <>
@@ -67,6 +67,22 @@ const CurrencyEdit = (props) => {
                             invalid={props.isInvalid('sign')}
                             />
                             {props.feedback('sign')}
+                        </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                        <CCol sm="4" lg="2">
+                            <CLabel>Set as Default Currency</CLabel>
+                        </CCol>
+                        <CCol sm="8" lg="10">
+                            <CSwitch
+                                color="primary"
+                                checked={props.data.isDefault}                                
+                                labelOn="ON"
+                                shape="pill"             
+                                disabled={props.loading}
+                                innerRef={props.inputRefs('isDefault')}                   
+                                onChange={e => props.handleChange({isDefault: e.target.checked})}                               
+                            />
                         </CCol>
                     </CFormGroup>
                 </>

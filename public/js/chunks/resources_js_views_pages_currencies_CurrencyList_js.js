@@ -726,7 +726,17 @@ __webpack_require__.r(__webpack_exports__);
 var CurrencyList = function CurrencyList() {
   var fields = [{
     label: 'Name',
-    key: 'name'
+    key: 'name',
+    type: 'custom',
+    onRender: function onRender(item, index) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("td", {
+        children: [item.name, item.isDefault ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CBadge, {
+          className: "ml-2",
+          color: "success",
+          children: "DEFAULT"
+        }) : '']
+      });
+    }
   }, {
     label: 'Code',
     key: 'code'

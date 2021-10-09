@@ -125,17 +125,11 @@ class UnitRepository extends BaseRepository
     }
     public function getById($id)
     {
-        $data = $this->data->whereId($id)
-                     ->select("*")
-                     ->selectSub(
-                         DB::table(DB::raw("units as unit_child"))
-                              ->select("name")
-                              ->whereColumn("unit_child.id", "units.qty_unit"),
-                        "qty_per_unit_name"
-                     );
-        if (!$data){
-            throw new \Exception("Data not found");
+        $data = parent::getById($id);
+        if ($data){
+            $childUnit = Unit::find($data->qty_unit);
+            $data->qty_per_unit_name = $childUnit ? $childUnit->name : '';
         }
-        return $data->first();
+        return $data;
     }    
 }

@@ -155,31 +155,21 @@ class AccountRepository extends BaseRepository
     }
     public function getById(String $id)
     {
-        $data = $this->data->where("accounts.id", $id)
-                           ->select("accounts.*", "parents.parent_number", "parents.parent_name",
-                                    "account_types.prefix",
-                                    DB::raw("account_types.name as account_type_name"))
-                           ->joinSub(
-                                AccountType::select("id","prefix","name"),
-                                'account_types',
-                                function($join){
-                                    $join->on("accounts.account_type","=", "account_types.id");
-                                }
-                            )
-                            ->leftJoinSub(
-                                Account::select("accounts.id",
-                                    DB::raw("CONCAT(types.prefix, accounts.number) AS parent_number"),
-                                    DB::raw("accounts.name AS parent_name")
-                                )
-                                ->leftJoin(DB::raw("account_types types"), "accounts.account_type","=","types.id"),
-                                "parents",
-                                function($join){
-                                    $join->on("accounts.parent", "=", "parents.id");
-                                }
-                            );
-        if (!$data){
-            throw new \Exception("Data not found");
+        $data = parent::getById($id);
+        if ($data){
+            $typeData = AccountType::find($data->account_type);
+            $data->account_type_name = $typeData->name;
+            $data->prefix = $typeData->prefix;
+
+            $parentData = Account::select("accounts.id", "prefix", "accounts.name")
+                                ->leftJoin(DB::raw("account_types types"), "accounts.account_type","=","types.id")
+                                ->where("accounts.id", $data->parent)
+                                ->first();                              
+
+            $data->parent_number = $parentData ? $parentData->prefix .$parentData->number : '';
+            $data->parent_name = $parentData ? $parentData->name : '';
         }
-        return $data->first();
+        
+        return $data;
     }
 }

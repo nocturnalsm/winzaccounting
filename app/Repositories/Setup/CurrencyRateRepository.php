@@ -3,6 +3,7 @@
 namespace App\Repositories\Setup;
 
 use App\Repositories\BaseRepository;
+use App\Repositories\Admin\SettingRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\CurrencyRate;
@@ -22,7 +23,20 @@ class CurrencyRateRepository extends BaseRepository
     public function validateUsing($params, $id = "")
     {
         return [
-            'currency_id' => 'bail|required|exists:App\Models\Currency,id',
+            'currency_id' => [
+                'bail',
+                'required',
+                'exists:App\Models\Currency,id',
+                function($attr, $value, $fail) use ($params){
+                    $setting = new SettingRepository($params["company_id"]);
+                    $defaultCurrency = $setting->get('default_currency');
+                    if (trim($defaultCurrency) != ""){
+                        if ($params["id"] == $defaultCurrency){
+                            $fail("Default currency can only have one rate");
+                        }
+                    }
+                }
+            ],
             'start' => [
                 'bail',
                 'required_without:end',
@@ -85,16 +99,11 @@ class CurrencyRateRepository extends BaseRepository
     }
     public function getById(String $id)
     {
-        $data = $this->data->where("id", $id)
-                           ->select("*")
-                           ->selectSub(
-                                Currency::select("name")
-                                         ->whereColumn("id", "currency_rates.currency_id"),
-                                'currency_name'
-                            );
-        if (!$data){
-            throw new \Exception("Data not found");
+        $data = parent::getById($id);
+        if ($data){
+            $currency = Currency::find($data->currency_id);            
+            $data->currency_name = $currency->name;
         }
-        return $data->first();
+        return $data;
     }
 }

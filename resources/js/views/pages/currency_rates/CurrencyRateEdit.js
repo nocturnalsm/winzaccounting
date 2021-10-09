@@ -46,7 +46,7 @@ const CurrencyRateEdit = (props) => {
                                 value={currency}
                                 optionLabel={e => e.name}
                                 optionValue={e => e.id}
-                                url="/api/setup/currencies/search"
+                                url="/api/setup/currencies/search?default=0"
                                 onChange={value => props.handleChange({currency_id: value ? value.id : ""})}
                                 invalid={props.isInvalid('currency_id')}
                             />

@@ -10023,3 +10023,9 @@ h3 {
   border-color: #e55353;
   box-shadow: 0 0 0 0.2rem rgba(229, 83, 83, 0.25);
 }
+
+.editForm .sticky {
+  width: 100%;
+  padding: 0 15px 0 15px;
+  background-color: white;
+}

@@ -2,7 +2,32 @@ import MasterEdit from '../../../containers/MasterEdit'
 import { useState } from 'react';
 import { useSelector } from "react-redux";
 import SearchSelect from '../../../components/SearchSelect'
-import { CInput, CInputCheckbox, CCol, CFormGroup, CLabel, CTextarea} from '@coreui/react'
+import { CInput, CInputCheckbox, CCol, CFormGroup, CRow,
+         CLabel, CTextarea, CCarousel, CCarouselIndicators,
+         CCarouselInner, CCarouselItem, CCarouselCaption, CCarouselControl} from '@coreui/react'
+import CIcon from '@coreui/icons-react'
+import 'react-dropzone-uploader/dist/styles.css'
+import Dropzone from 'react-dropzone-uploader'
+
+const navItems = [
+    {'title': 'Information',
+     'icon': 'cil-notes',
+     'target': '#nav-info'
+    },
+    {'title': 'Images',
+     'icon': 'cil-image',
+     'target': '#nav-images'
+    },
+    {'title': 'Variants',
+     'icon': 'cil-color-palette',
+     'target': '#nav-variants'
+    },
+    {'title': 'Prices',
+     'icon': 'cil-money',
+     'target': '#nav-prices'
+    }
+]
+    
 
 const ProductEdit = () => {
 
@@ -25,10 +50,12 @@ const ProductEdit = () => {
         can_inventory: false,
         account_id: ''
     })
+    
 
     return (
         <MasterEdit title="Product"
             apiUrl="/api/setup/products"
+            navigation={navItems}
             onOpen={data => {
                 if (data){                    
                     setProductCategory(data.categories)
@@ -47,6 +74,10 @@ const ProductEdit = () => {
         >
         {props => (
             <>
+            <h5 id="nav-info" className="border-bottom pb-3 mb-4">
+                <CIcon name="cil-notes" className="mr-2"/>
+                Information
+            </h5>
             <CFormGroup row>
                 <CCol sm="4" lg="2">
                     <CLabel>Product Name</CLabel>
@@ -104,7 +135,7 @@ const ProductEdit = () => {
                 <CCol sm="4" lg="2">
                     <CLabel>Product Type</CLabel>
                 </CCol>
-                <CCol md="9">
+                <CCol md="8" lg="10">
                 <CFormGroup variant="custom-checkbox" inline>
                     <CInputCheckbox 
                         custom                
@@ -208,6 +239,33 @@ const ProductEdit = () => {
                     />
                 </CCol>
             </CFormGroup>
+            <h5 id="nav-images" className="border-bottom pb-3 mb-4">
+                <CIcon name="cil-image" className="mr-2"/>
+                Images
+            </h5>
+            <CRow>
+                <CCol sm={12}>
+                <CCarousel>
+                    <CCarouselIndicators/>
+                    <CCarouselInner>
+                    <CCarouselItem>                        
+                        <CCarouselCaption><h3>Slide 1</h3><p>Slide 1</p></CCarouselCaption>
+                    </CCarouselItem>
+                    <CCarouselItem>                        
+                        <CCarouselCaption><h3>Slide 2</h3><p>Slide 2</p></CCarouselCaption>
+                    </CCarouselItem>
+                    <CCarouselItem>                        
+                        <CCarouselCaption><h3>Slide 3</h3><p>Slide 3</p></CCarouselCaption>
+                    </CCarouselItem>
+                    </CCarouselInner>
+                    <CCarouselControl direction="prev"/>
+                    <CCarouselControl direction="next"/>
+                </CCarousel>
+                </CCol>
+            </CRow>
+            <Dropzone
+                accept="image/*,audio/*,video/*"
+            />
             </>
         )}
         </MasterEdit>

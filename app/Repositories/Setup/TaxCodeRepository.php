@@ -87,24 +87,20 @@ class TaxCodeRepository extends BaseRepository
     }
     public function getById($id)
     {        
-        $data = $this->data->where("id", $id)
-             ->select("*", "accounts.*")
-             ->leftJoinSub(
-                Account::select(
-                    DB::raw("accounts.id AS linked_account_id"),
-                    DB::raw("CONCAT(types.prefix, accounts.number) AS account_number"),
-                    DB::raw("accounts.name AS account_name")
-                )
-                ->leftJoin(DB::raw("account_types types"), "accounts.account_type","=","types.id"),
-                "accounts",
-                function($join){
-                    $join->on("tax_codes.account_id", "=", "linked_account_id");
-                }
-             );
-        if (!$data){
-            throw new \Exception("Data not found");
+        $data = parent::getById($id);
+        if ($data){
+            $account = Account::where("accounts.id", $data->account_id)
+                               ->select("accounts.id", "types.prefix", "number", "accounts.name")
+                               ->leftJoin(
+                                   DB::raw("account_types types"), 
+                                   "accounts.account_type","=","types.id"
+                               )->first();
+            $data->account_number = $account ? $account->prefix .$account->number : '';
+            $data->account_name = $account ? $account->name : '';
+
+            return $data;
         }
-        return $data->first();
+        
     }
     public function searchAccount($request)
     {                       
