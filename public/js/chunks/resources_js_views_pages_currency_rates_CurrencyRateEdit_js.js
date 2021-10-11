@@ -2217,9 +2217,11 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
   }, [submitted]);
   var inputRefs = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)({});
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    setNavElements(props.navigation.map(function (item) {
-      return document.querySelector(item.target);
-    }));
+    if (props.navigation) {
+      setNavElements(props.navigation.map(function (item) {
+        return document.querySelector(item.target);
+      }));
+    }
   }, []);
   var activeNavigation = (0,_hooks_useScrollspy__WEBPACK_IMPORTED_MODULE_9__["default"])({
     sectionElements: navElements,
@@ -2444,8 +2446,15 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
                   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CNavItem, {
                     to: item.target,
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CNavLink, {
-                      onClick: function onClick() {
-                        return document.querySelector(item.target).scrollIntoView();
+                      onClick: function onClick(event) {
+                        var element = document.querySelector(item.target);
+                        var headerOffset = 20;
+                        var elementPosition = element.getBoundingClientRect().top;
+                        var offsetPosition = elementPosition - headerOffset;
+                        window.scrollTo({
+                          top: offsetPosition,
+                          behavior: "smooth"
+                        });
                       },
                       active: activeNavigation == index,
                       children: [item.icon ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {

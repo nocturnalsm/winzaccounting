@@ -13,12 +13,19 @@ class Product extends Model
         'company_id', 'code', 'name', 'description',
         'can_sell', 'can_buy', 'can_inventory', 'account_id'
     ];
+
+    protected $mediaFolderName = "products";
+
     /**
      * Get all of the product's tags.
      */
     public function tags()
     {
         return $this->morphMany(Tag::class, 'model');
+    }
+    public function media()
+    {
+        return $this->morphMany(Media::class, 'model');
     }
     public function categories()
     {
@@ -31,5 +38,9 @@ class Product extends Model
     public function variants()
     {
         return $this->belongstoMany(Variants::class, 'product_has_variants', 'product_id', 'variant_id');
+    }
+    public function getMediaFolderName()
+    {
+        return $this->mediaFolderName;
     }
 }

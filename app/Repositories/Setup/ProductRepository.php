@@ -3,6 +3,7 @@
 namespace App\Repositories\Setup;
 
 use App\Repositories\BaseRepository;
+use App\Repositories\MediaRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Account;
@@ -12,10 +13,12 @@ use DB;
 
 class ProductRepository extends BaseRepository
 {
+    private $media;
 
     public function __construct()
     {
         $this->data = new Product;
+        $this->media = new MediaRepository;
         $this->listFilters = [
             "category" => function($query, $key, $value){
                 return
@@ -76,7 +79,7 @@ class ProductRepository extends BaseRepository
                             }
                         }
         ];
-    }    
+    }
     /*
     public function listSort($data, $sortBy, $order)
     {
@@ -111,12 +114,12 @@ class ProductRepository extends BaseRepository
     {
         $data = $this->data->select("*")
                            ->with("categories")
-                           ->with("units")   
+                           ->with("units")
                            ->with('tags')
                            ->selectSub(
                                Account::whereColumn("id", "products.account_id"),
                                'account_name'
-                           )                            
+                           )
                            ->whereId($id);
         if (!$data){
             throw new \Exception("Data not found");
@@ -128,7 +131,7 @@ class ProductRepository extends BaseRepository
         $accountRepository = new AccountRepository;
         $accountRepository->setData(
             Account::whereAccountType(Account::ASSETS)
-                   ->detail()                                      
+                   ->detail()
         );
         return $accountRepository->search($request);
     }
@@ -146,5 +149,37 @@ class ProductRepository extends BaseRepository
             'count' => $data->count(),
             'data'  => $data->get()
         ];
+    }
+    public function getMedia($id, Request $request)
+    {
+        if (isset($request->download)){
+            $response = $this->media->download($id);
+        }
+        else {
+            $response = $this->media->get($id);
+        }
+        if (!$response){
+            abort(400, 'Media cannot be loaded');
+        }
+        return $response;
+    }
+    public function uploadMedia($id, Request $request)
+    {
+        $product = Product::find($id);
+        if ($product){
+            $file = $this->media->save($product, $request);
+            if (!$file){
+                abort(400, 'Upload failed');
+            }
+            return $file;
+        }
+        else {
+            abort(422, 'Product not found');
+        }
+    }
+    public function deleteMedia($id)
+    {
+          $media = $this->media->delete($id);
+          return true;
     }
 }

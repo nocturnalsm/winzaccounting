@@ -27,28 +27,43 @@ Route::prefix('admin')->group(function(){
     Route::resource('/permissions', App\Http\Controllers\Admin\PermissionController::class);
 });
 
-Route::prefix('setup')->group(function(){    
+Route::prefix('setup')->group(function(){
     Route::get('currencies/search', [App\Http\Controllers\Setup\CurrencyController::class, 'search']);
     Route::resource('currencies', App\Http\Controllers\Setup\CurrencyController::class);
-    Route::resource('currency-rates', App\Http\Controllers\Setup\CurrencyRateController::class);    
+
+    Route::resource('currency-rates', App\Http\Controllers\Setup\CurrencyRateController::class);
+
     Route::get('taxcodes/search-account', [App\Http\Controllers\Setup\TaxCodeController::class, 'search_account']);
     Route::get('taxcodes/search', [App\Http\Controllers\Setup\TaxCodeController::class, 'search']);
     Route::resource('taxcodes', App\Http\Controllers\Setup\TaxCodeController::class);
+
     Route::get('accounts/search', [App\Http\Controllers\Setup\AccountController::class, 'search']);
     Route::get('accounts/types', [App\Http\Controllers\Setup\AccountController::class, 'account_types']);
     Route::get('accounts/parents', [App\Http\Controllers\Setup\AccountController::class, 'account_parents']);
-    Route::resource('accounts', App\Http\Controllers\Setup\AccountController::class);    
+    Route::resource('accounts', App\Http\Controllers\Setup\AccountController::class);
+
     Route::get('banks/search', [App\Http\Controllers\Setup\BankController::class, 'search']);
-    Route::resource('banks', App\Http\Controllers\Setup\BankController::class);    
+    Route::resource('banks', App\Http\Controllers\Setup\BankController::class);
+
     Route::get('bank-accounts/search-account', [App\Http\Controllers\Setup\BankAccountController::class, 'search_account']);
     Route::resource('bank-accounts', App\Http\Controllers\Setup\BankAccountController::class);
+
     Route::get('units/search', [App\Http\Controllers\Setup\UnitController::class, 'search']);
     Route::get('units/per_units', [App\Http\Controllers\Setup\UnitController::class, 'per_unit']);
-    Route::resource('units', App\Http\Controllers\Setup\UnitController::class);    
+    Route::resource('units', App\Http\Controllers\Setup\UnitController::class);
+
     Route::get('product-categories/search', [App\Http\Controllers\Setup\ProductCategoryController::class, 'search']);
     Route::get('product-categories/parents', [App\Http\Controllers\Setup\ProductCategoryController::class, 'category_parents']);
     Route::resource('product-categories', App\Http\Controllers\Setup\ProductCategoryController::class);
+
     Route::get('products/search-tags', [App\Http\Controllers\Setup\ProductController::class, 'search_tags']);
     Route::get('products/search-account', [App\Http\Controllers\Setup\ProductController::class, 'search_account']);
+
+    Route::prefix('products/media/{$id}')->group(function(){
+        Route::post('/', [App\Http\Controllers\Setup\ProductController::class, 'media_upload']);
+        Route::get('/', [App\Http\Controllers\Setup\ProductController::class, 'media_get']);
+        Route::delete('/', [App\Http\Controllers\Setup\ProductController::class, 'media_delete']);
+    });
+
     Route::resource('products', App\Http\Controllers\Setup\ProductController::class);
 });

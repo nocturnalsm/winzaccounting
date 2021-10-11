@@ -101,7 +101,7 @@ class ProductController extends Controller
         $data = $this->product->search($request);
         return response()->json($data);
     }
-    
+
     public function search_account(Request $request)
     {
         $data = $this->product->searchAccount($request);
@@ -112,5 +112,20 @@ class ProductController extends Controller
     {
         $data = $this->product->searchTags($request);
         return response()->json($data);
+    }
+    public function media_get($id, Request $request)
+    {
+        $response =  $this->product->getMedia($id, $request);
+        return response()->json($response);
+    }
+    public function media_upload($id, Request $request)
+    {
+        $response = $this->product->uploadMedia($id, $request);
+        return response()->json($response);
+    }
+    public function media_delete($id)
+    {
+        $response = $this->product->deleteMedia($id);
+        return response()->json($response);
     }
 }
