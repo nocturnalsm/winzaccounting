@@ -51,6 +51,10 @@ const SearchSelect = React.forwardRef(({
                 setSelectedValue({...selectedValue, inputValue})
                 onChange(inputValue)
                 return;
+            case 'deselect-option':
+                setSelectedValue({...selectedValue, inputValue})
+                onChange(inputValue)
+                return;
             default:
                 return;
         }

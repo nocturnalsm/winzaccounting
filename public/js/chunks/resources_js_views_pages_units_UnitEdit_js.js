@@ -1807,6 +1807,13 @@ var SearchSelect = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(fu
         onChange(inputValue);
         return;
 
+      case 'deselect-option':
+        setSelectedValue(_objectSpread(_objectSpread({}, selectedValue), {}, {
+          inputValue: inputValue
+        }));
+        onChange(inputValue);
+        return;
+
       default:
         return;
     }

@@ -56,14 +56,17 @@ Route::prefix('setup')->group(function(){
     Route::get('product-categories/parents', [App\Http\Controllers\Setup\ProductCategoryController::class, 'category_parents']);
     Route::resource('product-categories', App\Http\Controllers\Setup\ProductCategoryController::class);
 
-    Route::get('products/search-tags', [App\Http\Controllers\Setup\ProductController::class, 'search_tags']);
-    Route::get('products/search-account', [App\Http\Controllers\Setup\ProductController::class, 'search_account']);
-
-    Route::prefix('products/media/{$id}')->group(function(){
-        Route::post('/', [App\Http\Controllers\Setup\ProductController::class, 'media_upload']);
-        Route::get('/', [App\Http\Controllers\Setup\ProductController::class, 'media_get']);
-        Route::delete('/', [App\Http\Controllers\Setup\ProductController::class, 'media_delete']);
+    Route::prefix('products/')->group(function(){
+        Route::get('search-tags', [App\Http\Controllers\Setup\ProductController::class, 'search_tags']);
+        Route::get('search-account', [App\Http\Controllers\Setup\ProductController::class, 'search_account']);
+        Route::get('variants/values', [App\Http\Controllers\Setup\ProductController::class, 'search_variant_values']);
+        Route::get('variants', [App\Http\Controllers\Setup\ProductController::class, 'search_variants']);    
+        Route::prefix('media/{$id}')->group(function(){
+            Route::post('/', [App\Http\Controllers\Setup\ProductController::class, 'media_upload']);
+            Route::get('/', [App\Http\Controllers\Setup\ProductController::class, 'media_get']);
+            Route::delete('/', [App\Http\Controllers\Setup\ProductController::class, 'media_delete']);
+        });
     });
-
+    
     Route::resource('products', App\Http\Controllers\Setup\ProductController::class);
 });

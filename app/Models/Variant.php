@@ -9,6 +9,10 @@ class Variant extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['company_id', 'code', 'name'];
+    protected $fillable = ['company_id', 'name'];
 
+    public function values($query)
+    {
+        return $query->hasMany(ProductVariant::class);
+    }
 }

@@ -14,8 +14,7 @@ class CreateTagsTable extends Migration
     public function up()
     {
         Schema::create('tags', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedInteger('company_id')->index();
+            $table->id();            
             $table->string('model_type')->index();
             $table->unsignedInteger('model_id')->index();
             $table->string("name");

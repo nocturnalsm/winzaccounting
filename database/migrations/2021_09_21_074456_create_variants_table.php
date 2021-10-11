@@ -16,8 +16,7 @@ class CreateVariantsTable extends Migration
         Schema::create('variants', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('company_id');
-            $table->string('name');
-            $table->string('code')->nullable();
+            $table->string('name');            
             $table->smallInteger('status')->nullable();
             $table->timestamps();
         });

@@ -4,6 +4,8 @@ namespace App\Repositories\Setup;
 
 use App\Repositories\BaseRepository;
 use App\Repositories\MediaRepository;
+use App\Repositories\TagRepository;
+use App\Repositories\Setup\VarianceRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Account;
@@ -14,11 +16,14 @@ use DB;
 class ProductRepository extends BaseRepository
 {
     private $media;
+    private $variants;
 
     public function __construct()
     {
         $this->data = new Product;
         $this->media = new MediaRepository;
+        $this->variants = new VarianceRepository;
+        $this->tags = new TagRepository;
         $this->listFilters = [
             "category" => function($query, $key, $value){
                 return
@@ -137,27 +142,11 @@ class ProductRepository extends BaseRepository
     }
     public function searchTags($request)
     {
-        $data = Tag::whereModelType('App/Product')
-                   ->orderBy("name", "asc");
-        if ($request->q){
-            $data->where("name", "LIKE", "%{$request->q}%");
-        }
-        if ($request->company_id){
-            $data->where("company_id", $request->company_id);
-        }
-        return [
-            'count' => $data->count(),
-            'data'  => $data->get()
-        ];
+        return $this->tags->searchProductTags($request);        
     }
     public function getMedia($id, Request $request)
-    {
-        if (isset($request->download)){
-            $response = $this->media->download($id);
-        }
-        else {
-            $response = $this->media->get($id);
-        }
+    {        
+        $response = $this->media->get($id, isset($request->download));
         if (!$response){
             abort(400, 'Media cannot be loaded');
         }
@@ -179,7 +168,15 @@ class ProductRepository extends BaseRepository
     }
     public function deleteMedia($id)
     {
-          $media = $this->media->delete($id);
-          return true;
+        $media = $this->media->delete($id);
+        return true;
+    }
+    public function searchVariants(Request $request)
+    {
+        return $this->variants->search($request);
+    }
+    public function searchVariantValues(Request $request)
+    {
+        return $this->variants->searchValues($request);
     }
 }

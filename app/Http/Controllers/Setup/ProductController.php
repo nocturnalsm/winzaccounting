@@ -107,7 +107,6 @@ class ProductController extends Controller
         $data = $this->product->searchAccount($request);
         return response()->json($data);
     }
-
     public function search_tags(Request $request)
     {
         $data = $this->product->searchTags($request);
@@ -126,6 +125,16 @@ class ProductController extends Controller
     public function media_delete($id)
     {
         $response = $this->product->deleteMedia($id);
+        return response()->json($response);
+    }
+    public function search_variants(Request $request)
+    {
+        $response = $this->product->searchVariants($request);
+        return response()->json($response);
+    }
+    public function search_variant_values(Request $request)
+    {
+        $response = $this->product->searchVariantValues($request);
         return response()->json($response);
     }
 }

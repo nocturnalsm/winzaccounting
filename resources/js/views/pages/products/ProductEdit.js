@@ -4,31 +4,41 @@ import { useSelector } from "react-redux";
 import SearchSelect from '../../../components/SearchSelect'
 import { CInput, CInputCheckbox, CCol, CFormGroup, CRow,
          CLabel, CTextarea, CCarousel, CCarouselIndicators,
-         CCarouselInner, CCarouselItem, CCarouselCaption, CCarouselControl} from '@coreui/react'
+         CCarouselInner, CCarouselItem, CCarouselCaption, CCarouselControl} 
+         from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader'
+import PopReactrox from 'react-media-gallery'
 
 const navItems = [
     {'title': 'Information',
      'icon': 'cil-notes',
      'target': '#nav-info'
     },
-    {'title': 'Images',
-     'icon': 'cil-image',
-     'target': '#nav-images'
-    },
     {'title': 'Variants',
      'icon': 'cil-color-palette',
      'target': '#nav-variants'
     },
+    {'title': 'Images',
+     'icon': 'cil-image',
+     'target': '#nav-images'
+    },    
     {'title': 'Prices',
      'icon': 'cil-money',
      'target': '#nav-prices'
     }
 ]
 
-
+const images = () => {
+    return (
+        <div id='minimal-gallery'>
+            <a>
+                <img src="/images/noimage.png" />
+            </a>            
+        </div>
+    )
+}
 const ProductEdit = () => {
 
     const [productCategory, setProductCategory] = useState([])
@@ -36,6 +46,7 @@ const ProductEdit = () => {
     const [productTag, setProductTag]  = useState([])
     const [account, setAccount] = useState('')
     const activeCompany = useSelector(state => state.activeCompany)
+    
     const [formData, setFormData] = useState({
         id: '',
         company_id: activeCompany.id,
@@ -48,9 +59,12 @@ const ProductEdit = () => {
         can_buy: false,
         can_sell: false,
         can_inventory: false,
-        account_id: ''
+        account_id: '',
+        variants: [],
+        variantValues: []
     })
 
+    const [activeCarouselIndex, setActiveCarouselIndex] = useState(0)
 
     return (
         <MasterEdit title="Product"
@@ -211,6 +225,8 @@ const ProductEdit = () => {
                 <CCol sm="8" lg="6">
                     <SearchSelect
                         creatable
+                        optionValue={e => e.id ?? e.value}
+                        optionLabel={e => e.name ?? e.label}
                         url={"/api/setup/products/search-tags?company_id=" + activeCompany.id}
                         disabled={props.loading}
                         value={props.data.tags}
@@ -239,34 +255,74 @@ const ProductEdit = () => {
                     />
                 </CCol>
             </CFormGroup>
+            <h4 id="nav-variants" className="border-bottom pb-3 mb-4">
+                <CIcon name="cil-color-palette" className="mr-2"/>
+                Variants
+            </h4>
+            <CFormGroup row>
+                <CCol sm="4" lg="2">
+                    <CLabel>Select Variants</CLabel>
+                </CCol>
+                <CCol sm="8" lg="5">
+                    <SearchSelect
+                        creatable
+                        url={"/api/setup/products/variants?company_id=" + activeCompany.id}
+                        disabled={props.loading}
+                        value={props.data.variants}
+                        optionValue={e => e.id ?? e.value}
+                        optionLabel={e => e.name ?? e.label}
+                        isMulti
+                        ref={props.inputRefs('product_variants')}
+                        placeholder="Choose Variants ( you can create a new one)"
+                        onChange={values => props.handleChange({variants: values})}
+                    />
+                </CCol>
+            </CFormGroup>
+            {props.data.variants.map((item,index) => (
+                <CFormGroup row key={index}>
+                    <CCol sm="4" lg="2">
+                        {item.label}
+                    </CCol>
+                    <CCol sm="8" lg="10">
+                        <SearchSelect
+                            creatable
+                            url={"/api/setup/products/variants/values?company_id=" + activeCompany.id}
+                            disabled={props.loading}
+                            value={props.data.variantValues[item.label] ?? []}
+                            isMulti
+                            optionValue={e => e.id ?? e.value}
+                            optionLabel={e => e.name ?? e.label}
+                            ref={props.inputRefs('product_variant_values')}
+                            placeholder="Enter Values ( you can create a new one)"
+                            onChange={values => { 
+                                console.log(props.data.variantValues)
+                                props.handleChange({                                    
+                                    variantValues: {...props.data.variantValues, [item.label]: values}
+                                })
+                            }}
+                        />
+                    </CCol>
+                </CFormGroup>
+            ))}           
             <h4 id="nav-images" className="border-bottom pb-3 mb-4">
                 <CIcon name="cil-image" className="mr-2"/>
                 Images
             </h4>
             <CRow>
                 <CCol sm={12}>
-                <CCarousel>
-                    <CCarouselIndicators/>
-                    <CCarouselInner>
-                    <CCarouselItem>
-                        <img src="noimage.png" />
-                        <CCarouselCaption><h3>Slide 1</h3><p>Slide 1</p></CCarouselCaption>
-                    </CCarouselItem>
-                    <CCarouselItem>
-                        <CCarouselCaption><h3>Slide 2</h3><p>Slide 2</p></CCarouselCaption>
-                    </CCarouselItem>
-                    <CCarouselItem>
-                        <CCarouselCaption><h3>Slide 3</h3><p>Slide 3</p></CCarouselCaption>
-                    </CCarouselItem>
-                    </CCarouselInner>
-                    <CCarouselControl direction="prev"/>
-                    <CCarouselControl direction="next"/>
-                </CCarousel>
+                    {images()}
+                    <PopReactrox PRTSettings={{selector: '#minimal-gallery a'}} />    
                 </CCol>
             </CRow>
-            <Dropzone
-                accept="image/*,audio/*,video/*"
-            />
+            <CRow>
+                <CCol className="py-4" sm={12}>
+                    <Dropzone
+                        inputContent="Drag Files or Click to Upload Image"
+                        accept="image/*,audio/*,video/*"
+                        autoUpload={false}
+                    />
+                </CCol>
+            </CRow>
             </>
         )}
         </MasterEdit>
