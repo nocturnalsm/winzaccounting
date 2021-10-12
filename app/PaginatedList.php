@@ -44,7 +44,7 @@ class PaginatedList
             $data = $data->limit($limit)
                          ->offset(($page - 1)*$limit);
         }
-
+        
         return [
             "count" => $count,
             "data" => $data->get()

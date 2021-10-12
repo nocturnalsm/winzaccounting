@@ -13,6 +13,6 @@ class Variant extends Model
 
     public function values($query)
     {
-        return $query->hasMany(ProductVariant::class);
+        return $this->hasMany(VariantValue::class);
     }
 }

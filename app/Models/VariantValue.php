@@ -5,13 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductVariant extends Model
+class VariantValue extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'product_has_variant_id', 'value'
-    ];
     
-
+    protected $fillable = ['variant_id', 'value'];
 }

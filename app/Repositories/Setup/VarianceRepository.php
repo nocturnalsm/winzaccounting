@@ -4,7 +4,6 @@ namespace App\Repositories\Setup;
 
 use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use App\Models\Variant;
 use App\Models\ProductVariant;
 use DB;

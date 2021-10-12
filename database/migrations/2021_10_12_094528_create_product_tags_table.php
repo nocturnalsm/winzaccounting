@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductHasVariantsTable extends Migration
+class CreateProductTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateProductHasVariantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_has_variants', function (Blueprint $table) {
+        Schema::create('product_tags', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('product_id');
-            $table->unsignedInteger('variant_id');
+            $table->unsignedInteger('product_id')->index();
+            $table->unsignedInteger('tag_id')->index();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateProductHasVariantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_has_variants');
+        Schema::dropIfExists('product_tags');
     }
 }

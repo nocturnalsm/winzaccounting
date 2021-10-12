@@ -23,9 +23,9 @@ class TagRepository extends BaseRepository
         return parent::search($request, $qRules);
 
     }
-    public function searchProductTags(Request $request)
+    public function searchByType(Request $request, $type)
     {
-        $this->data = $this->data->whereModelType('App/Product');
+        $this->data = $this->data->whereModelType($type);
         return $this->search($request);
     }
     

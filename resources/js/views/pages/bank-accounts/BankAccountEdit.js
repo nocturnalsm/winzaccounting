@@ -26,7 +26,6 @@ const BankAccountEdit = () => {
             onSubmitSuccess={(request, response) => {
                 let {account_id, bank_id} = request;
                 if (request.id == ""){
-                    console.log('set form')
                     setFormData({...formData, account_id: account_id, bank_id: bank_id})
                 }
             }}

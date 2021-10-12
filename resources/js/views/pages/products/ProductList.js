@@ -40,13 +40,13 @@ const ProductList = () => {
                 {
                   item.categories.map((badge, index) => {
                       return (
-                          <CBadge className="mr-2" color="primary" key={index}>{badge.name}</CBadge>
+                          <CBadge key={"cat-" +index} className="mr-2" color="primary">{badge.name}</CBadge>
                       )
                   })
                 }
                 {
                   item.categories > 3 ? (
-                      <CBadge className="mr-2" color="warning">
+                      <CBadge key={"cat-" +index} className="mr-2" color="warning">
                           {item.categories_count - 3} more
                       </CBadge>
                   ) : ''
@@ -68,17 +68,17 @@ const ProductList = () => {
                 <td>
                     {
                         item.can_buy ? (
-                            <CBadge key={index} color="primary" className="mr-2">Purchased</CBadge>
+                            <CBadge color="primary" className="mr-2">Purchased</CBadge>
                         ) : ''
                     }
                     {
                         item.can_buy ? (
-                            <CBadge key={index} color="success" className="mr-2">Sold</CBadge>
+                            <CBadge color="success" className="mr-2">Sold</CBadge>
                         ) : ''
                     }
                     {
                         item.can_buy ? (
-                            <CBadge key={index} color="light" className="mr-2">Inventory</CBadge>
+                            <CBadge color="light" className="mr-2">Inventory</CBadge>
                         ) : ''
                     }
                 </td>

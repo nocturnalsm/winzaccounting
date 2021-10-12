@@ -8,7 +8,6 @@ import MyAlert from "../alert";
 import CIcon from '@coreui/icons-react'
 import axios from 'axios'
 import Sticky from '../components/StickyComponent'
-import useScrollSpy from '../hooks/useScrollspy'
 
 
 const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
@@ -20,6 +19,7 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
     const [submitError, setSubmitError] = useState({})
     const [submitted, setSubmitted] = useState(0)
     const [navElements, setNavElements] = useState([])
+    const [activeNavigation, setActiveNavigation] = useState();
 
     const dispatch = useDispatch()
     const loading = useSelector(state => state.appLoading)
@@ -33,7 +33,9 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
             props.onChangeData(oldData, values)
         }
     }
-
+    useEffect(() => {
+        console.log(activeNavigation)
+    }, [activeNavigation])
     useEffect(() => {
         if (!id){
             setData(formData)
@@ -44,16 +46,14 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
 
     useEffect(() => {
         if (props.navigation){
-          setNavElements(props.navigation.map(item => {
+          setNavElements(props.navigation.map((item, index) => {
+              if (index == 0){
+                  setActiveNavigation(item.target)
+              }
               return document.querySelector(item.target)
           }))
         }
-    }, [])
-
-    const activeNavigation = useScrollSpy({
-        sectionElements: navElements,
-        offsetPx: 20,
-    });
+    }, [])    
 
     const refs = (index) => {
         if (!inputRefs.current.hasOwnProperty(index)){
@@ -204,7 +204,8 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
                 submitError[property][0] : (errorText ?? 'Unknown Error')
             }
             </CInvalidFeedback>
-        )
+        ),
+        activeNavigation: activeNavigation
     }
     return (
         <CForm className="form-horizontal needs-validation editForm" noValidate wasValidated={validated} onSubmit={handleSubmit}>
@@ -225,23 +226,8 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
                                     <CNav variant="pills">
                                         {
                                             props.navigation.map((item, index) => (
-                                                <CNavItem to={item.target} key={index}>
-                                                    <CNavLink
-                                                      onClick={(event) => {
-                                                          let element = document.querySelector(item.target)
-                                                          var headerOffset = 20;
-                                                          var elementPosition = element.getBoundingClientRect().top;
-                                                          var offsetPosition = elementPosition - headerOffset;
-
-                                                          window.scrollTo({
-                                                               top: offsetPosition,
-                                                               behavior: "smooth"
-                                                          });
-                                                        }
-                                                      }
-                                                      key={"link-" +index}
-                                                      active={activeNavigation == index}
-                                                    >
+                                                <CNavItem key={index}>
+                                                    <CNavLink active={item.target == activeNavigation} onClick={() => setActiveNavigation(item.target)}>                                                      
                                                         {item.icon ? (
                                                             <CIcon className="mr-2" name={item.icon} />
                                                         ) : ''

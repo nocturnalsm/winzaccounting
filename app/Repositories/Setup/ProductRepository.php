@@ -11,6 +11,8 @@ use Illuminate\Validation\Rule;
 use App\Models\Account;
 use App\Models\Tag;
 use App\Models\Product;
+use App\Models\Variant;
+use App\Models\VariantValue;
 use DB;
 
 class ProductRepository extends BaseRepository
@@ -26,10 +28,12 @@ class ProductRepository extends BaseRepository
         $this->tags = new TagRepository;
         $this->listFilters = [
             "category" => function($query, $key, $value){
-                return
-                    $query->whereHas('categories', function($query) use ($value){
-                        $query->where('product_categories.id', $value);
-                    });
+                if ($value != ""){
+                    return
+                        $query->whereHas('categories', function($query) use ($value){
+                            $query->where('product_categories.id', $value);
+                        });
+                }
             },
             "name" => ["operator" => "like"],
             "code" => ["operator" => "like"]
@@ -38,10 +42,9 @@ class ProductRepository extends BaseRepository
     }
     public function listQuery($data)
     {
-        return $this->data->with(["categories" => function($query){
-                    $query->take(3);
-                }])
-                ->withCount('categories');
+        $data = $data->with("categories")
+                     ->withCount('categories');        
+        return $data;
     }
     public function validateUsing($params, $id = "")
     {
@@ -84,17 +87,7 @@ class ProductRepository extends BaseRepository
                             }
                         }
         ];
-    }
-    /*
-    public function listSort($data, $sortBy, $order)
-    {
-        $data->depthFirst();
-        if ($sortBy != ""){
-            $data->orderBy($sortBy, $order);
-        }
-        return $data;
-    }
-    */
+    }    
     public function search(Request $request, $qRules = [])
     {
         if ($qRules == []){
@@ -120,16 +113,22 @@ class ProductRepository extends BaseRepository
         $data = $this->data->select("*")
                            ->with("categories")
                            ->with("units")
-                           ->with('tags')
+                           ->with('tags')                           
                            ->selectSub(
-                               Account::whereColumn("id", "products.account_id"),
+                               Account::select("name")->whereColumn("id", "products.account_id"),
                                'account_name'
                            )
                            ->whereId($id);
         if (!$data){
             throw new \Exception("Data not found");
         }
-        return $data->first();
+        $data = $data->first();
+        $variantValues = $data->variants();
+        
+
+        foreach ($variantValues as $values){
+
+        }
     }
     public function searchAccount($request)
     {
@@ -142,7 +141,7 @@ class ProductRepository extends BaseRepository
     }
     public function searchTags($request)
     {
-        return $this->tags->searchProductTags($request);        
+        return $this->tags->searchByType($request, 'App/Product');        
     }
     public function getMedia($id, Request $request)
     {        
@@ -178,5 +177,46 @@ class ProductRepository extends BaseRepository
     public function searchVariantValues(Request $request)
     {
         return $this->variants->searchValues($request);
+    }
+    public function create(Request $request)
+    {
+        $data = parent::create($request);
+
+        $categories = $request->categories ?? [];
+        foreach($categories as $category)
+        {
+            $data->categories()->attach($category["id"]);
+        }
+
+        $units = $request->units ?? [];
+        foreach($units as $unit){
+            $data->units()->attach($unit["id"]);
+        }
+
+        $tags = $request->tags ?? [];
+        foreach($tags as $tag){
+            $theTag = Tag::firstOrCreate([
+                "name" => $tag["label"],
+                "model_type" => 'App/Product'
+            ], ["company_id" => $request->company_id]);
+            $data->tags()->attach($theTag->id);
+        }
+
+        $variants = $request->variants ?? [];
+        $variantValues = $request->variantValues ?? [];
+        foreach ($variants as $variant){
+            $theVariant = Variant::firstOrCreate([
+                "name" => $variant["label"]
+            ], ["company_id" => $request->company_id]);            
+            if (isset($variantValues[$variant["label"]])){                
+                foreach ($variantValues[$variant["label"]] as $value){
+                    $theValue = VariantValue::firstOrCreate([
+                        "variant_id" => $theVariant->id,
+                        "value" => $value["label"]
+                    ]);
+                    $data->variants()->attach($theValue->id);
+                }
+            }
+        }
     }
 }

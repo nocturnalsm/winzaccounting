@@ -38,26 +38,8 @@ const SearchSelect = React.forwardRef(({
 
     // handle selection
     const handleChange = (inputValue, action) => {
-        switch (action.action){
-            case 'select-option':
-                setSelectedValue(inputValue)
-                onChange(inputValue)
-                return;
-            case 'clear':                
-                setSelectedValue(null)
-                onChange(null)
-                return;
-            case 'create-option':
-                setSelectedValue({...selectedValue, inputValue})
-                onChange(inputValue)
-                return;
-            case 'deselect-option':
-                setSelectedValue({...selectedValue, inputValue})
-                onChange(inputValue)
-                return;
-            default:
-                return;
-        }
+        setSelectedValue(inputValue)       
+        onChange(inputValue)
     }
 
     const customStyles = {

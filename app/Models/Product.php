@@ -21,7 +21,7 @@ class Product extends Model
      */
     public function tags()
     {
-        return $this->morphMany(Tag::class, 'model');
+        return $this->belongsToMany(Tag::class, 'product_tags', 'product_id', 'tag_id');
     }
     public function media()
     {
@@ -33,12 +33,12 @@ class Product extends Model
     }
     public function units()
     {
-        return $this->belongstoMany(Unit::class, 'product_has_units', 'product_id', 'unit_id');
+        return $this->belongstoMany(Unit::class, 'product_units', 'product_id', 'unit_id');
     }
     public function variants()
     {
-        return $this->belongstoMany(Variants::class, 'product_has_variants', 'product_id', 'variant_id');
-    }
+        return $this->belongsToMany(VariantValue::class, 'product_variants', 'product_id', 'variant_value_id');
+    }   
     public function getMediaFolderName()
     {
         return $this->mediaFolderName;
