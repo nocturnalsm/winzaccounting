@@ -20,8 +20,10 @@ class Media extends Model
     {
         return $this->morphTo();
     }
+
     public function getUrlAttribute()
     {
-        return Storage::url("{$this->model()->getMediaFolderName()}/{$this->filename}");
+        return url('/api/media/'.$this->id);
     }
+    
 }

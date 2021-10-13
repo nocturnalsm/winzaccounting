@@ -13,8 +13,8 @@ class Product extends Model
         'company_id', 'code', 'name', 'description',
         'can_sell', 'can_buy', 'can_inventory', 'account_id'
     ];
-
-    protected $mediaFolderName = "products";
+    
+    protected $mediaFoldername = "products";
 
     /**
      * Get all of the product's tags.

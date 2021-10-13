@@ -1,14 +1,13 @@
 import MasterEdit from '../../../containers/MasterEdit'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import SearchSelect from '../../../components/SearchSelect'
 import { CInput, CInputCheckbox, CCol, CFormGroup, CRow,
          CLabel, CTextarea, CTabs, CTabContent, CTabPane} 
          from '@coreui/react'
-import CIcon from '@coreui/icons-react'
 import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader'
-import PopReactrox from 'react-media-gallery'
+import FsLightbox from 'fslightbox-react';
 
 const navItems = [
     {'title': 'Information',
@@ -19,9 +18,9 @@ const navItems = [
      'icon': 'cil-color-palette',
      'target': 'tab-variants'
     },
-    {'title': 'Images',
+    {'title': 'Media',
      'icon': 'cil-image',
-     'target': 'tab-images'
+     'target': 'tab-media'
     },    
     {'title': 'Prices',
      'icon': 'cil-money',
@@ -29,20 +28,13 @@ const navItems = [
     }
 ]
 
-const images = () => {
-    return (
-        <div id='minimal-gallery'>
-            <a>
-                <img src="/images/noimage.png" />
-            </a>            
-        </div>
-    )
-}
 const ProductEdit = () => {
 
     const [productCategory, setProductCategory] = useState([])
     const [productUnit, setProductUnit] = useState([])
     const [productTag, setProductTag]  = useState([])
+    const [media, setMedia] = useState([])
+    const [mediaKey, setMediaKey] = useState(0)
     const [account, setAccount] = useState('')
     const activeCompany = useSelector(state => state.activeCompany)
     
@@ -59,11 +51,25 @@ const ProductEdit = () => {
         can_sell: false,
         can_inventory: false,
         account_id: '',
-        variants: [],
-        variantValues: []
+        productVariants: [],
+        variantValues: [],
+        media: [],        
     })
 
-    const [activeCarouselIndex, setActiveCarouselIndex] = useState(0)
+    useEffect(() => {
+        setMediaKey(mediaKey+1)
+    }, [media])
+    
+    const getMedia = (items) => {
+        if (items && items.length > 0){
+            return items.map((item, index) => {
+                return item.url
+            })               
+        }
+        else {
+            return ["/images/noimage.png"]            
+        }     
+    }
 
     return (
         <MasterEdit title="Product"
@@ -73,9 +79,10 @@ const ProductEdit = () => {
                 if (data){
                     setProductCategory(data.categories)
                     setProductUnit(data.units)
-                    setProductTag(data.tags)
+                    setProductTag(data.tags)                    
+                    setMedia(getMedia(data.media))
                     if (data.account_id){
-                        setAccount({id: data.account_id, name: data.account_name})
+                        setAccount({id: data.account_id, number: data.account_number, name: data.account_name})
                     }
                 }
             }}
@@ -266,38 +273,38 @@ const ProductEdit = () => {
                                     creatable
                                     url={"/api/setup/products/variants?company_id=" + activeCompany.id}
                                     disabled={props.loading}
-                                    value={props.data.variants}
+                                    value={props.data.productVariants}
                                     optionValue={e => e.id ?? e.value}
                                     optionLabel={e => e.name ?? e.label}
                                     isMulti
                                     ref={props.inputRefs('product_variants')}
                                     placeholder="Choose Variants ( you can create a new one)"
-                                    onChange={values => props.handleChange({variants: values})}
+                                    onChange={values => props.handleChange({productVariants: values})}
                                 />
                             </CCol>
                         </CFormGroup>
                         {
-                            props.data.variants ?
-                                props.data.variants.map((item,index) => (
-                                <CFormGroup row key={index}>
+                            props.data.productVariants ?
+                                props.data.productVariants.map((item) => (
+                                <CFormGroup row key={'variant-' + (item.name ?? item.label)}>
                                     <CCol sm="4" lg="2">
-                                        {item.label}
+                                        {(item.name ?? item.label)}
                                     </CCol>
                                     <CCol sm="8" lg="10">
                                         <SearchSelect
                                             creatable
-                                            url={"/api/setup/products/variants/values?company_id=" + activeCompany.id}
+                                            url={"/api/setup/products/variants/values"}
+                                            urlParams={{company_id: activeCompany.id, variant_id: item.id}}
                                             disabled={props.loading}
-                                            value={props.data.variantValues[item.label] ?? []}
+                                            value={props.data.variantValues[(item.name ?? item.label)] ?? []}
                                             isMulti
-                                            optionValue={e => e.id ?? e.value}
-                                            optionLabel={e => e.name ?? e.label}
+                                            optionValue={e => e.id ?? e.label}
+                                            optionLabel={e => e.value ?? e.label}
                                             ref={props.inputRefs('product_variant_values')}
                                             placeholder="Enter Values ( you can create a new one)"
-                                            onChange={values => { 
-                                                console.log(props.data.variantValues)
+                                            onChange={values => {                                                 
                                                 props.handleChange({                                    
-                                                    variantValues: {...props.data.variantValues, [item.label]: values}
+                                                    variantValues: {...props.data.variantValues, [(item.name ?? item.label)]: values}
                                                 })
                                             }}
                                         />
@@ -307,20 +314,34 @@ const ProductEdit = () => {
                             : ''
                         }           
                     </CTabPane>
-                    <CTabPane data-tab="tab-images">
-                        <CRow>
-                            <CCol sm={12}>
-                                {images()}
-                                <PopReactrox PRTSettings={{selector: '#minimal-gallery a'}} />    
-                            </CCol>
-                        </CRow>
+                    <CTabPane data-tab="tab-media">                        
                         <CRow>
                             <CCol className="py-4" sm={12}>
                                 <Dropzone
-                                    inputContent="Drag Files or Click to Upload Image"
+                                    inputContent="Drag Files or Click here to Upload Media"
                                     accept="image/*,audio/*,video/*"
-                                    autoUpload={false}
+                                    getUploadParams={({file}) => {
+                                        const body = new FormData()
+                                        body.append('company_id', activeCompany.id)
+                                        body.append('file', file)
+                                        return {url: '/api/setup/products/media/' + props.data.id, body}
+                                    }}
+                                    handleSubmit = {(files, allFiles) => {                                        
+                                        allFiles.forEach(f => f.remove())
+                                    }}
+                                    onChangeStatus={({meta, xhr}, status) => {
+                                        if (status === 'done'){
+                                            let body = JSON.parse(xhr.responseText)
+                                            props.data.media.push(body)
+                                            setMedia(getMedia(props.data.media))
+                                        }
+                                    }}
                                 />
+                            </CCol>
+                        </CRow>
+                        <CRow>
+                            <CCol sm={12}>                                
+                                <FsLightbox type="image" key={mediaKey} toggler={false} sources={media} />
                             </CCol>
                         </CRow>
                     </CTabPane>

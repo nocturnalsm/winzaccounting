@@ -8,6 +8,7 @@ use App\Repositories\TagRepository;
 use App\Repositories\Setup\VarianceRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Models\AccountType;
 use App\Models\Account;
 use App\Models\Tag;
 use App\Models\Product;
@@ -19,6 +20,7 @@ class ProductRepository extends BaseRepository
 {
     private $media;
     private $variants;
+    private $mediaFolderName = "products";
 
     public function __construct()
     {
@@ -111,24 +113,40 @@ class ProductRepository extends BaseRepository
     public function getById($id)
     {
         $data = $this->data->select("*")
-                           ->with("categories")
-                           ->with("units")
-                           ->with('tags')                           
-                           ->selectSub(
-                               Account::select("name")->whereColumn("id", "products.account_id"),
-                               'account_name'
-                           )
+                           ->with(["categories", "units", "tags", "media"])                              
                            ->whereId($id);
         if (!$data){
             throw new \Exception("Data not found");
         }
         $data = $data->first();
-        $variantValues = $data->variants();
-        
+        $account = Account::whereId($data->account_id)
+                          ->select("name", "number")
+                          ->selectSub(
+                              AccountType::whereColumn("id", "accounts.account_type")
+                                         ->select("prefix"),
+                              'prefix'
+                          )->first();
 
-        foreach ($variantValues as $values){
-
+        $data->account_name = $account ? $account->name : '';
+        $data->account_number = $account ? $account->prefix .$account->number : '';
+        $variantValues = $data->variants()->get();
+                
+        $theValues = Array();
+        $theVariants = Array();
+        foreach ($variantValues as $variant){
+            $theVariant = Variant::find($variant->variant_id);
+            if ($theVariant){
+                if (!isset($theValues[$theVariant->name])){                                
+                    $theVariants[] = $theVariant;                                        
+                }
+                $theValues[$theVariant->name][] = $variant;
+            }
         }
+        $data->variantValues = $theValues;
+        $data->productVariants = $theVariants;
+
+        return $data;
+                
     }
     public function searchAccount($request)
     {
@@ -153,17 +171,22 @@ class ProductRepository extends BaseRepository
     }
     public function uploadMedia($id, Request $request)
     {
-        $product = Product::find($id);
-        if ($product){
-            $file = $this->media->save($product, $request);
-            if (!$file){
-                abort(400, 'Upload failed');
+        if ($id){
+            $product = Product::find($id);
+            if ($product){
+                $media = $this->media->save($request, $this->mediaFolderName, $product);
             }
-            return $file;
+            else {
+                abort(422, 'Product not found');
+            }
         }
-        else {
-            abort(422, 'Product not found');
+        else {                    
+            $media = $this->media->save($request, $this->mediaFolderName);
         }
+        if (!$media){
+            abort(400, json_encode($request->all()));
+        }
+        return $media;        
     }
     public function deleteMedia($id)
     {
@@ -180,43 +203,111 @@ class ProductRepository extends BaseRepository
     }
     public function create(Request $request)
     {
-        $data = parent::create($request);
+        DB::transaction(function () use ($request) {
+            $data = parent::create($request);
 
-        $categories = $request->categories ?? [];
-        foreach($categories as $category)
-        {
-            $data->categories()->attach($category["id"]);
-        }
+            $categories = $request->categories ?? [];
+            foreach($categories as $category)
+            {
+                $data->categories()->attach($category["id"]);
+            }
 
-        $units = $request->units ?? [];
-        foreach($units as $unit){
-            $data->units()->attach($unit["id"]);
-        }
+            $units = $request->units ?? [];
+            foreach($units as $unit){
+                $data->units()->attach($unit["id"]);
+            }
 
-        $tags = $request->tags ?? [];
-        foreach($tags as $tag){
-            $theTag = Tag::firstOrCreate([
-                "name" => $tag["label"],
-                "model_type" => 'App/Product'
-            ], ["company_id" => $request->company_id]);
-            $data->tags()->attach($theTag->id);
-        }
+            $tags = $request->tags ?? [];
+            foreach($tags as $tag){
+                $theTag = Tag::firstOrCreate([
+                    "name" => $tag["label"] ?? $tag["name"],
+                    "model_type" => 'App/Product',
+                    "company_id" => $request->company_id
+                ]);
+                $data->tags()->attach($theTag->id);
+            }
 
-        $variants = $request->variants ?? [];
-        $variantValues = $request->variantValues ?? [];
-        foreach ($variants as $variant){
-            $theVariant = Variant::firstOrCreate([
-                "name" => $variant["label"]
-            ], ["company_id" => $request->company_id]);            
-            if (isset($variantValues[$variant["label"]])){                
-                foreach ($variantValues[$variant["label"]] as $value){
-                    $theValue = VariantValue::firstOrCreate([
-                        "variant_id" => $theVariant->id,
-                        "value" => $value["label"]
-                    ]);
-                    $data->variants()->attach($theValue->id);
+            $variants = $request->productVariants ?? [];
+            $variantValues = $request->variantValues ?? [];
+            foreach ($variants as $variant){
+                $theVariant = Variant::firstOrCreate([
+                    "name" => $variant["label"] ?? $variant["name"],
+                    "company_id" => $request->company_id
+                ]);   
+                $label = $variant["label"] ?? $variant["name"];        
+                if (isset($variantValues[$label])){                
+                    foreach ($variantValues[$label] as $value){
+                        $theValue = VariantValue::firstOrCreate([
+                            "variant_id" => $theVariant->id,
+                            "value" => $value["label"] ?? $value["value"]
+                        ]);
+                        $data->variants()->attach($theValue->id);
+                    }
                 }
             }
-        }
+
+            $this->media->sync($request->media, $data);            
+
+            return $data;
+        });        
+    }
+    public function update($id, Request $request)
+    {
+        DB::transaction(function () use ($id, $request) {
+            $data = parent::update($id, $request);
+
+            $categories = $request->categories ?? [];
+            $syncCategories = [];
+            foreach($categories as $category)
+            {
+                $syncCategories[] = $category["id"];
+            }
+            $data->categories()->sync($syncCategories);
+
+            $units = $request->units ?? [];
+            $syncUnits = [];
+            foreach($units as $unit){
+                $syncUnits[] = $unit["id"];
+            }
+            $data->units()->sync($syncUnits);
+            
+            $tags = $request->tags ?? [];
+            $syncTags = [];
+            foreach($tags as $tag){
+                $theTag = Tag::firstOrCreate([
+                    "name" => $tag["label"] ?? $tag["name"],
+                    "model_type" => 'App/Product',
+                    "company_id" => $request->company_id
+                ]);
+                $syncTags[] = $theTag->id;
+            }
+            $data->tags()->sync($syncTags);
+            
+            $variants = $request->productVariants ?? [];
+            $variantValues = $request->variantValues ?? [];
+            $syncVariants = [];
+            foreach ($variants as $variant){
+                $theVariant = Variant::firstOrCreate([
+                    "name" => $variant["label"] ?? $variant["name"],
+                    "company_id" => $request->company_id
+                ]);   
+                $label = $variant["label"] ?? $variant["name"];
+                
+                if (isset($variantValues[$label])){                
+                    foreach ($variantValues[$label] as $value){
+                        $theValue = VariantValue::firstOrCreate([
+                            "variant_id" => $theVariant->id,
+                            "value" => $value["label"] ?? $value["value"]
+                        ]);
+                        $syncVariants[] = $theValue->id;
+                    }
+                }
+            }
+            $data->variants()->sync($syncVariants);
+
+            $this->media->sync($request->media, $data);
+
+            return $data;
+        });        
     }
 }

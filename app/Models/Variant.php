@@ -11,7 +11,7 @@ class Variant extends Model
 
     protected $fillable = ['company_id', 'name'];
 
-    public function values($query)
+    public function values()
     {
         return $this->hasMany(VariantValue::class);
     }

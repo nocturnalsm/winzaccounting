@@ -61,12 +61,11 @@ Route::prefix('setup')->group(function(){
         Route::get('search-account', [App\Http\Controllers\Setup\ProductController::class, 'search_account']);
         Route::get('variants/values', [App\Http\Controllers\Setup\ProductController::class, 'search_variant_values']);
         Route::get('variants', [App\Http\Controllers\Setup\ProductController::class, 'search_variants']);    
-        Route::prefix('media/{$id}')->group(function(){
-            Route::post('/', [App\Http\Controllers\Setup\ProductController::class, 'media_upload']);
-            Route::get('/', [App\Http\Controllers\Setup\ProductController::class, 'media_get']);
-            Route::delete('/', [App\Http\Controllers\Setup\ProductController::class, 'media_delete']);
-        });
+        Route::post('media/{id?}', [App\Http\Controllers\Setup\ProductController::class, 'media_upload']);
     });
-    
+
     Route::resource('products', App\Http\Controllers\Setup\ProductController::class);
+    
 });
+
+Route::resource('media', App\Http\Controllers\MediaController::class);

@@ -29,7 +29,7 @@ class VarianceRepository extends BaseRepository
         if ($qRules == []){
             $qRules = ["value" => ["operator" => "like"]];
         }        
-        $this->data = $this->data->find($request->id);
+        $this->data = $this->data->find($request->variant_id);
         if ($this->data){
             $this->data = $this->data->values();
             return parent::search($request, $qRules);
