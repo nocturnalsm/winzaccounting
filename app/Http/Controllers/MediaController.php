@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\MediaRepository;
-use Storage;
 
 class MediaController extends Controller
 {
@@ -56,13 +55,11 @@ class MediaController extends Controller
      */
     public function show($id, Request $request)
     {
-        $data = $this->media->getById($id);
-        $file = Storage::get($data->filename);
-        $type = Storage::mimeType($data->filename);
+        $file = $this->media->getById($id);
 
-        return response($file)
+        return response($file->getContent())
                 ->withHeaders([
-                    'Content-Type' => $type
+                    'Content-Type' => $file->type
                 ]);       
     }
 

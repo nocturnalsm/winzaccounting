@@ -115,8 +115,8 @@ class ProductRepository extends BaseRepository
         $data = $this->data->select("*")
                            ->with(["categories", "units", "tags", "media"])                              
                            ->whereId($id);
-        if (!$data){
-            throw new \Exception("Data not found");
+        if (!$data->exists()){
+            abort(404, "Product not found");
         }
         $data = $data->first();
         $account = Account::whereId($data->account_id)
@@ -160,39 +160,15 @@ class ProductRepository extends BaseRepository
     public function searchTags($request)
     {
         return $this->tags->searchByType($request, 'App/Product');        
-    }
-    public function getMedia($id, Request $request)
+    }    
+    public function uploadMedia(Request $request)
     {        
-        $response = $this->media->get($id, isset($request->download));
-        if (!$response){
-            abort(400, 'Media cannot be loaded');
-        }
-        return $response;
-    }
-    public function uploadMedia($id, Request $request)
-    {
-        if ($id){
-            $product = Product::find($id);
-            if ($product){
-                $media = $this->media->save($request, $this->mediaFolderName, $product);
-            }
-            else {
-                abort(422, 'Product not found');
-            }
-        }
-        else {                    
-            $media = $this->media->save($request, $this->mediaFolderName);
-        }
+        $media = $this->media->save($request, $this->mediaFolderName);
         if (!$media){
             abort(400, json_encode($request->all()));
         }
         return $media;        
-    }
-    public function deleteMedia($id)
-    {
-        $media = $this->media->delete($id);
-        return true;
-    }
+    }    
     public function searchVariants(Request $request)
     {
         return $this->variants->search($request);

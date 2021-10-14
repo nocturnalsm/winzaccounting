@@ -14,7 +14,7 @@ class MediaRepository extends BaseRepository
         $this->data = new Media;
     }
     
-    public function save($request, $folderName, $model)
+    public function save($request, $folderName)
     {
         if ($request->file){
             $path = $request->file('file')->store($folderName);    
@@ -22,29 +22,23 @@ class MediaRepository extends BaseRepository
                 "filename" => $path,
                 "company_id" => $request->company_id
             ];        
-            if ($model){
-                $media = $model->media()->create($data);
-            }
-            else {
-                $media = $media->fill($data)->save();
-            }
+            $media = Media::create($data);
             return $media;
         }
         return false;
     }
     public function sync($medias, $model)
     {
-        $oldMedia = $model->media();
-        $deassociated = Array();
+        $oldMedia = $model->media()->get();
         foreach ($oldMedia as $media){
             $founded = false;
             for($i=0;$i<count($medias);$i++){
-                if ($media["id"] == $medias[$i]->id){
+                if ($media->id == $medias[$i]["id"]){
                     $founded = true;
                 }
             }
             if ($founded === false){
-                $media->model()->dissociate()->save();
+                $media->delete();
             }
         }
         foreach ($medias as $media){

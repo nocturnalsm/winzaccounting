@@ -14,7 +14,7 @@ class Media extends Model
         'company_id', 'model_type', 'model_id', 'filename', 'title'
     ];
 
-    protected $appends = ['url'];
+    protected $appends = ['url', 'type', 'size'];
     
     public function model()
     {
@@ -25,5 +25,24 @@ class Media extends Model
     {
         return url('/api/media/'.$this->id);
     }
+
+    public function getContent()
+    {
+        return Storage::get($this->filename);
+    }
+
+    public function getTypeAttribute()
+    {
+        return Storage::mimeType($this->filename);
+    }
     
+    public function getThumbnail()
+    {
+        return Storage::get($this->filename ."-thumbnail");
+    }
+
+    public function getSizeAttribute()
+    {
+        return Storage::size($this->filename);
+    }
 }

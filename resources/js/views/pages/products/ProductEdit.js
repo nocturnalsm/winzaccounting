@@ -1,5 +1,5 @@
 import MasterEdit from '../../../containers/MasterEdit'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from "react-redux";
 import SearchSelect from '../../../components/SearchSelect'
 import { CInput, CInputCheckbox, CCol, CFormGroup, CRow,
@@ -7,7 +7,7 @@ import { CInput, CInputCheckbox, CCol, CFormGroup, CRow,
          from '@coreui/react'
 import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader'
-import FsLightbox from 'fslightbox-react';
+import MediaGallery from '../../../components/MediaGallery'
 
 const navItems = [
     {'title': 'Information',
@@ -33,8 +33,7 @@ const ProductEdit = () => {
     const [productCategory, setProductCategory] = useState([])
     const [productUnit, setProductUnit] = useState([])
     const [productTag, setProductTag]  = useState([])
-    const [media, setMedia] = useState([])
-    const [mediaKey, setMediaKey] = useState(0)
+    const [media, setMedia] = useState([])    
     const [account, setAccount] = useState('')
     const activeCompany = useSelector(state => state.activeCompany)
     
@@ -56,19 +55,16 @@ const ProductEdit = () => {
         media: [],        
     })
 
-    useEffect(() => {
-        setMediaKey(mediaKey+1)
-    }, [media])
-    
-    const getMedia = (items) => {
-        if (items && items.length > 0){
-            return items.map((item, index) => {
-                return item.url
-            })               
-        }
-        else {
-            return ["/images/noimage.png"]            
-        }     
+    const getMedia = (items) => {        
+        return items.map((item, index) => {
+            return {
+                id: item.id,
+                originalSrc: item.url,
+                thumbnailSrc: item.thumbnail,
+                size: item.size,
+                type: item.type
+            }
+        })    
     }
 
     return (
@@ -316,7 +312,7 @@ const ProductEdit = () => {
                     </CTabPane>
                     <CTabPane data-tab="tab-media">                        
                         <CRow>
-                            <CCol className="py-4" sm={12}>
+                            <CCol className="py-2" sm={4}>
                                 <Dropzone
                                     inputContent="Drag Files or Click here to Upload Media"
                                     accept="image/*,audio/*,video/*"
@@ -332,16 +328,17 @@ const ProductEdit = () => {
                                     onChangeStatus={({meta, xhr}, status) => {
                                         if (status === 'done'){
                                             let body = JSON.parse(xhr.responseText)
-                                            props.data.media.push(body)
+                                            props.data.media.push(body)                                                                                                                                   
                                             setMedia(getMedia(props.data.media))
                                         }
                                     }}
                                 />
-                            </CCol>
-                        </CRow>
-                        <CRow>
-                            <CCol sm={12}>                                
-                                <FsLightbox type="image" key={mediaKey} toggler={false} sources={media} />
+                            </CCol>                        
+                            <CCol sm={8}>                           
+                                <MediaGallery onDelete={(deleted, restMedia) => {                                    
+                                    props.data.media = restMedia                                       
+                                    setMedia(restMedia)
+                                }} sources={media} />
                             </CCol>
                         </CRow>
                     </CTabPane>
