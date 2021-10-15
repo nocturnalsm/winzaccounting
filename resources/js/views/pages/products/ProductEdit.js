@@ -2,7 +2,7 @@ import MasterEdit from '../../../containers/MasterEdit'
 import { useState } from 'react';
 import { useSelector } from "react-redux";
 import SearchSelect from '../../../components/SearchSelect'
-import { CInput, CInputCheckbox, CCol, CFormGroup, CRow,
+import { CInput, CBadge, CButton, CInputCheckbox, CCol, CFormGroup, CRow,
          CLabel, CTextarea, CTabs, CTabContent, CTabPane} 
          from '@coreui/react'
 import 'react-dropzone-uploader/dist/styles.css'
@@ -35,6 +35,7 @@ const ProductEdit = () => {
     const [productTag, setProductTag]  = useState([])
     const [media, setMedia] = useState([])    
     const [account, setAccount] = useState('')
+    const [primaryMedia, setPrimaryMedia] = useState('')
     const activeCompany = useSelector(state => state.activeCompany)
     
     const [formData, setFormData] = useState({
@@ -53,6 +54,7 @@ const ProductEdit = () => {
         productVariants: [],
         variantValues: [],
         media: [],        
+        primary_media_id: ''
     })
 
     const getMedia = (items) => {        
@@ -77,6 +79,7 @@ const ProductEdit = () => {
                     setProductUnit(data.units)
                     setProductTag(data.tags)                    
                     setMedia(getMedia(data.media))
+                    setPrimaryMedia(data.primary_media_id)
                     if (data.account_id){
                         setAccount({id: data.account_id, number: data.account_number, name: data.account_name})
                     }
@@ -143,7 +146,7 @@ const ProductEdit = () => {
                                     rows="5"
                                     disabled={props.loading}
                                     onChange={e => props.handleChange({description: e.target.value})}
-                                    value={props.data.description}
+                                    value={props.data.description ?? ''}
                                     innerRef={props.inputRefs('description')}
                                 />
                             </CCol>
@@ -315,16 +318,13 @@ const ProductEdit = () => {
                             <CCol className="py-2" sm={4}>
                                 <Dropzone
                                     inputContent="Drag Files or Click here to Upload Media"
-                                    accept="image/*,audio/*,video/*"
+                                    accept="image/*,video/*"                                    
                                     getUploadParams={({file}) => {
                                         const body = new FormData()
                                         body.append('company_id', activeCompany.id)
                                         body.append('file', file)
                                         return {url: '/api/setup/products/media/' + props.data.id, body}
-                                    }}
-                                    handleSubmit = {(files, allFiles) => {                                        
-                                        allFiles.forEach(f => f.remove())
-                                    }}
+                                    }}                                    
                                     onChangeStatus={({meta, xhr}, status) => {
                                         if (status === 'done'){
                                             let body = JSON.parse(xhr.responseText)
@@ -332,13 +332,66 @@ const ProductEdit = () => {
                                             setMedia(getMedia(props.data.media))
                                         }
                                     }}
+                                    LayoutComponent={({input, previews, dropzoneProps}) => {
+                                        return (
+                                            <div>                                                                                      
+                                              <div {...dropzoneProps}>
+                                                {input}
+                                                {previews}
+                                              </div>
+                                            </div>
+                                        )
+                                    }}
                                 />
                             </CCol>                        
                             <CCol sm={8}>                           
-                                <MediaGallery onDelete={(deleted, restMedia) => {                                    
-                                    props.data.media = restMedia                                       
-                                    setMedia(restMedia)
-                                }} sources={media} />
+                                <MediaGallery 
+                                    onDelete={deleted => {                                    
+                                        let filtered = props.data.media.filter(item => {
+                                            return item.id != deleted.id
+                                        })
+                                        props.handleChange({
+                                            media: filtered
+                                        })                                       
+                                        setMedia(getMedia(filtered))                                    
+                                    }} 
+                                    sources={media} 
+                                    deleteButton={(currentMedia, onDelete) => (
+                                        <CButton type="button" onClick={event => {
+                                                event.stopPropagation()
+                                                onDelete(currentMedia)
+                                            }} 
+                                            className="text-danger" size="sm">Delete
+                                        </CButton>
+                                    )}
+                                    cardLayout={({media: currentMedia, preview, deleteButton}) => {
+                                        return (
+                                            <>        
+                                                {preview}                                        
+                                                <div className="meta">
+                                                    <div className="text-center mt-2">{(currentMedia.size/1024).toFixed(2)} KB</div>
+                                                    <div className="text-center">
+                                                        {currentMedia.id == primaryMedia ? (
+                                                            <CBadge color="primary">PRIMARY</CBadge>
+                                                        )
+                                                        : (
+                                                            <CButton 
+                                                                type="button" 
+                                                                onClick={event => {                                                                    
+                                                                    event.stopPropagation()
+                                                                    setPrimaryMedia(currentMedia.id)    
+                                                                    props.handleChange({primary_media_id: currentMedia.id})                                                        
+                                                                }} 
+                                                                className="text-primary" size="sm">Set as Primary
+                                                            </CButton>
+                                                        )}
+                                                        {deleteButton}
+                                                    </div>
+                                                </div>                                                
+                                            </>
+                                        )
+                                    }}
+                                />
                             </CCol>
                         </CRow>
                     </CTabPane>

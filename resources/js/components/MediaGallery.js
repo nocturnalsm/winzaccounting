@@ -7,18 +7,26 @@ import { isEqual } from 'lodash';
 //MAIN LIGHTBOX
 //Holds Medias Cards and Lightbox
 //this is where all of our logic will live
-const MediaGallery = ({sources, onDelete}) => {
+const MediaGallery = ({sources, 
+                       preview,                        
+                       deleteButton, 
+                       onClickMedia,
+                       cardLayout,
+                       onDelete, 
+                       loop = true,                        
+                    }) => {
 
     const [mediaToShow, setMediaToShow] = useState("");
     const [lightboxDisplay, setLightBoxDisplay] = useState(false);
-
+    
     const handleDelete = (deleted) => {
         MyAlert.confirm({
-            confirmAction: () => {
-                let filtered = sources.filter((item, index) => {                    
-                    return !isEqual(item, deleted)
-                })                                 
-                onDelete(deleted, filtered)     
+            confirmAction: () => {                
+                
+                if (onDelete){
+                    onDelete(deleted)
+                }
+                
             }
         })
     }
@@ -49,25 +57,68 @@ const MediaGallery = ({sources, onDelete}) => {
               
     }
 
-    //looping through our medias array to create img elements
-    const mediaCards = sources.map((media, index) => (
-        <div className="d-inline-block my-4" key={'media-' + index}>            
-            <img style={styles.mediaCard} onClick={() => showMedia(media)} src={media.thumbnailSrc ?? media.originalSrc} />
-            <div className="meta">
-                <div className="text-center mt-2">{(media.size/1024).toFixed(2)} KB</div>
-                <CButton type="button" onClick={event => {
-                    event.stopPropagation()
-                    handleDelete(media)
-                }} block className="btn-link text-danger" size="sm">Delete</CButton>
-            </div>
-        </div>
-    ));
-
     //function to show a specific media in the lightbox, amd make lightbox visible
     const showMedia = (media) => {        
         setMediaToShow(media);
         setLightBoxDisplay(true);
     };
+
+    const onDeleteFunction = (currentMedia => {
+        handleDelete(currentMedia)
+    })
+
+    const onClickMediaFunction = ((event, currentMedia) => {
+        event.stopPropagation()
+        showMedia(currentMedia)
+        if (onClickMedia){
+            onClickMedia(currentMedia)
+        }
+    })
+
+    const renderPreview = (currentMedia => {
+        if (!preview){
+            return (
+                <img style={styles.mediaCard} onClick={event => onClickMediaFunction(event, currentMedia)} src={currentMedia.thumbnailSrc ?? currentMedia.originalSrc} />
+            )
+        }
+        else {
+            return preview(currentMedia, onClickMedia)
+        }
+    })
+
+    const renderDelete = (currentMedia => {
+        if (!deleteButton){
+            return (
+                <CButton type="button" onClick={event => {
+                    event.stopPropagation()
+                    onDeleteFunction(currentMedia)
+                }} block className="btn-link text-danger" size="sm">Delete</CButton>
+            )
+        }
+        else {
+            return deleteButton(currentMedia, onDeleteFunction)
+        }
+    })    
+
+    //looping through our medias array to create img elements
+    const mediaCards = sources.map((media, index) => (
+        <div draggable className="d-inline-block p-2 m-2" key={'media-' + index}> 
+            {                
+                cardLayout ? (                    
+                    cardLayout({preview: renderPreview(media), media: media, deleteButton: renderDelete(media)})  
+                )
+                : (
+                    <>
+                        {renderPreview(media)}
+                        <div className="meta">
+                            <div className="text-center mt-2">{(media.size/1024).toFixed(2)} KB</div>
+                            {renderDelete(media)}
+                        </div>
+                    </>
+                )
+            }
+        </div>
+    ));
 
     //hide lightbox
     const hideLightBox = () => {
@@ -79,7 +130,13 @@ const MediaGallery = ({sources, onDelete}) => {
         e.stopPropagation();
         let currentIndex = sources.indexOf(mediaToShow);
         if (currentIndex >= sources.length - 1) {
-            setLightBoxDisplay(false);
+            if (!loop){
+                setLightBoxDisplay(false);
+            }
+            else {
+                let nextMedia = sources[0];
+                setMediaToShow(nextMedia);                
+            }
         } else {
             let nextMedia = sources[currentIndex + 1];
             setMediaToShow(nextMedia);            
@@ -91,7 +148,13 @@ const MediaGallery = ({sources, onDelete}) => {
         e.stopPropagation();
         let currentIndex = sources.indexOf(mediaToShow);
         if (currentIndex <= 0) {
-            setLightBoxDisplay(false);
+            if (!loop){
+                setLightBoxDisplay(false);
+            }
+            else {
+                let nextMedia = sources[sources.length - 1];
+                setMediaToShow(nextMedia);    
+            }
         } 
         else {
             let nextMedia = sources[currentIndex - 1];
@@ -108,11 +171,11 @@ const MediaGallery = ({sources, onDelete}) => {
         {
             lightboxDisplay ? 
             <div style={styles.lightbox} onClick={hideLightBox}>
-                <CButton variant="ghost" onClick={showPrev}>
+                <CButton style={{boxShadow: 'none'}} className={"ml-2"} shape="pill" color="light" variant="ghost" onClick={showPrev}>
                     <CIcon size={"xl"} name="cil-chevron-double-left" />
                 </CButton>
                 <img style={styles.lightboxMedia} src={mediaToShow.originalSrc}></img>
-                <CButton variant="ghost" onClick={showNext}>
+                <CButton style={{boxShadow: 'none'}} className={"mr-2"} shape="pill" color="light" variant="ghost" onClick={showNext}>
                     <CIcon size={"xl"} name="cil-chevron-double-right" />
                 </CButton>
             </div>
