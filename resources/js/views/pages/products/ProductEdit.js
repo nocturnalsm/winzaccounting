@@ -32,11 +32,10 @@ const ProductEdit = () => {
 
     const [productCategory, setProductCategory] = useState([])
     const [productUnit, setProductUnit] = useState([])
-    const [productTag, setProductTag]  = useState([])
-    const [media, setMedia] = useState([])    
-    const [account, setAccount] = useState('')
-    const [primaryMedia, setPrimaryMedia] = useState('')
+    const [productTag, setProductTag]  = useState([])    
+    const [account, setAccount] = useState('')    
     const activeCompany = useSelector(state => state.activeCompany)
+    const [animateMedia, setAnimateMedia] = useState(false)
     
     const [formData, setFormData] = useState({
         id: '',
@@ -57,16 +56,38 @@ const ProductEdit = () => {
         primary_media_id: ''
     })
 
-    const getMedia = (items) => {        
-        return items.map((item, index) => {
-            return {
-                id: item.id,
-                originalSrc: item.url,
-                thumbnailSrc: item.thumbnail,
-                size: item.size,
-                type: item.type
-            }
-        })    
+    const getMedia = ((items, primary_id) => {                
+        if (items.length > 0){
+            let primaryMedia = null
+            let filtered = items.map(item => {            
+                return  {
+                    id: item.id,
+                    originalSrc: item.url,
+                    thumbnailSrc: item.thumbnail,
+                    size: item.size,
+                    type: item.type
+                }
+            })
+            .filter(item => {
+                if (item.id == primary_id){
+                    primaryMedia = item
+                }
+                return item.id != primary_id
+            })
+            return primaryMedia ? [primaryMedia, ...filtered] : filtered
+        }
+        else {
+            return []
+        }
+    })
+
+    const cardStyle = {
+        animate: {
+            transition: 'transform .35s ease-in-out'
+        },
+        grow: {
+            transform: 'scale(1.2)'
+        }
     }
 
     return (
@@ -77,9 +98,7 @@ const ProductEdit = () => {
                 if (data){
                     setProductCategory(data.categories)
                     setProductUnit(data.units)
-                    setProductTag(data.tags)                    
-                    setMedia(getMedia(data.media))
-                    setPrimaryMedia(data.primary_media_id)
+                    setProductTag(data.tags)                                                            
                     if (data.account_id){
                         setAccount({id: data.account_id, number: data.account_number, name: data.account_name})
                     }
@@ -327,9 +346,14 @@ const ProductEdit = () => {
                                     }}                                    
                                     onChangeStatus={({meta, xhr}, status) => {
                                         if (status === 'done'){
-                                            let body = JSON.parse(xhr.responseText)
-                                            props.data.media.push(body)                                                                                                                                   
-                                            setMedia(getMedia(props.data.media))
+                                            let body = JSON.parse(xhr.responseText)  
+                                            let changes = {media: [...props.data.media, body]}                                          
+                                            if (props.data.primary_media_id == ''){
+                                                changes = {...changes, primary_media_id: body.id}
+                                            }
+                                            console.log(props.data.primary_media_id)
+                                            console.log(changes)
+                                            props.handleChange(changes)
                                         }
                                     }}
                                     LayoutComponent={({input, previews, dropzoneProps}) => {
@@ -349,13 +373,19 @@ const ProductEdit = () => {
                                     onDelete={deleted => {                                    
                                         let filtered = props.data.media.filter(item => {
                                             return item.id != deleted.id
-                                        })
-                                        props.handleChange({
-                                            media: filtered
-                                        })                                       
-                                        setMedia(getMedia(filtered))                                    
+                                        })                                        
+                                        let changes = {media: filtered}
+                                        if (filtered.length > 0){
+                                            if (deleted.id == props.data.primary_media_id){
+                                                changes = {...changes, primary_media_id: filtered[0].id}
+                                            }                  
+                                        }
+                                        else {
+                                            changes = {...changes, primary_media_id: ''}
+                                        }                                                                   
+                                        props.handleChange(changes)                      
                                     }} 
-                                    sources={media} 
+                                    sources={getMedia(props.data.media, props.data.primary_media_id)} 
                                     deleteButton={(currentMedia, onDelete) => (
                                         <CButton type="button" onClick={event => {
                                                 event.stopPropagation()
@@ -364,31 +394,38 @@ const ProductEdit = () => {
                                             className="text-danger" size="sm">Delete
                                         </CButton>
                                     )}
-                                    cardLayout={({media: currentMedia, preview, deleteButton}) => {
+                                    cardLayout={({media: currentMedia, preview, deleteButton}, index) => {
                                         return (
-                                            <>        
+                                            <div className="p-0" 
+                                                style={{
+                                                    ...cardStyle.animate, 
+                                                    ...(index == 0 && animateMedia ? cardStyle.grow : null)
+                                                }}>        
                                                 {preview}                                        
                                                 <div className="meta">
                                                     <div className="text-center mt-2">{(currentMedia.size/1024).toFixed(2)} KB</div>
                                                     <div className="text-center">
-                                                        {currentMedia.id == primaryMedia ? (
+                                                        {currentMedia.id == props.data.primary_media_id ? (
                                                             <CBadge color="primary">PRIMARY</CBadge>
                                                         )
                                                         : (
                                                             <CButton 
                                                                 type="button" 
                                                                 onClick={event => {                                                                    
-                                                                    event.stopPropagation()
-                                                                    setPrimaryMedia(currentMedia.id)    
-                                                                    props.handleChange({primary_media_id: currentMedia.id})                                                        
+                                                                    event.stopPropagation() 
+                                                                    setAnimateMedia(true) 
+                                                                    setTimeout(function(){ setAnimateMedia(false); }, 300);
+                                                                    props.handleChange({
+                                                                        primary_media_id: currentMedia.id
+                                                                    })                                                                                                                                                                    
                                                                 }} 
-                                                                className="text-primary" size="sm">Set as Primary
+                                                                className={"text-primary"} style={{boxShadow: 'none'}} size="sm">Set as Primary
                                                             </CButton>
                                                         )}
                                                         {deleteButton}
                                                     </div>
                                                 </div>                                                
-                                            </>
+                                            </div>
                                         )
                                     }}
                                 />

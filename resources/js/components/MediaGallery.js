@@ -105,7 +105,7 @@ const MediaGallery = ({sources,
         <div draggable className="d-inline-block p-2 m-2" key={'media-' + index}> 
             {                
                 cardLayout ? (                    
-                    cardLayout({preview: renderPreview(media), media: media, deleteButton: renderDelete(media)})  
+                    cardLayout({preview: renderPreview(media), media: media, deleteButton: renderDelete(media)}, index)
                 )
                 : (
                     <>
@@ -166,7 +166,7 @@ const MediaGallery = ({sources,
     return sources.length > 0 ? (
         <>
         
-        <div>{mediaCards}</div>
+        <div className="mediaGallery">{mediaCards}</div>
         
         {
             lightboxDisplay ? 

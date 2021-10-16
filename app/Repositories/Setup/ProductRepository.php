@@ -223,7 +223,7 @@ class ProductRepository extends BaseRepository
             }
 
             $this->media->sync($request->media, $data);            
-
+            $data = $this->checkPrimaryMedia($data);
             return $data;
         });        
     }
@@ -282,8 +282,23 @@ class ProductRepository extends BaseRepository
             $data->variants()->sync($syncVariants);
 
             $this->media->sync($request->media, $data);
+            $this->checkPrimaryMedia($data);
 
-            return $data;
+            return $this->getById($data->id);
         });        
+    }
+    public function checkPrimaryMedia($data){
+        $media_id = "";
+        if ($data->primary_media_id != ""){
+            $primaryMedia = $data->media()->whereId($data->primary_media_id);
+            if ($primaryMedia->exists()){
+                return $data;
+            }
+        }
+        $media = $data->media();
+        if ($media->exists()){
+            $data->primary_media_id = $media->first()->id;
+            $data->save();
+        }
     }
 }
