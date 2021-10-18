@@ -7,26 +7,26 @@ import { isEqual } from 'lodash';
 //MAIN LIGHTBOX
 //Holds Medias Cards and Lightbox
 //this is where all of our logic will live
-const MediaGallery = ({sources, 
-                       preview,                        
-                       deleteButton, 
+const MediaGallery = ({sources,
+                       preview,
+                       deleteButton,
                        onClickMedia,
                        cardLayout,
-                       onDelete, 
-                       loop = true,                        
+                       onDelete,
+                       loop = true,
                     }) => {
 
     const [mediaToShow, setMediaToShow] = useState("");
     const [lightboxDisplay, setLightBoxDisplay] = useState(false);
-    
+
     const handleDelete = (deleted) => {
         MyAlert.confirm({
-            confirmAction: () => {                
-                
+            confirmAction: () => {
+
                 if (onDelete){
                     onDelete(deleted)
                 }
-                
+
             }
         })
     }
@@ -36,12 +36,12 @@ const MediaGallery = ({sources,
             height: '12.5vw',
             objectFit: 'cover',
             cursor: 'pointer'
-        },         
+        },
         lightboxMedia: {
             height: '80vh',
             maxWidth: '90vw',
             objectFit: 'cover'
-        },         
+        },
         lightbox: {
             zIndex: 10000,
             position: 'fixed',
@@ -54,11 +54,11 @@ const MediaGallery = ({sources,
             alignItems: 'center',
             justifyContent: 'space-between'
         }
-              
+
     }
 
     //function to show a specific media in the lightbox, amd make lightbox visible
-    const showMedia = (media) => {        
+    const showMedia = (media) => {
         setMediaToShow(media);
         setLightBoxDisplay(true);
     };
@@ -98,13 +98,13 @@ const MediaGallery = ({sources,
         else {
             return deleteButton(currentMedia, onDeleteFunction)
         }
-    })    
+    })
 
     //looping through our medias array to create img elements
     const mediaCards = sources.map((media, index) => (
-        <div draggable className="d-inline-block p-2 m-2" key={'media-' + index}> 
-            {                
-                cardLayout ? (                    
+        <div draggable className="d-inline-block p-2 m-2" key={'media-' + index}>
+            {
+                cardLayout ? (
                     cardLayout({preview: renderPreview(media), media: media, deleteButton: renderDelete(media)}, index)
                 )
                 : (
@@ -135,12 +135,12 @@ const MediaGallery = ({sources,
             }
             else {
                 let nextMedia = sources[0];
-                setMediaToShow(nextMedia);                
+                setMediaToShow(nextMedia);
             }
         } else {
             let nextMedia = sources[currentIndex + 1];
-            setMediaToShow(nextMedia);            
-        }       
+            setMediaToShow(nextMedia);
+        }
     };
 
     //show previous media in lightbox
@@ -153,23 +153,23 @@ const MediaGallery = ({sources,
             }
             else {
                 let nextMedia = sources[sources.length - 1];
-                setMediaToShow(nextMedia);    
+                setMediaToShow(nextMedia);
             }
-        } 
+        }
         else {
             let nextMedia = sources[currentIndex - 1];
             setMediaToShow(nextMedia);
         }
     };
-    
-    
+
+
     return sources.length > 0 ? (
         <>
-        
+
         <div className="mediaGallery">{mediaCards}</div>
-        
+
         {
-            lightboxDisplay ? 
+            lightboxDisplay ?
             <div style={styles.lightbox} onClick={hideLightBox}>
                 <CButton style={{boxShadow: 'none'}} className={"ml-2"} shape="pill" color="light" variant="ghost" onClick={showPrev}>
                     <CIcon size={"xl"} name="cil-chevron-double-left" />

@@ -56,11 +56,16 @@ class MediaController extends Controller
     public function show($id, Request $request)
     {
         $file = $this->media->getById($id);
-
-        return response($file->getContent())
+        if (isset($request->thumbnail)){
+            $content = $file->getThumbnail();
+        }
+        else {
+            $content = $file->getContent();
+        }
+        return response($content)
                 ->withHeaders([
                     'Content-Type' => $file->type
-                ]);       
+                ]);
     }
 
     /**
@@ -107,7 +112,7 @@ class MediaController extends Controller
      */
     public function search(Request $request)
     {
-        $data = $this->media->search($request);        
+        $data = $this->media->search($request);
         return response()->json($data);
     }
 }
