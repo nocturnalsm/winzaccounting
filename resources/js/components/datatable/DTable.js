@@ -6,10 +6,11 @@ import CreateButton from './CreateButton'
 import { useSelector } from 'react-redux';
 import { store, setAppLoading } from '../../store';
 import {debounce, isEqual} from 'lodash';
-import {CDataTable,CPagination, CRow, CCol, CButton, CSelect, CBadge} from '@coreui/react';
+import {CDataTable,CPagination, CRow, CCol, CButton, CInputCheckbox, CSelect, CBadge} from '@coreui/react';
 
 const DTable = React.forwardRef(({
     customFilter,
+    showCheckColumn = true,
     ...props},
     ref) => {
 
@@ -25,10 +26,12 @@ const DTable = React.forwardRef(({
 
     const appLoading = useSelector(state => state.appLoading);
     const [data, setData] = useState([]);
+    const [columnHeaders, setColumnHeaders] = useState({});
     const [showToolbar, setShowToolbar] = useState(true);
     const [customFields, setCustomFields] = useState({});
     const [fields, setFields] = useState(props.fields);
     const [params, setParams] = useState(initialParams)    
+    const [rowsChecked, setRowsChecked] = useState({})
 
     const changeParams = (values) => {
         let newValues = {...params, ...values}
@@ -45,6 +48,39 @@ const DTable = React.forwardRef(({
         }
     }
 
+    useEffect(() => {
+        console.log(rowsChecked)
+    }, [rowsChecked])
+
+    const getCheckColumn = () => {
+        return {
+            label: '',
+            key: 'check',
+            type: 'custom',
+            sorter: false,
+            filter: false,
+            onRender: (item, index) =>
+            (
+                <td>
+                    <input 
+                        type="checkbox"
+                        onClick={(event) => {
+                            event.preventDefault()                            
+                            let checked = rowsChecked;                            
+                            checked[item.id] = !(rowsChecked[item.id] ?? false)                            
+                            setRowsChecked(checked)
+                        }}
+                        key={'check-' + item.id} 
+                        checked={rowsChecked[item.id]}                     
+                        value="Y" 
+                    />
+                </td>
+            ),
+            _style: {
+                width: '2%'
+            }
+        }
+    }
     useEffect(() => {        
         fetchData()
         localStorage.setItem('datatable.' +props._id, JSON.stringify(params))
@@ -114,6 +150,29 @@ const DTable = React.forwardRef(({
             }
 
         })
+        if (showCheckColumn){
+            let checkColumn = getCheckColumn() 
+            currentFields = [checkColumn, ...currentFields]
+            slots[checkColumn.key] = checkColumn.onRender
+            setColumnHeaders({
+                check: (
+                    <input type="checkbox" 
+                        onClick={
+                            event => {
+                                event.stopPropagation()
+                                let checked = {}
+                                console.log('this',data)
+                                data.forEach(item => {
+                                    checked[item.id] = !(rowsChecked[item.id] ?? false)
+                                })
+                                console.log(checked)
+                                setRowsChecked(checked)
+                            }
+                        } 
+                    />
+                )
+            })
+        }
         setFields(currentFields);
         setCustomFields(slots);
 
@@ -199,7 +258,8 @@ const DTable = React.forwardRef(({
               fields={fields}
               columnFilter={{external: true, lazy: true}}
               clickableRows={true}
-              footer
+              columnHeaderSlot={columnHeaders}
+              footer={false}
               columnFilterValue={params.filter}
               itemsPerPage={params.limit}
               onColumnFilterChange={debounce(handleFilterChange, 300)}

@@ -181,12 +181,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var _excluded = ["customFilter"];
+var _excluded = ["customFilter", "showCheckColumn"];
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -226,6 +234,8 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
   var _tableData$page, _tableData$limit, _tableData$order, _tableData$filter, _props$createButtonDi, _props$createButtonCo, _ref3, _params$limit;
 
   var customFilter = _ref.customFilter,
+      _ref$showCheckColumn = _ref.showCheckColumn,
+      showCheckColumn = _ref$showCheckColumn === void 0 ? true : _ref$showCheckColumn,
       props = _objectWithoutProperties(_ref, _excluded);
 
   var tableData = JSON.parse(localStorage.getItem('datatable.' + props._id)) || {};
@@ -245,25 +255,35 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       data = _useState2[0],
       setData = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
       _useState4 = _slicedToArray(_useState3, 2),
-      showToolbar = _useState4[0],
-      setShowToolbar = _useState4[1];
+      columnHeaders = _useState4[0],
+      setColumnHeaders = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
       _useState6 = _slicedToArray(_useState5, 2),
-      customFields = _useState6[0],
-      setCustomFields = _useState6[1];
+      showToolbar = _useState6[0],
+      setShowToolbar = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(props.fields),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
       _useState8 = _slicedToArray(_useState7, 2),
-      fields = _useState8[0],
-      setFields = _useState8[1];
+      customFields = _useState8[0],
+      setCustomFields = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initialParams),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(props.fields),
       _useState10 = _slicedToArray(_useState9, 2),
-      params = _useState10[0],
-      setParams = _useState10[1];
+      fields = _useState10[0],
+      setFields = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initialParams),
+      _useState12 = _slicedToArray(_useState11, 2),
+      params = _useState12[0],
+      setParams = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+      _useState14 = _slicedToArray(_useState13, 2),
+      rowsChecked = _useState14[0],
+      setRowsChecked = _useState14[1];
 
   var changeParams = function changeParams(values) {
     var newValues = _objectSpread(_objectSpread({}, params), values);
@@ -285,6 +305,40 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
     if (!(0,lodash__WEBPACK_IMPORTED_MODULE_8__.isEqual)(params, newValues)) {
       setParams(newValues);
     }
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    console.log(rowsChecked);
+  }, [rowsChecked]);
+
+  var getCheckColumn = function getCheckColumn() {
+    return {
+      label: '',
+      key: 'check',
+      type: 'custom',
+      sorter: false,
+      filter: false,
+      onRender: function onRender(item, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("td", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+            type: "checkbox",
+            onClick: function onClick(event) {
+              var _rowsChecked$item$id;
+
+              event.preventDefault();
+              var checked = rowsChecked;
+              checked[item.id] = !((_rowsChecked$item$id = rowsChecked[item.id]) !== null && _rowsChecked$item$id !== void 0 ? _rowsChecked$item$id : false);
+              setRowsChecked(checked);
+            },
+            checked: rowsChecked[item.id],
+            value: "Y"
+          }, 'check-' + item.id)
+        });
+      },
+      _style: {
+        width: '2%'
+      }
+    };
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
@@ -365,6 +419,30 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         return field;
       }
     });
+
+    if (showCheckColumn) {
+      var checkColumn = getCheckColumn();
+      currentFields = [checkColumn].concat(_toConsumableArray(currentFields));
+      slots[checkColumn.key] = checkColumn.onRender;
+      setColumnHeaders({
+        check: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+          type: "checkbox",
+          onClick: function onClick(event) {
+            event.stopPropagation();
+            var checked = {};
+            console.log('this', data);
+            data.forEach(function (item) {
+              var _rowsChecked$item$id2;
+
+              checked[item.id] = !((_rowsChecked$item$id2 = rowsChecked[item.id]) !== null && _rowsChecked$item$id2 !== void 0 ? _rowsChecked$item$id2 : false);
+            });
+            console.log(checked);
+            setRowsChecked(checked);
+          }
+        })
+      });
+    }
+
     setFields(currentFields);
     setCustomFields(slots);
   }, []);
@@ -502,7 +580,8 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
         lazy: true
       },
       clickableRows: true,
-      footer: true,
+      columnHeaderSlot: columnHeaders,
+      footer: false,
       columnFilterValue: params.filter,
       itemsPerPage: params.limit,
       onColumnFilterChange: (0,lodash__WEBPACK_IMPORTED_MODULE_8__.debounce)(handleFilterChange, 300),

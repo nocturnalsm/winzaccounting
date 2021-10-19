@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { CButton } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import MyAlert from '../alert'
-import { isEqual } from 'lodash';
 
 //MAIN LIGHTBOX
 //Holds Medias Cards and Lightbox
@@ -76,10 +75,17 @@ const MediaGallery = ({sources,
     })
 
     const renderPreview = (currentMedia => {
-        if (!preview){
-            return (
-                <img style={styles.mediaCard} onClick={event => onClickMediaFunction(event, currentMedia)} src={currentMedia.thumbnailSrc ?? currentMedia.originalSrc} />
-            )
+        if (!preview){            
+            if (currentMedia.type.indexOf('image/') == 0){
+                return (
+                    <img style={styles.mediaCard} onClick={event => onClickMediaFunction(event, currentMedia)} src={currentMedia.thumbnailSrc ?? currentMedia.originalSrc} />
+                )
+            }
+            else if (currentMedia.type.indexOf('video/') == 0){
+                return (
+                    <img style={styles.mediaCard} onClick={event => onClickMediaFunction(event, currentMedia)} src={"images/video-thumbnail.jpg"} />
+                )
+            }
         }
         else {
             return preview(currentMedia, onClickMedia)
@@ -162,7 +168,6 @@ const MediaGallery = ({sources,
         }
     };
 
-
     return sources.length > 0 ? (
         <>
 
@@ -174,7 +179,15 @@ const MediaGallery = ({sources,
                 <CButton style={{boxShadow: 'none'}} className={"ml-2"} shape="pill" color="light" variant="ghost" onClick={showPrev}>
                     <CIcon size={"xl"} name="cil-chevron-double-left" />
                 </CButton>
-                <img style={styles.lightboxMedia} src={mediaToShow.originalSrc}></img>
+                {mediaToShow.type.indexOf('image/') == 0 ? (
+                    <img style={styles.lightboxMedia} src={mediaToShow.originalSrc}></img>
+                )
+                : (mediaToShow.type.indexOf('video/') == 0 ? (
+                    <video style={styles.lightboxMedia} controls>
+                        <source src={mediaToShow.originalSrc} type={mediaToShow.type} />
+                    </video>
+                ) : '')
+                }
                 <CButton style={{boxShadow: 'none'}} className={"mr-2"} shape="pill" color="light" variant="ghost" onClick={showNext}>
                     <CIcon size={"xl"} name="cil-chevron-double-right" />
                 </CButton>

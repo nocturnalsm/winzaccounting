@@ -351,8 +351,6 @@ const ProductEdit = () => {
                                             if (props.data.primary_media_id == ''){
                                                 changes = {...changes, primary_media_id: body.id}
                                             }
-                                            console.log(props.data.primary_media_id)
-                                            console.log(changes)
                                             props.handleChange(changes)
                                         }
                                     }}

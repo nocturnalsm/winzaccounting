@@ -38,7 +38,9 @@ class MediaRepository extends BaseRepository
         if ($request->file){
             $path = $request->file('file')->store($folderName);
             $mimeType = Storage::mimeType($path);
-            $this->createThumbnail($path, $mimeType, $this->thumbnailSize);
+            if (strpos($mimeType, 'image/') === 0){
+                $this->createThumbnail($path, $mimeType, $this->thumbnailSize);
+            }
             $data = [
                 "filename" => $path,
                 "company_id" => $request->company_id
