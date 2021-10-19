@@ -53,19 +53,20 @@ class MediaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, Request $request)
+    public function show($id, $type = "")
     {
-        $file = $this->media->getById($id);
-        if (isset($request->thumbnail)){
-            $content = $file->getThumbnail();
+        $file = $this->media->getById($id, $type);
+        if ($type == "download"){
+            return response()->download($file->originalPath);
         }
         else {
-            $content = $file->getContent();
+            if ($type == "thumbnail"){
+                return response()->file($file->thumbnailPath);
+            }
+            else if ($type == ""){
+                return response()->file($file->originalPath);
+            }
         }
-        return response($content)
-                ->withHeaders([
-                    'Content-Type' => $file->type
-                ]);
     }
 
     /**

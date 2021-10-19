@@ -14,7 +14,7 @@ class Media extends Model
         'company_id', 'model_type', 'model_id', 'filename', 'title'
     ];
 
-    protected $appends = ['url', 'type', 'size', 'thumbnail'];
+    protected $appends = ['url', 'type', 'size', 'originalPath', 'thumbnail'];
 
     public function model()
     {
@@ -23,16 +23,12 @@ class Media extends Model
 
     public function getUrlAttribute()
     {
-        return url('/api/media/'.$this->id);
+        return route('media.show', $this->id);
     }
 
     public function getThumbnailAttribute()
     {
-        return $this->url ."?thumbnail=true";
-    }
-    public function getContent()
-    {
-        return Storage::get($this->filename);
+        return $this->url ."/thumbnail";
     }
 
     public function getTypeAttribute()
@@ -40,19 +36,24 @@ class Media extends Model
         return Storage::mimeType($this->filename);
     }
 
-    public function getThumbnail()
-    {
-        $thumbName = $this->filename ."-thumbnail";
-        if (!Storage::exists($thumbName)){
-            return $this->getContent();
-        }
-        else {
-            return Storage::get($thumbName);
-        }
-    }
-
     public function getSizeAttribute()
     {
         return Storage::size($this->filename);
+    }
+
+    public function getOriginalPathAttribute()
+    {
+        return Storage::path($this->filename);
+    }
+
+    public function getThumbnailPathAttribute()
+    {
+        if (Storage::exists($this->filename ."-thumbnail")){
+            return Storage::path($this->filename ."-thumbnail");
+        }
+        else {
+            return $this->originalPath;
+        }
+
     }
 }

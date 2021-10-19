@@ -60,12 +60,14 @@ Route::prefix('setup')->group(function(){
         Route::get('search-tags', [App\Http\Controllers\Setup\ProductController::class, 'search_tags']);
         Route::get('search-account', [App\Http\Controllers\Setup\ProductController::class, 'search_account']);
         Route::get('variants/values', [App\Http\Controllers\Setup\ProductController::class, 'search_variant_values']);
-        Route::get('variants', [App\Http\Controllers\Setup\ProductController::class, 'search_variants']);    
+        Route::get('variants', [App\Http\Controllers\Setup\ProductController::class, 'search_variants']);
         Route::post('media/{id?}', [App\Http\Controllers\Setup\ProductController::class, 'media_upload']);
     });
 
     Route::resource('products', App\Http\Controllers\Setup\ProductController::class);
-    
+
 });
+
+Route::get('media/{id}/{type?}', [App\Http\Controllers\MediaController::class, 'show'])->name('media.show');
 
 Route::resource('media', App\Http\Controllers\MediaController::class);

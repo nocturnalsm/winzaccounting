@@ -75,6 +75,7 @@ class MediaRepository extends BaseRepository
         if ($file){
             parent::delete($id);
             Storage::delete($file->filename);
+            Storage::delete($file->filename ."-thumbnail");
             return true;
         }
     }
