@@ -55,6 +55,23 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
         }
     }, [])    
 
+    const handleDelete = () => {
+       
+        MyAlert.confirm({
+            title: 'Are you sure to delete this data ?',
+            confirmAction: () => {
+                axios.delete(props.apiUrl + "/" + id)
+                .then(() => {
+                    MyAlert.success({text: "Data successfully deleted"})
+                    history.goBack()
+                })
+                .catch((error) => {
+                    MyAlert.error({text: error.response})
+                })
+            }
+        })
+        
+    }
     const refs = (index) => {
         if (!inputRefs.current.hasOwnProperty(index)){
             inputRefs.current[index] = React.createRef()
@@ -220,7 +237,7 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
                                 </CButton>
                                 {id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title}
                                 </h4>
-                            </CCol>
+                            </CCol>                
                             {props.navigation ? (
                                 <CCol className="mt-2">
                                     <CNav variant="pills">
@@ -240,6 +257,12 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
                                     </CNav>
                                 </CCol>
                             ) : ''}
+                            <CCol className="card-header-actions">
+                                <CButton onClick={handleDelete} color="danger" className="float-right mt-2">
+                                    <CIcon name="cil-trash" className="mr-2" />
+                                    Delete
+                                </CButton>
+                            </CCol>
                         </CRow>
                     </Sticky>
                 </CCardHeader>

@@ -281,6 +281,24 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
     }
   }, []);
 
+  var handleDelete = function handleDelete() {
+    _alert__WEBPACK_IMPORTED_MODULE_5__["default"].confirm({
+      title: 'Are you sure to delete this data ?',
+      confirmAction: function confirmAction() {
+        axios__WEBPACK_IMPORTED_MODULE_7___default()["delete"](props.apiUrl + "/" + id).then(function () {
+          _alert__WEBPACK_IMPORTED_MODULE_5__["default"].success({
+            text: "Data successfully deleted"
+          });
+          history.goBack();
+        })["catch"](function (error) {
+          _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
+            text: error.response
+          });
+        });
+      }
+    });
+  };
+
   var refs = function refs(index) {
     if (!inputRefs.current.hasOwnProperty(index)) {
       inputRefs.current[index] = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createRef();
@@ -511,7 +529,18 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
                   }, index);
                 })
               })
-            }) : '']
+            }) : '', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+              className: "card-header-actions",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CButton, {
+                onClick: handleDelete,
+                color: "danger",
+                className: "float-right mt-2",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+                  name: "cil-trash",
+                  className: "mr-2"
+                }), "Delete"]
+              })
+            })]
           })
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardBody, {
@@ -577,9 +606,14 @@ var CurrencyEdit = function CurrencyEdit(props) {
       code: '',
       sign: '',
       company_id: activeCompany.id,
-      isDefault: false
+      isDefault: '',
+      buy: '',
+      sell: '',
+      start: ''
     },
     children: function children(props) {
+      var _props$data$buy, _props$data$sell, _props$data$start;
+
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CFormGroup, {
           row: true,
@@ -671,7 +705,7 @@ var CurrencyEdit = function CurrencyEdit(props) {
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCol, {
             sm: "8",
-            lg: "10",
+            lg: "3",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CSwitch, {
               color: "primary",
               checked: props.data.isDefault,
@@ -686,7 +720,89 @@ var CurrencyEdit = function CurrencyEdit(props) {
               }
             })
           })]
-        })]
+        }), props.data.isDefault === false ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CFormGroup, {
+            row: true,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCol, {
+              sm: "4",
+              lg: "2",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CLabel, {
+                children: "Buy Rate"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCol, {
+              sm: "8",
+              lg: "3",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CInput, {
+                type: "number",
+                placeholder: "Enter currency buy rate",
+                autoComplete: "off",
+                disabled: props.loading,
+                innerRef: props.inputRefs('buy'),
+                value: (_props$data$buy = props.data.buy) !== null && _props$data$buy !== void 0 ? _props$data$buy : '',
+                onChange: function onChange(e) {
+                  return props.handleChange({
+                    buy: e.target.value
+                  });
+                },
+                invalid: props.isInvalid('buy')
+              }), props.feedback('buy')]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CFormGroup, {
+            row: true,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCol, {
+              sm: "4",
+              lg: "2",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CLabel, {
+                children: "Sell Rate"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCol, {
+              sm: "8",
+              lg: "3",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CInput, {
+                type: "number",
+                placeholder: "Enter currency sell rate",
+                autoComplete: "off",
+                disabled: props.loading,
+                innerRef: props.inputRefs('sell'),
+                value: (_props$data$sell = props.data.sell) !== null && _props$data$sell !== void 0 ? _props$data$sell : '',
+                onChange: function onChange(e) {
+                  return props.handleChange({
+                    sell: e.target.value
+                  });
+                },
+                invalid: props.isInvalid('sell')
+              }), props.feedback('sell')]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CFormGroup, {
+            row: true,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCol, {
+              sm: "4",
+              lg: "2",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CLabel, {
+                children: "As Of"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCol, {
+              sm: "8",
+              lg: "3",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CInput, {
+                placeholder: "Choose rate valid date",
+                autoComplete: "off",
+                innerRef: props.inputRefs("start"),
+                type: "date",
+                disabled: props.loading,
+                onChange: function onChange(e) {
+                  return props.handleChange({
+                    start: e.target.value
+                  });
+                },
+                value: (_props$data$start = props.data.start) !== null && _props$data$start !== void 0 ? _props$data$start : '',
+                invalid: props.isInvalid('start')
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CLabel, {
+                children: "Leave blank to set to current date"
+              }), props.feedback('start')]
+            })]
+          })]
+        }) : ""]
       });
     }
   });

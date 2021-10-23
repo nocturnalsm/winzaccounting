@@ -285,6 +285,11 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
       rowsChecked = _useState14[0],
       setRowsChecked = _useState14[1];
 
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState16 = _slicedToArray(_useState15, 2),
+      allChecked = _useState16[0],
+      setAllChecked = _useState16[1];
+
   var changeParams = function changeParams(values) {
     var newValues = _objectSpread(_objectSpread({}, params), values);
 
@@ -307,34 +312,30 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
     }
   };
 
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {}, [allChecked]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    console.log(rowsChecked);
+    console.log('rows', rowsChecked);
   }, [rowsChecked]);
+
+  var handleCheckColumnChange = function handleCheckColumnChange(event, item) {
+    console.log(rowsChecked);
+    console.log(item);
+    console.log(event.target.checked);
+  };
+
+  var getCheckedState = function getCheckedState(item) {
+    console.log('data', data);
+    console.log('test', rowsChecked[item.id]);
+    return rowsChecked[item.id];
+  };
 
   var getCheckColumn = function getCheckColumn() {
     return {
       label: '',
-      key: 'check',
+      key: '_check',
       type: 'custom',
       sorter: false,
       filter: false,
-      onRender: function onRender(item, index) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("td", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
-            type: "checkbox",
-            onClick: function onClick(event) {
-              var _rowsChecked$item$id;
-
-              event.preventDefault();
-              var checked = rowsChecked;
-              checked[item.id] = !((_rowsChecked$item$id = rowsChecked[item.id]) !== null && _rowsChecked$item$id !== void 0 ? _rowsChecked$item$id : false);
-              setRowsChecked(checked);
-            },
-            checked: rowsChecked[item.id],
-            value: "Y"
-          }, 'check-' + item.id)
-        });
-      },
       _style: {
         width: '2%'
       }
@@ -423,21 +424,27 @@ var DTable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function
     if (showCheckColumn) {
       var checkColumn = getCheckColumn();
       currentFields = [checkColumn].concat(_toConsumableArray(currentFields));
-      slots[checkColumn.key] = checkColumn.onRender;
-      setColumnHeaders({
-        check: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+      slots[checkColumn.key] = function (item, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("td", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
+            type: "checkbox",
+            onChange: function onChange(event) {
+              return handleCheckColumnChange(event, item);
+            },
+            checked: getCheckedState(item)
+          })
+        }, 'check-' + item.id);
+      }, setColumnHeaders({
+        _check: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("input", {
           type: "checkbox",
-          onClick: function onClick(event) {
-            event.stopPropagation();
-            var checked = {};
-            console.log('this', data);
-            data.forEach(function (item) {
-              var _rowsChecked$item$id2;
-
-              checked[item.id] = !((_rowsChecked$item$id2 = rowsChecked[item.id]) !== null && _rowsChecked$item$id2 !== void 0 ? _rowsChecked$item$id2 : false);
-            });
-            console.log(checked);
-            setRowsChecked(checked);
+          onChange: function onChange(event) {
+            if (data.data) {
+              var checked = {};
+              data.data.map(function (item) {
+                checked[item.id] = event.currentTarget.checked;
+              });
+              setRowsChecked(checked);
+            }
           }
         })
       });
@@ -734,7 +741,7 @@ var MasterList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(func
       disabled: false
     }
   };
-  toolbarButtons = _objectSpread(_objectSpread({}, toolbarButtons), toolbarDefaultButtons);
+  toolbarButtons = _objectSpread(_objectSpread({}, toolbarDefaultButtons), toolbarButtons);
 
   var topButtonsSlot = function topButtonsSlot() {
     var _props$createButtonVi, _props$createButtonDi, _props$createButtonCo;

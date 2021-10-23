@@ -6,6 +6,7 @@ use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Bank;
+use DB;
 
 class BankRepository extends BaseRepository
 {
@@ -32,13 +33,21 @@ class BankRepository extends BaseRepository
             ]
         ];
     }
-    public function search(Request $request, $qRules = [])
+    public function search(Request $request, $rules = [])
     {
-        if ($qRules == []){
-            $qRules = ["name" => ["operator" => "like"]];
+        if ($rules == []){
+            $rules = ["name" => ["operator" => "like"]];
         }        
         $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);                            
-        return parent::search($request, $qRules);
+        return parent::search($request, $rules);
     }
-
+    public function delete($id)
+    {
+        DB::transaction(function () use ($id) {
+            $data = $this->data->findOrFail($id);
+            $data->accounts()->delete();
+            parent::delete($id);
+            return true;
+        });
+    }
 }

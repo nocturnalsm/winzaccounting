@@ -15,24 +15,24 @@ class VarianceRepository extends BaseRepository
     {
         $this->data = new Variant;
     }
-    public function search(Request $request, $qRules = [])
+    public function search(Request $request, $rules = [])
     {
-        if ($qRules == []){
-            $qRules = ["name" => ["operator" => "like"]];
+        if ($rules == []){
+            $rules = ["name" => ["operator" => "like"]];
         }        
         $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);                            
-        return parent::search($request, $qRules);
+        return parent::search($request, $rules);
 
     }
-    public function searchValues(Request $request, $qRules = [])
+    public function searchValues(Request $request, $rules = [])
     {
-        if ($qRules == []){
-            $qRules = ["value" => ["operator" => "like"]];
+        if ($rules == []){
+            $rules = ["value" => ["operator" => "like"]];
         }        
         $this->data = $this->data->find($request->variant_id);
         if ($this->data){
             $this->data = $this->data->values();
-            return parent::search($request, $qRules);
+            return parent::search($request, $rules);
         }
     }
     

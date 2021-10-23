@@ -21,7 +21,8 @@ class Product extends Model
      */
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'product_tags', 'product_id', 'tag_id');
+        return $this->belongsToMany(Tag::class, 'product_tags', 'product_id', 'tag_id')
+                    ->orderBy("name");
     }
     public function media()
     {
@@ -29,15 +30,18 @@ class Product extends Model
     }
     public function categories()
     {
-        return $this->belongsToMany(ProductCategory::class, 'product_has_categories', 'product_id', 'category_id');
+        return $this->belongsToMany(ProductCategory::class, 'product_has_categories', 'product_id', 'category_id')
+                    ->orderBy("name");
     }
     public function units()
     {
-        return $this->belongstoMany(Unit::class, 'product_units', 'product_id', 'unit_id');
+        return $this->belongstoMany(Unit::class, 'product_units', 'product_id', 'unit_id')
+                    ->orderBy("name");
     }
     public function variants()
     {
-        return $this->belongsToMany(VariantValue::class, 'product_variants', 'product_id', 'variant_value_id');
+        return $this->belongsToMany(VariantValue::class, 'product_variants', 'product_id', 'variant_value_id')
+                    ->orderBy("value");
     }   
     public function getMediaFolderName()
     {

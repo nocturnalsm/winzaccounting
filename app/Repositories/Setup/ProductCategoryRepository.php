@@ -78,10 +78,10 @@ class ProductCategoryRepository extends BaseRepository
         }
         return $data;
     }
-    public function search(Request $request, $qRules = [])
+    public function search(Request $request, $rules = [])
     {
-        if ($qRules == []){
-            $qRules = ["name" => ["operator" => "like"]];
+        if ($rules == []){
+            $rules = ["name" => ["operator" => "like"]];
         }
         if (isset($request->detail)){
             $this->data = $this->data->detail();
@@ -89,7 +89,7 @@ class ProductCategoryRepository extends BaseRepository
         $this->data = $this->data
                            ->whereCompanyId($request->company_id ?? NULL)
                            ->orderBy("name","asc");
-        return parent::search($request, $qRules);
+        return parent::search($request, $rules);
     }
     public function searchParents(Request $request)
     {

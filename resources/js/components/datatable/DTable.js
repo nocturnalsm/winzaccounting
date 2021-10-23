@@ -6,7 +6,7 @@ import CreateButton from './CreateButton'
 import { useSelector } from 'react-redux';
 import { store, setAppLoading } from '../../store';
 import {debounce, isEqual} from 'lodash';
-import {CDataTable,CPagination, CRow, CCol, CButton, CInputCheckbox, CSelect, CBadge} from '@coreui/react';
+import {CDataTable,CPagination, CRow, CCol, CSelect, CBadge} from '@coreui/react';
 
 const DTable = React.forwardRef(({
     customFilter,
@@ -32,6 +32,7 @@ const DTable = React.forwardRef(({
     const [fields, setFields] = useState(props.fields);
     const [params, setParams] = useState(initialParams)    
     const [rowsChecked, setRowsChecked] = useState({})
+    const [allChecked, setAllChecked] = useState(false)
 
     const changeParams = (values) => {
         let newValues = {...params, ...values}
@@ -49,33 +50,32 @@ const DTable = React.forwardRef(({
     }
 
     useEffect(() => {
-        console.log(rowsChecked)
+        
+    }, [allChecked])
+
+    useEffect(() => {
+        console.log('rows', rowsChecked)
     }, [rowsChecked])
+
+    const handleCheckColumnChange = (event, item) => {                
+        console.log(rowsChecked)     
+        console.log(item)            
+        console.log(event.target.checked)
+    }
+
+    const getCheckedState = (item) => {
+        console.log('data', data)
+        console.log('test', rowsChecked[item.id])
+        return rowsChecked[item.id]
+    }
 
     const getCheckColumn = () => {
         return {
             label: '',
-            key: 'check',
+            key: '_check',
             type: 'custom',
             sorter: false,
-            filter: false,
-            onRender: (item, index) =>
-            (
-                <td>
-                    <input 
-                        type="checkbox"
-                        onClick={(event) => {
-                            event.preventDefault()                            
-                            let checked = rowsChecked;                            
-                            checked[item.id] = !(rowsChecked[item.id] ?? false)                            
-                            setRowsChecked(checked)
-                        }}
-                        key={'check-' + item.id} 
-                        checked={rowsChecked[item.id]}                     
-                        value="Y" 
-                    />
-                </td>
-            ),
+            filter: false,            
             _style: {
                 width: '2%'
             }
@@ -151,24 +151,31 @@ const DTable = React.forwardRef(({
 
         })
         if (showCheckColumn){
-            let checkColumn = getCheckColumn() 
+            let checkColumn = getCheckColumn()             
             currentFields = [checkColumn, ...currentFields]
-            slots[checkColumn.key] = checkColumn.onRender
+            slots[checkColumn.key] = (item, index) => {
+                return (
+                    <td key={'check-' + item.id}>
+                        <input 
+                            type="checkbox"
+                            onChange={event => handleCheckColumnChange(event, item)}    
+                            checked={getCheckedState(item)}         
+                        />                        
+                    </td>
+                )
+            },
             setColumnHeaders({
-                check: (
+                _check: (
                     <input type="checkbox" 
-                        onClick={
-                            event => {
-                                event.stopPropagation()
+                        onChange={event => {                                                            
+                            if (data.data){
                                 let checked = {}
-                                console.log('this',data)
-                                data.forEach(item => {
-                                    checked[item.id] = !(rowsChecked[item.id] ?? false)
+                                data.data.map(item => {
+                                    checked[item.id] = event.currentTarget.checked
                                 })
-                                console.log(checked)
                                 setRowsChecked(checked)
                             }
-                        } 
+                        }}                         
                     />
                 )
             })

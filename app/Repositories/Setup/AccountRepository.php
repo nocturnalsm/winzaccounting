@@ -116,10 +116,10 @@ class AccountRepository extends BaseRepository
             "data" => AccountType::select('id','name','prefix')->get()
         ];
     }
-    public function search(Request $request, $qRules = [])
+    public function search(Request $request, $rules = [])
     {
-        if ($qRules == []){
-            $qRules = [
+        if ($rules == []){
+            $rules = [
                 "number" => [
                     "operator" => "like",
                     "key" => DB::raw("CONCAT(at.prefix, laravel_cte.number)")
@@ -140,7 +140,7 @@ class AccountRepository extends BaseRepository
                            ->orderBy(DB::raw('laravel_cte.account_type'), 'asc')
                            ->depthFirst();
 
-        return parent::search($request, $qRules);
+        return parent::search($request, $rules);
     }
     public function searchParents(Request $request)
     {
@@ -156,20 +156,17 @@ class AccountRepository extends BaseRepository
     public function getById(String $id)
     {
         $data = parent::getById($id);
-        if ($data){
-            $typeData = AccountType::find($data->account_type);
-            $data->account_type_name = $typeData->name;
-            $data->prefix = $typeData->prefix;
+        $typeData = AccountType::find($data->account_type);
+        $data->account_type_name = $typeData->name;
+        $data->prefix = $typeData->prefix;
 
-            $parentData = Account::select("accounts.id", "prefix", "accounts.name")
-                                ->leftJoin(DB::raw("account_types types"), "accounts.account_type","=","types.id")
-                                ->where("accounts.id", $data->parent)
-                                ->first();                              
+        $parentData = Account::select("accounts.id", "prefix", "accounts.name")
+                            ->leftJoin(DB::raw("account_types types"), "accounts.account_type","=","types.id")
+                            ->where("accounts.id", $data->parent)
+                            ->first();                              
 
-            $data->parent_number = $parentData ? $parentData->prefix .$parentData->number : '';
-            $data->parent_name = $parentData ? $parentData->name : '';
-        }
-        
+        $data->parent_number = $parentData ? $parentData->prefix .$parentData->number : '';
+        $data->parent_name = $parentData ? $parentData->name : '';
         return $data;
     }
 }

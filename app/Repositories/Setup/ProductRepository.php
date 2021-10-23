@@ -90,13 +90,13 @@ class ProductRepository extends BaseRepository
                         }
         ];
     }    
-    public function search(Request $request, $qRules = [])
+    public function search(Request $request, $rules = [])
     {
-        if ($qRules == []){
-            $qRules = ["name" => ["operator" => "like"]];
+        if ($rules == []){
+            $rules = ["name" => ["operator" => "like"]];
         }
         $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);
-        return parent::search($request, $qRules);
+        return parent::search($request, $rules);
     }
     public function searchParents(Request $request)
     {
@@ -287,7 +287,20 @@ class ProductRepository extends BaseRepository
             return $this->getById($data->id);
         });        
     }
-    public function checkPrimaryMedia($data){
+    public function delete($id)
+    {
+        DB::transaction(function () use ($id) {                                    
+            $data = $this->data->findOrFail($id);
+            $data->categories()->detach();
+            $data->units()->detach();
+            $data->tags()->detach();
+            $data->variants()->detach();
+            $data->media()->delete();            
+            $response = parent::delete($id);
+        });
+    }
+    public function checkPrimaryMedia($data)
+    {
         $media_id = "";
         if ($data->primary_media_id != ""){
             $primaryMedia = $data->media()->whereId($data->primary_media_id);

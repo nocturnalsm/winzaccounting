@@ -65,7 +65,7 @@ const MasterList = React.forwardRef((
             disabled: false,
         },
     }
-    toolbarButtons = {...toolbarButtons, ...toolbarDefaultButtons}
+    toolbarButtons = {...toolbarDefaultButtons, ...toolbarButtons}
 
     const topButtonsSlot = () => {
         const createButtonVisible = props.createButtonVisible ?? true

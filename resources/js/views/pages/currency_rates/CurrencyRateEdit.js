@@ -9,7 +9,7 @@ const CurrencyRateEdit = (props) => {
     const [initialData, setInitialData] = useState({currency_id: ''})
     const activeCompany = useSelector(state => state.activeCompany)
     const [currency, setCurrency] = useState(null)
-    const [formData, setFormData] = useState({id: '', company_id: activeCompany.id, currency_id: '', start: '', end: '', buy: '', sell: ''})
+    const [formData, setFormData] = useState({id: '', company_id: activeCompany.id, currency_id: '', start: '', buy: '', sell: ''})
     const ref = useRef(null)
 
     return (
@@ -55,7 +55,7 @@ const CurrencyRateEdit = (props) => {
                     </CFormGroup>
                     <CFormGroup row>
                         <CCol sm="4" lg="2">
-                            <CLabel>Valid From</CLabel>
+                            <CLabel>Valid as of</CLabel>
                         </CCol>
                         <CCol sm="8" lg="3">
                             <CInput
@@ -70,25 +70,7 @@ const CurrencyRateEdit = (props) => {
                             />
                             {props.feedback('start', 'Choose start date')}
                         </CCol>
-                    </CFormGroup>
-                    <CFormGroup row>
-                        <CCol sm="4" lg="2">
-                            <CLabel>To</CLabel>
-                        </CCol>
-                        <CCol sm="8" lg="3">
-                            <CInput
-                              placeholder="Choose end date"
-                              autoComplete="off"
-                              innerRef={props.inputRefs("end")}
-                              type="date"
-                              disabled={props.loading}
-                              onChange={e => props.handleChange({end: e.target.value})}
-                              value={props.data.end}
-                              invalid={props.isInvalid('end')}
-                            />
-                            {props.feedback('end', 'Please choose end date')}
-                        </CCol>
-                    </CFormGroup>
+                    </CFormGroup>                    
                     <CFormGroup row>
                         <CCol sm="4" lg="2">
                             <CLabel>Buy</CLabel>

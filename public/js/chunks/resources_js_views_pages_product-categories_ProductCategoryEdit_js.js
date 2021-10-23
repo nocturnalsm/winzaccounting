@@ -2202,6 +2202,24 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
     }
   }, []);
 
+  var handleDelete = function handleDelete() {
+    _alert__WEBPACK_IMPORTED_MODULE_5__["default"].confirm({
+      title: 'Are you sure to delete this data ?',
+      confirmAction: function confirmAction() {
+        axios__WEBPACK_IMPORTED_MODULE_7___default()["delete"](props.apiUrl + "/" + id).then(function () {
+          _alert__WEBPACK_IMPORTED_MODULE_5__["default"].success({
+            text: "Data successfully deleted"
+          });
+          history.goBack();
+        })["catch"](function (error) {
+          _alert__WEBPACK_IMPORTED_MODULE_5__["default"].error({
+            text: error.response
+          });
+        });
+      }
+    });
+  };
+
   var refs = function refs(index) {
     if (!inputRefs.current.hasOwnProperty(index)) {
       inputRefs.current[index] = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createRef();
@@ -2432,7 +2450,18 @@ var MasterEdit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(func
                   }, index);
                 })
               })
-            }) : '']
+            }) : '', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
+              className: "card-header-actions",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CButton, {
+                onClick: handleDelete,
+                color: "danger",
+                className: "float-right mt-2",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+                  name: "cil-trash",
+                  className: "mr-2"
+                }), "Delete"]
+              })
+            })]
           })
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCardBody, {

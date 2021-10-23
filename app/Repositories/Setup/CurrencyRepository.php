@@ -4,6 +4,7 @@ namespace App\Repositories\Setup;
 
 use App\Repositories\BaseRepository;
 use App\Repositories\Admin\SettingRepository;
+use App\Repositories\Setup\CurrencyRateRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Currency;
@@ -49,10 +50,10 @@ class CurrencyRepository extends BaseRepository
             'sign' => 'max:10'
         ];
     }
-    public function search(Request $request, $qRules = [])
+    public function search(Request $request, $rules = [])
     {
-        if ($qRules == []){
-            $qRules = ["name" => ["operator" => "like"]];
+        if ($rules == []){
+            $rules = ["name" => ["operator" => "like"]];
         }
         if (isset($request->company_id)){
             $this->data = $this->data->whereCompanyId($request->company_id ?? NULL);        
@@ -63,14 +64,23 @@ class CurrencyRepository extends BaseRepository
                 }
             }
         }
-        return parent::search($request, $qRules);
+        return parent::search($request, $rules);
     }
     public function getById($id)
     {        
         $data = parent::getById($id);
         if ($data){
             $defaultCurrency = $this->getDefaultCurrency($data->company_id);
-            $data->isDefault = trim($defaultCurrency) != "" && $id == $defaultCurrency;            
+            $data->isDefault = trim($defaultCurrency) != "" && $id == $defaultCurrency;  
+            $rate = $data->rates()          
+                         ->whereNull("end")
+                         ->where("start", "<=", Date("Y-m-d"))
+                         ->first();
+            if ($rate){
+                $data->buy = $rate->buy;
+                $data->sell = $rate->sell;
+                $data->start = $rate->start;
+            }
             return $data;
         }
     }
@@ -105,6 +115,17 @@ class CurrencyRepository extends BaseRepository
                 if ($request->isDefault){
                     $this->setDefaultCurrency($data->company_id, $data->id);
                 }
+                else {
+                    if (!empty($request->buy) || !empty($request->sell)){
+                        $rateRepository = new CurrencyRateRepository;
+                        $rateRepository->create(
+                            $request->merge([
+                                        'currency_id' => $data->id,
+                                        'start' => empty($request->start) ? Date("Y-m-d") : Date("Y-m-d", strtotime($request->start))
+                            ])
+                        );
+                    }
+                }
                 return $data;     
             }
             return $data;
@@ -121,7 +142,25 @@ class CurrencyRepository extends BaseRepository
             else if (!$request->isDefault && $data->id == $defaultCurrency){                
                 $this->setDefaultCurrency($data->company_id, NULL);                
             }
+            if (!$request->isDefault && (!empty($request->buy) || !empty($request->sell))){
+                $rateRepository = new CurrencyRateRepository;
+                $rateRepository->updateRate(
+                    $request->merge([
+                                'currency_id' => $data->id,
+                                'start' => empty($request->start) ? Date("Y-m-d") : Date("Y-m-d", strtotime($request->start))
+                    ])
+                );
+            }
             return $data;
+        });
+    }
+    public function delete($id)
+    {
+        DB::transaction(function() use ($id){
+            $data = $this->data->findOrFail($id);
+            $data->rates()->delete();
+            parent::delete($id);
+            return true;
         });
     }
     

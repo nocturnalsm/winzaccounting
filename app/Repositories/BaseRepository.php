@@ -67,13 +67,9 @@ class BaseRepository implements RepositoryInterface
     }
     public function getById(String $id)
     {        
-        $data = $this->data->where("id", $id);
+        $data = $this->data->whereId($id)->firstOrFail();
         $data = Eventy::filter('record.get', $data, $id);
-
-        if (!$data){
-            throw new \Exception("Data not found");
-        }
-        return $data->first();
+        return $data;
     }
     public function create(Request $request)
     {        
@@ -114,14 +110,13 @@ class BaseRepository implements RepositoryInterface
             $validator = $this->validateDelete();           
             $validator = Eventy::filter('record.delete.validate', $id, $validator);
         }
-        $data = $this->data->findOrFail($id);
-        $data->delete();
-        $data = Eventy::filter('record.delete.after', $data, $request);
-        Eventy::action('record.delete.after', $data, $request);
+        $data = $this->data->find($id)->deleteOrFail();
+        $data = Eventy::filter('record.delete.after', $id);
+        Eventy::action('record.delete.after', $id);
 
         return true;
     }
-    public function search(Request $request, $qRules = [])
+    public function search(Request $request, $rules = [])
     {
         $params = $request->all();
         $query = isset($params["q"]) ? $params["q"] : "";
@@ -136,8 +131,8 @@ class BaseRepository implements RepositoryInterface
         
         $list = new SearchList($data);        
         $qFilter = [];
-        if (is_array($qRules)){
-            foreach ($qRules as $key => $rule){
+        if (is_array($rules)){
+            foreach ($rules as $key => $rule){
                 $value = isset($rule["value"]) ? trim($rule["value"]) : trim($query);
                 $qFilter[$key] = $value;
             }
@@ -149,7 +144,7 @@ class BaseRepository implements RepositoryInterface
             });
         }
 
-        return $list->makeList($qFilter, $qRules, $sortBy, $order);
+        return $list->makeList($qFilter, $rules, $sortBy, $order);
 
     }
     
