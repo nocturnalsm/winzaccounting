@@ -229,41 +229,41 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
             <CCard>
                 <CCardHeader className="p-0">
                     <Sticky>
-                        <CRow>
-                            <CCol sm="auto">
+                        <div className="d-flex flex-wrap flex-sm-nowrap">
+                            <div>
                                 <h4 className="mb-0">
                                 <CButton className="btn-ghost pl-0" onClick={e => history.goBack()}>
                                     <CIcon size="2xl" name="cilArrowCircleLeft" />
                                 </CButton>
                                 {id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title}
                                 </h4>
-                            </CCol>                
+                            </div>                
                             {props.navigation ? (
-                                <CCol className="mt-2">
-                                    <CNav variant="pills">
+                                <div className="order-2 px-4 pb-2 pb-sm-0 order-sm-1 col-12 col-sm-auto align-self-center">
+                                    <CNav variant="pills" className="justify-content-between">
                                         {
                                             props.navigation.map((item, index) => (
                                                 <CNavItem key={index}>
                                                     <CNavLink active={item.target == activeNavigation} onClick={() => setActiveNavigation(item.target)}>                                                      
                                                         {item.icon ? (
-                                                            <CIcon className="mr-2" name={item.icon} />
+                                                            <CIcon className="mr-sm-2" name={item.icon} />
                                                         ) : ''
                                                         }
-                                                        {item.title}
+                                                        <span className="d-none d-sm-inline">{item.title}</span>
                                                     </CNavLink>
                                                 </CNavItem>
                                             ))
                                         }
                                     </CNav>
-                                </CCol>
+                                </div>
                             ) : ''}
-                            <CCol className="card-header-actions">
-                                <CButton onClick={handleDelete} color="danger" className="float-right mt-2">
-                                    <CIcon name="cil-trash" className="mr-2" />
-                                    Delete
+                            <div className="order-1 order-sm-3 ml-auto">
+                                <CButton onClick={handleDelete} color="danger" className="mt-2">
+                                    <CIcon name="cil-trash" className="mr-sm-2" />
+                                    <span className="d-none d-sm-inline">Delete</span>
                                 </CButton>
-                            </CCol>
-                        </CRow>
+                            </div>
+                        </div>
                     </Sticky>
                 </CCardHeader>
                 <CCardBody>

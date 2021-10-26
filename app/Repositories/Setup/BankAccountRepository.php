@@ -25,8 +25,9 @@ class BankAccountRepository extends BaseRepository
             }
         ];
     }
-    public function validateUsing($params, $id = "")
+    public function validateUsing($request, $id = "")
     {
+        $params = $request->all();
         return [
             'bank_id' => 'bail|required|exists:App\Models\Bank,id',
             'number' => [

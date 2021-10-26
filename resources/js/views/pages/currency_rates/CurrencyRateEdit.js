@@ -75,7 +75,7 @@ const CurrencyRateEdit = (props) => {
                         <CCol sm="4" lg="2">
                             <CLabel>Buy</CLabel>
                         </CCol>
-                        <CCol sm="8" lg="5">
+                        <CCol sm="8" lg="3">
                             <CInput
                             placeholder="Enter buy rate"
                             autoComplete="off"
@@ -93,7 +93,7 @@ const CurrencyRateEdit = (props) => {
                         <CCol sm="4" lg="2">
                             <CLabel>Sell</CLabel>
                         </CCol>
-                        <CCol sm="8" lg="5">
+                        <CCol sm="8" lg="3">
                             <CInput
                             placeholder="Enter sell rate"
                             autoComplete="off"

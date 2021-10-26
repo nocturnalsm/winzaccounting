@@ -39,8 +39,9 @@ class TaxCodeRepository extends BaseRepository
                     ->select("tax_codes.*", "account_number", "account_name");
 
     }
-    public function validateUsing($params, $id = "")
+    public function validateUsing($request, $id = "")
     {        
+        $params = $request->all();
         return [
             'company_id' => 'bail|required|exists:App\Models\Company,id',
             'code' => [

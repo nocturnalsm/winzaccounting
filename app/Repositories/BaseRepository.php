@@ -73,15 +73,12 @@ class BaseRepository implements RepositoryInterface
     }
     public function create(Request $request)
     {        
-        $request = Eventy::filter('record.create.before', $request);
-        $params = $request->all();
+        $request = Eventy::filter('record.create.before', $request);        
         
-        $validator = Validator::make($params, $this->validateUsing($params));                
-        $validator = Eventy::filter('record.create.validate', $validator, $request);
-        $validator->validateWithBag("errors");        
+        $validator = $this->validate($request);                       
 
         $data = new $this->data;
-        $data->fill($params)->save();        
+        $data->fill($request->all())->save();        
         $data = Eventy::filter('record.create.after', $data, $request);
         Eventy::action('record.create.after', $data, $request);
 
@@ -90,14 +87,11 @@ class BaseRepository implements RepositoryInterface
     public function update(String $id, Request $request)
     {
         $request = Eventy::filter('record.update.before', $request);
-        $params = $request->all();
 
-        $validator = Validator::make($params, $this->validateUsing($params, $id));
-        $validator = Eventy::filter('record.update.validate', $validator, $request);
-        $validator->validateWithBag('errors');
+        $validator = $this->validate($request, $id);
 
         $data = $this->data->findOrFail($id);
-        $data->fill($params)->save();
+        $data->fill($request->all())->save();
         $data = Eventy::filter('record.update.before', $data, $request);
         Eventy::action('record.update.before', $data, $request);
 
@@ -147,5 +141,10 @@ class BaseRepository implements RepositoryInterface
         return $list->makeList($qFilter, $rules, $sortBy, $order);
 
     }
-    
+    public function validate($request, $id = "")   
+    {
+        $validator = Validator::make($request->all(), $this->validateUsing($request, $id));        
+        $validator->validateWithBag("errors"); 
+        return $validator;
+    }
 }

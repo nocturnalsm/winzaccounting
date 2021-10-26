@@ -21,8 +21,9 @@ class CurrencyRateRepository extends BaseRepository
             "end" => ["operator" => "<="]
         ];
     }
-    public function validateUsing($params, $id = "")
+    public function validateUsing($request, $id = "")
     {
+        $params = $request->all();
         return [
             'currency_id' => [
                 'bail',
@@ -41,19 +42,22 @@ class CurrencyRateRepository extends BaseRepository
             'start' => [            
                 function($attr, $value, $fail) use ($params){
                     if (!empty($value)){
+                        $value = Date("Y-m-d", strtotime($value));  
                         $query = $this->data
-                                    ->where('currency_id', $params["currency_id"])
+                                    ->whereCurrencyId($params["currency_id"])
                                     ->where(function($query) use ($value){
-                                                $query->whereNull("end")
+                                                $query->whereNotNull("end")
                                                       ->orWhere('end', ">", $value);
                                     })
-                                    ->orderBy(DB::raw("(IFNULL(end, 'x'))"), 'desc');                        
-                        if ($query->exists()){
-                            $data = $query->first();
-                            if ($data->end != NULL){
-                                $fail(__("Start date you specified is bound in an already expired rate"));
-                            }
-                            else if ($value < $data->end){
+                                    ->orderBy(DB::raw("(IFNULL(end, 'x'))"), 'desc'); 
+                        if (!empty($params["id"])){
+                            $query->where("id", "<>", $params["id"]);
+                        }
+                        
+                        if ($query->exists()){                            
+                            $data = $query->first();                                     
+                            //abort(404, $data->toJson());
+                            if ($value <= $data->end){                                                                
                                 $fail(__("Start date you specified cannot be older than currently active rate period"));
                             }
                         }
@@ -70,6 +74,14 @@ class CurrencyRateRepository extends BaseRepository
                      ->select("currency_rates.*", "currencies.name", "currencies.company_id");
         return $data;
     }
+    public function listSort($data, $sortBy, $order)
+    {
+        if (empty($sortBy)){
+            $sortBy = DB::raw("(IFNULL(end, 'x'))");
+            $oder = "desc";            
+        }
+        return $data->orderBy($sortBy, $order);
+    }
     public function getById(String $id)
     {
         $data = parent::getById($id);
@@ -77,17 +89,27 @@ class CurrencyRateRepository extends BaseRepository
         $data->currency_name = $currency->name;
         return $data;
     }
-    public function updateRate(Request $request)
+    public function createRate(Request $request)
     {
+        $this->validate($request);
+        if (empty($request->start)){
+            $request->merge(['start' => Date("Y-m-d")]);            
+        }       
+        $this->updateRate($request);
+    }
+    public function updateRate(Request $request)
+    {       
+        $this->validate($request, $request->id);
         $currentRate = $this->data
                             ->whereCurrencyId($request->currency_id)
                             ->whereNull("end")->first();
+       
         if ($currentRate && $request->start <= $currentRate->start){
             $data = $this->update($currentRate->id, $request);
             return $data;
         }
         else {
-            DB::transaction(function() use ($request, $currentRate){                
+            DB::transaction(function() use ($request, $currentRate){                          
                 $currentRate->end = Date("Y-m-d", strtotime('-1 day', strtotime($request->start)));
                 $currentRate->save();
                 $data = $this->create($request);

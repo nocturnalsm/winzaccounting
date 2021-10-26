@@ -797,12 +797,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _containers_MasterList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../containers/MasterList */ "./resources/js/containers/MasterList.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _coreui_icons_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @coreui/icons-react */ "./node_modules/@coreui/icons-react/es/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -815,8 +810,8 @@ var CurrencyList = function CurrencyList() {
     key: 'name',
     type: 'custom',
     onRender: function onRender(item, index) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("td", {
-        children: [item.name, item.isDefault ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CBadge, {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
+        children: [item.name, item.isDefault ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CBadge, {
           className: "ml-2",
           color: "success",
           children: "DEFAULT"
@@ -830,41 +825,22 @@ var CurrencyList = function CurrencyList() {
     label: 'Sign',
     key: 'sign'
   }, {
+    label: 'Current Rate',
+    key: 'current_rate',
+    filter: false
+  }, {
     label: 'Action',
     type: 'toolbar'
   }];
   var activeCompany = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.activeCompany;
   });
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useHistory)();
-
-  var topButtonsSlot = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CButton, {
-      className: "mr-2",
-      color: "primary",
-      onClick: function onClick(event) {
-        return handleCreateRate(event);
-      },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        name: "cil-plus"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-        className: "ml-2",
-        children: "Add Rate"
-      })]
-    })
-  });
-
-  var handleCreateRate = function handleCreateRate() {
-    history.push('/currencies/create-rate');
-  };
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_containers_MasterList__WEBPACK_IMPORTED_MODULE_0__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_containers_MasterList__WEBPACK_IMPORTED_MODULE_0__["default"], {
     tableId: "currencieslist",
     fields: fields,
     apiUrl: "/api/setup/currencies",
     editUrl: "/currencies",
     createUrl: "/currencies/create",
-    topButtonsSlot: topButtonsSlot,
     customFilter: {
       company_id: activeCompany.id
     }

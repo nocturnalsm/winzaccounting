@@ -8,6 +8,7 @@ use App\Repositories\Setup\CurrencyRateRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Currency;
+use App\Models\CurrencyRate;
 use DB;
 
 class CurrencyRepository extends BaseRepository
@@ -27,12 +28,20 @@ class CurrencyRepository extends BaseRepository
                          "IF(id = {$defaultCurrency}, 1, 0) AS isDefault"
                        : "0 AS isDefault";
         $this->data = $this->data->select("*")
-                                 ->addSelect(DB::raw($rawSelect));        
+                                 ->addSelect(DB::raw($rawSelect))
+                                 ->selectSub(
+                                     CurrencyRate::select(DB::raw("IFNULL(buy, '')"))
+                                                  ->whereColumn("currency_id", "currencies.id")
+                                                  ->whereNull("end")
+                                                  ->limit(1),
+                                    'current_rate'                                 
+                                 );      
 
         return parent::getList($request);
     }
-    public function validateUsing($params, $id = "")
+    public function validateUsing($request, $id = "")
     {
+        $params = $request->all();
         return [
             'company_id' => 'bail|required|exists:App\Models\Company,id',
             'name' => [

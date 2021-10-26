@@ -27,8 +27,9 @@ class AccountRepository extends BaseRepository
         ];
     }
 
-    public function validateUsing($params, $id = "")
+    public function validateUsing($request, $id = "")
     {
+        $params = $request->all();
         return [
             'company_id' => 'bail|required|exists:App\Models\Company,id',
             'number' => [

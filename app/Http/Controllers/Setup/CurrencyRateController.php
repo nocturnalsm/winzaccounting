@@ -45,7 +45,7 @@ class CurrencyRateController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->currencyRate->create($request);
+        $data = $this->currencyRate->createRate($request);
         return response()->json($data);
     }
 
@@ -82,7 +82,7 @@ class CurrencyRateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $this->currencyRate->update($id, $request);
+        $data = $this->currencyRate->updateRate($request);
         return $data;
     }
 
