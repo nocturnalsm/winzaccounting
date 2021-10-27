@@ -18,7 +18,13 @@ class CurrencyRateRepository extends BaseRepository
         $this->data = new CurrencyRate;
         $this->listFilters = [
             "start" => ["operator" => ">="],
-            "end" => ["operator" => "<="]
+            "end" => ["operator" => "<="],
+            "showInactive" => function($query, $key, $value){                                                                          
+                if ($value == ""){
+                    $query = $query->whereNull("end");
+                }
+                return $query;
+            }
         ];
     }
     public function validateUsing($request, $id = "")
@@ -64,14 +70,13 @@ class CurrencyRateRepository extends BaseRepository
                     }
                 }
             ],
-            'buy' => 'required_without:sell|min:0',
-            'sell' => 'required_without:buy|min:0'
+            'rate' => 'min:0'
         ];
     }
     public function listQuery($data)
     {
         $data = $data->join("currencies", "currency_rates.currency_id", "=", "currencies.id")
-                     ->select("currency_rates.*", "currencies.name", "currencies.company_id");
+                     ->select("currency_rates.*", "currencies.name", "currencies.company_id");        
         return $data;
     }
     public function listSort($data, $sortBy, $order)
@@ -109,9 +114,11 @@ class CurrencyRateRepository extends BaseRepository
             return $data;
         }
         else {
-            DB::transaction(function() use ($request, $currentRate){                          
-                $currentRate->end = Date("Y-m-d", strtotime('-1 day', strtotime($request->start)));
-                $currentRate->save();
+            DB::transaction(function() use ($request, $currentRate){   
+                if ($currentRate){                       
+                    $currentRate->end = Date("Y-m-d", strtotime('-1 day', strtotime($request->start)));
+                    $currentRate->save();
+                }
                 $data = $this->create($request);
                 return $data;
             });            

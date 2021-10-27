@@ -1,7 +1,7 @@
 import {CButton} from '@coreui/react'
 import CIcon from '@coreui/icons-react';
 
-const CreateButton = (props) => {
+const DTCreateButton = (props) => {
     
     return (
         <CButton
@@ -15,4 +15,4 @@ const CreateButton = (props) => {
     )
 }
 
-export default CreateButton
+export default DTCreateButton

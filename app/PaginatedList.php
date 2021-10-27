@@ -70,14 +70,20 @@ class PaginatedList
     }
     protected function defaultFilter()
     {
-        return function($data, $filter){            
+        return function($data, $filter){                   
             $data = $data->where(function($query) use ($filter){
-                foreach ($filter as $key=>$value){
-                    if (trim($value) != ""){
-                        if (isset($this->filterRules[$key])){
+                foreach ($filter as $key=>$value){                      
+                    if (is_bool($value)){                                                                     
+                        $checkNotEmpty = is_bool($value);
+                    }
+                    else {
+                        $checkNotEmpty = !empty($value);
+                    }
+                    if ($checkNotEmpty){                                                  
+                        if (isset($this->filterRules[$key])){                                                       
                             $itemFilter = $this->filterRules[$key];
                             if ($itemFilter !== false){
-                                if (is_callable($itemFilter)){
+                                if (is_callable($itemFilter)){                                    
                                     $query = $itemFilter($query, $key, $value);
                                 }
                                 else if (is_array($itemFilter)){

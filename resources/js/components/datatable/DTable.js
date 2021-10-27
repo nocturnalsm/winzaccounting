@@ -2,7 +2,8 @@ import React, { useEffect, useState, useImperativeHandle } from 'react';
 import axios from 'axios';
 import MyAlert from '../../alert';
 import DTToolbar from './DTToolbar'
-import CreateButton from './CreateButton'
+import DTCreateButton from './DTCreateButton'
+import DTTopSlot from './DTTopSlot'
 import { useSelector } from 'react-redux';
 import { store, setAppLoading } from '../../store';
 import {debounce, isEqual} from 'lodash';
@@ -228,23 +229,28 @@ const DTable = React.forwardRef(({
             changeParams({sort: sort, order: order});
         }
   	}
+    
+
+    const createButtonProps = {
+        disabled: props.createButtonDisabled ?? false,
+        color: props.createButtonColor ?? 'primary',
+        action: props.createAction,
+        icon: props.createButtonIcon,
+        text: props.createButtonText,
+        visible: props.createButtonVisible ?? true
+    }
 
     return (
         <>
           <CRow className="pb-2">
-              <CCol xs="6" md="9" lg="10">
-                  {
-                    props.topButtonsSlot ? props.topButtonsSlot : (
-                        props.createButtonVisible ? (
-                            <CreateButton
-                                disabled={props.createButtonDisabled ?? false}
-                                color={props.createButtonColor ?? 'primary'}
-                                action={props.createAction}
-                                icon={props.createButtonIcon}
-                                text={props.createButtonText}
-                            />
-                        ) : ''
-                  )}
+              <CCol xs="6" md="9" lg="10">      
+                {props.topSlot ? (
+                    <DTTopSlot createButtonProps={createButtonProps}>
+                        {topSlotProps => props.topSlot(topSlotProps)}
+                    </DTTopSlot>
+                ) : (
+                    <DTTopSlot createButtonProps={createButtonProps} />
+                )}
               </CCol>
               <CCol xs="6" md="3" lg="2">
                 <CSelect

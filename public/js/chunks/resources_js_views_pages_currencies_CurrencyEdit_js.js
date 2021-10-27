@@ -614,12 +614,11 @@ var CurrencyEdit = function CurrencyEdit(props) {
       sign: '',
       company_id: activeCompany.id,
       isDefault: false,
-      buy: '',
-      sell: '',
+      rate: '',
       start: ''
     },
     children: function children(props) {
-      var _props$data$buy, _props$data$sell, _props$data$start;
+      var _props$data$rate, _props$data$start;
 
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CFormGroup, {
@@ -734,51 +733,25 @@ var CurrencyEdit = function CurrencyEdit(props) {
               sm: "4",
               lg: "2",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CLabel, {
-                children: "Buy Rate"
+                children: "Rate"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCol, {
               sm: "8",
               lg: "3",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CInput, {
                 type: "number",
-                placeholder: "Enter currency buy rate",
+                placeholder: "Enter currency rate",
                 autoComplete: "off",
                 disabled: props.loading,
-                innerRef: props.inputRefs('buy'),
-                value: (_props$data$buy = props.data.buy) !== null && _props$data$buy !== void 0 ? _props$data$buy : '',
+                innerRef: props.inputRefs('rate'),
+                value: (_props$data$rate = props.data.rate) !== null && _props$data$rate !== void 0 ? _props$data$rate : '',
                 onChange: function onChange(e) {
                   return props.handleChange({
-                    buy: e.target.value
+                    rate: e.target.value
                   });
                 },
-                invalid: props.isInvalid('buy')
-              }), props.feedback('buy')]
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CFormGroup, {
-            row: true,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCol, {
-              sm: "4",
-              lg: "2",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CLabel, {
-                children: "Sell Rate"
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CCol, {
-              sm: "8",
-              lg: "3",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CInput, {
-                type: "number",
-                placeholder: "Enter currency sell rate",
-                autoComplete: "off",
-                disabled: props.loading,
-                innerRef: props.inputRefs('sell'),
-                value: (_props$data$sell = props.data.sell) !== null && _props$data$sell !== void 0 ? _props$data$sell : '',
-                onChange: function onChange(e) {
-                  return props.handleChange({
-                    sell: e.target.value
-                  });
-                },
-                invalid: props.isInvalid('sell')
-              }), props.feedback('sell')]
+                invalid: props.isInvalid('rate')
+              }), props.feedback('rate')]
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_2__.CFormGroup, {
             row: true,

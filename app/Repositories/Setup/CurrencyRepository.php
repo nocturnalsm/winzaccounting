@@ -30,7 +30,7 @@ class CurrencyRepository extends BaseRepository
         $this->data = $this->data->select("*")
                                  ->addSelect(DB::raw($rawSelect))
                                  ->selectSub(
-                                     CurrencyRate::select(DB::raw("IFNULL(buy, '')"))
+                                     CurrencyRate::select("rate")
                                                   ->whereColumn("currency_id", "currencies.id")
                                                   ->whereNull("end")
                                                   ->limit(1),
@@ -86,8 +86,7 @@ class CurrencyRepository extends BaseRepository
                          ->where("start", "<=", Date("Y-m-d"))
                          ->first();
             if ($rate){
-                $data->buy = $rate->buy;
-                $data->sell = $rate->sell;
+                $data->rate = $rate->rate;
                 $data->start = $rate->start;
             }
             return $data;
@@ -125,7 +124,7 @@ class CurrencyRepository extends BaseRepository
                     $this->setDefaultCurrency($data->company_id, $data->id);
                 }
                 else {
-                    if (!empty($request->buy) || !empty($request->sell)){
+                    if (!empty($request->rate)){
                         $rateRepository = new CurrencyRateRepository;
                         $rateRepository->create(
                             $request->merge([
@@ -151,7 +150,7 @@ class CurrencyRepository extends BaseRepository
             else if (!$request->isDefault && $data->id == $defaultCurrency){                
                 $this->setDefaultCurrency($data->company_id, NULL);                
             }
-            if (!$request->isDefault && (!empty($request->buy) || !empty($request->sell))){
+            if (!$request->isDefault && !empty($request->rate)){
                 $rateRepository = new CurrencyRateRepository;
                 $rateRepository->updateRate(
                     $request->merge([

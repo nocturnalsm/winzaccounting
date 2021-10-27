@@ -14,6 +14,7 @@ const CurrencyRateList = () => {
     }
     const activeCompany = useSelector(state => state.activeCompany)
     const [customFilter, setCustomFilter] = useState(initialFilter())
+    const [showInactive, setShowInactive] = useState(false)
     const fields = [
         {
             label: 'Currency',
@@ -30,14 +31,8 @@ const CurrencyRateList = () => {
             filter: false
         },
         {
-            label: 'Buy',
-            key: 'buy',
-            filter: false,
-        },
-        {
-            label: 'Sell',
-            key: 'sell',
-            filter: false
+            label: 'Rate',
+            key: 'rate'
         },
         {
             label: 'Action',
@@ -48,6 +43,10 @@ const CurrencyRateList = () => {
     useEffect(() => {        
         setCustomFilter({...customFilter, company_id: activeCompany.id})
     }, [activeCompany])
+
+    useEffect(() => {
+        setCustomFilter({...customFilter, showInactive: showInactive})
+    }, [showInactive])
 
     const onChangeDate = (type, event) => {
         const value = event.target.value;
@@ -65,6 +64,13 @@ const CurrencyRateList = () => {
                 )
     }
 
+    const topSlot = ({createButton}) => (
+        <>
+            {createButton}
+            <input onChange={event => setShowInactive(event.target.checked)} className="ml-4 mr-2" type="checkbox" />
+            <span>Show Inactive Rates</span>
+        </>
+    )
     return (
         <MasterList
             tableId="currencyrateslist"
@@ -74,6 +80,7 @@ const CurrencyRateList = () => {
             createUrl='/currency-rates/create'
             customFilter={customFilter}
             customFilterInput={customFilterInput}
+            topSlot={topSlot}
         />
     );
 

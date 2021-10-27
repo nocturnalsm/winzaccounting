@@ -9,7 +9,7 @@ const CurrencyEdit = (props) => {
     return (
         <MasterEdit title="Currency"
             apiUrl="/api/setup/currencies"
-            formData={{id: '', name: '', code: '', sign: '', company_id: activeCompany.id, isDefault: false, buy: '', sell: '', start: ''}}
+            formData={{id: '', name: '', code: '', sign: '', company_id: activeCompany.id, isDefault: false, rate: '', start: ''}}
         >
             {props => (
                     <>
@@ -89,40 +89,22 @@ const CurrencyEdit = (props) => {
                         <>
                         <CFormGroup row>
                             <CCol sm="4" lg="2">
-                                <CLabel>Buy Rate</CLabel>
+                                <CLabel>Rate</CLabel>
                             </CCol>
                             <CCol sm="8" lg="3">
                                 <CInput
                                     type="number"
-                                    placeholder="Enter currency buy rate"
+                                    placeholder="Enter currency rate"
                                     autoComplete="off"
                                     disabled={props.loading}
-                                    innerRef={props.inputRefs('buy')}
-                                    value={props.data.buy ?? ''}
-                                    onChange={e => props.handleChange({buy: e.target.value})}
-                                    invalid={props.isInvalid('buy')}
+                                    innerRef={props.inputRefs('rate')}
+                                    value={props.data.rate ?? ''}
+                                    onChange={e => props.handleChange({rate: e.target.value})}
+                                    invalid={props.isInvalid('rate')}
                                 />                                
-                                {props.feedback('buy')}
+                                {props.feedback('rate')}
                             </CCol>
-                        </CFormGroup>
-                        <CFormGroup row>
-                            <CCol sm="4" lg="2">
-                                <CLabel>Sell Rate</CLabel>
-                            </CCol>
-                            <CCol sm="8" lg="3">
-                                <CInput
-                                    type="number"
-                                    placeholder="Enter currency sell rate"
-                                    autoComplete="off"
-                                    disabled={props.loading}
-                                    innerRef={props.inputRefs('sell')}
-                                    value={props.data.sell ?? ''}
-                                    onChange={e => props.handleChange({sell: e.target.value})}
-                                    invalid={props.isInvalid('sell')}
-                                />                                
-                                {props.feedback('sell')}
-                            </CCol>
-                        </CFormGroup>
+                        </CFormGroup>                        
                         <CFormGroup row>
                             <CCol sm="4" lg="2">
                                 <CLabel>As Of</CLabel>

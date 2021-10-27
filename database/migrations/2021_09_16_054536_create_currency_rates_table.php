@@ -18,8 +18,7 @@ class CreateCurrencyRatesTable extends Migration
             $table->unsignedInteger('currency_id')->index();
             $table->date('start')->nullable();
             $table->date('end')->nullable();
-            $table->decimal('buy',13,2)->nullable();
-            $table->decimal('sell',13,2)->nullable();
+            $table->decimal('rate',13,2)->nullable();
             $table->smallInteger('status')->nullable();
             $table->timestamps();
         });

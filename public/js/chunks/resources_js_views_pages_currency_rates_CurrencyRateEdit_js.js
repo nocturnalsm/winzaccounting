@@ -2565,8 +2565,7 @@ var CurrencyRateEdit = function CurrencyRateEdit(props) {
     company_id: activeCompany.id,
     currency_id: '',
     start: '',
-    buy: '',
-    sell: ''
+    rate: ''
   }),
       _useState6 = _slicedToArray(_useState5, 2),
       formData = _useState6[0],
@@ -2665,51 +2664,24 @@ var CurrencyRateEdit = function CurrencyRateEdit(props) {
             sm: "4",
             lg: "2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Buy"
+              children: "Rate"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
             sm: "8",
             lg: "3",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
-              placeholder: "Enter buy rate",
+              placeholder: "Enter rate",
               autoComplete: "off",
               type: "number",
               disabled: props.loading,
               onChange: function onChange(e) {
                 return props.handleChange({
-                  buy: e.target.value
+                  rate: e.target.value
                 });
               },
-              value: props.data.buy,
-              invalid: props.isInvalid('buy'),
-              innerRef: props.inputRefs("buy")
-            }), props.feedback('buy')]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CFormGroup, {
-          row: true,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "4",
-            lg: "2",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CLabel, {
-              children: "Sell"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CCol, {
-            sm: "8",
-            lg: "3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_coreui_react__WEBPACK_IMPORTED_MODULE_3__.CInput, {
-              placeholder: "Enter sell rate",
-              autoComplete: "off",
-              type: "number",
-              disabled: props.loading,
-              onChange: function onChange(e) {
-                return props.handleChange({
-                  sell: e.target.value
-                });
-              },
-              value: props.data.sell,
-              invalid: props.isInvalid('sell'),
-              innerRef: props.inputRefs("sell")
-            }), props.feedback('sell')]
+              value: props.data.rate,
+              invalid: props.isInvalid('rate')
+            }), props.feedback('rate')]
           })]
         })]
       });

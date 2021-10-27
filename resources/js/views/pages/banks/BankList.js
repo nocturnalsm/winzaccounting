@@ -28,9 +28,10 @@ const BankList = () => {
         history.push('/banks/create-account')
     }
 
-    const topButtonsSlot = (
+    const topSlot = ({createButton}) => (
           <>
-            <CButton className="mr-2" color="primary" onClick={event => handleCreateAccount(event)}>
+            {createButton}
+            <CButton className="mx-2" color="primary" onClick={event => handleCreateAccount(event)}>
                 <CIcon name="cil-plus" />
                 <span className="ml-2">Add Account</span>
             </CButton>
@@ -44,7 +45,7 @@ const BankList = () => {
             apiUrl="/api/setup/banks"
             editUrl="/banks"
             createUrl="/banks/create"
-            topButtonsSlot={topButtonsSlot}
+            topSlot={topSlot}
             customFilter={{company_id: activeCompany.id}}
         />
     );

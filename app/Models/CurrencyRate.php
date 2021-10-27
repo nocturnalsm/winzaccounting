@@ -10,7 +10,7 @@ class CurrencyRate extends Model
     use HasFactory;
 
     protected $fillable = [
-        'currency_id', 'start', 'buy', 'sell', 'status'
+        'currency_id', 'start', 'rate', 'status'
     ];
 
     public function currency()

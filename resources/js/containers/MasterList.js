@@ -3,7 +3,6 @@ import DTable from '../components/datatable/DTable'
 import {CCard, CCardBody} from '@coreui/react'
 import MyAlert from '../alert'
 import axios from 'axios';
-import CreateButton from '../components/datatable/CreateButton'
 import { useHistory } from 'react-router-dom'
 import { isEqual } from 'lodash';
 
@@ -67,25 +66,6 @@ const MasterList = React.forwardRef((
     }
     toolbarButtons = {...toolbarDefaultButtons, ...toolbarButtons}
 
-    const topButtonsSlot = () => {
-        const createButtonVisible = props.createButtonVisible ?? true
-        return (
-            <>
-                {createButtonVisible ?
-                    (
-                        <CreateButton className="mr-2"
-                            disabled={props.createButtonDisabled ?? false}
-                            color={props.createButtonColor ?? 'primary'}
-                            action={handleCreate}
-                            icon={props.createButtonIcon}
-                            text={props.createButtonText}
-                        />
-                    ) : ''
-                }
-                {props.topButtonsSlot}
-            </>
-        )
-    }
     return (
         <CCard>
             <CCardBody>
@@ -109,9 +89,9 @@ const MasterList = React.forwardRef((
                     showButtonDisabled={toolbarButtons.show.disabled}
                     editButtonDisabled={toolbarButtons.edit.disabled}
                     createButtonDisabled={toolbarButtons.create.disabled}
-                    deleteButtonDisabled={toolbarButtons.delete.disabled}
-                    topButtonsSlot={topButtonsSlot()}
+                    deleteButtonDisabled={toolbarButtons.delete.disabled}                    
                     customFilter={tableCustomFilter}
+                    topSlot={props.topSlot}
                 />
             </CCardBody>
         </CCard>
