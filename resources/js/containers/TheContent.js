@@ -17,7 +17,7 @@ const loading = (
 
 const TheContent = () => {
   return (
-      <CContainer className="p-0" fluid>
+      <CContainer className="p-2" fluid>
         <Suspense fallback={loading}>
           <Switch>
               {routes.map((route, idx) => {

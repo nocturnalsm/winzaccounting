@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useImperativeHandle } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CCard, CNav, CNavItem, CNavLink, CCardBody, CCardFooter, CRow, CCol,
-         CCardHeader, CForm, CButton, CInvalidFeedback } from '@coreui/react'
+         CCardHeader, CForm, CLabel, CBadge, CButton, CInvalidFeedback } from '@coreui/react'
 import { setAppEditing, setAppLoading} from "../store";
 import MyAlert from "../alert";
 import CIcon from '@coreui/icons-react'
@@ -33,9 +33,7 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
             props.onChangeData(oldData, values)
         }
     }
-    useEffect(() => {
-        console.log(activeNavigation)
-    }, [activeNavigation])
+    
     useEffect(() => {
         if (!id){
             setData(formData)
@@ -83,21 +81,20 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
         const form = event.currentTarget
         event.preventDefault()
         event.stopPropagation()
+        
         setValidated(true)
-
-        let newData = {}
-        Object.keys(formData).filter(function(x){
-            if (data[x] !== undefined) {
-                newData[x] = data[x]
-            }
-            else {
-                newData[x] = formData[x]
-            }
-        });
-        let request = props.formatData ? props.formatData(newData) : newData
-        setData(request)
-
-        if (form.checkValidity() === true) {
+        if (form.checkValidity() === true) {            
+            let newData = {}
+            Object.keys(formData).filter(function(x){
+                if (data[x] !== undefined) {
+                    newData[x] = data[x]
+                }
+                else {
+                    newData[x] = formData[x]
+                }
+            });
+            let request = props.formatData ? props.formatData(newData) : newData
+            setData(request)
             const submit = async () => {
                 try {
                     const response = await axios({
@@ -218,67 +215,96 @@ const MasterEdit = React.forwardRef(({children, formData, ...props}, ref) => {
         feedback: (property, errorText) => (
             <CInvalidFeedback>{
                 submitError.hasOwnProperty(property) ?
-                submitError[property][0] : (errorText ?? 'Unknown Error')
+                submitError[property][0] : (errorText ?? 'Field is required')
             }
             </CInvalidFeedback>
         ),
         activeNavigation: activeNavigation
     }
     return (
-        <CForm className="form-horizontal needs-validation editForm" noValidate wasValidated={validated} onSubmit={handleSubmit}>
-            <CCard>
-                <CCardHeader className="p-0">
-                    <Sticky>
-                        <div className="d-flex flex-wrap flex-sm-nowrap">
-                            <div>
-                                <h4 className="mb-0">
-                                <CButton className="btn-ghost pl-0" onClick={e => history.goBack()}>
-                                    <CIcon size="2xl" name="cilArrowCircleLeft" />
+        <>
+            <CRow>
+                <CCol lg="9">                
+                    <CForm className="form-horizontal needs-validation editForm" noValidate wasValidated={validated} onSubmit={handleSubmit}>
+                        <CCard>
+                            <CCardHeader className="py-1 px-3">                                
+                                <div className="d-flex flex-wrap flex-sm-nowrap">
+                                    <div>
+                                        <h4 className="mb-0">
+                                        <CButton className="btn-ghost pl-0" onClick={e => history.goBack()}>
+                                            <CIcon size="2xl" name="cilArrowCircleLeft" />
+                                        </CButton>
+                                        {id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title}
+                                        </h4>
+                                    </div>                
+                                    {props.navigation ? (
+                                        <div className="order-2 px-4 pb-2 pb-sm-0 order-sm-1 col-12 col-sm-auto align-self-center">
+                                            <CNav variant="pills" className="justify-content-between">
+                                                {
+                                                    props.navigation.map((item, index) => (
+                                                        <CNavItem key={index}>
+                                                            <CNavLink active={item.target == activeNavigation} onClick={() => setActiveNavigation(item.target)}>                                                      
+                                                                {item.icon ? (
+                                                                    <CIcon className="mr-sm-2" name={item.icon} />
+                                                                ) : ''
+                                                                }
+                                                                <span className="d-none d-sm-inline">{item.title}</span>
+                                                            </CNavLink>
+                                                        </CNavItem>
+                                                    ))
+                                                }
+                                            </CNav>
+                                        </div>
+                                    ) : ''}
+                                    <div className="order-1 order-sm-3 ml-auto">
+                                        { id ? (
+                                            <CButton onClick={handleDelete} color="danger" className="mt-2">
+                                                <CIcon name="cil-trash" className="mr-sm-2" />
+                                                <span className="d-none d-sm-inline">Delete</span>
+                                            </CButton>
+                                        ) : '' }
+                                    </div>
+                                </div>                               
+                            </CCardHeader>
+                            <CCardBody>
+                                {children(childProps)}     
+                            </CCardBody>
+                            <CCardFooter>
+                                <CButton className="mr-2" type="submit" size="md" color="primary">
+                                    <CIcon name="cil-scrubber" /> Submit
                                 </CButton>
-                                {id && id != "" ? 'Edit ' + props.title : 'Create ' + props.title}
-                                </h4>
-                            </div>                
-                            {props.navigation ? (
-                                <div className="order-2 px-4 pb-2 pb-sm-0 order-sm-1 col-12 col-sm-auto align-self-center">
-                                    <CNav variant="pills" className="justify-content-between">
-                                        {
-                                            props.navigation.map((item, index) => (
-                                                <CNavItem key={index}>
-                                                    <CNavLink active={item.target == activeNavigation} onClick={() => setActiveNavigation(item.target)}>                                                      
-                                                        {item.icon ? (
-                                                            <CIcon className="mr-sm-2" name={item.icon} />
-                                                        ) : ''
-                                                        }
-                                                        <span className="d-none d-sm-inline">{item.title}</span>
-                                                    </CNavLink>
-                                                </CNavItem>
-                                            ))
-                                        }
-                                    </CNav>
+                                <CButton className="mr-2" type="reset" onClick={resetForm} size="md" color="danger">
+                                    <CIcon name="cil-ban" /> Reset
+                                </CButton>
+                            </CCardFooter>
+                        </CCard>
+                    </CForm>
+                </CCol>                
+                <CCol lg="3" className="pl-lg-0 pr-lg-4">
+                    <CCard>
+                        <CCardHeader>
+                            Data Information
+                        </CCardHeader>
+                        <CCardBody className="p-0">    
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <CLabel className="font-weight-bold">Status</CLabel>
+                                    <CBadge className="px-4 py-2" color="primary" className="p-2">DRAFT</CBadge>                                    
                                 </div>
-                            ) : ''}
-                            <div className="order-1 order-sm-3 ml-auto">
-                                <CButton onClick={handleDelete} color="danger" className="mt-2">
-                                    <CIcon name="cil-trash" className="mr-sm-2" />
-                                    <span className="d-none d-sm-inline">Delete</span>
-                                </CButton>
-                            </div>
-                        </div>
-                    </Sticky>
-                </CCardHeader>
-                <CCardBody>
-                    {children(childProps)}
-                </CCardBody>
-                <CCardFooter>
-                    <CButton className="mr-2" type="submit" size="md" color="primary">
-                        <CIcon name="cil-scrubber" /> Submit
-                    </CButton>
-                    <CButton className="mr-2" type="reset" onClick={resetForm} size="md" color="danger">
-                        <CIcon name="cil-ban" /> Reset
-                    </CButton>
-                </CCardFooter>
-            </CCard>
-        </CForm>
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <CLabel className="font-weight-bold">Created by</CLabel>
+                                        <p className="mb-1">Administrator</p>
+                                        <CLabel className="font-weight-bold">Created at</CLabel>                                   
+                                        <p className="mb-1">{data.created_at}</p>
+                                    </div>
+                                </div>
+                            </div>                                         
+                        </CCardBody>
+                    </CCard>                    
+                </CCol>
+            </CRow>
+        </>
     )
 })
 
