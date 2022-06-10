@@ -27,6 +27,29 @@ __webpack_require__.r(__webpack_exports__);
 
 var last = function last(arr) {
   return arr.length ? arr[arr.length - 1] : null;
+}; // based on https://github.com/thysultan/stylis.js/blob/e6843c373ebcbbfade25ebcc23f540ed8508da0a/src/Tokenizer.js#L239-L244
+
+
+var identifierWithPointTracking = function identifierWithPointTracking(begin, points, index) {
+  var previous = 0;
+  var character = 0;
+
+  while (true) {
+    previous = character;
+    character = (0,stylis__WEBPACK_IMPORTED_MODULE_3__.peek)(); // &\f
+
+    if (previous === 38 && character === 12) {
+      points[index] = 1;
+    }
+
+    if ((0,stylis__WEBPACK_IMPORTED_MODULE_3__.token)(character)) {
+      break;
+    }
+
+    (0,stylis__WEBPACK_IMPORTED_MODULE_3__.next)();
+  }
+
+  return (0,stylis__WEBPACK_IMPORTED_MODULE_3__.slice)(begin, stylis__WEBPACK_IMPORTED_MODULE_3__.position);
 };
 
 var toRules = function toRules(parsed, points) {
@@ -46,7 +69,7 @@ var toRules = function toRules(parsed, points) {
           points[index] = 1;
         }
 
-        parsed[index] += (0,stylis__WEBPACK_IMPORTED_MODULE_3__.identifier)(stylis__WEBPACK_IMPORTED_MODULE_3__.position - 1);
+        parsed[index] += identifierWithPointTracking(stylis__WEBPACK_IMPORTED_MODULE_3__.position - 1, points, index);
         break;
 
       case 2:
@@ -79,8 +102,9 @@ var getRules = function getRules(value, points) {
 
 var fixedElements = /* #__PURE__ */new WeakMap();
 var compat = function compat(element) {
-  if (element.type !== 'rule' || !element.parent || // .length indicates if this rule contains pseudo or not
-  !element.length) {
+  if (element.type !== 'rule' || !element.parent || // positive .length indicates that this rule contains pseudo
+  // negative .length indicates that this rule has been already prefixed
+  element.length < 1) {
     return;
   }
 
@@ -313,7 +337,8 @@ var createCache = function createCache(options) {
       container: container,
       nonce: options.nonce,
       speedy: options.speedy,
-      prepend: options.prepend
+      prepend: options.prepend,
+      insertionPoint: options.insertionPoint
     }),
     nonce: options.nonce,
     inserted: inserted,
@@ -421,30 +446,59 @@ function memoize(fn) {
 
 /***/ }),
 
-/***/ "./node_modules/@emotion/react/dist/emotion-element-99289b21.browser.esm.js":
+/***/ "./node_modules/@emotion/react/_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js":
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/@emotion/react/_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js ***!
+  \*****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! hoist-non-react-statics */ "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js");
+/* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_0__);
+
+
+// this file isolates this package that is not tree-shakeable
+// and if this module doesn't actually contain any logic of its own
+// then Rollup just use 'hoist-non-react-statics' directly in other chunks
+
+var hoistNonReactStatics = (function (targetComponent, sourceComponent) {
+  return hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_0___default()(targetComponent, sourceComponent);
+});
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (hoistNonReactStatics);
+
+
+/***/ }),
+
+/***/ "./node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js":
 /*!**********************************************************************************!*\
-  !*** ./node_modules/@emotion/react/dist/emotion-element-99289b21.browser.esm.js ***!
+  !*** ./node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js ***!
   \**********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+var react__WEBPACK_IMPORTED_MODULE_0___namespace_cache;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "C": () => (/* binding */ CacheProvider),
 /* harmony export */   "E": () => (/* binding */ Emotion),
 /* harmony export */   "T": () => (/* binding */ ThemeContext),
 /* harmony export */   "_": () => (/* binding */ __unsafe_useEmotionCache),
-/* harmony export */   "a": () => (/* binding */ ThemeProvider),
-/* harmony export */   "b": () => (/* binding */ withTheme),
+/* harmony export */   "a": () => (/* binding */ useTheme),
+/* harmony export */   "b": () => (/* binding */ ThemeProvider),
 /* harmony export */   "c": () => (/* binding */ createEmotionProps),
+/* harmony export */   "d": () => (/* binding */ withTheme),
 /* harmony export */   "h": () => (/* binding */ hasOwnProperty),
-/* harmony export */   "u": () => (/* binding */ useTheme),
+/* harmony export */   "u": () => (/* binding */ useInsertionEffectMaybe),
 /* harmony export */   "w": () => (/* binding */ withEmotionCache)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _emotion_cache__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @emotion/cache */ "./node_modules/@emotion/cache/dist/emotion-cache.browser.esm.js");
 /* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
 /* harmony import */ var _emotion_weak_memoize__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @emotion/weak-memoize */ "./node_modules/@emotion/weak-memoize/dist/weak-memoize.browser.esm.js");
-/* harmony import */ var _isolated_hoist_non_react_statics_do_not_use_this_in_your_code_dist_emotion_react_isolated_hoist_non_react_statics_do_not_use_this_in_your_code_browser_esm_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../isolated-hoist-non-react-statics-do-not-use-this-in-your-code/dist/emotion-react-isolated-hoist-non-react-statics-do-not-use-this-in-your-code.browser.esm.js */ "./node_modules/@emotion/react/isolated-hoist-non-react-statics-do-not-use-this-in-your-code/dist/emotion-react-isolated-hoist-non-react-statics-do-not-use-this-in-your-code.browser.esm.js");
+/* harmony import */ var _isolated_hnrs_dist_emotion_react_isolated_hnrs_browser_esm_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js */ "./node_modules/@emotion/react/_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js");
 /* harmony import */ var _emotion_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @emotion/utils */ "./node_modules/@emotion/utils/dist/emotion-utils.browser.esm.js");
 /* harmony import */ var _emotion_serialize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @emotion/serialize */ "./node_modules/@emotion/serialize/dist/emotion-serialize.browser.esm.js");
 
@@ -455,7 +509,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+var hasOwnProperty = {}.hasOwnProperty;
 
 var EmotionCacheContext = /* #__PURE__ */(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)( // we're doing this to avoid preconstruct's dead code elimination in this one case
 // because this module is primarily intended for the browser and node
@@ -543,14 +598,59 @@ function withTheme(Component) {
 
   var WithTheme = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(render);
   WithTheme.displayName = "WithTheme(" + componentName + ")";
-  return (0,_isolated_hoist_non_react_statics_do_not_use_this_in_your_code_dist_emotion_react_isolated_hoist_non_react_statics_do_not_use_this_in_your_code_browser_esm_js__WEBPACK_IMPORTED_MODULE_6__["default"])(WithTheme, Component);
+  return (0,_isolated_hnrs_dist_emotion_react_isolated_hnrs_browser_esm_js__WEBPACK_IMPORTED_MODULE_6__["default"])(WithTheme, Component);
 }
 
-// thus we only need to replace what is a valid character for JS, but not for CSS
+var getLastPart = function getLastPart(functionName) {
+  // The match may be something like 'Object.createEmotionProps' or
+  // 'Loader.prototype.render'
+  var parts = functionName.split('.');
+  return parts[parts.length - 1];
+};
+
+var getFunctionNameFromStackTraceLine = function getFunctionNameFromStackTraceLine(line) {
+  // V8
+  var match = /^\s+at\s+([A-Za-z0-9$.]+)\s/.exec(line);
+  if (match) return getLastPart(match[1]); // Safari / Firefox
+
+  match = /^([A-Za-z0-9$.]+)@/.exec(line);
+  if (match) return getLastPart(match[1]);
+  return undefined;
+};
+
+var internalReactFunctionNames = /* #__PURE__ */new Set(['renderWithHooks', 'processChild', 'finishClassComponent', 'renderToString']); // These identifiers come from error stacks, so they have to be valid JS
+// identifiers, thus we only need to replace what is a valid character for JS,
+// but not for CSS.
 
 var sanitizeIdentifier = function sanitizeIdentifier(identifier) {
   return identifier.replace(/\$/g, '-');
 };
+
+var getLabelFromStackTrace = function getLabelFromStackTrace(stackTrace) {
+  if (!stackTrace) return undefined;
+  var lines = stackTrace.split('\n');
+
+  for (var i = 0; i < lines.length; i++) {
+    var functionName = getFunctionNameFromStackTraceLine(lines[i]); // The first line of V8 stack traces is just "Error"
+
+    if (!functionName) continue; // If we reach one of these, we have gone too far and should quit
+
+    if (internalReactFunctionNames.has(functionName)) break; // The component name is the first function in the stack that starts with an
+    // uppercase letter
+
+    if (/^[A-Z]/.test(functionName)) return sanitizeIdentifier(functionName);
+  }
+
+  return undefined;
+};
+
+var useInsertionEffect = /*#__PURE__*/ (react__WEBPACK_IMPORTED_MODULE_0___namespace_cache || (react__WEBPACK_IMPORTED_MODULE_0___namespace_cache = __webpack_require__.t(react__WEBPACK_IMPORTED_MODULE_0__, 2)))['useInsertion' + 'Effect'] ? /*#__PURE__*/ (react__WEBPACK_IMPORTED_MODULE_0___namespace_cache || (react__WEBPACK_IMPORTED_MODULE_0___namespace_cache = __webpack_require__.t(react__WEBPACK_IMPORTED_MODULE_0__, 2)))['useInsertion' + 'Effect'] : function useInsertionEffect(create) {
+  create();
+};
+function useInsertionEffectMaybe(create) {
+
+  useInsertionEffect(create);
+}
 
 var typePropName = '__EMOTION_TYPE_PLEASE_DO_NOT_USE__';
 var labelPropName = '__EMOTION_LABEL_PLEASE_DO_NOT_USE__';
@@ -568,28 +668,29 @@ var createEmotionProps = function createEmotionProps(type, props) {
     }
   }
 
-  newProps[typePropName] = type;
+  newProps[typePropName] = type; // For performance, only call getLabelFromStackTrace in development and when
+  // the label hasn't already been computed
 
-  if (true) {
-    var error = new Error();
-
-    if (error.stack) {
-      // chrome
-      var match = error.stack.match(/at (?:Object\.|Module\.|)(?:jsx|createEmotionProps).*\n\s+at (?:Object\.|)([A-Z][A-Za-z0-9$]+) /);
-
-      if (!match) {
-        // safari and firefox
-        match = error.stack.match(/.*\n([A-Z][A-Za-z0-9$]+)@/);
-      }
-
-      if (match) {
-        newProps[labelPropName] = sanitizeIdentifier(match[1]);
-      }
-    }
+  if ( true && !!props.css && (typeof props.css !== 'object' || typeof props.css.name !== 'string' || props.css.name.indexOf('-') === -1)) {
+    var label = getLabelFromStackTrace(new Error().stack);
+    if (label) newProps[labelPropName] = label;
   }
 
   return newProps;
 };
+
+var Insertion = function Insertion(_ref) {
+  var cache = _ref.cache,
+      serialized = _ref.serialized,
+      isStringTag = _ref.isStringTag;
+  (0,_emotion_utils__WEBPACK_IMPORTED_MODULE_4__.registerStyles)(cache, serialized, isStringTag);
+  var rules = useInsertionEffectMaybe(function () {
+    return (0,_emotion_utils__WEBPACK_IMPORTED_MODULE_4__.insertStyles)(cache, serialized, isStringTag);
+  });
+
+  return null;
+};
+
 var Emotion = /* #__PURE__ */withEmotionCache(function (props, cache, ref) {
   var cssProp = props.css; // so that using `css` from `emotion` and passing the result to the css prop works
   // not passing the registered cache to serializeStyles because it would
@@ -599,7 +700,7 @@ var Emotion = /* #__PURE__ */withEmotionCache(function (props, cache, ref) {
     cssProp = cache.registered[cssProp];
   }
 
-  var type = props[typePropName];
+  var WrappedComponent = props[typePropName];
   var registeredStyles = [cssProp];
   var className = '';
 
@@ -619,7 +720,6 @@ var Emotion = /* #__PURE__ */withEmotionCache(function (props, cache, ref) {
     }
   }
 
-  var rules = (0,_emotion_utils__WEBPACK_IMPORTED_MODULE_4__.insertStyles)(cache, serialized, typeof type === 'string');
   className += cache.key + "-" + serialized.name;
   var newProps = {};
 
@@ -631,9 +731,11 @@ var Emotion = /* #__PURE__ */withEmotionCache(function (props, cache, ref) {
 
   newProps.ref = ref;
   newProps.className = className;
-  var ele = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(type, newProps);
-
-  return ele;
+  return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Insertion, {
+    cache: cache,
+    serialized: serialized,
+    isStringTag: typeof WrappedComponent === 'string'
+  }), /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(WrappedComponent, newProps));
 });
 
 if (true) {
@@ -651,15 +753,16 @@ if (true) {
   \***********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+var react__WEBPACK_IMPORTED_MODULE_0___namespace_cache;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CacheProvider": () => (/* reexport safe */ _emotion_element_99289b21_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.C),
-/* harmony export */   "ThemeContext": () => (/* reexport safe */ _emotion_element_99289b21_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.T),
-/* harmony export */   "ThemeProvider": () => (/* reexport safe */ _emotion_element_99289b21_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.a),
-/* harmony export */   "__unsafe_useEmotionCache": () => (/* reexport safe */ _emotion_element_99289b21_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__._),
-/* harmony export */   "useTheme": () => (/* reexport safe */ _emotion_element_99289b21_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.u),
-/* harmony export */   "withEmotionCache": () => (/* reexport safe */ _emotion_element_99289b21_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.w),
-/* harmony export */   "withTheme": () => (/* reexport safe */ _emotion_element_99289b21_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.b),
+/* harmony export */   "CacheProvider": () => (/* reexport safe */ _emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.C),
+/* harmony export */   "ThemeContext": () => (/* reexport safe */ _emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.T),
+/* harmony export */   "ThemeProvider": () => (/* reexport safe */ _emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.b),
+/* harmony export */   "__unsafe_useEmotionCache": () => (/* reexport safe */ _emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__._),
+/* harmony export */   "useTheme": () => (/* reexport safe */ _emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.a),
+/* harmony export */   "withEmotionCache": () => (/* reexport safe */ _emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.w),
+/* harmony export */   "withTheme": () => (/* reexport safe */ _emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.d),
 /* harmony export */   "ClassNames": () => (/* binding */ ClassNames),
 /* harmony export */   "Global": () => (/* binding */ Global),
 /* harmony export */   "createElement": () => (/* binding */ jsx),
@@ -669,14 +772,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _emotion_cache__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @emotion/cache */ "./node_modules/@emotion/cache/dist/emotion-cache.browser.esm.js");
-/* harmony import */ var _emotion_element_99289b21_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./emotion-element-99289b21.browser.esm.js */ "./node_modules/@emotion/react/dist/emotion-element-99289b21.browser.esm.js");
+/* harmony import */ var _emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./emotion-element-cbed451f.browser.esm.js */ "./node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js");
 /* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
 /* harmony import */ var _emotion_weak_memoize__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @emotion/weak-memoize */ "./node_modules/@emotion/weak-memoize/dist/weak-memoize.browser.esm.js");
 /* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! hoist-non-react-statics */ "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js");
 /* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _emotion_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @emotion/utils */ "./node_modules/@emotion/utils/dist/emotion-utils.browser.esm.js");
 /* harmony import */ var _emotion_serialize__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @emotion/serialize */ "./node_modules/@emotion/serialize/dist/emotion-serialize.browser.esm.js");
-/* harmony import */ var _emotion_sheet__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @emotion/sheet */ "./node_modules/@emotion/sheet/dist/emotion-sheet.browser.esm.js");
 
 
 
@@ -691,7 +793,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var pkg = {
 	name: "@emotion/react",
-	version: "11.4.1",
+	version: "11.9.0",
 	main: "dist/emotion-react.cjs.js",
 	module: "dist/emotion-react.esm.js",
 	browser: {
@@ -704,24 +806,24 @@ var pkg = {
 		"dist",
 		"jsx-runtime",
 		"jsx-dev-runtime",
-		"isolated-hoist-non-react-statics-do-not-use-this-in-your-code",
+		"_isolated-hnrs",
 		"types/*.d.ts",
 		"macro.js",
 		"macro.d.ts",
 		"macro.js.flow"
 	],
 	sideEffects: false,
-	author: "mitchellhamilton <mitchell@mitchellhamilton.me>",
+	author: "Emotion Contributors",
 	license: "MIT",
 	scripts: {
 		"test:typescript": "dtslint types"
 	},
 	dependencies: {
 		"@babel/runtime": "^7.13.10",
-		"@emotion/cache": "^11.4.0",
-		"@emotion/serialize": "^1.0.2",
-		"@emotion/sheet": "^1.0.2",
-		"@emotion/utils": "^1.0.0",
+		"@emotion/babel-plugin": "^11.7.1",
+		"@emotion/cache": "^11.7.1",
+		"@emotion/serialize": "^1.0.3",
+		"@emotion/utils": "^1.1.0",
 		"@emotion/weak-memoize": "^0.2.5",
 		"hoist-non-react-statics": "^3.3.1"
 	},
@@ -739,15 +841,16 @@ var pkg = {
 	},
 	devDependencies: {
 		"@babel/core": "^7.13.10",
-		"@emotion/css": "11.1.3",
-		"@emotion/css-prettifier": "1.0.0",
+		"@emotion/css": "11.9.0",
+		"@emotion/css-prettifier": "1.0.1",
 		"@emotion/server": "11.4.0",
-		"@emotion/styled": "11.3.0",
+		"@emotion/styled": "11.8.1",
 		"@types/react": "^16.9.11",
-		dtslint: "^0.3.0",
+		dtslint: "^4.2.1",
 		"html-tag-names": "^1.1.2",
 		react: "16.14.0",
-		"svg-tag-names": "^1.1.1"
+		"svg-tag-names": "^1.1.1",
+		typescript: "^4.5.5"
 	},
 	repository: "https://github.com/emotion-js/emotion/tree/main/packages/react",
 	publishConfig: {
@@ -759,7 +862,7 @@ var pkg = {
 			"./index.js",
 			"./jsx-runtime.js",
 			"./jsx-dev-runtime.js",
-			"./isolated-hoist-non-react-statics-do-not-use-this-in-your-code.js"
+			"./_isolated-hnrs.js"
 		],
 		umdName: "emotionReact"
 	}
@@ -768,15 +871,15 @@ var pkg = {
 var jsx = function jsx(type, props) {
   var args = arguments;
 
-  if (props == null || !_emotion_element_99289b21_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.h.call(props, 'css')) {
+  if (props == null || !_emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.h.call(props, 'css')) {
     // $FlowFixMe
     return react__WEBPACK_IMPORTED_MODULE_0__.createElement.apply(undefined, args);
   }
 
   var argsLength = args.length;
   var createElementArgArray = new Array(argsLength);
-  createElementArgArray[0] = _emotion_element_99289b21_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.E;
-  createElementArgArray[1] = (0,_emotion_element_99289b21_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.c)(type, props);
+  createElementArgArray[0] = _emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.E;
+  createElementArgArray[1] = (0,_emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.c)(type, props);
 
   for (var i = 2; i < argsLength; i++) {
     createElementArgArray[i] = args[i];
@@ -786,11 +889,12 @@ var jsx = function jsx(type, props) {
   return react__WEBPACK_IMPORTED_MODULE_0__.createElement.apply(null, createElementArgArray);
 };
 
+var useInsertionEffect = /*#__PURE__*/ (react__WEBPACK_IMPORTED_MODULE_0___namespace_cache || (react__WEBPACK_IMPORTED_MODULE_0___namespace_cache = __webpack_require__.t(react__WEBPACK_IMPORTED_MODULE_0__, 2)))['useInsertion' + 'Effect'] ? /*#__PURE__*/ (react__WEBPACK_IMPORTED_MODULE_0___namespace_cache || (react__WEBPACK_IMPORTED_MODULE_0___namespace_cache = __webpack_require__.t(react__WEBPACK_IMPORTED_MODULE_0__, 2)))['useInsertion' + 'Effect'] : react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect;
 var warnedAboutCssPropForGlobal = false; // maintain place over rerenders.
 // initial render from browser, insertBefore context.sheet.tags[0] or if a style hasn't been inserted there yet, appendChild
 // initial client-side render from SSR, use place of hydrating tag
 
-var Global = /* #__PURE__ */(0,_emotion_element_99289b21_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.w)(function (props, cache) {
+var Global = /* #__PURE__ */(0,_emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.w)(function (props, cache) {
   if ( true && !warnedAboutCssPropForGlobal && ( // check for className as well since the user is
   // probably using the custom createElement which
   // means it will be turned into a className prop
@@ -801,16 +905,17 @@ var Global = /* #__PURE__ */(0,_emotion_element_99289b21_browser_esm_js__WEBPACK
   }
 
   var styles = props.styles;
-  var serialized = (0,_emotion_serialize__WEBPACK_IMPORTED_MODULE_7__.serializeStyles)([styles], undefined, (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_emotion_element_99289b21_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.T));
+  var serialized = (0,_emotion_serialize__WEBPACK_IMPORTED_MODULE_7__.serializeStyles)([styles], undefined, (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.T));
   // but it is based on a constant that will never change at runtime
   // it's effectively like having two implementations and switching them out
   // so it's not actually breaking anything
 
 
   var sheetRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(function () {
-    var key = cache.key + "-global";
-    var sheet = new _emotion_sheet__WEBPACK_IMPORTED_MODULE_8__.StyleSheet({
+  useInsertionEffect(function () {
+    var key = cache.key + "-global"; // use case of https://github.com/emotion-js/emotion/issues/2675
+
+    var sheet = new cache.sheet.constructor({
       key: key,
       nonce: cache.sheet.nonce,
       container: cache.sheet.container,
@@ -836,7 +941,7 @@ var Global = /* #__PURE__ */(0,_emotion_element_99289b21_browser_esm_js__WEBPACK
       sheet.flush();
     };
   }, [cache]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(function () {
+  useInsertionEffect(function () {
     var sheetRefCurrent = sheetRef.current;
     var sheet = sheetRefCurrent[0],
         rehydrating = sheetRefCurrent[1];
@@ -951,8 +1056,22 @@ function merge(registered, css, className) {
   return rawClassName + css(registeredStyles);
 }
 
-var ClassNames = /* #__PURE__ */(0,_emotion_element_99289b21_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.w)(function (props, cache) {
+var Insertion = function Insertion(_ref) {
+  var cache = _ref.cache,
+      serializedArr = _ref.serializedArr;
+  var rules = (0,_emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.u)(function () {
+
+    for (var i = 0; i < serializedArr.length; i++) {
+      var res = (0,_emotion_utils__WEBPACK_IMPORTED_MODULE_6__.insertStyles)(cache, serializedArr[i], false);
+    }
+  });
+
+  return null;
+};
+
+var ClassNames = /* #__PURE__ */(0,_emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.w)(function (props, cache) {
   var hasRendered = false;
+  var serializedArr = [];
 
   var css = function css() {
     if (hasRendered && "development" !== 'production') {
@@ -964,11 +1083,9 @@ var ClassNames = /* #__PURE__ */(0,_emotion_element_99289b21_browser_esm_js__WEB
     }
 
     var serialized = (0,_emotion_serialize__WEBPACK_IMPORTED_MODULE_7__.serializeStyles)(args, cache.registered);
+    serializedArr.push(serialized); // registration has to happen here as the result of this might get consumed by `cx`
 
-    {
-      (0,_emotion_utils__WEBPACK_IMPORTED_MODULE_6__.insertStyles)(cache, serialized, false);
-    }
-
+    (0,_emotion_utils__WEBPACK_IMPORTED_MODULE_6__.registerStyles)(cache, serialized, false);
     return cache.key + "-" + serialized.name;
   };
 
@@ -987,12 +1104,14 @@ var ClassNames = /* #__PURE__ */(0,_emotion_element_99289b21_browser_esm_js__WEB
   var content = {
     css: css,
     cx: cx,
-    theme: (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_emotion_element_99289b21_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.T)
+    theme: (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_emotion_element_cbed451f_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__.T)
   };
   var ele = props.children(content);
   hasRendered = true;
-
-  return ele;
+  return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Insertion, {
+    cache: cache,
+    serializedArr: serializedArr
+  }), ele);
 });
 
 if (true) {
@@ -1005,7 +1124,10 @@ if (true) {
   var isJest = typeof jest !== 'undefined';
 
   if (isBrowser && !isJest) {
-    var globalContext = isBrowser ? window : __webpack_require__.g;
+    // globalThis has wide browser support - https://caniuse.com/?search=globalThis, Node.js 12 and later
+    var globalContext = // $FlowIgnore
+    typeof globalThis !== 'undefined' ? globalThis // eslint-disable-line no-undef
+    : isBrowser ? window : __webpack_require__.g;
     var globalKey = "__EMOTION_REACT_" + pkg.version.split('.')[0] + "__";
 
     if (globalContext[globalKey]) {
@@ -1017,33 +1139,6 @@ if (true) {
 }
 
 
-
-
-/***/ }),
-
-/***/ "./node_modules/@emotion/react/isolated-hoist-non-react-statics-do-not-use-this-in-your-code/dist/emotion-react-isolated-hoist-non-react-statics-do-not-use-this-in-your-code.browser.esm.js":
-/*!***************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@emotion/react/isolated-hoist-non-react-statics-do-not-use-this-in-your-code/dist/emotion-react-isolated-hoist-non-react-statics-do-not-use-this-in-your-code.browser.esm.js ***!
-  \***************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! hoist-non-react-statics */ "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js");
-/* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_0__);
-
-
-// this file isolates this package that is not tree-shakeable
-// and if this module doesn't actually contain any logic of its own
-// then Rollup just use 'hoist-non-react-statics' directly in other chunks
-
-var hoistNonReactStatics = (function (targetComponent, sourceComponent) {
-  return hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_0___default()(targetComponent, sourceComponent);
-});
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (hoistNonReactStatics);
 
 
 /***/ }),
@@ -1108,7 +1203,7 @@ var processStyleValue = function processStyleValue(key, value) {
 };
 
 if (true) {
-  var contentValuePattern = /(attr|counters?|url|(((repeating-)?(linear|radial))|conic)-gradient)\(|(no-)?(open|close)-quote/;
+  var contentValuePattern = /(var|attr|counters?|url|(((repeating-)?(linear|radial))|conic)-gradient)\(|(no-)?(open|close)-quote/;
   var contentValues = ['normal', 'none', 'initial', 'inherit', 'unset'];
   var oldProcessStyleValue = processStyleValue;
   var msPattern = /^-ms-/;
@@ -1450,7 +1545,13 @@ var StyleSheet = /*#__PURE__*/function () {
       var before;
 
       if (_this.tags.length === 0) {
-        before = _this.prepend ? _this.container.firstChild : _this.before;
+        if (_this.insertionPoint) {
+          before = _this.insertionPoint.nextSibling;
+        } else if (_this.prepend) {
+          before = _this.container.firstChild;
+        } else {
+          before = _this.before;
+        }
       } else {
         before = _this.tags[_this.tags.length - 1].nextSibling;
       }
@@ -1468,6 +1569,7 @@ var StyleSheet = /*#__PURE__*/function () {
     this.key = options.key;
     this.container = options.container;
     this.prepend = options.prepend;
+    this.insertionPoint = options.insertionPoint;
     this.before = null;
   }
 
@@ -1521,7 +1623,7 @@ var StyleSheet = /*#__PURE__*/function () {
   _proto.flush = function flush() {
     // $FlowFixMe
     this.tags.forEach(function (tag) {
-      return tag.parentNode.removeChild(tag);
+      return tag.parentNode && tag.parentNode.removeChild(tag);
     });
     this.tags = [];
     this.ctr = 0;
@@ -1612,7 +1714,8 @@ var unitlessKeys = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getRegisteredStyles": () => (/* binding */ getRegisteredStyles),
-/* harmony export */   "insertStyles": () => (/* binding */ insertStyles)
+/* harmony export */   "insertStyles": () => (/* binding */ insertStyles),
+/* harmony export */   "registerStyles": () => (/* binding */ registerStyles)
 /* harmony export */ });
 var isBrowser = "object" !== 'undefined';
 function getRegisteredStyles(registered, registeredStyles, classNames) {
@@ -1626,7 +1729,7 @@ function getRegisteredStyles(registered, registeredStyles, classNames) {
   });
   return rawClassName;
 }
-var insertStyles = function insertStyles(cache, serialized, isStringTag) {
+var registerStyles = function registerStyles(cache, serialized, isStringTag) {
   var className = cache.key + "-" + serialized.name;
 
   if ( // we only need to add the styles to the registered cache if the
@@ -1641,6 +1744,10 @@ var insertStyles = function insertStyles(cache, serialized, isStringTag) {
   isBrowser === false ) && cache.registered[className] === undefined) {
     cache.registered[className] = serialized.styles;
   }
+};
+var insertStyles = function insertStyles(cache, serialized, isStringTag) {
+  registerStyles(cache, serialized, isStringTag);
+  var className = cache.key + "-" + serialized.name;
 
   if (cache.inserted[serialized.name] === undefined) {
     var current = serialized;
@@ -7927,7 +8034,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
 /* harmony import */ var _index_4bd03571_esm_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./index-4bd03571.esm.js */ "./node_modules/react-select/dist/index-4bd03571.esm.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @emotion/react */ "./node_modules/@emotion/react/dist/emotion-element-99289b21.browser.esm.js");
+/* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @emotion/react */ "./node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js");
 /* harmony import */ var _emotion_cache__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @emotion/cache */ "./node_modules/@emotion/cache/dist/emotion-cache.browser.esm.js");
 /* harmony import */ var memoize_one__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! memoize-one */ "./node_modules/memoize-one/dist/memoize-one.esm.js");
 /* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
@@ -8242,6 +8349,9 @@ function _defineProperties(target, props) {
 function _createClass(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", {
+    writable: false
+  });
   return Constructor;
 }
 
@@ -8270,6 +8380,9 @@ function _inherits(subClass, superClass) {
       writable: true,
       configurable: true
     }
+  });
+  Object.defineProperty(subClass, "prototype", {
+    writable: false
   });
   if (superClass) (0,_setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__["default"])(subClass, superClass);
 }
@@ -8402,17 +8515,11 @@ __webpack_require__.r(__webpack_exports__);
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof(obj);
 }
 
 /***/ }),
@@ -8551,31 +8658,32 @@ function rulesheet (callback) {
  * @param {function} callback
  */
 function prefixer (element, index, children, callback) {
-	if (!element.return)
-		switch (element.type) {
-			case _Enum_js__WEBPACK_IMPORTED_MODULE_1__.DECLARATION: element.return = (0,_Prefixer_js__WEBPACK_IMPORTED_MODULE_2__.prefix)(element.value, element.length)
-				break
-			case _Enum_js__WEBPACK_IMPORTED_MODULE_1__.KEYFRAMES:
-				return (0,_Serializer_js__WEBPACK_IMPORTED_MODULE_3__.serialize)([(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_4__.copy)((0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.replace)(element.value, '@', '@' + _Enum_js__WEBPACK_IMPORTED_MODULE_1__.WEBKIT), element, '')], callback)
-			case _Enum_js__WEBPACK_IMPORTED_MODULE_1__.RULESET:
-				if (element.length)
-					return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.combine)(element.props, function (value) {
-						switch ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.match)(value, /(::plac\w+|:read-\w+)/)) {
-							// :read-(only|write)
-							case ':read-only': case ':read-write':
-								return (0,_Serializer_js__WEBPACK_IMPORTED_MODULE_3__.serialize)([(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_4__.copy)((0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.replace)(value, /:(read-\w+)/, ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_1__.MOZ + '$1'), element, '')], callback)
-							// :placeholder
-							case '::placeholder':
-								return (0,_Serializer_js__WEBPACK_IMPORTED_MODULE_3__.serialize)([
-									(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_4__.copy)((0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.replace)(value, /:(plac\w+)/, ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_1__.WEBKIT + 'input-$1'), element, ''),
-									(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_4__.copy)((0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.replace)(value, /:(plac\w+)/, ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_1__.MOZ + '$1'), element, ''),
-									(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_4__.copy)((0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.replace)(value, /:(plac\w+)/, _Enum_js__WEBPACK_IMPORTED_MODULE_1__.MS + 'input-$1'), element, '')
-								], callback)
-						}
+	if (element.length > -1)
+		if (!element.return)
+			switch (element.type) {
+				case _Enum_js__WEBPACK_IMPORTED_MODULE_1__.DECLARATION: element.return = (0,_Prefixer_js__WEBPACK_IMPORTED_MODULE_2__.prefix)(element.value, element.length)
+					break
+				case _Enum_js__WEBPACK_IMPORTED_MODULE_1__.KEYFRAMES:
+					return (0,_Serializer_js__WEBPACK_IMPORTED_MODULE_3__.serialize)([(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_4__.copy)(element, {value: (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.replace)(element.value, '@', '@' + _Enum_js__WEBPACK_IMPORTED_MODULE_1__.WEBKIT)})], callback)
+				case _Enum_js__WEBPACK_IMPORTED_MODULE_1__.RULESET:
+					if (element.length)
+						return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.combine)(element.props, function (value) {
+							switch ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.match)(value, /(::plac\w+|:read-\w+)/)) {
+								// :read-(only|write)
+								case ':read-only': case ':read-write':
+									return (0,_Serializer_js__WEBPACK_IMPORTED_MODULE_3__.serialize)([(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_4__.copy)(element, {props: [(0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.replace)(value, /:(read-\w+)/, ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_1__.MOZ + '$1')]})], callback)
+								// :placeholder
+								case '::placeholder':
+									return (0,_Serializer_js__WEBPACK_IMPORTED_MODULE_3__.serialize)([
+										(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_4__.copy)(element, {props: [(0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.replace)(value, /:(plac\w+)/, ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_1__.WEBKIT + 'input-$1')]}),
+										(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_4__.copy)(element, {props: [(0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.replace)(value, /:(plac\w+)/, ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_1__.MOZ + '$1')]}),
+										(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_4__.copy)(element, {props: [(0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.replace)(value, /:(plac\w+)/, _Enum_js__WEBPACK_IMPORTED_MODULE_1__.MS + 'input-$1')]})
+									], callback)
+							}
 
-						return ''
-					})
-		}
+							return ''
+						})
+			}
 }
 
 /**
@@ -8680,8 +8788,15 @@ function parse (value, root, parent, rule, rules, rulesets, pseudo, points, decl
 
 	while (scanning)
 		switch (previous = character, character = (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_0__.next)()) {
-			// " ' [ (
-			case 34: case 39: case 91: case 40:
+			// (
+			case 40:
+				if (previous != 108 && characters.charCodeAt(length - 1) == 58) {
+					if ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.indexof)(characters += (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_0__.delimit)(character), '&', '&\f'), '&\f') != -1)
+						ampersand = -1
+					break
+				}
+			// " ' [
+			case 34: case 39: case 91:
 				characters += (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_0__.delimit)(character)
 				break
 			// \t \n \r \s
@@ -8731,7 +8846,7 @@ function parse (value, root, parent, rule, rules, rulesets, pseudo, points, decl
 										parse(value, reference, reference, rule && (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.append)(ruleset(value, reference, reference, 0, 0, rules, points, type, rules, props = [], length), children), rules, children, length, points, rule ? props : children)
 										break
 									default:
-										parse(characters, reference, reference, reference, [''], children, length, points, children)
+										parse(characters, reference, reference, reference, [''], children, 0, points, children)
 								}
 				}
 
@@ -8762,7 +8877,7 @@ function parse (value, root, parent, rule, rules, rulesets, pseudo, points, decl
 						if ((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_0__.peek)() === 45)
 							characters += (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_0__.delimit)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_0__.next)())
 
-						atrule = (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_0__.peek)(), offset = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(type = characters += (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_0__.identifier)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_0__.caret)())), character++
+						atrule = (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_0__.peek)(), offset = length = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(type = characters += (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_0__.identifier)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_0__.caret)())), character++
 						break
 					// -
 					case 45:
@@ -9002,6 +9117,7 @@ function stringify (element, index, children, callback) {
 	switch (element.type) {
 		case _Enum_js__WEBPACK_IMPORTED_MODULE_1__.IMPORT: case _Enum_js__WEBPACK_IMPORTED_MODULE_1__.DECLARATION: return element.return = element.return || element.value
 		case _Enum_js__WEBPACK_IMPORTED_MODULE_1__.COMMENT: return ''
+		case _Enum_js__WEBPACK_IMPORTED_MODULE_1__.KEYFRAMES: return element.return = element.value + '{' + serialize(element.children, callback) + '}'
 		case _Enum_js__WEBPACK_IMPORTED_MODULE_1__.RULESET: element.value = element.props.join(',')
 	}
 
@@ -9057,11 +9173,11 @@ var characters = ''
 
 /**
  * @param {string} value
- * @param {object} root
- * @param {object?} parent
+ * @param {object | null} root
+ * @param {object | null} parent
  * @param {string} type
- * @param {string[]} props
- * @param {object[]} children
+ * @param {string[] | string} props
+ * @param {object[] | string} children
  * @param {number} length
  */
 function node (value, root, parent, type, props, children, length) {
@@ -9069,12 +9185,12 @@ function node (value, root, parent, type, props, children, length) {
 }
 
 /**
- * @param {string} value
  * @param {object} root
- * @param {string} type
+ * @param {object} props
+ * @return {object}
  */
-function copy (value, root, type) {
-	return node(value, root.root, root.parent, type, root.props, root.children, 0)
+function copy (root, props) {
+	return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.assign)(node('', null, null, '', null, null, 0), root, {length: -root.length}, props)
 }
 
 /**
@@ -9248,7 +9364,9 @@ function delimiter (type) {
 				return position
 			// " '
 			case 34: case 39:
-				return delimiter(type === 34 || type === 39 ? type : character)
+				if (type !== 34 && type !== 39)
+					delimiter(character)
+				break
 			// (
 			case 40:
 				if (type === 41)
@@ -9304,6 +9422,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "abs": () => (/* binding */ abs),
 /* harmony export */   "from": () => (/* binding */ from),
+/* harmony export */   "assign": () => (/* binding */ assign),
 /* harmony export */   "hash": () => (/* binding */ hash),
 /* harmony export */   "trim": () => (/* binding */ trim),
 /* harmony export */   "match": () => (/* binding */ match),
@@ -9327,6 +9446,12 @@ var abs = Math.abs
  * @return {string}
  */
 var from = String.fromCharCode
+
+/**
+ * @param {object}
+ * @return {object}
+ */
+var assign = Object.assign
 
 /**
  * @param {string} value
@@ -9366,7 +9491,7 @@ function replace (value, pattern, replacement) {
 
 /**
  * @param {string} value
- * @param {string} value
+ * @param {string} search
  * @return {number}
  */
 function indexof (value, search) {
