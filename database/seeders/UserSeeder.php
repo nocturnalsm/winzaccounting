@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'email' => env('SUPER_ADMIN_EMAIL', 'xxxx@gmail.com'),
             'password' => Hash::make(env('SUPER_ADMIN_PASSWORD', 'xxxx')),
             'email_verified_at' => now(),
-            'remember_token' => Str::random(10)
+            'remember_token' => Str::random(10),
         ]);
 
         $admin->companies()->attach($companies);

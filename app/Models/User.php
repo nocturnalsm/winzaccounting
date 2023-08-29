@@ -74,4 +74,9 @@ class User extends Authenticatable
         return $this->name;
     }
 
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'status');
+    }
+
 }
