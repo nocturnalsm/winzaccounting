@@ -25,6 +25,7 @@ class CreateCompaniesTable extends Migration
             $table->smallInteger('company_type')->nullable();
             $table->string('tax_number', 20)->nullable();
             $table->string('url')->nullable();
+            $table->smallInteger('status')->index()->nullable();
             $table->timestamps();
         });
     }

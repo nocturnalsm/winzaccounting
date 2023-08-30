@@ -6,6 +6,21 @@ use App\Lists\PaginatedList;
 
 class User extends PaginatedList
 {
+    public function __construct()
+    {
+        $this->setFilterRules([
+            "roles" => function($query, $key, $value){
+                return $query->orWhereHas('roles', function($qry) use ($value){
+                    $qry->where('name', 'LIKE', "%{$value}%");
+                });
+            },
+            "status" => function($query, $key, $value){
+                return $query->orWhereHas('status', function($qry) use ($value){
+                    $qry->where('status', 'LIKE', "%{$value}%");
+                });
+            }
+        ]);
+    }
 
     public function useQuery($data)
     {        

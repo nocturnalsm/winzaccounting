@@ -45,4 +45,16 @@ class Company extends Model
     {
         return $this->belongsTo(CompanyType::class, 'company_type');
     }
+    public function phoneNumbers()
+    {
+        return $this->morphMany(PhoneNumber::class);
+    }
+    public function emailAddresses()
+    {
+        return $this->morphMany(EmailAddress::class);
+    }
+    public function locations()
+    {
+        return $this->morphMany(Location::class);
+    }
 }
