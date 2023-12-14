@@ -37,9 +37,5 @@ class RoleSeeder extends Seeder
           ]
         );
 
-        User::where('username', 'basugi99')
-            ->first()
-            ->roles()
-            ->attach($superAdmin);
     }
 }

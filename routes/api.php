@@ -25,6 +25,7 @@ Route::group(["prefix" => "v1"], function(){
             Route::apiResource('/companies', App\Http\Controllers\Admin\CompanyController::class);
             Route::apiResource('/roles', App\Http\Controllers\Admin\RoleController::class);
             Route::apiResource('/permissions', App\Http\Controllers\Admin\PermissionController::class);
+            Route::apiResource('/statuses', App\Http\Controllers\Admin\StatusController::class);
         });
 
         Route::prefix('setup')->group(function(){

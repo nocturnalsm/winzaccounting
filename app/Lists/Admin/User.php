@@ -6,20 +6,26 @@ use App\Lists\PaginatedList;
 
 class User extends PaginatedList
 {
-    public function __construct()
+    public function useFilter($data, $filter)
     {
-        $this->setFilterRules([
-            "roles" => function($query, $key, $value){
-                return $query->orWhereHas('roles', function($qry) use ($value){
-                    $qry->where('name', 'LIKE', "%{$value}%");
-                });
-            },
-            "status" => function($query, $key, $value){
-                return $query->orWhereHas('status', function($qry) use ($value){
-                    $qry->where('status', 'LIKE', "%{$value}%");
-                });
+        $data = $data->where(function($query) use ($filter){
+            foreach ($filter as $key => $value){
+                if ($key == 'roles'){
+                    $query->orWhereHas('roles', function($qry) use ($value){
+                        $qry->where('name', 'LIKE', "%{$value}%");
+                    });
+                }
+                else if ($key == 'status'){
+                    $query->orWhereHas('status', function($qry) use ($value){
+                        $qry->where('status', 'LIKE', "%{$value}%");
+                    });
+                }
+                else {
+                    $query->orWhere($key, "LIKE" , "%{$value}%");
+                }
             }
-        ]);
+        });
+        return $data;
     }
 
     public function useQuery($data)

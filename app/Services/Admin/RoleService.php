@@ -18,24 +18,27 @@ class RoleService extends BaseService
     public function getList(Request $request)
     {
         $data = parent::getList($request);
-        return $data->through(function($item){            
-            if ($item->name == config('auth.super_admin', 'Super Admin')){
-                $item->permissions->push([
-                    'name' => 'All'
-                ]);
-            }
-            else {
-                $rest = $item->permissions->count() - 3;
-                $item->permissions->splice(3);
-                if ($rest > 0){
+        if (!$data instanceof \Illuminate\Database\Eloquent\Collection) {
+            return $data->through(function($item){            
+                if ($item->name == config('auth.super_admin', 'Super Admin')){
                     $item->permissions->push([
-                        'name' => "+{$rest} more"
+                        'name' => 'All'
                     ]);
-                };
-            }            
-            $item->users_count = $item->users()->count();
-            return $item;
-        });    
+                }
+                else {
+                    $rest = $item->permissions->count() - 3;
+                    $item->permissions->splice(3);
+                    if ($rest > 0){
+                        $item->permissions->push([
+                            'name' => "+{$rest} more"
+                        ]);
+                    };
+                }            
+                $item->users_count = $item->users()->count();
+                return $item;
+            });    
+        }
+        return $data;
     }
     
     public function validateUsing($params, $id)

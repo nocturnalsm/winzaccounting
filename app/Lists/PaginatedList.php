@@ -63,6 +63,7 @@ class PaginatedList
 
         return $data;
     }    
+    
     protected function defaultFilter($data, $filter){
 
         $data = $data->where(function($query) use ($filter){

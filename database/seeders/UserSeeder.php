@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\Status;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -30,9 +31,10 @@ class UserSeeder extends Seeder
             'password' => Hash::make(env('SUPER_ADMIN_PASSWORD', 'xxxx')),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
+            'status' => Status::whereStatus('active')->value('id')
         ]);
 
         $admin->companies()->attach($companies);
-
+        $admin->assignRole('Super Admin');
     }
 }
