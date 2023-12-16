@@ -24,7 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'status'
+        'status_id'
     ];
 
     /**
@@ -76,7 +76,7 @@ class User extends Authenticatable
 
     public function status()
     {
-        return $this->belongsTo(Status::class, 'status');
+        return $this->belongsTo(Status::class);
     }
 
 }

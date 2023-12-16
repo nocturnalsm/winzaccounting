@@ -24,7 +24,7 @@ class CreateLocationsTable extends Migration
             $table->string('province')->nullable();
             $table->string('zip_code')->nullable();
             $table->unsignedInteger('country')->nullable();
-            $table->smallInteger('status')->nullable();
+            $table->smallInteger('status_id')->nullable();
             $table->timestamps();
         });
     }

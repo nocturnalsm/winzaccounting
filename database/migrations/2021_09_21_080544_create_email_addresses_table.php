@@ -18,7 +18,7 @@ class CreateEmailAddressesTable extends Migration
             $table->string('parent_type')->index();
             $table->unsignedInteger('parent_id')->index();
             $table->string('address');
-            $table->smallInteger('status')->nullable();
+            $table->smallInteger('status_id')->nullable();
             $table->timestamps();
         });
     }

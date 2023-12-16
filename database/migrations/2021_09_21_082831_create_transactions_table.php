@@ -19,7 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->string('number', 50)->nullable();
             $table->date('date');
             $table->unsignedInteger('currency_id')->nullable();
-            $table->smallInteger('status')->nullable();
+            $table->smallInteger('status_id')->nullable();
             $table->timestamps();
         });
     }

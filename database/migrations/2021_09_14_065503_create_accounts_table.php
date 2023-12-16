@@ -20,7 +20,7 @@ class CreateAccountsTable extends Migration
             $table->string("name");
             $table->unsignedInteger('account_type')->index();
             $table->unsignedInteger('parent')->nullable();
-            $table->smallInteger('status')->index()->nullable();
+            $table->smallInteger('status_id')->index()->nullable();
             $table->timestamps();
         });
     }

@@ -24,7 +24,7 @@ class CreateProductsTable extends Migration
             $table->boolean('can_inventory')->nullable();
             $table->unsignedInteger('account_id')->nullable();  
             $table->unsignedInteger('primary_media_id')->nullable();
-            $table->smallInteger('status')->nullable();
+            $table->smallInteger('status_id')->nullable();
             $table->timestamps();
         });
     }

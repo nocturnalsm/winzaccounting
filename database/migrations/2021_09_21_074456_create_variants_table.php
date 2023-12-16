@@ -17,7 +17,7 @@ class CreateVariantsTable extends Migration
             $table->id();
             $table->unsignedInteger('company_id');
             $table->string('name');            
-            $table->smallInteger('status')->nullable();
+            $table->smallInteger('status_id')->nullable();
             $table->timestamps();
         });
     }

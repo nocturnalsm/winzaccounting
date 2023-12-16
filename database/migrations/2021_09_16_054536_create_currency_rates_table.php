@@ -19,7 +19,7 @@ class CreateCurrencyRatesTable extends Migration
             $table->date('start')->nullable();
             $table->date('end')->nullable();
             $table->decimal('rate',13,2)->nullable();
-            $table->smallInteger('status')->nullable();
+            $table->smallInteger('status_id')->nullable();
             $table->timestamps();
         });
     }

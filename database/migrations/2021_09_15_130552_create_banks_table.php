@@ -18,7 +18,7 @@ class CreateBanksTable extends Migration
             $table->unsignedInteger('company_id');
             $table->string("name");
             $table->string("branch")->nullable();
-            $table->smallInteger('status')->nullable();
+            $table->smallInteger('status_id')->nullable();
             $table->timestamps();
         });
     }

@@ -25,7 +25,8 @@ class CurrencyFactory extends Factory
         return [
             'name' => $this->faker->unique()->country(),
             'code' => $this->faker->unique()->currencyCode(),
-            'sign' => $this->faker->unique()->currencyCode()
+            'sign' => $this->faker->unique()->currencyCode(),
+            'status_id' => \App\Models\Status::all()->random()        
         ];
     }
     

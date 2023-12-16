@@ -37,15 +37,17 @@ class UserService extends BaseService
     {
         $rules = [
             "name" => 'required',
+            "username" => 'required|unique:users,username' .(!empty($id) ? ",{$id}" : ""),
             "email" => [
                 'email',
                 'required',
                 'unique:users,email' .(!empty($id) ? ",{$id}" : "")
             ],
-            "roles" => 'array|nullable'
+            "roles" => 'array|nullable',
+            "companies" => 'bail|required|array'
         ];
-        if (empty($id)){
-            //$rules["password"] = 'required';
+        if ($id == ""){
+            $rules[] = Array("password" => 'required');
         }
         return $rules;
     }

@@ -19,7 +19,7 @@ class Currency extends Model
         'name',
         'code',
         'sign',
-        'status'
+        'status_id'
     ];
 
     public function company()

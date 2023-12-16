@@ -36,7 +36,11 @@ class User extends PaginatedList
                 $query->where("companies.id", $company_id);
             });
         }
-        return $data->with(['roles', 'status']);
+        return $data->with([
+            'roles:id,name', 
+            'status:id,status,label,color', 
+            'companies:id,name'
+        ]);
     }
 
 

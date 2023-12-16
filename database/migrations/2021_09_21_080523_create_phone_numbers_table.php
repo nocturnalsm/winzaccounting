@@ -21,7 +21,7 @@ class CreatePhoneNumbersTable extends Migration
             $table->string('extension', 20)->nullable();
             $table->boolean('fax')->nullable();
             $table->boolean('fixed_line')->nullable();
-            $table->smallInteger('status')->nullable();
+            $table->smallInteger('status_id')->nullable();
             $table->timestamps();
         });
     }

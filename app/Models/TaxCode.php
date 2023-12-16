@@ -20,7 +20,7 @@ class TaxCode extends Model
         'code',
         'percentage',
         'account_id',
-        'status'
+        'status_id'
     ];
 
     public function company()

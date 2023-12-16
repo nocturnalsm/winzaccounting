@@ -19,7 +19,7 @@ class CreateProductCategoriesTable extends Migration
             $table->string('name');
             $table->string('code')->nullable();
             $table->unsignedInteger('parent')->nullable();
-            $table->smallInteger('status')->nullable();
+            $table->smallInteger('status_id')->nullable();
             $table->timestamps();
         });
     }

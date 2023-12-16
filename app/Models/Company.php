@@ -18,7 +18,7 @@ class Company extends Model
         'name',
         'tax_number',
         'company_type',
-        'status'
+        'status_id'
     ];
 
     public function currencies()

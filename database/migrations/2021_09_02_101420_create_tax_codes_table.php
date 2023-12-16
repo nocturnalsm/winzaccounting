@@ -20,7 +20,7 @@ class CreateTaxCodesTable extends Migration
             $table->string('name')->nullable();
             $table->decimal('percentage')->default(0);
             $table->unsignedInteger('account_id')->nullable();
-            $table->smallInteger('status')->index()->nullable();
+            $table->smallInteger('status_id')->index()->nullable();
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ class CreateBankAccountsTable extends Migration
             $table->string('number');
             $table->string('holder');
             $table->unsignedInteger('account_id')->nullable();
-            $table->smallInteger('status')->nullable();            
+            $table->smallInteger('status_id')->nullable();            
             $table->timestamps();
         });
     }
