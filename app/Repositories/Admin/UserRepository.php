@@ -31,6 +31,9 @@ class UserRepository extends BaseRepository
             if (isset($params["roles"])){
                 $user->syncRoles($params["roles"]);
             }
+            if (isset($params["companies"])){
+                $user->companies()->attach($params['companies']);
+            }
             return $user;
         });
     }
@@ -60,6 +63,9 @@ class UserRepository extends BaseRepository
             $user = parent::update($id, $params);
             if (isset($params["roles"])){
                 $user->syncRoles($params["roles"]);
+            }
+            if (isset($params["companies"])){
+                $user->companies()->sync($params['companies']);
             }
             return $user;
         });

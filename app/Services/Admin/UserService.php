@@ -44,10 +44,14 @@ class UserService extends BaseService
                 'unique:users,email' .(!empty($id) ? ",{$id}" : "")
             ],
             "roles" => 'array|nullable',
-            "companies" => 'bail|required|array'
+            "companies" => 'bail|required|array',
+            "status_id" => [
+                'rule' => 'required',
+                'message' => "Status field is required"
+            ]
         ];
         if ($id == ""){
-            $rules[] = Array("password" => 'required');
+            $rules["password"] = 'required';
         }
         return $rules;
     }
