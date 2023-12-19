@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
             'status_id' => Status::whereStatus('active')->value('id')
         ]);
 
-        $admin->companies()->attach($companies);
+        $admin->companies()->attach(Company::all());
         $admin->assignRole('Super Admin');
     }
 }
