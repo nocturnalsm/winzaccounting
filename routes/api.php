@@ -22,7 +22,10 @@ Route::group(["prefix" => "v1"], function(){
             
         Route::prefix('admin')->group(function(){
             Route::apiResource('/users', App\Http\Controllers\Admin\UserController::class);
+            
+            Route::get('/companies/types', [App\Http\Controllers\Admin\CompanyController::class, 'getTypes']);
             Route::apiResource('/companies', App\Http\Controllers\Admin\CompanyController::class);
+            
             Route::apiResource('/roles', App\Http\Controllers\Admin\RoleController::class);
             Route::apiResource('/permissions', App\Http\Controllers\Admin\PermissionController::class);
             Route::apiResource('/statuses', App\Http\Controllers\Admin\StatusController::class);

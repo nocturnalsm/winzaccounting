@@ -79,4 +79,10 @@ class CompanyController extends Controller
         $data = $this->company->getByDomain($request);
         return response()->json($data);
     }
+
+    public function getTypes(Request $request)
+    {
+        $data = $this->company->getTypes($request);
+        return response()->json($data);
+    }
 }

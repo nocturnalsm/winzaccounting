@@ -26,7 +26,8 @@ class CompanyFactory extends Factory
             'name' => $this->faker->unique()->company(),
             'company_type' => 1,
             'tax_number' => $this->faker->unique()->randomNumber(8),
-            'url' => $this->faker->unique()->domainName()
+            'url' => $this->faker->unique()->domainName(),
+            'status_id' => \App\Models\Status::all()->random()
         ];
     }
     
