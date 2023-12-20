@@ -19,6 +19,6 @@ class Role extends PaginatedList
 
     public function useQuery($data)
     {        
-        return $data->with('permissions');
+        return $data->with(['permissions', 'status']);
     }
 }

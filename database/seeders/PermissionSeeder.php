@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use App\Models\Role;
+use App\Models\Permission;
+use App\Models\Status;
 
 class PermissionSeeder extends Seeder
 {
@@ -20,9 +21,13 @@ class PermissionSeeder extends Seeder
         ];
         $entities = ['users', 'roles', 'permissions', 'companies'];
                 
+        $status_id = Status::whereStatus('active')->value('id');
         foreach ($entities as $ent){
             foreach ($permissions as $perm){
-                Permission::create(['name' => $ent ."." .$perm]);
+                Permission::create([
+                    'name' => $ent ."." .$perm,
+                    'status_id' => $status_id
+                ]);
             }
         }        
         

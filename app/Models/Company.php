@@ -57,4 +57,8 @@ class Company extends Model
     {
         return $this->morphMany(Location::class);
     }
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 }

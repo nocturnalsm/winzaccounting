@@ -3,8 +3,8 @@
 namespace App\Repositories\Admin;
 
 use App\Repositories\BaseRepository;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use App\Models\Role;
+use App\Models\Permission;
 use DB;
 
 class RoleRepository extends BaseRepository

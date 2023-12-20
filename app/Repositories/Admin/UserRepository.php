@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Company;
-use Spatie\Permission\Models\Permission;
+use App\Models\Permission;
 
 use DB;
 

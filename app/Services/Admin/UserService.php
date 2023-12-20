@@ -6,7 +6,7 @@ use App\Services\BaseService;
 use Illuminate\Http\Request;
 use App\Repositories\Admin\UserRepository;
 use App\Lists\Admin\User as UserList;
-use Spatie\Permission\Models\Permission;
+use App\Models\Permission;
 use App\Models\User;
 
 

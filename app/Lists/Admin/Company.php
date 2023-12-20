@@ -20,7 +20,7 @@ class Company extends PaginatedList
 
     public function useQuery($data)
     {        
-        return $data->with(['type']);
+        return $data->with(['type', 'status']);
     }
 
 

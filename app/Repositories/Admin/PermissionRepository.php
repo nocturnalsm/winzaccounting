@@ -3,7 +3,7 @@
 namespace App\Repositories\Admin;
 
 use App\Repositories\BaseRepository;
-use Spatie\Permission\Models\Permission;
+use App\Models\Permission;
 
 class PermissionRepository extends BaseRepository
 {
