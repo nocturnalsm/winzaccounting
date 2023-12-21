@@ -15,4 +15,9 @@ class Role extends RoleClass
         return $this->belongsTo(Status::class);
     }
 
+    public function company()
+    {
+        return $this->belongsTo(company::class);
+    }
+    
 }

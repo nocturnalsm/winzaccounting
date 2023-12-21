@@ -19,6 +19,17 @@ class Role extends PaginatedList
 
     public function useQuery($data)
     {        
-        return $data->with(['permissions', 'status']);
+        $company_id = request('company_id');
+        $data = $data->with(['permissions', 'status'])
+                     ->where(function($query) use ($company_id){
+                        $query->whereDoesntHave('company');
+                        if ($company_id){
+                            $query->orWhereHas('company', function($query) use ($company_id){
+                                $query->whereId($company_id);
+                            });
+                        }
+                     });
+                     
+        return $data;
     }
 }

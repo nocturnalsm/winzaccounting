@@ -21,24 +21,16 @@ class RoleSeeder extends Seeder
             [
                 'name' => config('auth.super_admin'),
                 'guard_name' => 'web',
-                'status_id' => $status_id
+                'status_id' => $status_id,
+                'system' => true
             ]
         );
         Role::insert([
             [
                 'name' => 'Admin',
                 'guard_name' => 'web',
-                'status_id' => $status_id
-            ],
-            [
-                'name' => 'Owner',
-                'guard_name' => 'web',
-                'status_id' => $status_id
-            ],
-            [
-                'name' => 'Employee',
-                'guard_name' => 'web',
-                'status_id' => $status_id
+                'status_id' => $status_id,
+                'system' => false
             ]
           ]
         );
