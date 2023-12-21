@@ -30,7 +30,7 @@ class RoleSeeder extends Seeder
                 'name' => 'Admin',
                 'guard_name' => 'web',
                 'status_id' => $status_id,
-                'system' => false
+                'system' => true
             ]
           ]
         );

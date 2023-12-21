@@ -10,6 +10,10 @@ class Role extends RoleClass
 {
     use HasFactory;
 
+    protected $casts = [
+        'system' => 'boolean'
+    ];
+    
     public function status()
     {
         return $this->belongsTo(Status::class);

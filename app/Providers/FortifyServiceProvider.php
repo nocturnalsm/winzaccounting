@@ -43,9 +43,20 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(20)->by($request->session()->get('login.id'));
         });
 
+        RateLimiter::for('login', function (Request $request) {
+            $username = (string) $request->username;
+
+            return Limit::perMinute(20)->by($username.$request->ip());
+        });
+
         Fortify::authenticateUsing(function (Request $request) {
-            $user = User::where('username', $request->username)
-                        ->orWhere('email', $request->username)
+            $user = User::whereHas('status', function($query){
+                            $query->whereStatus('active');
+                        })
+                        ->where(function($query) use ($request) {
+                            $query->where('username', $request->username)
+                                  ->orWhere('email', $request->username);
+                        })                        
                         ->first();            
             if (
                 $user &&
