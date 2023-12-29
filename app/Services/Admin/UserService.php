@@ -23,18 +23,12 @@ class UserService extends BaseService
         $user = auth()->user(); 
         if ($user){
             $user->role = $user->getRoleNames();
+            $user->companies = $user->companies()->get();
             if ($user->hasRole('Super Admin')){
-                $company = app(\App\Services\Admin\CompanyService::class);
-                $user->companies = $company->data()->all();
+                $user->permissions = Permission::all()->pluck("name");
             }
             else {
-                $user->companies = $user->companies()->get();
-            }
-            if ($user->hasRole('Super Admin')){
-                $user->permission = Permission::all()->pluck("name");
-            }
-            else {
-                $user->permission = $user->getAllPermissions()->pluck("name");
+                $user->permissions = $user->getAllPermissions()->pluck("name");
             }
         }
         return $user;

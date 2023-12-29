@@ -21,11 +21,9 @@ class Company extends PaginatedList
     public function useQuery($data)
     {        
         $user = auth()->user();
-        if (!$user->hasRole('Super Admin')){
-            $data = $data->whereHas('users', function($query) use ($user){
-                $query->where('users.id', $user->id);
-            });
-        }
+        $data = $data->whereHas('users', function($query) use ($user){
+            $query->where('users.id', $user->id);
+        });
         $data = $data->with(['type', 'status']);
         return $data;
     }
