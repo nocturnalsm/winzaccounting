@@ -6,6 +6,7 @@ use App\Services\BaseService;
 use Illuminate\Http\Request;
 use App\Repositories\Admin\RoleRepository;
 use App\Lists\Admin\Role;
+use Illuminate\Validation\Rule;
 
 class RoleService extends BaseService
 {    
@@ -44,7 +45,15 @@ class RoleService extends BaseService
     public function validateUsing($params, $id)
     {
         return [
-            "name" => 'required|unique:roles,name' .(!empty($id) ? ",{$id}" : ""),
+            "name" => [
+                'required',
+                Rule::unique('roles')
+                     ->where(function($query) use ($params) {
+                         $query->where('company_id', $params["company_id"])
+                               ->where('name', $params["name"]);
+                     })
+                     ->ignore($id)
+            ],
             "permissions" => 'nullable|array'
         ];
     }
