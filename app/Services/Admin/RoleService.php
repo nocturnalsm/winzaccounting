@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Repositories\Admin\RoleRepository;
 use App\Lists\Admin\Role;
 use Illuminate\Validation\Rule;
+use App\Repositories\Admin\PermissionRepository;
 
 class RoleService extends BaseService
 {    
@@ -21,20 +22,12 @@ class RoleService extends BaseService
         $data = parent::getList($request);
         if (!$data instanceof \Illuminate\Database\Eloquent\Collection) {
             return $data->through(function($item){            
-                if ($item->name == config('auth.super_admin', 'Super Admin')){
-                    $item->permissions->push([
-                        'name' => 'All'
-                    ]);
-                }
-                else {
-                    $rest = $item->permissions->count() - 3;
-                    $item->permissions->splice(3);
-                    if ($rest > 0){
-                        $item->permissions->push([
-                            'name' => "+{$rest} more"
-                        ]);
-                    };
-                }            
+                if ($item->name == config('auth.super_admin')){                    
+                    $permissions = app(PermissionRepository::class);    
+                    $permissions->getData()->get()->map(function($p) use ($item) {
+                        $item->permissions->push($p);
+                    });
+                }                
                 $item->users_count = $item->users()->count();
                 return $item;
             });    
