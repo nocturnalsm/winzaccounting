@@ -71,12 +71,7 @@ class StatusController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $this->status->delete($id);
-            return response()->json(["success" => true]);
-        }
-        catch (\Exception $e) {
-            return response()->json(["success" => false]);
-        }
+        $data = $this->status->delete($id);
+        return response()->json($data);
     }
 }

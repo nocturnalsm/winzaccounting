@@ -71,7 +71,8 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        return $this->company->delete($id);
+        $data = $this->company->delete($id);
+        return response()->json($data);
     }
 
     public function getCompany(Request $request)

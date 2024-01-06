@@ -72,13 +72,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $this->user->delete($id);
-            return response()->json(["success" => true]);
-        }
-        catch (\Exception $e) {
-            return response()->json(["success" => false]);
-        }
+        $data = $this->user->delete($id);
+        return response()->json($data);
     }
 
     public function checkPermission(Request $request)

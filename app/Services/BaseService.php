@@ -76,9 +76,7 @@ class BaseService implements ServiceInterface
             ];
         }
         catch (\Exception $e){
-            return [
-                "error" => $e->getMessage()
-            ];
+            abort(422, $e->getMessage());
         }
     }
 

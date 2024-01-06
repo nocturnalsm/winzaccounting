@@ -71,13 +71,8 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $this->permission->delete($id);
-            return response()->json(["success" => true]);
-        }
-        catch (\Exception $e) {
-            return response()->json(["success" => false]);
-        }
+        $data = $this->permission->delete($id);
+        return response()->json($data);
     }
 
 }

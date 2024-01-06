@@ -71,12 +71,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $this->role->delete($id);
-            return response()->json(["success" => true]);
-        }
-        catch (\Exception $e) {
-            return response()->json(["success" => false]);
-        }
+        $data = $this->role->delete($id);
+        return response()->json($data);
     }
 }

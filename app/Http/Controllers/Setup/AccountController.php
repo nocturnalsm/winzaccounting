@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Setup;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Services\Setup\AccountService;
 
 class AccountController extends Controller
 {
-    private $account;
+    protected $account;
 
-    public function __construct(\App\Repositories\Setup\AccountRepository $account)
+    public function __construct(AccountService $account)
     {
         $this->account = $account;
     }
@@ -23,16 +24,6 @@ class AccountController extends Controller
     {
         $data = $this->account->getList($request);
         return response()->json($data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -58,19 +49,7 @@ class AccountController extends Controller
         $data = $this->account->getById($id);
         return response()->json($data);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $data = $this->account->getById($id);
-        return response()->json($data);
-    }
-
+   
     /**
      * Update the specified resource in storage.
      *
@@ -93,7 +72,7 @@ class AccountController extends Controller
     public function destroy($id)
     {
         $result = $this->account->delete($id);
-        return $result;
+        return response()->json($data);
     }
 
     public function search(Request $request)

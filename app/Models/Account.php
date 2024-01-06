@@ -21,13 +21,7 @@ class Account extends Model
         return 'parent';
     }
 
-    protected $fillable = [
-        'number',
-        'name',
-        'account_type',
-        'company_id',
-        'parent'
-    ];
+    protected $protected = ['id'];
 
     public function company()
     {
@@ -43,6 +37,11 @@ class Account extends Model
     {
         return $this->hasMany(AccountBalance::class);
     }    
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 
     public function scopeDetail($query)
     {
