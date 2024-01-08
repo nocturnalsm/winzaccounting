@@ -16,12 +16,12 @@ class Account extends Model
     const INCOME = 4;
     const EXPENSES = 5;
 
+    protected $guarded = ['id'];
+    
     public function getParentKeyName()
     {
         return 'parent';
-    }
-
-    protected $protected = ['id'];
+    }    
 
     public function company()
     {
@@ -30,7 +30,7 @@ class Account extends Model
 
     public function type()
     {
-        return $this->belongsTo(AccountType::class);
+        return $this->belongsTo(AccountType::class, 'account_type', 'id');
     }
    
     public function balances()

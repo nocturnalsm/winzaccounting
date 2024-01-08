@@ -6,6 +6,7 @@ use App\Services\BaseService;
 use Illuminate\Http\Request;
 use App\Lists\Setup\Account as AccountList;
 use App\Repositories\Setup\AccountRepository;
+use Illuminate\Validation\Rule;
 use DB;
 
 class AccountService extends BaseService
@@ -16,11 +17,9 @@ class AccountService extends BaseService
         $this->list = $list;
     }
     
-    public function validateUsing($request, $id = "")
+    public function validateUsing($params, $id = "")
     {
-        $params = $request->all();
-        return [
-            'company_id' => 'bail|required|exists:App\Models\Company,id',
+        return [            
             'number' => [
                 'required',
                 Rule::unique('accounts')->where(function ($query) use($params, $id) {
@@ -33,18 +32,7 @@ class AccountService extends BaseService
                     return $query;
                 }),
             ],
-            'name' => [
-                'required',
-                Rule::unique('accounts')->where(function ($query) use($params, $id) {
-                    $query = $query->where('name', $params["name"])
-                                   ->where('company_id', $params["company_id"]);
-                    if ($id != ""){
-                        $query = $query->where("id", "<>", $id);
-                    }
-                    return $query;
-                }),
-
-            ],
+            'name' => 'required',
             'account_type' => 'required',
             'parent' => function($attr, $value, $fail) use($params){
                             if ($value != "" && $value == (isset($params["id"]) ? $params["id"] : "")){
@@ -71,7 +59,8 @@ class AccountService extends BaseService
     public function searchParents(Request $request)
     {
         $request->validate([
-            'id' => 'required'
+            'type' => 'required',
+            'id' => 'nullable'
         ]);
         return $this->repository->getParents($request->all());
     }

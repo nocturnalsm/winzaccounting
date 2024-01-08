@@ -137,7 +137,7 @@ class BaseService implements ServiceInterface
 
             if (count($defs) > 0){
                 foreach($defs as $key => $def){
-                    if (isset($def["rule"])){
+                    if (is_array($def) && isset($def["rule"])){
                         $rule = $def["rule"];
                     }
                     else {
@@ -152,7 +152,7 @@ class BaseService implements ServiceInterface
                         }
                     }
                     $rules[$key] = $rule;
-                    if (isset($def["message"])){
+                    if (is_array($def) && isset($def["message"])){
                         $message = $def["message"];
                         if (is_string($message)){
                             $messages[$key .".*"] = $message;
@@ -163,7 +163,7 @@ class BaseService implements ServiceInterface
                             }
                         }
                     }
-                    if (isset($def["attribute"])){
+                    if (is_array($def) && isset($def["attribute"])){
                         $attributes[$key] = $def["attribute"];
                     }
                 }
