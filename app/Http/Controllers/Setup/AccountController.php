@@ -83,7 +83,7 @@ class AccountController extends Controller
 
     public function account_types()
     {
-        $data = $this->account->getTypes();
+        $data = $this->account->getAccountTypes();
         return response()->json($data);
     }
 

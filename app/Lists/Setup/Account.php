@@ -38,7 +38,7 @@ class Account extends PaginatedList
                   ->orWhere("parent", "0");
         };
 
-        $data = $data->with(['status'])                    
+        $data = $data->with(['status', 'parent'])                    
                     ->treeOf($constraint)
                     ->select("laravel_cte.id", "laravel_cte.name", "accountType", "depth","path",
                              DB::raw("CONCAT(at.prefix, laravel_cte.number) AS number"),

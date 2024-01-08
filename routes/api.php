@@ -33,8 +33,10 @@ Route::group(["prefix" => "v1"], function(){
 
         Route::prefix('setup')->group(function(){
 
+            Route::get('accounts/types', [App\Http\Controllers\Setup\AccountController::class, 'account_types']);
+            Route::get('accounts/parents', [App\Http\Controllers\Setup\AccountController::class, 'account_parents']);
             Route::apiResource('accounts', App\Http\Controllers\Setup\AccountController::class);
-            
+
             /*
             Route::get('currencies/search', [App\Http\Controllers\Setup\CurrencyController::class, 'search']);
             Route::apiResource('currencies', App\Http\Controllers\Setup\CurrencyController::class);
@@ -45,10 +47,7 @@ Route::group(["prefix" => "v1"], function(){
             Route::get('taxcodes/search', [App\Http\Controllers\Setup\TaxCodeController::class, 'search']);
             Route::apiResource('taxcodes', App\Http\Controllers\Setup\TaxCodeController::class);
 
-            Route::get('accounts/search', [App\Http\Controllers\Setup\AccountController::class, 'search']);
-            Route::get('accounts/types', [App\Http\Controllers\Setup\AccountController::class, 'account_types']);
-            Route::get('accounts/parents', [App\Http\Controllers\Setup\AccountController::class, 'account_parents']);
-            
+            Route::get('accounts/search', [App\Http\Controllers\Setup\AccountController::class, 'search']);                        
 
             Route::get('banks/search', [App\Http\Controllers\Setup\BankController::class, 'search']);
             Route::apiResource('banks', App\Http\Controllers\Setup\BankController::class);

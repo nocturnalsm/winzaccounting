@@ -63,6 +63,19 @@ class AccountService extends BaseService
         ];
     }
 
+    public function getAccountTypes()
+    {
+        return $this->repository->getTypes();
+    }
+    
+    public function searchParents(Request $request)
+    {
+        $request->validate([
+            'id' => 'required'
+        ]);
+        return $this->repository->getParents($request->all());
+    }
+
     /*
     public function search(Request $request)
     {

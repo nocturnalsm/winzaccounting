@@ -20,23 +20,22 @@ class AccountRepository extends BaseRepository
     
     public function getTypes()
     {
-        return [
-            "data" => AccountType::select('id','name','prefix')->get()
-        ];
+        return AccountType::select('id','name','prefix')->get();
     }
     
-    public function searchParents(Request $request)
+    public function getParents($params)
     {
-        $findPath = Account::tree()->where("laravel_cte.id", $request->id);
+        $id = $params["id"];
+        $findPath = Account::tree()->where("laravel_cte.id", $id);
         $this->data = $this->data
-                           ->where("laravel_cte.id", "<>", $request->id);
+                           ->where("laravel_cte.id", "<>", $id);
         if ($findPath->exists()){
             $findPath = $findPath->first();
             $this->data->where("path", "NOT LIKE", "{$findPath->path}%");
         }
-        return $this->search($request);
+        return $this->data->get();
     }
-    
+
     public function getById(String $id)
     {
         $data = parent::getById($id);
