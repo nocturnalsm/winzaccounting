@@ -25,17 +25,17 @@ class AccountRepository extends BaseRepository
     
     public function getParents($params)
     {
-        $data = $this->data->with(['type']);
+        $data = $this->data;
         if (isset($params["id"])){
             $id = $params["id"];
-            $findPath = Account::tree()->where("laravel_cte.id", $id);
-            $data = $data->where("laravel_cte.id", "<>", $id);
+            $findPath = Account::tree()->where("id", $id);
+            $data = $data::tree()->where("id", "<>", $id);
             if ($findPath->exists()){
                 $findPath = $findPath->first();
                 $data->where("path", "NOT LIKE", "{$findPath->path}%");
             }
         }
-        $data = $data->whereAccountType($params["type"]);
+        $data = $data->with(['type'])->whereAccountType($params["type"]);
         return $data->get();
     }
 

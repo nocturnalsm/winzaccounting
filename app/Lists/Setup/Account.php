@@ -41,8 +41,7 @@ class Account extends PaginatedList
         $data = $data->with(['status', 'parent'])                    
                     ->treeOf($constraint)
                     ->select("laravel_cte.id", "laravel_cte.name", "accountType", "depth","path",
-                             DB::raw("CONCAT(at.prefix, laravel_cte.number) AS number"),
-                             "laravel_cte.parent", "laravel_cte.account_type", "at.prefix",
+                             "laravel_cte.number", "laravel_cte.parent", "laravel_cte.account_type", "at.prefix",
                              DB::raw("IFNULL(balance.amount,0) AS balance"),
                              'status_id'
                      )
