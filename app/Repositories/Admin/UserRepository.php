@@ -44,9 +44,7 @@ class UserRepository extends BaseRepository
                     ->whereId($id)
                     ->with([
                         'roles',
-                        'office' => [
-                            'company:id,name'
-                        ]
+                        'status:id,status,label,color'
                     ])
                     ->firstOrFail();
     }

@@ -36,6 +36,9 @@ class AccountRepository extends BaseRepository
             }
         }
         $data = $data->with(['type'])->whereAccountType($params["type"]);
+        if (isset($params["company_id"]) && $params["company_id"]){
+            $data = $data->whereCompanyId($params["company_id"]);
+        }
         return $data->get();
     }
 

@@ -46,14 +46,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['initials', 'avatar'];
+    protected $appends = ['avatar'];
 
     public function companies()
     {
         return $this->belongsToMany(Company::class, 'user_has_companies', 'user_id', 'company_id');
     }
 
-    public function getInitialsAttribute()
+    public function getAvatarAttribute()
     {
         $excludes = [
             'Mr.', 'Mrs', 'Ms.', 'Dr.', 'Prof.', 'Jr.'
@@ -68,12 +68,7 @@ class User extends Authenticatable
             $name_array)), 0, 2);
         }        
     }
-
-    public function getAvatarAttribute()
-    {
-        return $this->name;
-    }
-
+    
     public function status()
     {
         return $this->belongsTo(Status::class);
