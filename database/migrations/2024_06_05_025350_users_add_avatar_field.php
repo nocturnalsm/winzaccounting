@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('statuses', function (Blueprint $table) {
-            $table->id();
-            $table->string('status')->unique();
-            $table->string('label');
-            $table->string('color');
-            $table->timestamps();
+        Schema::table('users', function(Blueprint $table){
+            $table->string('avatar')->nullable();
             $table->softDeletes();
         });
     }
@@ -26,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('statuses');
+        Schema::table('users', function(Blueprint $table){
+            $table->dropColumn(['avatar', 'deleted_at'])->nullable();
+            $table->softDeletes();
+        });
     }
 };

@@ -21,6 +21,7 @@ class CreateBankAccountsTable extends Migration
             $table->unsignedInteger('account_id')->nullable();
             $table->smallInteger('status_id')->nullable();            
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

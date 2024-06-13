@@ -19,6 +19,7 @@ class CreateAccountBalancesTable extends Migration
             $table->date('date');
             $table->decimal("amount", 13,2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

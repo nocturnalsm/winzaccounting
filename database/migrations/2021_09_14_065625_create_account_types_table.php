@@ -18,6 +18,7 @@ class CreateAccountTypesTable extends Migration
             $table->string('name');
             $table->string('prefix', 3)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -20,6 +20,7 @@ class CreateEmailAddressesTable extends Migration
             $table->string('address');
             $table->smallInteger('status_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

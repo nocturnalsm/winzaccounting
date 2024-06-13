@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('primary_media_id')->nullable();
             $table->smallInteger('status_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

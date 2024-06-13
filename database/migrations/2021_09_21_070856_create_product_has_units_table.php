@@ -18,6 +18,7 @@ class CreateProductHasUnitsTable extends Migration
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('unit_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

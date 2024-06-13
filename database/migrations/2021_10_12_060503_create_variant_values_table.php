@@ -18,6 +18,7 @@ class CreateVariantValuesTable extends Migration
             $table->unsignedInteger('variant_id')->index();
             $table->string("value");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

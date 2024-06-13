@@ -21,6 +21,7 @@ class CreateWarehousesTable extends Migration
             $table->unsignedInteger('location_id')->nullable()->index();
             $table->smallInteger('status_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

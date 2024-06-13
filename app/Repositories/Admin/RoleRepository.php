@@ -38,6 +38,7 @@ class RoleRepository extends BaseRepository
         else {
             $permissions = $data->permissions()->orderBy('name');
         }
+        $data->status = $data->status()->first();
         $data->permissions = $permissions->get()
                                         ->map(function($item, $key){
                                             return $item->name;

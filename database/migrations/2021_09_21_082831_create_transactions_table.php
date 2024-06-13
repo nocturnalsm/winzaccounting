@@ -21,6 +21,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedInteger('currency_id')->nullable();
             $table->smallInteger('status_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

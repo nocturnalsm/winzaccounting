@@ -17,6 +17,7 @@ class CreateCompaniesTable extends Migration
             $table->id();
             $table->string('type');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('companies', function (Blueprint $table) {

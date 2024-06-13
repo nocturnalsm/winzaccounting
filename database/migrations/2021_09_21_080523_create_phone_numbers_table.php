@@ -23,6 +23,7 @@ class CreatePhoneNumbersTable extends Migration
             $table->boolean('fixed_line')->nullable();
             $table->smallInteger('status_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

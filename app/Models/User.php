@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -24,7 +25,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'status_id'
+        'status_id',
+        'avatar'
     ];
 
     /**
@@ -53,20 +55,30 @@ class User extends Authenticatable
         return $this->belongsToMany(Company::class, 'user_has_companies', 'user_id', 'company_id');
     }
 
-    public function getAvatarAttribute()
+    public function avatar():Attribute
     {
-        $excludes = [
-            'Mr.', 'Mrs', 'Ms.', 'Dr.', 'Prof.', 'Jr.'
-        ];
-        if ($this->name){
-            $name_array = explode(" ", $this->name);
-            return substr(implode("", array_map(function($item) use ($excludes){                            
-                if (!in_array($item, $excludes)){
-                    return strtoupper($item[0]);
+        return Attribute::make(
+            function($value, $attributes) {
+                $excludes = [
+                    'Mr.', 'Mrs', 'Ms.', 'Dr.', 'Prof.', 'Jr.'
+                ];
+                if ($value){
+                    return $value;
                 }
-            }, 
-            $name_array)), 0, 2);
-        }        
+                if (isset($attributes['google']) && $attributes['google']){            
+                    return $attributes['google']["avatar"];
+                }
+                if ($attributes['name']){
+                    $name_array = explode(" ", $attributes['name']);
+                    return substr(implode("", array_map(function($item) use ($excludes){                            
+                        if (!in_array($item, $excludes)){
+                            return strtoupper($item[0]);
+                        }
+                    }, 
+                    $name_array)), 0, 2);
+                }        
+            }
+        );
     }
     
     public function status()

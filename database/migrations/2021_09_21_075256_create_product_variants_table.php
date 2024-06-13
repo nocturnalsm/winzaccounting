@@ -18,6 +18,7 @@ class CreateProductVariantsTable extends Migration
             $table->unsignedInteger('product_id')->index();
             $table->unsignedInteger('variant_value_id')->index();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

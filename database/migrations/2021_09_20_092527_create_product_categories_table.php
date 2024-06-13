@@ -21,6 +21,7 @@ class CreateProductCategoriesTable extends Migration
             $table->unsignedInteger('parent')->nullable();
             $table->smallInteger('status_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

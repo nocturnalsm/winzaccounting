@@ -18,6 +18,7 @@ class CreateProductHasCategoriesTable extends Migration
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('category_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

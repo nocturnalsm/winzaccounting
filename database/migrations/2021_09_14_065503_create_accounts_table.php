@@ -22,6 +22,7 @@ class CreateAccountsTable extends Migration
             $table->unsignedInteger('parent')->nullable();
             $table->smallInteger('status_id')->index()->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

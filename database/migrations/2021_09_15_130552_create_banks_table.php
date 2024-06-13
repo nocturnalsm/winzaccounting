@@ -20,6 +20,7 @@ class CreateBanksTable extends Migration
             $table->string("branch")->nullable();
             $table->smallInteger('status_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

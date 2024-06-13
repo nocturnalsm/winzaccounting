@@ -18,6 +18,7 @@ class CreateProductTagsTable extends Migration
             $table->unsignedInteger('product_id')->index();
             $table->unsignedInteger('tag_id')->index();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

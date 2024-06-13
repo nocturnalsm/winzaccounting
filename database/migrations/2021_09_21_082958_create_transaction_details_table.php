@@ -20,6 +20,7 @@ class CreateTransactionDetailsTable extends Migration
             $table->decimal('amount');
             $table->enum('pos',['D', 'C']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -20,6 +20,7 @@ class CreateCurrenciesTable extends Migration
             $table->string('code', 3)->index()->nullable();
             $table->string('sign')->nullable();
             $table->smallInteger('status_id')->index()->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
