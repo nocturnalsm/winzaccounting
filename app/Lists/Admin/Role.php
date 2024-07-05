@@ -10,8 +10,16 @@ class Role extends PaginatedList
     {
         $this->setFilterRules([
             "permissions" => function($query, $key, $value){
-                return $query->orWhereHas('permissions', function($qry) use ($value){
-                    $qry->where('name', 'LIKE', "%{$value}%");
+                return $query->orWhere(function($query) use ($value){
+                    $query->whereHas('permissions', function($qry) use ($value){
+                        $qry->whereIn('id', $value);
+                    })
+                    ->orWhere('name', "Super Admin");
+                });
+            },
+            "status" => function($query, $key, $value){
+                return $query->orWhereHas('status', function($qry) use ($value){
+                    $qry->whereId($value);
                 });
             }
         ]);
@@ -32,4 +40,5 @@ class Role extends PaginatedList
                      
         return $data;
     }
+
 }

@@ -1,6 +1,7 @@
 <?php
-
 namespace App\Lists;
+
+use Illuminate\Support\Facades\Log;
 
 class PaginatedList
 {    
@@ -13,9 +14,14 @@ class PaginatedList
         $this->data = $data;
     }
 
-    public function make($limit, $sortBy = '', $order = 'asc', $filter = '')
+    public function make($limit, $sortBy = '', $order = 'asc', $search = '', $filter = '')
     {
         $data = $this->data;
+
+        if ($search){
+            $searchData = $this->data->search($search)->get()->pluck('id');
+            $data = $this->data->whereIn('id', $searchData);
+        }
 
         if (method_exists($this, 'useQuery')){
             $data = $this->useQuery($data);

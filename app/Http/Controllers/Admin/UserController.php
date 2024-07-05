@@ -90,7 +90,7 @@ class UserController extends Controller
      */
     public function search(Request $request)
     {
-        $data = $this->user->searchUser($request);
+        $data = $this->user->search($request);
         return response()->json($data);
     }
 }

@@ -23,6 +23,7 @@ class BaseService implements ServiceInterface
         
         $params = $request->all();
         Validator::make($params, [
+            'q' => 'nullable|string',
             'page' => 'nullable|numeric',
             'limit' => 'nullable|numeric',
             'sort' => 'nullable|string',
@@ -35,9 +36,10 @@ class BaseService implements ServiceInterface
         $sortBy = isset($params['sort']) ? $params['sort'] : (!empty($this->defaultSort) ? $this->defaultSort : null);
         $order = isset($params['order']) ? $params['order'] : (!empty($this->defaultOrder) ? $this->defaultOrder : 'asc');
         $filter = isset($params['filter']) ? json_decode($params['filter'], true) : '';
+        $search = isset($params['q']) ? $params['q'] : '';
                     
         $this->list->setData($data);
-        $result = $this->list->make($limit, $sortBy, $order, $filter);
+        $result = $this->list->make($limit, $sortBy, $order, $search, $filter);
                         
         return $result;
     }    
@@ -79,53 +81,7 @@ class BaseService implements ServiceInterface
             abort(422, $e->getMessage());
         }
     }
-
-    public function search(Request $request) : Array
-    {                
-        $params = $request->all();
-        Validator::make($params, [
-            'page' => 'nullable|numeric',
-            'limit' => 'nullable|numeric',
-            'sort' => 'nullable|string',
-            'order' => 'nullable|in:asc,desc'
-        ])->validate();
-
-        $rules = [];
-        if (method_exists($this->repository, 'getSearchRules')){
-            $rules = $this->repository->getSearchRules();
-        }
-        else if (method_exists($this, 'getSearchRules')){
-            $rules = $this->getSearchRules();
-        }                
-            
-        $data = $this->repository->getData();
- 
-        $limit = isset($params['limit']) ? intval($params['limit']) : 10;
-        $sortBy = isset($params['sort']) ? $params['sort'] : (!empty($this->defaultSort) ? $this->defaultSort : null);
-        $order = isset($params['order']) ? $params['order'] : (!empty($this->defaultOrder) ? $this->defaultOrder : 'asc');
-        $filter = isset($params['filter']) ? json_decode($params['filter'], true) : '';
-                    
-        $this->list->setData($data);
-        
-        $qFilter = [];
-        if (is_array($rules)){
-            foreach ($rules as $key => $rule){
-                if (is_array($rule)){
-                    $value = isset($rule["value"]) ? trim($rule["value"]) : trim($query);
-                }
-                else {
-                    $value = trim($query);
-                }
-                $qFilter[$key] = $value;
-            }
-        }
-        
-        $result = $list->makeList($sortBy, $order, $qFiler);
-        
-        return $result;
-
-    }
-
+    
     public function validate($params, $id = "", $apiUpdate = true)
     {
         if (method_exists($this, 'validateUsing')){

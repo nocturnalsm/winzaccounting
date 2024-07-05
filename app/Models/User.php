@@ -10,10 +10,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Laravel\Scout\Searchable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -86,4 +87,12 @@ class User extends Authenticatable
         return $this->belongsTo(Status::class);
     }
 
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'username' => $this->username,
+            'email' => $this->email
+        ];
+    }
 }
