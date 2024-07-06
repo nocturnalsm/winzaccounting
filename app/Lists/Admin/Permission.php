@@ -16,12 +16,9 @@ class Permission extends PaginatedList
         $data = $data->where(function($query) use ($filter){
             foreach ($filter as $key => $value){
                 if ($key == 'status'){
-                    $query->orWhereHas('status', function($qry) use ($value){
+                    $query->whereHas('status', function($qry) use ($value){
                         $qry->whereId($value);
                     });
-                }
-                else {
-                    $query->orWhere($key, "LIKE" , "%{$value}%");
                 }
             }
         });

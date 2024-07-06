@@ -11,17 +11,14 @@ class User extends PaginatedList
         $data = $data->where(function($query) use ($filter){
             foreach ($filter as $key => $value){
                 if ($key == 'roles'){
-                    $query->orWhereHas('roles', function($qry) use ($value){
+                    $query->whereHas('roles', function($qry) use ($value){
                         $qry->whereId($value);
                     });
                 }
                 else if ($key == 'status'){
-                    $query->orWhereHas('status', function($qry) use ($value){
+                    $query->whereHas('status', function($qry) use ($value){
                         $qry->whereId($value);
                     });
-                }
-                else {
-                    $query->orWhere($key, "LIKE" , "%{$value}%");
                 }
             }
         });
