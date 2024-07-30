@@ -14,6 +14,12 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
+        Company::factory()->create([
+            'name' => "System",
+            'url' => 'https://winzaccounting.com',
+            'system' => true
+        ]);
+
         Company::factory(5)->create();
     }
 }

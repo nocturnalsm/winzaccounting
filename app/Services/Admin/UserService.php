@@ -34,6 +34,14 @@ class UserService extends BaseService
         return $user;
     }
 
+    public function getById($id)
+    {
+        $data = $this->repository->getById($id);
+        $data->companies = $data->companies()->select('companies.id', 'companies.name')->get();
+        $data->roles = $data->roles()->select('roles.id', 'roles.name')->get();
+        return $data;
+    }
+
     public function validateUsing($params, $id = "")
     {
         $rules = [
@@ -55,26 +63,6 @@ class UserService extends BaseService
             $rules["password"] = 'required';
         }
         return $rules;
-    }
-
-    public function checkPermission($request)
-    {
-        $params = $request->all();
-        $permissions = Array();
-        if (isset($params["permissions"])){
-            $permissions = explode(",", $params["permissions"]);
-        }
-        return $this->repository->checkPermission($permissions);
-    }    
-
-    public function searchUser(Request $request)
-    {
-        $request->validate([
-            "q" => "required"
-        ]);
-
-        return $this->repository->search($request->all());
-
     }
 
 }

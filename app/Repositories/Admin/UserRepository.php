@@ -43,7 +43,6 @@ class UserRepository extends BaseRepository
         return $this->data
                     ->whereId($id)
                     ->with([
-                        'roles',
                         'status:id,status,label,color'
                     ])
                     ->firstOrFail();
